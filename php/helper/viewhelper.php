@@ -67,7 +67,7 @@ class viewhelper
 
     public static function renderWelcome()
     {
-        if (self::fileCounter(__DIR__ . '/welcomeMsgCounter.txt', 10) === true) {
+        if (self::fileCounter(WPNXM_DATA_DIR . '/welcomeMsgCounter.txt', 10) === true) {
             return;
         } else {
             echo '<h1>Welcome to the WPИ-XM server stack!</h1>';
