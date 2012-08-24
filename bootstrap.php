@@ -69,6 +69,7 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface\php\controller' . DS);
     define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface\php\helper' . DS);
     define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface\php\view' . DS);
+    define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface\php\data' . DS);
 
     // Web Path Constants -> "http://.."
     define('SERVER_URL', 'http://' . $_SERVER['SERVER_NAME']);

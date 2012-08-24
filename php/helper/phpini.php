@@ -257,7 +257,7 @@ class phpextension
         $phpiniEOF = '; Local Variables:';
 
         # load and prepare xdebug php.ini template
-        $tpl_content = file_get_contents(WPNXM_VIEW_DIR . 'xdebug-section-phpini.tpl');
+        $tpl_content = file_get_contents(WPNXM_DATA_DIR . '/config-templates/xdebug-section-phpini.tpl');
         $search = array('%PHP_EXT_DIR%', '%TEMP_DIR%');
         $replace = array(WPNXM_DIR . 'bin\php\ext\\', WPNXM_DIR . 'temp');
         $content = str_replace($search, $replace, $tpl_content);

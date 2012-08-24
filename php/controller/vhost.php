@@ -51,7 +51,7 @@ function insert()
     }
 
     // read vhost template file
-    $tpl_content = file_get_contents(WPNXM_VIEW_DIR . 'nginx-vhost-conf.tpl');
+    $tpl_content = file_get_contents(WPNXM_DATA_DIR . '/config-templates/nginx-vhost-conf.tpl');
 
     // replace the host name in the vhost template
     $content = str_replace('%%vhost%%', $new_vhost, $tpl_content);
