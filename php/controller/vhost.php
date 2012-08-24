@@ -72,11 +72,10 @@ function insert()
     }
 
     // check for "COM" (php_com_dotnet.dll)
-    if(!class_exists('COM') and !extension_loaded("com_dotnet")) {
+    if (!class_exists('COM') and !extension_loaded("com_dotnet")) {
         $msg = 'COM class not found. Enable the extension by adding "extension=php_com_dotnet.dll" to your php.ini.';
         throw new Exception($msg);
     }
-
 
     $WshShell = new COM("WScript.Shell");
 

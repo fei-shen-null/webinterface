@@ -7,12 +7,10 @@
 $html_checkboxes = '';
 $i = 0;
 
-foreach($available_extensions as $name => $file)
-{
+foreach ($available_extensions as $name => $file) {
     // in case the extension is enabled, check the checkbox
     $checked = false;
-    if(isset($enabled_extensions[$file]))
-    {
+    if (isset($enabled_extensions[$file])) {
         $checked = true;
     }
 
@@ -22,8 +20,7 @@ foreach($available_extensions as $name => $file)
      * It is loaded as a Zend Engine extension ([ZEND]zend_extension=).
      */
     $disabled = '';
-    if(strpos($name, 'xdebug') !== false)
-    {
+    if (strpos($name, 'xdebug') !== false) {
         $disabled = 'disabled';
     }
 
@@ -37,7 +34,7 @@ foreach($available_extensions as $name => $file)
     $html_checkboxes .= substr($name, 4);
     $html_checkboxes .= '</label>';
 
-    $i++; if($i == 12) { $html_checkboxes .= '</div><div style="float: left; width: 125px; margin: 10px;">'; $i = 0; }
+    $i++; if ($i == 12) { $html_checkboxes .= '</div><div style="float: left; width: 125px; margin: 10px;">'; $i = 0; }
 }
 
 echo $html_checkboxes;

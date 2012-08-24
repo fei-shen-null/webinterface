@@ -43,8 +43,8 @@
     <link rel="shortcut icon" href="http://wpn-xm.org/favicon.ico" />
     <link type="text/css" href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"  media="screen, projection" />
-    <script type="text/javascript" src="assets/js/wpnxm.js"></script>   
-    <?php if(isset($load_jquery) && $load_jquery === true) { ?>
+    <script type="text/javascript" src="assets/js/wpnxm.js"></script>
+    <?php if (isset($load_jquery) && $load_jquery === true) { ?>
     <!-- jQuery & jQuery UI -->
     <script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
@@ -76,7 +76,7 @@
             <small>Version <?php echo WPNXM_VERSION; ?></small>
         </h1>
 
-        <?php           
+        <?php
             viewhelper::renderMenu();
             viewhelper::renderWelcome();
         ?>

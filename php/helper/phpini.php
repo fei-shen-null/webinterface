@@ -71,7 +71,6 @@ class phpini
         // add date/time to new file name
 
         // keep last 3 files, remove older files
-
         return true;
     }
 }

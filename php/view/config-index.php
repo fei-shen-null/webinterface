@@ -7,7 +7,8 @@
 </style></noscript>
 
 <script>
-function setupTreeTable() {
+function setupTreeTable()
+{
   // Apply some configuration settings
   $("table#treeTable").treeTable({
     clickableNodeNames: true
@@ -25,7 +26,8 @@ function setupTreeTable() {
   });
 }
 
-function setupjEditable() {
+function setupjEditable()
+{
   $('.editable').editable(submitEdit, {
          indicator : 'Saving...',
          tooltip   : 'Click to edit...'
@@ -39,7 +41,8 @@ function setupjEditable() {
      });
 }
 
-function submitEdit(value, settings) {
+function submitEdit(value, settings)
+{
   var edits = new Object();
   var origvalue = this.revert;
   var textbox = this;
@@ -66,11 +69,12 @@ function submitEdit(value, settings) {
           var response = xhr.responseText;
       }
   });
+
   return(result);
 };
 
-function loadTab(tabObj) {
-
+function loadTab(tabObj)
+{
   if (!tabObj || !tabObj.length) {
     return;
   }
@@ -94,7 +98,8 @@ function loadTab(tabObj) {
   });
 }
 
-function setupTabs() {
+function setupTabs()
+{
   // define selectors
   var tabsNavigation = 'div#organic-tabs > ul.nav';
   var activeTab = tabsNavigation + ' li a.current';
@@ -125,7 +130,8 @@ function setupTabs() {
   });
 }
 
-function handleRedirectToTab() {
+function handleRedirectToTab()
+{
   var anchor = window.location.href.split('#')[1];
   if (anchor != '') {
         var tabToSelect = $('#organic-tabs').find('a[name="'+anchor+'"]');

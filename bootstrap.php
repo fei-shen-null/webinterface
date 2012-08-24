@@ -42,8 +42,9 @@ ini_set('memory_limit', -1);
 // timezone
 date_default_timezone_set('Europe/Berlin');
 
-// drop request global
+// drop request and globals
 unset($_REQUEST);
+unset($GLOBALS);
 
 /**
  * Definition of Constants
@@ -89,9 +90,11 @@ if (!defined('WPNXM_DIR')) {
      * Feature Flags
      */
     define('FEATURE_1', false); // "create new project dialog" in php/view/projects-index.php
-    define('FEATURE_2', false); // memcached configure button and dialog
+    define('FEATURE_2', false); // memcached configure button and dialog and switch on/off
     define('FEATURE_3', false); // Configuration Tabs Nginx, Nginx Vhosts, MariaDB, Xdebug
     define('FEATURE_4', false); // create nginx vhost directly from project list
+    define('FEATURE_5', false); // xdebug configure and switch on/off
+
 }
 
 if (!function_exists('showConstants')) {

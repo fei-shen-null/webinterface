@@ -100,7 +100,7 @@ function showtab_nginx_vhosts()
 
     $tpl_data = array(
         'no_layout' => true,
-        'project_folders' => ( new projects() )->fetchProjectDirectories(true),
+        'project_folders' => (new projects())->fetchProjectDirectories(true),
         'vhosts' => getVhosts()
     );
 

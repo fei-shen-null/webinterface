@@ -15,13 +15,13 @@
 
     <form action="index.php?page=config&action=update_nginx_vhosts" method="post" class="well form-inline">
         <table>
-            <?php 
-            foreach($vhosts as $vhost) { /* array: fqpn, filename, loaded */
+            <?php
+            foreach ($vhosts as $vhost) { /* array: fqpn, filename, loaded */
                 // if the vhost is loaded, add "checked" for checking the checkbox
                 $checked = (isset($vhost['loaded']) && $vhost['loaded'] === true) ? 'checked="checked"' : '';
-                // output row contains filename | checkbox    
-                echo '<tr><td>' . $vhost['filename'] . '</td><td><input type="checkbox" ' . $checked . '></td><td><a href="index.php?page=openfile&file"Open in Editor</a></tr>';           
-            } ?>        
+                // output row contains filename | checkbox
+                echo '<tr><td>' . $vhost['filename'] . '</td><td><input type="checkbox" ' . $checked . '></td><td><a href="index.php?page=openfile&file"Open in Editor</a></tr>';
+            } ?>
         </table>
         <div class="form-actions">
             <button type="submit" class="aButton"><i class="icon-ok"></i>&nbsp;&nbsp;&nbsp;Submit</button>
@@ -50,7 +50,7 @@
         <script>
         // servername suggestion based on path
         // transfer the 'selected realpath' to the input box 'servername'
-        $('#folder').click(function() {            
+        $('#folder').click(function() {
             var selectedText = $("#folder option:selected").text().toLowerCase();
             selectedText = 'www.' + selectedText + '.dev';
             $("input[id='servername']").val(selectedText);
@@ -74,7 +74,7 @@
             <label class="checkbox">Location (Realpath)</label>
             <span class="block-help">Path of the project folder you want to create the vhost for.</span>
             <select id="folder">
-                <?php foreach($project_folders as $folder) { ?>
+                <?php foreach ($project_folders as $folder) { ?>
                 <option value="/<?=$folder?>"><?=$folder?></option>
                 <?php } ?>
             </select>

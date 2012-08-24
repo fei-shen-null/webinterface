@@ -287,7 +287,7 @@
 }
 ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log' ?>">Show Log</a>
-                            <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>                     
+                            <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
                     </td>
                 </tr>
             </table>
@@ -312,7 +312,6 @@
                     <td colspan="2" class="right">
                         <?php if (FEATURE_2 == true) { ?>
                             <a class="aButton" href="index.php?page=config#memcached">Configure</a>
-                        <?php } ?>
                         <a class="aButton"
                         <?php
                         if (extension_loaded('memcached') === true) {
@@ -326,6 +325,7 @@
                         ?>
                            href="<?= $url ?>"><?= $button_text ?>
                         </a>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>
@@ -334,7 +334,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-<?= $xdebug_status ?> Xdebug
+                         <?= $xdebug_status ?> Xdebug
                         </div>
                     </td>
                 </tr>
@@ -352,6 +352,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
+                        <?php if (FEATURE_5 == true) { ?>
                         <a class="aButton" href="index.php?page=config#xdebug">Configure</a>
                         <a class="aButton"
                             <?php
@@ -366,6 +367,7 @@
                             ?>
                            href="<?= $url ?>"><?= $button_text ?>
                         </a>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>
