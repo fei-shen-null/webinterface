@@ -380,7 +380,7 @@ class phpextension
     {
         $glob = $list = array(); // PHP SYNTAX reminder $glob, $list = array();
 
-        $glob = glob(WPNXM_DIR ."bin/php/ext/*");
+        $glob = glob(WPNXM_DIR ."bin/php/ext/*.dll");
 
         foreach ($glob as $key => $file) {
             // $list array has the following structure
