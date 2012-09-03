@@ -224,7 +224,7 @@ class phpextension
 
         # prepare line to insert
         $new_line = ($enabled === true) ? '' : ';';
-        $new_line .= 'extension=php_' . $name . '.dll' . "\n";
+        $new_line .= 'extension=' . $name . "\n";
 
         # read php.ini and determine position of last extension entry
         $lines = array();
@@ -380,7 +380,7 @@ class phpextension
     {
         $glob = $list = array(); // PHP SYNTAX reminder $glob, $list = array();
 
-        $glob = glob(WPNXM_DIR ."bin/php/ext/*.dll");
+        $glob = glob(WPNXM_DIR ."bin/php/ext/*");
 
         foreach ($glob as $key => $file) {
             // $list array has the following structure
