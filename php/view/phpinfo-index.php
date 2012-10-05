@@ -41,6 +41,11 @@
             <input id="textToHighlight" type="text" value="xdebug">
             <button id="highlightButton">Search</button>
             <button id="resetButton">Reset</button>
+            <div id="search-terms-navbar" style="display: hidden;">
+                Search Term found! <span id="hits-counter"></span> Hits.
+                <button id="nextButton">Next</button>
+                <button id="prevButton">Prev</button>
+            </div>
         </div>
     </div>
 
@@ -52,24 +57,61 @@
 <script type="text/javascript">
 <!--
 (function(){
-    var resetHighlight = function(){
-    var elems = document.querySelectorAll('.highlight');
-    var n = elems.length;
-    while (n--) {
-        var e = elems[n];
-        e.parentNode.replaceChild(e.childNodes[0], e);
+    // initial scroll to position is the first element
+    var currentScrollIndex = 0;
+    var scrollToElement = function() {
+        var elems = document.querySelectorAll('.highlight');
+        // number of elements found (search hits)
+        var n = elems.length;
+        if(n > 0) {
+            // additional feature: hit-counter for highlighted search terms
+            document.getElementById('hits-counter').innerHTML = elems.length;
+            document.getElementById('search-terms-navbar').style.visibility = "visible";
+        } else {
+            document.getElementById('search-terms-navbar').style.visibility = "hidden";
         }
+        // scroll to element position
+        var el = elems[currentScrollIndex];
+        el.scrollIntoView(true);
+    }
+    var resetHighlight = function(){
+        var elems = document.querySelectorAll('.highlight');
+        var n = elems.length;
+        while (n--) {
+            var e = elems[n];
+            e.parentNode.replaceChild(e.childNodes[0], e);
+            }
+        // reset scroll position to first element
+        currentScrollIndex = 0;
+        // hide the search terms navbar (prev/next button)
+        document.getElementById('search-terms-navbar').style.visibility = "hidden";
     };
+    // search button
     var e = document.querySelector('#highlightButton');
     if (!e) {return;}
     e.onclick = function(){
-    resetHighlight();
-    var e = document.querySelector('#textToHighlight');
-    if (!e) {return;}
-    var searchFor = new RegExp(e.value.replace(/\s+/g,'\\s+'), 'gi');
-    doHighlight('phpinfo', 'highlight', searchFor);
-    document.getElementById('highlight').scrollIntoView(true);
+        resetHighlight();
+        var e = document.querySelector('#textToHighlight');
+        if (!e) {return;}
+        var searchFor = new RegExp(e.value.replace(/\s+/g,'\\s+'), 'gi');
+        doHighlight('phpinfo', 'highlight', searchFor);
+        scrollToElement();
     };
+    // next button
+    var e = document.querySelector('#nextButton');
+    if (!e) {return;}
+    e.onclick = function(){
+        currentScrollIndex++;
+        scrollToElement();
+    };
+    // prev button
+    var e = document.querySelector('#prevButton');
+    if (!e) {return;}
+    e.onclick = function() {
+        currentScrollIndex--;
+        scrollToElement();
+    };
+    // reset button
     e = document.querySelector('#resetButton');
     if (!e) {return;}
     e.onclick = resetHighlight;
