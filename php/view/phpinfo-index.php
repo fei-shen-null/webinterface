@@ -41,7 +41,7 @@
             <input id="textToHighlight" type="text" value="xdebug">
             <button id="highlightButton">Search</button>
             <button id="resetButton">Reset</button>
-            <div id="search-terms-navbar" style="display: hidden;">
+            <div id="search-terms-navbar" style="visibility: hidden;">
                 Search Term found! <span id="hits-counter"></span> Hits.
                 <button id="nextButton">Next</button>
                 <button id="prevButton">Prev</button>
