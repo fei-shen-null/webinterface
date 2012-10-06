@@ -55,7 +55,12 @@ function index()
       'my_ip'               => Serverstack::getMyIP(),
       'mariadb_password'    => Serverstack::getMariaDBPassword(),
       'memcached_installed' => Serverstack::assertExtensionInstalled('memcached'),
-      'xdebug_installed'    => Serverstack::assertExtensionInstalled('xdebug')
+      'xdebug_installed'    => Serverstack::assertExtensionInstalled('xdebug'),
+      // extension "com_dotnet" is needed to open logfile with editor, else we disable the log buttons
+      'canOpenLogfileWithEditor' => function() {
+                                      if(!class_exists('COM') and !extension_loaded("com_dotnet")) {
+                                      return false;
+                                    }}
     );
 
     render('page-action', $tpl_data);

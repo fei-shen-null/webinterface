@@ -205,16 +205,24 @@
                     <td colspan="2" class="right">
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx' ?>">Configure</a>
                         <a class="aButton"
-                        <?php if (!is_file(WPNXM_DIR . 'logs\access.log')) {
+                        <?php
+                        if (!is_file(WPNXM_DIR . 'logs\access.log')) {
                             echo "onclick=\"alert('Nginx Access Log not available. File not found.'); return false;\"";
+                        }
+                        if(!$canOpenLogfileWithEditor()) {
+                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
                         }
                         ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-access-log' ?>">Access Log</a>
                         <a class="aButton"
-<?php if (!is_file(WPNXM_DIR . 'logs\error.log')) {
-    echo "onclick=\"alert('Nginx Error Log not available. File not found.'); return false;\"";
-}
-?>
+                        <?php
+                        if (!is_file(WPNXM_DIR . 'logs\error.log')) {
+                            echo "onclick=\"alert('Nginx Error Log not available. File not found.'); return false;\"";
+                        }
+                        if(!$canOpenLogfileWithEditor()) {
+                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                        }
+                        ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-error-log' ?>">Error Log</a>
                     </td>
                 </tr>
@@ -244,10 +252,14 @@
                     <td colspan="2" class="right">
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php' ?>">Configure</a>
                         <a class="aButton"
-<?php if (!is_file(WPNXM_DIR . 'logs\php_error.log')) {
-    echo "onclick=\"alert('PHP Error Log not available. File not found.'); return false;\"";
-}
-?>
+                        <?php
+                        if (!is_file(WPNXM_DIR . 'logs\php_error.log')) {
+                            echo "onclick=\"alert('PHP Error Log not available. File not found.'); return false;\"";
+                        }
+                        if(!$canOpenLogfileWithEditor()) {
+                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                        }
+                        ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=php-error-log' ?>">Show Log</a>
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo' ?>">Show phpinfo()</a>
                     </td>
@@ -258,7 +270,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-<?= $mariadb_status ?> MariaDB
+                        <?= $mariadb_status ?> MariaDB
                         </div>
                     </td>
                 </tr>
@@ -282,12 +294,16 @@
                     <td colspan="2" class="right">
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb' ?>">Configure</a>
                         <a class="aButton"
-<?php if (!is_file(WPNXM_DIR . 'logs\mariadb_error.log')) {
-    echo "onclick=\"alert('MariaDB Error Log not available. File not found.'); return false;\"";
-}
-?>
+                        <?php
+                        if (!is_file(WPNXM_DIR . 'logs\mariadb_error.log')) {
+                            echo "onclick=\"alert('MariaDB Error Log not available. File not found.'); return false;\"";
+                        }
+                        if(!$canOpenLogfileWithEditor()) {
+                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                        }
+                        ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log' ?>">Show Log</a>
-                            <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
+                        <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
                     </td>
                 </tr>
             </table>
@@ -296,7 +312,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-<?= $memcached_status ?> Memcached
+                        <?= $memcached_status ?> Memcached
                         </div>
                     </td>
                 </tr>
