@@ -78,7 +78,7 @@ function update()
 
             // write new password to wpnxm.ini
             include WPNXM_HELPER_DIR . 'phpini.php';
-            $ini = new ini(WPNXM_INI);
+            $ini = new INIReaderWriter(WPNXM_INI);
             $ini->set('MariaDB', 'password', $newPassword);
             $ini->write();
         }

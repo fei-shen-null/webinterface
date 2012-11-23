@@ -60,7 +60,7 @@ function update_phpextensions()
     $extensions = $_POST['extensions'];
 
     include WPNXM_HELPER_DIR . 'phpini.php';
-    $ext = new phpextension();
+    $ext = new PHPExtension();
     $available_extensions = $ext->getExtensionDirFileList();
 
     foreach ($extensions as $extension) {
@@ -110,7 +110,7 @@ function showtab_nginx_vhosts()
 function showtab_php_ext()
 {
     include WPNXM_HELPER_DIR . 'phpini.php';
-    $phpext = new phpextension();
+    $phpext = new PHPExtension();
 
     $tpl_data = array(
         'no_layout' => true,

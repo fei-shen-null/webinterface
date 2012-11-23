@@ -98,7 +98,9 @@ class projects
 
                 if (FEATURE_4 == true) { // create nginx vhost directly from project list
                     if (false === $this->isVhost($dir)) {
-                        $html .= '<a class="btn-new-vhost floatright" href="' . WPNXM_ROOT . 'webinterface/addvhost.php?newvhost=' . $dir .'">New vhost</a></li>';
+                        $html .= '<a class="btn-new-vhost floatright" ';
+                        $html .= ' href="' . WPNXM_ROOT . 'webinterface/index.php?page=vhost&newvhost=' . $dir .'">';
+                        $html .= 'New vhost</a></li>';
                     } else {
                         // if there is a vhost config file, display a link to the vhost, too
                         $html .=  '<a class="floatright" href="http://' . $dir . '/">' . $dir . '</a></li>';
@@ -115,7 +117,7 @@ class projects
         $html = '<ul class="tools">';
 
         foreach ($this->toolDirectories as $dir => $href) {
-            if ($href =='') {
+            if ($href === '') {
                 $html .= '<li><a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a></li>';
             } else {
                 $html .='<li><a class="folder" href="' . WPNXM_ROOT . $href . '">' . $dir . '</a></li>';
@@ -137,8 +139,8 @@ class projects
      * tools directories are hardcoded.
      * because we don't know which ones the user installed,
      * we check for existence.
-     * if a tool dir is not there, remove it from the list
-     * this affects the counter
+     * if a tool dir is not there, remove it from the list.
+     * this affects the counter.
      */
     public function checkWhichToolDirectoriesAreInstalled()
     {

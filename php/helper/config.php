@@ -42,7 +42,7 @@ function disable_memcached()
 
     // remove memcached php extension
     // note: extension name is "memcache", daemon name is "memcached"
-    (new phpextension)->enable('memcache');
+    (new PHPExtension)->enable('memcache');
     // restart php daemon
     Serverstack::startDaemon('memcached');
 
@@ -59,7 +59,7 @@ function enable_memcached()
 
     // add memcached php extension
     // note: extension name is "memcache", daemon name is "memcached"
-    (new phpextension)->enable('memcache');
+    (new PHPExtension)->enable('memcache');
 
     // restart php daemon
     Serverstack::restartDaemon('php');
@@ -77,7 +77,7 @@ function disable_xdebug()
     include WPNXM_HELPER_DIR . 'serverstack.php';
 
     // remove xdebug php extension
-    (new phpextension)->disable('xdebug');
+    (new PHPExtension)->disable('xdebug');
 
     // restart php daemon
     Serverstack::restartDaemon('php');
@@ -92,7 +92,7 @@ function enable_xdebug()
     include WPNXM_HELPER_DIR . 'serverstack.php';
 
     // add xdebug php extension
-    (new phpextension)->enable('xdebug');
+    (new PHPExtension)->enable('xdebug');
 
     // restart php daemon
     Serverstack::restartDaemon('php');
@@ -103,7 +103,7 @@ function enable_xdebug()
 
 function xdebug_ini_keys()
 {
-    $ini_xdebug = ini_get_all('xdebug');
+    $xdebug = ini_get_all('xdebug');
 }
 
 /**
@@ -113,18 +113,18 @@ function xdebug_ini_keys()
 function getVhosts()
 {
     // fetch all vhosts config files
-    $vhost_files = array();
-    $vhost_files = glob( NGINX_VHOSTS_DIR . '*.conf' );
+    $vhostFiles = array();
+    $vhostFiles = glob(NGINX_VHOSTS_DIR . '*.conf');
 
     // enhance the array structure a bit, by adding pure filenames
     $vhosts = array();
-    foreach ($vhost_files as $key => $fqpn) {
+    foreach ($vhostFiles as $key => $fqpn) {
         $vhosts[] = array(
             'fqpn' => $fqpn,
             'filename' => basename($fqpn)
         );
     }
-    unset($vhost_files);
+    unset($vhostFiles);
 
     // ensure the vhost.conf is included in nginx.conf
     if (isVhostsConfIncludedInNginxConf()) {
@@ -132,7 +132,7 @@ function getVhosts()
         $loaded_vhosts = array();
 
         // take a look at vhost.conf
-        $vhost_conf_lines = file( NGINX_CONF_DIR . 'vhosts.conf' );
+        $vhost_conf_lines = file(NGINX_CONF_DIR . 'vhosts.conf');
 
         // examine each line
         foreach ($vhost_conf_lines as $vhost_conf_line) {
@@ -164,12 +164,12 @@ function getVhosts()
 
 function isVhostsConfIncludedInNginxConf()
 {
-    $nginx_conf_lines = file( NGINX_CONF_DIR . 'nginx.conf' );
+    $nginxConfigLines = file(NGINX_CONF_DIR . 'nginx.conf');
 
-    foreach ($nginx_conf_lines as $nginx_conf_line) {
-       if (strpos($nginx_conf_line, 'include vhosts.conf;') !== false) {
+    foreach ($nginxConfigLines as $nginx_conf_line) {
+        if (strpos($nginx_conf_line, 'include vhosts.conf;') !== false) {
             return true;
-       }
+        }
     }
 
     return false;

@@ -49,7 +49,7 @@ $action();
 function render($view = 'page-action', $template_vars = array())
 {
     // fallback to current page, if called empty
-    global $page, $action; if ($view == 'page-action') { $view = $page . '-' . $action; }
+    global $page, $action; if ($view === 'page-action') { $view = $page . '-' . $action; }
     extract($template_vars);
     ob_start();
     include WPNXM_HELPER_DIR . 'viewhelper.php';

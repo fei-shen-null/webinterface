@@ -32,12 +32,18 @@
     * @link       http://wpn-xm.org/
     */
 
+function index()
+{
+    render('page-action', array('no_layout'=>true));
+}
+
 function insert()
 {
-    if(isset($_GET['newvhost']) && !empty($_GET))
+    if(isset($_GET['newvhost']) && !empty($_GET)) {
+        $newVhostName = $_GET['newvhost'];    
+    }
 
-    $new_vhost = $_GET['newvhost'];
-    $vhost_file = NGINX_VHOSTS_DIR . $new_vhost . '.conf';
+    $vhostFileToCreate = NGINX_VHOSTS_DIR . $newVhostName . '.conf';
 
     clearstatcache();
 
@@ -51,13 +57,13 @@ function insert()
     }
 
     // read vhost template file
-    $tpl_content = file_get_contents(WPNXM_DATA_DIR . '/config-templates/nginx-vhost-conf.tpl');
+    $tplContent = file_get_contents(WPNXM_DATA_DIR . '/config-templates/nginx-vhost-conf.tpl');
 
     // replace the host name in the vhost template
-    $content = str_replace('%%vhost%%', $new_vhost, $tpl_content);
+    $content = str_replace('%%vhost%%', $newVhostName, $tplContent);
 
     // write new vhost file using the vhost template as content
-    file_put_contents($vhost_file, $content);
+    file_put_contents($vhostFileToCreate, $content);
 
     // Add include-line for new vhost file in "\bin\nginx\conf\vhosts.conf"
 
@@ -68,7 +74,7 @@ function insert()
     if (!is_writable($main_vhost_conf_file) && !chmod($main_vhost_conf_file, 0777)) {
         exit('The "vhosts.conf" file is not writeable. Please modify permissions.');
     } else {
-        file_put_contents($main_vhost_conf_file, "\n # automatically added vhost configuration file \n include vhosts/$new_vhost.conf;", FILE_APPEND);
+        file_put_contents($main_vhost_conf_file, "\n # automatically added vhost configuration file \n include vhosts/$newVhostName.conf;", FILE_APPEND);
     }
 
     // check for "COM" (php_com_dotnet.dll)
@@ -84,16 +90,16 @@ function insert()
     $oExec = $WshShell->run($cmd_restartNginx , 0, false);
 
     // add the new virtual host to the windows .hosts file using the "hosts" tool
-    $cmd_addHosts = 'cmd /c "' . WPNXM_DIR . '\bin\tools\hosts' . ' add ' . $_SERVER['SERVER_ADDR'] . ' ' . $new_vhost . ' # added by WPN-XM"' ;
-    passthru($cmd_addHosts);
+    $cmdAddHosts = 'cmd /c "' . WPNXM_DIR . '\bin\tools\hosts' . ' add ' . $_SERVER['SERVER_ADDR'] . ' ' . $newVhostName . ' # added by WPN-XM"' ;
+    passthru($cmdAddHosts);
 
     // flush ipcache
-    $cmd_ipflush = 'ipconfig /flushdns';
-    $oExec = $WshShell->run($cmd_ipflush , 0, false);
+    $cmdIpflush = 'ipconfig /flushdns';
+    $oExec = $WshShell->run($cmdIpflush , 0, false);
 
     // wait a second for dns flush
     sleep(1);
 
     // forward to new host
-    header("Location: http://$new_vhost/");
+    header("Location: http://$newVhostName/");
 }

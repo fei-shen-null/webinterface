@@ -90,11 +90,11 @@ class serverstack
 
     public static function getMariaDBPassword()
     {
-        if (!class_exists('ini')) {
-            include WPNXM_HELPER_DIR . 'phpini.php';
+        if (!class_exists('INIReaderWriter')) {
+            include WPNXM_HELPER_DIR . 'INIReaderWriter.php';
         }
 
-        $ini = new ini(WPNXM_INI);
+        $ini = new INIReaderWriter(WPNXM_INI);
 
         return $ini->get('MariaDB', 'password');
     }
