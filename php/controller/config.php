@@ -80,18 +80,20 @@ function showtab()
     $tab = filter_input(INPUT_GET, 'tab');
     $tab = strtr($tab, '-', '_'); // minus to underscore conversion
     $tab = 'showtab_' . $tab;
-    if (!is_callable($tab)) { throw new Exception('Error: Tab function not found: ' . $tab . '.');}
+    if (!is_callable($tab)) {
+        throw new Exception('Error: Tab function not found: ' . $tab . '.');
+    }
     $tab();
 }
 
 function showtab_nginx()
 {
-    render('config-showtab-nginx', array('no_layout'=>true));
+    render('config-showtab-nginx', array('no_layout' => true));
 }
 
 function showtab_mariadb()
 {
-    render('config-showtab-mariadb', array('no_layout'=>true));
+    render('config-showtab-mariadb', array('no_layout' => true));
 }
 
 function showtab_nginx_vhosts()
@@ -123,7 +125,7 @@ function showtab_php_ext()
 
 function showtab_help()
 {
-    render('config-showtab-help', array('no_layout'=>true));
+    render('config-showtab-help', array('no_layout' => true));
 }
 
 function showtab_php()
