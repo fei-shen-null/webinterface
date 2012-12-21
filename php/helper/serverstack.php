@@ -340,7 +340,32 @@ class serverstack
         $phpinfo = preg_replace('#>(yes|on|enabled|active)#i', '><span style="color:#090; font-weight: bold;">$1</span>', $phpinfo);
         $phpinfo = preg_replace('#>(no|off|disabled)#i', '><span style="color:#f00; font-weight: bold;">$1</span>', $phpinfo);
 
-        return $phpinfo;
+        # grab all php extensions for display in an additional table
+        preg_match_all("(?:module_)(.*)", $buffered_phpinfo, $match_modules, PREG_SET_ORDER);
+
+        // create 4 lists from the whole extensions result set
+        $modlists = array();
+        $i = 0;
+        foreach ($match_modules as $mod) {
+            $modlists[($i % 4)][] = $mod;
+            $i++;
+        }
+
+        // create html table listing the extensions
+        $html = '';
+        $html .= '<div class="center"><h1>PHP Extensions</h1>';
+        $html .= '<table style="width: 600px";>';
+
+        foreach ($modlists as $modlist) {
+            $html .= '<td valign="top"><ul>';
+            foreach ($modlist as $mod) {
+                $html .= '<li><a href="#module_' . $mod[1] . '">' . $mod[1] . '</a></li>';
+            }
+            $html .= '</ul></td>';
+        }
+        $html .= '</tr></table></div><br>';
+
+        return $html . $phpinfo;
     }
 
     public static function determinePort($daemon)
