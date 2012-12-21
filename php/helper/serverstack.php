@@ -341,7 +341,7 @@ class serverstack
         $phpinfo = preg_replace('#>(no|off|disabled)#i', '><span style="color:#f00; font-weight: bold;">$1</span>', $phpinfo);
 
         # grab all php extensions for display in an additional table
-        preg_match_all("(?:module_)(.*)", $buffered_phpinfo, $match_modules, PREG_SET_ORDER);
+        preg_match_all("^(?:module_)(.*)^", $buffered_phpinfo, $match_modules, PREG_SET_ORDER);
 
         // create 4 lists from the whole extensions result set
         $modlists = array();
