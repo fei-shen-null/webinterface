@@ -111,7 +111,7 @@ function showtab_nginx_vhosts()
 
 function showtab_php_ext()
 {
-    include WPNXM_HELPER_DIR . 'phpini.php';
+    include WPNXM_HELPER_DIR . 'PHPExtension.php';
     $phpext = new PHPExtension();
 
     $tpl_data = array(
