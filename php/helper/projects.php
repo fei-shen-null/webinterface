@@ -37,9 +37,14 @@ class projects
     private $dirs = array();
 
     /**
-     * The array defines paths of the www folder.
-     * These are not "Your Projects", but infrastructure and tools for WPN-XM.
-     * This is used for exclusion of folders when fetching project directories.
+     * The "toolDirectories" array contains paths of the "/www" folder.
+     * These paths are administration tools for WPN-XM, shipped with the distribution.
+     *
+     * In the webinterface, on the page "Projects and Tools", this array is used to
+     * divide the "Tools" folders from your "Your Projects" folders.
+     *
+     * @see fetchProjectDirectories(false)
+     * @var array
      */
     private $toolDirectories = array(
         'adminer' => 'adminer/adminer.php',
@@ -48,6 +53,8 @@ class projects
         'webinterface' => '',
         'xhprof' => 'xhprof/xhprof_html',
         'memadmin' => '',
+        'phpmemcachedadmin' => '',
+        'rockmongo' => ''
     );
 
     public function __construct()
@@ -55,6 +62,12 @@ class projects
         $this->dirs = $this->fetchProjectDirectories();
     }
 
+    /**
+     * Returns the list of directories in the "/www" folder.
+     *
+     * @param bool $all True, will return all dirs. False, will exclude tool directories.
+     * @return array
+     */
     public function fetchProjectDirectories($all = false)
     {
         $dirs = array();
