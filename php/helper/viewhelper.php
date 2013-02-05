@@ -48,7 +48,10 @@ class viewhelper
                 // is phpmyadmin installed?
                 if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
                     $item_number = $item_number + 1;
-                    $menu .= '<li class="'.$item_number.'"><a href="'.WPNXM_ROOT.'phpmyadmin/">PHPMyAdmin</a></li>';
+                    include_once WPNXM_HELPER_DIR.'serverstack.php';
+                    $password = serverstack::getMariaDBPassword();
+                    $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
+                    $menu .= '<li class="'.$item_number.'"><a href="'.$href.'">PHPMyAdmin</a></li>';
                 }
 
                 // is adminer installed?
@@ -57,8 +60,8 @@ class viewhelper
                     $menu .= '<li class="'.$item_number.'"><a href="'.WPNXM_ROOT.'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a></li>';
                 }
 
-                    $item_number = $item_number + 1;
-        $menu .= '<li class="last '.$item_number.'"><a href="index.php?page=phpinfo">PHP Info</a></li>
+                $item_number = $item_number + 1;
+                $menu .= '<li class="last '.$item_number.'"><a href="index.php?page=phpinfo">PHP Info</a></li>
                 </ul>
              </div>';
 
