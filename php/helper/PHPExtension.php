@@ -226,7 +226,7 @@ class PHPExtension
     {
         $glob = $list = array(); // PHP SYNTAX reminder $glob, $list = array();
 
-        $glob = glob(WPNXM_DIR ."bin/php/ext/*");
+        $glob = glob(WPNXM_DIR ."bin/php/ext/*.dll");
 
         foreach ($glob as $key => $file) {
             // $list array has the following structure
@@ -247,6 +247,7 @@ class PHPExtension
 
         // read php.ini
         $ini_file = php_ini_loaded_file();
+        include_once __DIR__ . '/INIReaderWriter.php';
         $ini = new INIReaderWriter();
         $ini->read($ini_file);
         $lines = $ini->returnArray();
