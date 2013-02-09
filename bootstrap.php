@@ -111,7 +111,6 @@ if (!function_exists('showConstants')) {
     }
 }
 
-new \webinterface\helper\iniReaderWriter();
 // autoload classes based on a 1:1 mapping from namespace to directory structure.
 spl_autoload_register(function ($class) {
     // return early, if class already loaded
