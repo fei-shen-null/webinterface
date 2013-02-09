@@ -97,6 +97,8 @@ if (!defined('WPNXM_DIR')) {
 
 }
 
+//showConstants();
+
 if (!function_exists('showConstants')) {
     function showConstants()
     {
@@ -108,5 +110,15 @@ if (!function_exists('showConstants')) {
         exit;
     }
 }
-//showConstants();
-?>
+
+new \webinterface\helper\iniReaderWriter();
+// autoload classes based on a 1:1 mapping from namespace to directory structure.
+spl_autoload_register(function ($class) {
+    // return early, if class already loaded
+    if(class_exists($class)) { return; }
+    // replace namespace separator with directory separator
+    $class = strtr($class, '\\', DS);
+    // get full name of file containing the required class
+    $file = __DIR__ . DS . 'php' . DS . $class . '.php';
+    if (is_file($file)) { include $file; }
+});
