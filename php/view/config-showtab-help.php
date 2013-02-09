@@ -1,5 +1,5 @@
 <h2>Help</h2>
-<p>The configuration page is divided into tabs for each of the components.
+<p>The configuration page is divided into tabs. There is one tab for each of the main software components.
    <br/>
    You will find the following functionality there:
 </p>
