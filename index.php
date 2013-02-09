@@ -42,7 +42,7 @@ if (is_file($helper)) { include $helper; }
 // action controller
 $action = @$_GET['action'] ?: 'index';
 $action = strtr($action, '-', '_'); // minus to underscore conversion
-if (!is_callable($action)) { throw new Exception('Error: Action "' . $action . '"" not found in PageController "' . $page . '".'); }
+if (!is_callable($action)) { throw new Exception('Error: Action "' . $action . '" not found in PageController "' . $page . '".'); }
 $action();
 
 // view renderer (dynamic)
