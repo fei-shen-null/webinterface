@@ -118,6 +118,31 @@
                 </tr>
             </table>
 
+             <table class="cs-message-content">
+                <tr>
+                    <td class="td-with-image">
+                        Database
+                    </td>
+                    <td>
+                        <div class="resourceheader">
+                            <div class="title">
+                                <img class="res-header-icon" src="<?= WPNXM_IMAGES_DIR ?>/mongodb.png" alt="Report Icon" height="16" width="16" />
+                                <a href="http://mongodb.org/">
+                                    <b>MongoDB</b>
+                                </a>
+                                <span class="version"><?php echo isset($mongodb_version) ? $mongodb_version : ''; ?></span>
+                            </div>
+                            <div class="description"><small>MongoDB (from "humongous") is a scalable, high-performance, open source NoSQL database. {name: "Mongo", type: "DB"}</small>
+                            </div>
+                            <div class="license"><p>
+                                    License: <a href="http://www.mongodb.org/about/licensing/">GNU/AGPL v3</a>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -195,11 +220,11 @@
                 </tr>
                 <tr>
                     <td>Directory</td>
-                    <td class="right"><?= WPNXM_WWW_DIR . 'bin\nginx' ?></td>
+                    <td class="right"><?= WPNXM_DIR . 'bin\nginx' ?></td>
                 </tr>
                 <tr>
                     <td>Config</td>
-                    <td class="right"><?= WPNXM_WWW_DIR . 'bin\nginx\conf\nginx.conf' ?></td>
+                    <td class="right"><?= WPNXM_DIR . 'bin\nginx\conf\nginx.conf' ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
@@ -232,7 +257,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-<?= $php_status ?> PHP
+                        <?= $php_status ?> PHP
                         </div>
                     </td>
                 </tr>
@@ -304,6 +329,49 @@
                         ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log' ?>">Show Log</a>
                         <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="cs-message-content">
+                <tr>
+                    <td colspan="2">
+                        <div class="resourceheader2 bold">
+                        <?php $mongodb_status = '1'; $mongodb_password = '0'; ?>
+                        <?= $mongodb_status ?> MongoDB
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="width-42 left">Host : Port</td>
+                    <td class="right">localhost:27017</td>
+                </tr>
+                <tr>
+                    <td>Username | Password</td>
+                    <td class="right"><span class="red">root</span> | <span class="red"><?= $mongodb_password ?></span></td>
+                </tr>
+                <tr>
+                    <td>Directory</td>
+                    <td class="right"><?= WPNXM_DIR . 'bin\mongodb'; ?></td>
+                </tr>
+                <tr>
+                    <td>Config</td>
+                    <td class="right"><?= WPNXM_DIR . 'bin\mongodb\mongodb.conf'; ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="right">
+                        <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb' ?>">Configure</a>
+                        <a class="aButton"
+                        <?php
+                        if (!is_file(WPNXM_DIR . 'logs\mongodb.log')) {
+                            echo "onclick=\"alert('MongoDB Log not available. File not found.'); return false;\"";
+                        }
+                        if(!$canOpenLogfileWithEditor()) {
+                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                        }
+                        ?>
+                           href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mongodb-log' ?>">Show Log</a>
+                        <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a> <?php } ?>
                     </td>
                 </tr>
             </table>
