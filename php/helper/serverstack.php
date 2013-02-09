@@ -183,42 +183,23 @@ class serverstack
 
         switch ($extension) {
             case "xdebug":
-
                 // Check phpinfo content for Xdebug as Zend Extension
-                if (preg_match('/with\sXdebug\sv([0-9.rcdevalphabeta-]+),/', $phpinfo, $matches)) {
-                    $loaded = true;
-                }
+                $loaded = (preg_match('/with\sXdebug\sv([0-9.rcdevalphabeta-]+),/', $phpinfo, $matches)) ? true : false;
 
-                // Check phpinfo content for Xdebug as normal PHP extension
-                if (preg_match('/xdebug support/', $phpinfo, $matches)) {
-                    $loaded = true;
-                }
-
+                // Check phpinfo content for Xdebug as normal PHP extension (?)
+                $loaded = (preg_match('/xdebug support/', $phpinfo, $matches)) ? true : false;
                 break;
-
             case "memcached":
-
-                if (preg_match('/memcache/', $phpinfo, $matches)) {
-                    $loaded = true;
-                }
-
+                $loaded = (preg_match('/memcache/', $phpinfo, $matches)) ? true : false;
                 break;
-
             case "apc":
-
-                if (preg_match('/apc/', $phpinfo, $matches)) {
-                    $loaded = true;
-                }
-
+                $loaded = (preg_match('/apc/', $phpinfo, $matches)) ? true : false;
                 break;
-
-             case "zeromq":
-
-                if (preg_match('/zeromq/', $phpinfo, $matches)) {
-                    $loaded = true;
-                }
-
+            case "zeromq":
+                $loaded =  (preg_match('/zeromq/', $phpinfo, $matches)) ? true : false;
                 break;
+            default:
+                throw new \InvalidArgumentException(sprintf('There is no assertion for the extension: %s', $extension));
         }
 
         unset($phpinfo);
@@ -388,8 +369,7 @@ class serverstack
                 # code...
                 break;
             default:
-                # code...
-                break;
+                throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
         }
     }
 
@@ -417,9 +397,11 @@ class serverstack
             case 'xdebug':
                 return self::checkPort('127.0.0.1', '9100');
                 break;
-            default:
-                # code...
+             case 'mongodb':
+                return self::checkPort('127.0.0.1', '27017'); // remember: port 27018 is the admin interface of mongo
                 break;
+            default:
+                throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
         }
     }
 
@@ -538,6 +520,8 @@ class serverstack
             case 'php':
                 exec($hide_console . $process_kill . 'php-cgi.exe');
                 break;
+            default:
+                throw new \InvalidArgumentException(sprintf('There is no stopDaemon command for the daemon: %s', $daemon));
         }
     }
 
@@ -562,6 +546,8 @@ class serverstack
                 $php_daemon = WPNXM_DIR . 'bin\php\bin\php-cgi.exe ';
                 exec($hide_console . $php_daemon . $options);
                 break;
+            default:
+                throw new \InvalidArgumentException(sprintf('There is no startDaemon command for the daemon: %s', $daemon));
         }
     }
 
@@ -583,7 +569,8 @@ class serverstack
             case 'php':
                 exec($hide_console . $restart . 'php');
                 break;
-
+            default:
+                throw new \InvalidArgumentException(sprintf('There is no restartDaemon command for the daemon: %s', $daemon));
         }
     }
 }
