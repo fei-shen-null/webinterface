@@ -117,6 +117,7 @@ spl_autoload_register(function ($class) {
     if(class_exists($class)) { return; }
     // replace namespace separator with directory separator
     $class = strtr($class, '\\', DS);
+    $class = str_replace('Webinterface\\', '', $class);
     // get full name of file containing the required class
     $file = __DIR__ . DS . 'php' . DS . $class . '.php';
     if (is_file($file)) { include $file; }

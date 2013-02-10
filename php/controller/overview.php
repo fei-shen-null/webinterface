@@ -32,7 +32,7 @@
     * @link       http://wpn-xm.org/
     */
 
-include WPNXM_HELPER_DIR . 'serverstack.php';
+use Webinterface\Helper\Serverstack;
 
 function index()
 {
@@ -45,17 +45,20 @@ function index()
       'mariadb_version'     => Serverstack::getMariaDBVersion(),
       'memcached_version'   => Serverstack::getMemcachedVersion(),
       'xdebug_version'      => Serverstack::getXdebugVersion(),
+      'mongodb_version'     => Serverstack::getMongoDBVersion(),
       // status
       'nginx_status'        => Serverstack::getStatus('nginx'),
       'php_status'          => Serverstack::getStatus('php'),
       'mariadb_status'      => Serverstack::getStatus('mariadb'),
       'memcached_status'    => Serverstack::getStatus('memcached'), // daemon && extension
       'xdebug_status'       => Serverstack::getStatus('xdebug'),
+      'mongodb_status'      => Serverstack::getStatus('mongodb'),
       // ...
       'my_ip'               => Serverstack::getMyIP(),
       'mariadb_password'    => Serverstack::getMariaDBPassword(),
       'memcached_installed' => Serverstack::assertExtensionInstalled('memcached'),
       'xdebug_installed'    => Serverstack::assertExtensionInstalled('xdebug'),
+      'mongodb_installed'   => Serverstack::assertExtensionInstalled('mongodb'),
       // extension "com_dotnet" is needed to open logfile with editor, else we disable the log buttons
       'canOpenLogfileWithEditor' => function() {
                                       if(!class_exists('COM') and !extension_loaded("com_dotnet")) {

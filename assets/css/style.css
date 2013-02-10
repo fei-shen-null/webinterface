@@ -236,13 +236,16 @@ hr.footer-line {
 }
 
 div.right-box {float:left; margin-left: 2em;}
+td.width-80 {width:80%;}
+td.width-60 {width:60%;}
+td.width-40 {width:40%;}
 td.width-35 {width:35%;}
 td.width-25 {width:25%;}
 td.width-20 {width:20%;}
 .left { text-align: left; }
 .right { text-align: right; }
 .center { text-align: center; }
-.bold {font-weight: bold}
+.bold { font-weight: bold; }
 
 div.left-box {float:left; margin-right: 2em;}
 h1.headline {margin-top: 40px; margin-bottom: 30px; font-size: 18px; line-height: 22px;}

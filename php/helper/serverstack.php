@@ -42,9 +42,7 @@ class serverstack
      */
     public static function printExclamationMark($image_title_text = '')
     {
-        return '<img style="float:right;"
-                     src="' . WPNXM_IMAGES_DIR . '/exclamation-red-frame.png" alt=""
-                     title="'.$image_title_text.'">';
+        return sprintf('<img style="float:right;" src="%s/exclamation-red-frame.png" alt="" title="%s">',  WPNXM_IMAGES_DIR, htmlspecialchars($image_title_text));
     }
 
     public static function get_MySQL_datadir()
@@ -142,6 +140,24 @@ class serverstack
         return $xdebug_version;
     }
 
+
+    public static function getMongoDBVersion()
+    {
+        if(!extension_loaded('mongo')) {
+            return self::printExclamationMark('The PHP Extension "Mongo" is required.');
+        }
+
+        $m = new Mongo();
+        // $db = $m->admin; //require admin priviledge
+
+        //$mongodb_info = $db->command(array('buildinfo'=>true));
+        //$mongodb_version = $mongodb_info['version'];
+
+        $mongodb_version = $db->execute('return db.version()');
+
+        return $mongodb_version;
+    }
+
     /**
      * Tests, if the extension file is found.
      *
@@ -156,6 +172,7 @@ class serverstack
             'xhprof'    => 'bin\php\ext\php_xhprof.dll',
             'memcached' => 'bin\php\ext\php_memcache.dll', # file without D
             'zeromq'    => 'bin\php\ext\php_zmq.dll',
+            'mongodb'   => 'bin\php\ext\php_mongo.dll',
             'nginx'     => 'bin\nginx\nginx.conf',
             'mariadb'   => 'bin\mariadb\my.ini',
             'php'       => 'bin\php\php.ini',
@@ -197,6 +214,9 @@ class serverstack
                 break;
             case "zeromq":
                 $loaded =  (preg_match('/zeromq/', $phpinfo, $matches)) ? true : false;
+                break;
+            case "mongo":
+                $loaded =  (preg_match('/mongo/', $phpinfo, $matches)) ? true : false;
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('There is no assertion for the extension: %s', $extension));
@@ -264,7 +284,7 @@ class serverstack
     public static function getMemcachedVersion()
     {
         if (extension_loaded('memcache') === false) {
-            return self::printExclamationMark('PHP Extension: memcache missing.');
+            return self::printExclamationMark('The PHP Extension "memcache" is required.');
         }
 
         $matches = new Memcache;
@@ -409,10 +429,10 @@ class serverstack
     {
         if (!self::isDaemonRunning($daemon)) {
             $img = WPNXM_IMAGES_DIR . '/status_stop.png';
-            $title = ucfirst($daemon) . ' daemon stopped.';
+            $title = $daemon . ' not running!';
         } else {
             $img = WPNXM_IMAGES_DIR . '/status_run.png';
-            $title = ucfirst($daemon) . ' daemon running.';
+            $title = $daemon . ' running.';
         }
 
         return '<img style="float:right;" src="'.$img.'" alt="" title="'.$title.'">';
@@ -424,6 +444,7 @@ class serverstack
         if ($daemon === 'xdebug') { return extension_loaded('xdebug'); }
         if ($daemon === 'php') { $daemon = 'php-cgi'; }
         if ($daemon === 'mariadb') { $daemon = 'mysqld'; }
+        if ($daemon === 'mongodb') { $daemon = 'mongod'; }
 
         // lookup daemon executable in process list
         static $output = '';

@@ -130,7 +130,7 @@
                                 <a href="http://mongodb.org/">
                                     <b>MongoDB</b>
                                 </a>
-                                <span class="version"><?php echo isset($mongodb_version) ? $mongodb_version : ''; ?></span>
+                                <span class="version"><?= $mongodb_version ?></span>
                             </div>
                             <div class="description"><small>MongoDB (from "humongous") is a scalable, high-performance, open source NoSQL database. {name: "Mongo", type: "DB"}</small>
                             </div>
@@ -211,7 +211,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-20">Host : Port</td>
+                    <td>Host : Port</td>
                     <td class="right"><?= $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] ?></td>
                 </tr>
                 <tr>
@@ -219,12 +219,16 @@
                     <td class="right"><?= $my_ip ?></td>
                 </tr>
                 <tr>
-                    <td>Directory</td>
-                    <td class="right"><?= WPNXM_DIR . 'bin\nginx' ?></td>
+                   <td colspan="5">
+                        <span class="floatleft">Directory</span>
+                        <span class="floatright"><?= WPNXM_DIR . 'bin\nginx' ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Config</td>
-                    <td class="right"><?= WPNXM_DIR . 'bin\nginx\conf\nginx.conf' ?></td>
+                    <td colspan="5">
+                        <span class="floatleft">Config</span>
+                        <span class="floatright"><?= WPNXM_DIR . 'bin\nginx\conf\nginx.conf' ?></span>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
@@ -262,16 +266,20 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-42 left">Host : Port</td>
+                    <td class="width-40 left">Host : Port</td>
                     <td class="right"><?= $_SERVER['SERVER_NAME'] ?>:<?= $_SERVER['SERVER_PORT'] ?></td>
                 </tr>
                 <tr>
-                    <td>Directory</td>
-                    <td class="right"><?= WPNXM_WWW_DIR . 'bin\php' ?></td>
+                    <td colspan="5">
+                        <span class="floatleft">Directory</span>
+                        <span class="floatright"><?= WPNXM_WWW_DIR . 'bin\php' ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Config</td>
-                    <td class="right"><?= get_cfg_var('cfg_file_path') ?></td>
+                    <td colspan="5">
+                        <span class="floatleft">Config</span>
+                        <span class="floatright"><?= get_cfg_var('cfg_file_path') ?></span>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
@@ -293,30 +301,34 @@
 
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="2">
+                    <td colspan="5">
                         <div class="resourceheader2 bold">
                         <?= $mariadb_status ?> MariaDB
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-42 left">Host : Port</td>
-                    <td class="right">localhost:3306</td>
+                    <td>Host : Port</td>
+                    <td colspan="4" class="right">localhost:3306</td>
                 </tr>
                 <tr>
-                    <td>Username | Password</td>
-                    <td class="right"><span class="red">root</span> | <span class="red"><?= $mariadb_password ?></span></td>
+                    <td colspan="2">Username | Password</td>
+                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?= $mariadb_password ?></span></td>
                 </tr>
                 <tr>
-                    <td>Directory</td>
-                    <td class="right"><?= WPNXM_WWW_DIR . 'bin\mariadb'; ?></td>
+                     <td colspan="5">
+                        <span class="floatleft">Directory</span>
+                        <span class="floatright"><?= WPNXM_WWW_DIR . 'bin\mariadb'; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Config</td>
-                    <td class="right"><?= WPNXM_WWW_DIR . 'mariadb\my.ini'; ?></td>
+                    <td colspan="5">
+                        <span class="floatleft">Config</span>
+                        <span class="floatright"><?= WPNXM_WWW_DIR . 'mariadb\my.ini'; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="right">
+                    <td colspan="5" class="right">
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb' ?>">Configure</a>
                         <a class="aButton"
                         <?php
@@ -335,31 +347,34 @@
 
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="2">
+                    <td colspan="5">
                         <div class="resourceheader2 bold">
-                        <?php $mongodb_status = '1'; $mongodb_password = '0'; ?>
                         <?= $mongodb_status ?> MongoDB
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-42 left">Host : Port</td>
-                    <td class="right">localhost:27017</td>
+                    <td>Host : Port</td>
+                    <td colspan="4" class="right">localhost:27017</td>
                 </tr>
                 <tr>
-                    <td>Username | Password</td>
-                    <td class="right"><span class="red">root</span> | <span class="red"><?= $mongodb_password ?></span></td>
+                    <td colspan="2">Username | Password</td>
+                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?= $mongodb_password = '--'; ?></span></td>
                 </tr>
                 <tr>
-                    <td>Directory</td>
-                    <td class="right"><?= WPNXM_DIR . 'bin\mongodb'; ?></td>
+                    <td colspan="5">
+                        <span class="floatleft">Directory</span>
+                        <span class="floatright"><?= WPNXM_DIR . 'bin\mongodb'; ?></span>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="5">
+                        <span class="floatleft">Config</span>
+                        <span class="floatright"><?= WPNXM_DIR . 'bin\mongodb\mongodb.conf'; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Config</td>
-                    <td class="right"><?= WPNXM_DIR . 'bin\mongodb\mongodb.conf'; ?></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="right">
+                    <td colspan="5" class="right">
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb' ?>">Configure</a>
                         <a class="aButton"
                         <?php
@@ -385,7 +400,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-42 left">Host : Port</td>
+                    <td class="width-40 left">Host : Port</td>
                     <td class="right">localhost:11211</td>
                 </tr>
                 <tr>
@@ -423,7 +438,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-42 left">Host : Port</td>
+                    <td class="width-40 left">Host : Port</td>
                     <td class="right">localhost:9000</td>
                 </tr>
                 <tr>
