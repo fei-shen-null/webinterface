@@ -57,6 +57,32 @@ class Serverstack
         return $mysql_datadir;
     }
 
+    public static function getVersion($component)
+    {
+        switch ($component) {
+            case 'nginx':
+                return self::getNginxVersion();
+                break;
+            case 'mariadb':
+                return self::getMariaDBVersion();
+                break;
+             case 'mongodb':
+                return self::getMongoDBVersion();
+                break;
+            case 'memcached':
+                return self::getMemcachedVersion();
+                break;
+            case 'xdebug':
+                return self::getXdebugVersion();
+                break;
+            case 'php':
+                return self::getPHPVersion();
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
+        }
+    }
+
     /**
      * Returns MariaDB Version.
      *
@@ -110,7 +136,7 @@ class Serverstack
      *
      * @return string Nginx Version
      */
-    public static function getNGINXVersion()
+    public static function getNginxVersion()
     {
         if (strpos($_SERVER["SERVER_SOFTWARE"], 'Apache') !== false) {
             return self::printExclamationMark('Traitor - you are using Apache!');

@@ -75,11 +75,9 @@ function showtab()
      */
     $tab = filter_input(INPUT_GET, 'tab');
     $tab = strtr($tab, '-', '_'); // minus to underscore conversion
-    $tab = 'showtab_' . $tab;
-    if (!is_callable($tab)) {
-        throw new Exception('Error: Tab function not found: ' . $tab . '.');
-    }
-    $tab();
+    $tabAction = 'showtab_' . $tab;
+    if (!is_callable($tabAction)) { throw new \Exception('The controller method "'.$tabAction.'" for the Tab "'.$tab.'" was not found!'); }
+    $tabAction();
 }
 
 function showtab_nginx()
@@ -92,12 +90,17 @@ function showtab_mariadb()
     render('config-showtab-mariadb', array('no_layout' => true));
 }
 
+function showtab_mongodb()
+{
+    render('config-showtab-mongodb', array('no_layout' => true));
+}
+
 function showtab_nginx_vhosts()
 {
     $tpl_data = array(
         'no_layout' => true,
         'project_folders' => (new Webinterface\Helper\Projects())->fetchProjectDirectories(true),
-        'vhosts' => getVhosts()
+        'vhosts' => (new Webinterface\Helper\VirtualHosts())->listVirtualHosts()
     );
 
     render('config-showtab-nginx-vhosts', $tpl_data);

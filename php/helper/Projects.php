@@ -109,42 +109,16 @@ class Projects
 
             foreach ($this->dirs as $dir) {
                 // always display the folder
-                 $html .= '<li><a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
+                $html .= '<li>';
+                $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
 
-                if (FEATURE_4 == true) { // create nginx vhost directly from project list
-                    if (false === $this->isVhost($dir)) {
-                        $html .= '<a class="btn-new-vhost floatright" ';
-                        $html .= ' href="' . WPNXM_ROOT . 'webinterface/index.php?page=vhost&newvhost=' . $dir .'">';
-                        $html .= 'New vhost</a></li>';
-                    } else {
-                        // if there is a vhost config file, display a link to the vhost, too
-                        $html .=  '<a class="floatright" href="http://' . $dir . '/">' . $dir . '</a></li>';
-                    }
+                if (FEATURE_4 == true) {
+                    $html .= $this->getVhostLink($dir);
                 }
 
-                // display a link to Travis CI
-                if(true === $this->containsTravisConfig($dir)) {
+                $html .= $this->getTravisCILink($dir);
 
-                    $composer = array();
-
-                    /*if(extension_loaded('openssl')) {
-                    $possible_repos = file_get_contents('https://api.travis-ci.org/repositories.json?search='. $dir);
-                    var_dump($possible_repos);
-                    set the one found or ask user to select one of multiple
-                     * }*/
-                    if(true === $this->containsComposerConfig($dir)) {
-                        $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
-                        // add the github link by showing a github icon
-                        $html .= '<a href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
-                    }
-
-                    if(array_key_exists('name', $composer)) {
-                        // add the travis link by showing build status icon
-                        $html .= '<a href="http://travis-ci.org/' . $composer['name'] . '">';
-                        $html .= '<img src="https://travis-ci.org/' . $composer['name'] . '.png">';
-                        $html .= '</a>';
-                    }
-                }
+                $html .= '</li>';
             }
         }
 
@@ -164,6 +138,53 @@ class Projects
         }
 
         return $html . '</ul>';
+    }
+
+    public function getTravisCILink($dir)
+    {
+        $html = '';
+
+        // display a link to Travis CI
+        if(true === $this->containsTravisConfig($dir)) {
+
+            $composer = array();
+
+            /*if(extension_loaded('openssl')) {
+            $possible_repos = file_get_contents('https://api.travis-ci.org/repositories.json?search='. $dir);
+            var_dump($possible_repos);
+            set the one found or ask user to select one of multiple
+             * }*/
+            if(true === $this->containsComposerConfig($dir)) {
+                $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
+                // add the github link by showing a github icon
+                $html .= '<a href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
+            }
+
+            if(array_key_exists('name', $composer)) {
+                // add the travis link by showing build status icon
+                $html .= '<a href="http://travis-ci.org/' . $composer['name'] . '">';
+                $html .= '<img src="https://travis-ci.org/' . $composer['name'] . '.png">';
+                $html .= '</a>';
+            }
+        }
+
+        return $html;
+    }
+
+    public function getVhostLink($dir)
+    {
+        $html = '';
+
+        if (false === $this->isVhost($dir)) {
+            $html .= '<a class="btn-new-vhost floatright" ';
+            $html .= ' href="' . WPNXM_ROOT . 'webinterface/index.php?page=vhost&newvhost=' . $dir .'">';
+            $html .= 'New Domain</a>';
+        } else {
+            // if there is a vhost config file, display a link to the vhost, too
+            $html .=  '<a class="floatright" href="http://' . $dir . '/">' . $dir . '</a>';
+        }
+
+        return $html;
     }
 
     /**

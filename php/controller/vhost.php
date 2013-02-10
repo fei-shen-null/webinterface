@@ -37,10 +37,12 @@ function index()
     render('page-action', array('no_layout'=>true));
 }
 
+
+
 function insert()
 {
     if(isset($_GET['newvhost']) && !empty($_GET)) {
-        $newVhostName = $_GET['newvhost'];    
+        $newVhostName = $_GET['newvhost'];
     }
 
     $vhostFileToCreate = NGINX_VHOSTS_DIR . $newVhostName . '.conf';

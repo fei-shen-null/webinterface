@@ -4,23 +4,28 @@
 
     <fieldset style="width: 350px;">
 
-    <legend><h3>Hosts</h3></legend>
+    <legend><h3>vHosts</h3></legend>
 
     <p>
-    You might select the vhosts to load.
-    Selecting a vhost will force loading this vhost in vhost.conf.
-    Deselecting a vhost will comment the entry in vhost.conf.
-    Remember to restart nginx for changes to take effect.
+    You might select the vHosts to load.
+    Selecting a vHost will enable it in "vhost.conf".
+    Deselecting a vHost disables loading.
+    Remember to restart Nginx for changes to take effect.
     </p>
 
     <form action="index.php?page=config&action=update_nginx_vhosts" method="post" class="well form-inline">
         <table>
             <?php
-            foreach ($vhosts as $vhost) { /* array: fqpn, filename, loaded */
-                // if the vhost is loaded, add "checked" for checking the checkbox
-                $checked = (isset($vhost['loaded']) && $vhost['loaded'] === true) ? 'checked="checked"' : '';
-                // output row contains filename | checkbox
-                echo '<tr><td>' . $vhost['filename'] . '</td><td><input type="checkbox" ' . $checked . '></td><td><a href="index.php?page=openfile&file"Open in Editor</a></tr>';
+            if(!empty($vhosts)) {
+                foreach ($vhosts as $vhost) { /* array: fqpn, filename, loaded */
+
+                    $checked = (isset($vhost['loaded']) && $vhost['loaded'] === true) ? 'checked="checked"' : '';
+
+                    echo '<tr><td>' . $vhost['filename'] . '</td><td><input type="checkbox" ' . $checked . '></td>
+                          <td><a href="index.php?page=openfile&file='.$vhost['filename'].'"Open in Editor</a></td></tr>';
+                }
+            } else {
+                echo '<tr><td>No vHosts files found.</td></tr>';
             } ?>
         </table>
         <div class="form-actions">
@@ -37,12 +42,12 @@
 
     <fieldset style="width: 350px;">
 
-    <legend><h3>Add New or Edit Vhost</h3></legend>
+    <legend><h3>Add New or Edit vHost</h3></legend>
 
     <p>
-    Please select the location (realpath) for the vhost, then add the servername.
+    Please select the location (realpath) for the vHost, then add the Servername.
     You might also provide aliases for the servername. Do not forget to select the checkbox
-    for adding the new vhost domain to your "hosts" file for local name resolution.
+    for adding the new vHost domain to your "hosts" file for local name resolution.
     </p>
 
     <form class="well">

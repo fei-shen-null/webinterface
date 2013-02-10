@@ -4,9 +4,14 @@
         <div class="cs-message">
             <div class="cs-message-content-projects">
                 <?php if (FEATURE_1 == true) { // @todo feature-flag create new project dialog ?>
-                  <button class="aButton new-project-btn-position floatright" href="#newproject">
-                      <i class="icon-plus"></i> New Project
-                  </button>
+                    <button class="aButton new-project-btn-position floatright" href="#newproject">
+                        New Project
+                    </button>
+                <?php } ?>
+                 <?php if (FEATURE_4 == true) { // @todo feature-flag create new project dialog ?>
+                    <button class="aButton new-project-btn-position floatright" href="#listDomains">
+                        List Domains
+                    </button>
                 <?php } ?>
                 <h2>Projects <small>(<?=$numberOfProjects?>)</small></h2>
                 <?=$listProjects?>
@@ -17,8 +22,8 @@
     <div class="right-box">
         <div class="cs-message">
             <div class="cs-message-content-projects">
-                <h2>Tools <small>(<?=$numberOfTools;?>)</small></h2>
-                <?=$listTools;?>
+                <h2>Tools <small>(<?=$numberOfTools?>)</small></h2>
+                <?=$listTools?>
             </div>
         </div>
     </div>

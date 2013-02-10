@@ -161,7 +161,8 @@ $(function () {
                   <li><a name="nginx" href="index.php?page=config#nginx">NGINX</a></li>
                   <li><a name="nginx-vhosts" href="index.php?page=config#nginx-vhosts">NGINX vHosts</a></li>
                   <li><a name="mariadb" href="index.php?page=config#mariadb">MariaDB</a></li>
-                  <li><a name="xdebug" href="index.php?page=config#xdebug">Xdebug</a></li>
+                  <li><a name="mongodb" href="index.php?page=config#mongodb">MongoDB</a></li>
+                  <li><a name="xdebug" href="index.php?page=config#xdebug">XDebug</a></li>
                   <?php } ?>
                 </ul>
 

@@ -40,12 +40,12 @@ function index()
       // load jq, because the database password reset uses jq modal window
       'load_jquery'         => true,
       // version
-      'nginx_version'       => Serverstack::getNGINXVersion(),
-      'php_version'         => Serverstack::getPHPVersion(),
-      'mariadb_version'     => Serverstack::getMariaDBVersion(),
-      'memcached_version'   => Serverstack::getMemcachedVersion(),
-      'xdebug_version'      => Serverstack::getXdebugVersion(),
-      'mongodb_version'     => Serverstack::getMongoDBVersion(),
+      'nginx_version'       => Serverstack::getVersion('nginx'),
+      'php_version'         => Serverstack::getVersion('php'),
+      'mariadb_version'     => Serverstack::getVersion('mariadb'),
+      'memcached_version'   => Serverstack::getVersion('memcached'),
+      'xdebug_version'      => Serverstack::getVersion('xdebug'),
+      'mongodb_version'     => Serverstack::getVersion('mongodb'),
       // status
       'nginx_status'        => Serverstack::getStatus('nginx'),
       'php_status'          => Serverstack::getStatus('php'),
