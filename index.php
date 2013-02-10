@@ -33,7 +33,7 @@ include 'bootstrap.php';
 // page controller
 $page = @$_GET['page'] ?: 'projects';
 $pagecontroller = WPNXM_CONTROLLER_DIR . $page . '.php';
-if (is_file($pagecontroller)) { include $pagecontroller; } else { throw new Exception('Error: PageController "' . $page . '" not found.'); }
+if (is_file($pagecontroller)) { include $pagecontroller; } else { throw new \Exception('Error: PageController "' . $page . '" not found.'); }
 
 // automatically load helper file if existing
 $helper = WPNXM_HELPER_DIR . $page . '.php';
@@ -42,7 +42,7 @@ if (is_file($helper)) { include $helper; }
 // action controller
 $action = @$_GET['action'] ?: 'index';
 $action = strtr($action, '-', '_'); // minus to underscore conversion
-if (!is_callable($action)) { throw new Exception('Error: Action "' . $action . '" not found in PageController "' . $page . '".'); }
+if (!is_callable($action)) { throw new \Exception('Error: Action "' . $action . '" not found in PageController "' . $page . '".'); }
 $action();
 
 // view renderer (dynamic)
@@ -55,7 +55,7 @@ function render($view = 'page-action', $template_vars = array())
     include WPNXM_HELPER_DIR . 'Viewhelper.php';
     if (!isset($no_layout) or $no_layout === false) { include WPNXM_VIEW_DIR . 'header.php'; }
     $view_file = WPNXM_VIEW_DIR . $view . '.php';
-    if (is_file($view_file)) { include $view_file; } else { throw new Exception('Error: View "' . $view_file . '" not found.'); }
+    if (is_file($view_file)) { include $view_file; } else { throw new \Exception('Error: View "' . $view_file . '" not found.'); }
     if (!isset($no_layout) or $no_layout === false) { include WPNXM_VIEW_DIR . 'footer.php'; }
 
     return ob_end_flush();
