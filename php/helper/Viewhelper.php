@@ -50,8 +50,7 @@ class Viewhelper
                 // is phpmyadmin installed?
                 if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
                     $item_number = $item_number + 1;
-                    include_once WPNXM_HELPER_DIR.'serverstack.php';
-                    $password = serverstack::getMariaDBPassword();
+                    $password = \Webinterface\Helper\Serverstack::getMariaDBPassword();
                     $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
                     $menu .= '<li class="'.$item_number.'"><a href="'.$href.'">PHPMyAdmin</a></li>';
                 }

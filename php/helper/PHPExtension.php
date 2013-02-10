@@ -239,8 +239,8 @@ class PHPExtension
 
         // read php.ini
         $ini_file = php_ini_loaded_file();
-        include_once __DIR__ . '/INIReaderWriter.php';
-        $ini = new INIReaderWriter();
+
+        $ini = new \Webinerface\Helper\INIReaderWriter();
         $ini->read($ini_file);
         $lines = $ini->returnArray();
 
