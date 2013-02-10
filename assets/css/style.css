@@ -166,6 +166,10 @@ h2 {
     margin-top: 0px;
 }
 
+h2 small {
+    font-size: 17px;
+}
+
 .aButton {
     background-color:transparent;
     -moz-border-radius:4px;

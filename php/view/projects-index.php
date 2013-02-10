@@ -8,7 +8,7 @@
                       <i class="icon-plus"></i> New Project
                   </button>
                 <?php } ?>
-                <h2>Projects (<?=$numberOfProjects?>)</h2>
+                <h2>Projects <small>(<?=$numberOfProjects?>)</small></h2>
                 <?=$listProjects?>
             </div>
         </div>
@@ -17,7 +17,7 @@
     <div class="right-box">
         <div class="cs-message">
             <div class="cs-message-content-projects">
-                <h2>Tools (<?=$numberOfTools;?>)</h2>
+                <h2>Tools <small>(<?=$numberOfTools;?>)</small></h2>
                 <?=$listTools;?>
             </div>
         </div>
