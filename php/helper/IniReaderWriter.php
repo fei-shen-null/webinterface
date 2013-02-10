@@ -1,4 +1,5 @@
 <?php
+namespace Webinterface\Helper;
 /**
  * INI Reader and Writer
  * The file content is in array $lines.

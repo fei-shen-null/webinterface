@@ -1,15 +1,7 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Webinterface\Helper;
 
-/**
- * Description of PHPExtension
- *
- * @author v
- */
 /**
  * Wrapper for handling php extensions and the php.ini extension section.
  */

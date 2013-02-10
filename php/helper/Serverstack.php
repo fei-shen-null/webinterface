@@ -32,7 +32,9 @@
     * @link       http://wpn-xm.org/
     */
 
-class serverstack
+namespace Webinterface\Helper;
+
+class Serverstack
 {
     /**
      * Prints the Exclaimation Mark Icon with title text.
@@ -88,10 +90,6 @@ class serverstack
 
     public static function getMariaDBPassword()
     {
-        if (!class_exists('INIReaderWriter')) {
-            include WPNXM_HELPER_DIR . 'INIReaderWriter.php';
-        }
-
         $ini = new INIReaderWriter(WPNXM_INI);
 
         return $ini->get('MariaDB', 'password');

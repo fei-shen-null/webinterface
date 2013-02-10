@@ -120,5 +120,6 @@ spl_autoload_register(function ($class) {
     $class = str_replace('Webinterface\\', '', $class);
     // get full name of file containing the required class
     $file = __DIR__ . DS . 'php' . DS . $class . '.php';
-    if (is_file($file)) { include $file; }
+    //echo 'Autoloading Try -> ' . $file;
+    if (is_file($file)) { include_once $file; }
 });

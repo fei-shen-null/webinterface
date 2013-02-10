@@ -32,6 +32,8 @@
     * @link       http://wpn-xm.org/
     */
 
+namespace Webinterface\Helper;
+
 function disable_memcached()
 {
     include WPNXM_HELPER_DIR . 'phpini.php';

@@ -32,7 +32,9 @@
     * @link       http://wpn-xm.org/
     */
 
-class viewhelper
+namespace Webinterface\Helper;
+
+class Viewhelper
 {
     public static function renderMenu()
     {

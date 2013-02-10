@@ -1,4 +1,6 @@
 <?php
+namespace Webinterface\Helper;
+
 /**
  * Opens the file (in a background process)
  * @param $file The file to open.

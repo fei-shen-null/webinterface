@@ -32,7 +32,9 @@
     * @link       http://wpn-xm.org/
     */
 
-include __DIR__ . '/INIReaderWriter.php';
+namespace Webinterface\Helper;
+
+use Webinterface\Helper\INIReaderWriter;
 
 /**
  * Wrapper for handling php.ini with ini class.

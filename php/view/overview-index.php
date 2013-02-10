@@ -31,6 +31,7 @@
  * @copyright  Jens-André Koch (2010 - 2012)
  * @link       http://wpn-xm.org/
  */
+use Webinterface\Helper\Serverstack;
 ?>
 
 <div class="centered">

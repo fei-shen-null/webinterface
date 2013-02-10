@@ -32,12 +32,10 @@
     * @link       http://wpn-xm.org/
     */
 
-include WPNXM_HELPER_DIR . 'serverstack.php';
-
 function index()
 {
     $tpl_data = array(
-        'php_info' => Serverstack::fetchPHPInfo()
+        'php_info' => Webinterface\Helper\Serverstack::fetchPHPInfo()
     );
 
     render('page-action', $tpl_data);

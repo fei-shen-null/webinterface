@@ -32,7 +32,9 @@
     * @link       http://wpn-xm.org/
     */
 
-class projects
+namespace Webinterface\Helper;
+
+class Projects
 {
     private $dirs = array();
 

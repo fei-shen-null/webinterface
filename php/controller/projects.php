@@ -34,7 +34,7 @@
 
 function index()
 {
-    $projects = new Projects();
+    $projects = new Webinterface\Helper\Projects();
 
     $tpl_data = array(
         'numberOfProjects' => $projects->getNumberOfProjects(),

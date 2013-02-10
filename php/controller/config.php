@@ -34,8 +34,6 @@
 
 function index()
 {
-    include WPNXM_HELPER_DIR . 'serverstack.php';
-
     $tpl_data = array(
         'load_jquery' => true
     );
@@ -49,8 +47,7 @@ function update_phpini_setting()
     $directive = filter_input(INPUT_POST, 'directive');
     $value = filter_input(INPUT_POST, 'value');
 
-    include WPNXM_HELPER_DIR . 'phpini.php';
-    PHPINI::setDirective($section, $directive, $value);
+    Webinterface\Helper\PHPINI::setDirective($section, $directive, $value);
 
     echo 'Entry saved.';
 }
@@ -59,8 +56,7 @@ function update_phpextensions()
 {
     $extensions = $_POST['extensions'];
 
-    include WPNXM_HELPER_DIR . 'phpini.php';
-    $ext = new PHPExtension();
+    $ext = new Webinterface\Helper\PHPExtension();
     $available_extensions = $ext->getExtensionDirFileList();
 
     foreach ($extensions as $extension) {
@@ -98,11 +94,9 @@ function showtab_mariadb()
 
 function showtab_nginx_vhosts()
 {
-    include WPNXM_HELPER_DIR . 'projects.php';
-
     $tpl_data = array(
         'no_layout' => true,
-        'project_folders' => (new projects())->fetchProjectDirectories(true),
+        'project_folders' => (new Webinterface\Helper\Projects())->fetchProjectDirectories(true),
         'vhosts' => getVhosts()
     );
 
@@ -111,8 +105,7 @@ function showtab_nginx_vhosts()
 
 function showtab_php_ext()
 {
-    include WPNXM_HELPER_DIR . 'PHPExtension.php';
-    $phpext = new PHPExtension();
+    $phpext = new Webinterface\Helper\PHPExtension();
 
     $tpl_data = array(
         'no_layout' => true,
@@ -130,11 +123,9 @@ function showtab_help()
 
 function showtab_php()
 {
-    include WPNXM_HELPER_DIR . 'phpini.php';
-
     $tpl_data = array(
         'no_layout' => true,
-        'ini' => PHPINI::read(), // $ini array structure = 'ini_file', 'ini_array'
+        'ini' => Webinterface\Helper\PHPINI::read(), // $ini array structure = 'ini_file', 'ini_array'
     );
 
     render('config-showtab-php', $tpl_data);
@@ -142,8 +133,6 @@ function showtab_php()
 
 function showtab_xdebug()
 {
-    include WPNXM_HELPER_DIR . 'phpini.php';
-
     $tpl_data = array(
         'no_layout' => true,
         'ini_settings' => ini_get_all('xdebug'),

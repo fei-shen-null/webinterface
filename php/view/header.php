@@ -77,8 +77,8 @@
         </h1>
 
         <?php
-            viewhelper::renderMenu();
-            viewhelper::renderWelcome();
+            Webinterface\Helper\Viewhelper::renderMenu();
+            Webinterface\Helper\Viewhelper::renderWelcome();
         ?>
 
         <div id="javascript-off-errorbox">
