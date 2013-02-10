@@ -240,7 +240,7 @@ class PHPExtension
         // read php.ini
         $ini_file = php_ini_loaded_file();
 
-        $ini = new \Webinerface\Helper\INIReaderWriter();
+        $ini = new \Webinterface\Helper\INIReaderWriter();
         $ini->read($ini_file);
         $lines = $ini->returnArray();
 
