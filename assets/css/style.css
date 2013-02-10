@@ -323,6 +323,13 @@ li {
     border-radius: 0 8px 8px 0;
     border-right: 0 none;
 }
+.main_menu li.first > a.active {
+    border-radius: 8px 0 0 8px;
+}
+.main_menu li.last > a.active {
+    border-radius: 0 8px 8px 0;
+    border-right: 0 none;
+}
 .main_menu a.active {
     background: #D1D1D1;
     background: rgb(238,238,238); /* Old browsers */
