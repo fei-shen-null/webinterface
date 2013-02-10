@@ -131,6 +131,7 @@ img
     padding-right: 12px;
     overflow: hidden;
     font-size: 12px;
+    line-height: 1.5;
 }
 
 .res-header-icon {
@@ -236,9 +237,6 @@ hr.footer-line {
 }
 
 div.right-box {float:left; margin-left: 2em;}
-td.width-80 {width:80%;}
-td.width-60 {width:60%;}
-td.width-40 {width:40%;}
 td.width-35 {width:35%;}
 td.width-25 {width:25%;}
 td.width-20 {width:20%;}
@@ -402,6 +400,8 @@ img
 #organic-tabs ul li.nav-two a.current, #organic-tabs ul.core li a:hover { background-color: #d30000; color: white; }
 #organic-tabs ul li.nav-three a.current, #organic-tabs ul.jquerytuts li a:hover { background-color: #8d01b0; color: white; }
 #organic-tabs ul li.nav-four a.current, #organic-tabs ul.classics li a:hover { background-color: #FE4902; color: white; }
+
+#organic-tabs div#tab-content h2 { margin-top: 5px; }
 
 .floatleft {
     float: left;
