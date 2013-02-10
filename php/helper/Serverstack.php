@@ -156,6 +156,13 @@ class Serverstack
         return $mongodb_version;
     }
 
+    public static function getMongoDBPassword()
+    {
+        $ini = new INIReaderWriter(WPNXM_INI);
+
+        return $ini->get('MongoDB', 'password');
+    }
+
     /**
      * Tests, if the extension file is found.
      *

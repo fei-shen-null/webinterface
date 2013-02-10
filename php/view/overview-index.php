@@ -360,7 +360,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="2">Username | Password</td>
-                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?= $mongodb_password = '--'; ?></span></td>
+                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?= $mongodb_password ?></span></td>
                 </tr>
                 <tr>
                     <td colspan="5">

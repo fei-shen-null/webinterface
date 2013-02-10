@@ -56,6 +56,7 @@ function index()
       // ...
       'my_ip'               => Serverstack::getMyIP(),
       'mariadb_password'    => Serverstack::getMariaDBPassword(),
+      'mongodb_password'    => Serverstack::getMongoDBPassword(),
       'memcached_installed' => Serverstack::assertExtensionInstalled('memcached'),
       'xdebug_installed'    => Serverstack::assertExtensionInstalled('xdebug'),
       'mongodb_installed'   => Serverstack::assertExtensionInstalled('mongodb'),
