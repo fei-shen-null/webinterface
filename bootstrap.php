@@ -89,11 +89,12 @@ if (!defined('WPNXM_DIR')) {
     /**
      * Feature Flags
      */
-    define('FEATURE_1', true); // "create new project dialog" in php/view/projects-index.php
-    define('FEATURE_2', true); // memcached configure button and dialog and switch on/off
-    define('FEATURE_3', true); // Configuration Tabs Nginx, Nginx Vhosts, MariaDB, Xdebug
-    define('FEATURE_4', true); // create nginx vhost directly from project list
-    define('FEATURE_5', true); // xdebug configure and switch on/off
+    $toggle = false;
+    define('FEATURE_1', $toggle); // "create new project dialog" in php/view/projects-index.php
+    define('FEATURE_2', $toggle); // memcached configure button and dialog and switch on/off
+    define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Vhosts, MariaDB, Xdebug
+    define('FEATURE_4', $toggle); // create nginx vhost directly from project list
+    define('FEATURE_5', $toggle); // xdebug configure and switch on/off
 
 }
 
