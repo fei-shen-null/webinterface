@@ -1,1 +1,1 @@
-<h2>NGINX Main Settings</h2>
+<h2>Nginx Settings</h2>

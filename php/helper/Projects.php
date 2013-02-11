@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
@@ -74,7 +74,7 @@ class Projects
     {
         $dirs = array();
 
-        $handle=opendir(WPNXM_WWW_DIR); # __DIR__
+        $handle = opendir(WPNXM_WWW_DIR); # __DIR__
 
         while ($dir = readdir($handle)) {
             if ($dir == "." or $dir == "..") {
@@ -113,7 +113,7 @@ class Projects
                 $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
 
                 if (FEATURE_4 == true) {
-                    $html .= $this->getVhostLink($dir);
+                    $html .= $this->getListDomainsButton($dir);
                 }
 
                 $html .= $this->getTravisCILink($dir);
@@ -122,7 +122,7 @@ class Projects
             }
         }
 
-         return $html . '</ul>';
+        return $html . '</ul>';
     }
 
     public function listTools()
@@ -145,22 +145,22 @@ class Projects
         $html = '';
 
         // display a link to Travis CI
-        if(true === $this->containsTravisConfig($dir)) {
+        if (true === $this->containsTravisConfig($dir)) {
 
             $composer = array();
 
-            /*if(extension_loaded('openssl')) {
-            $possible_repos = file_get_contents('https://api.travis-ci.org/repositories.json?search='. $dir);
-            var_dump($possible_repos);
-            set the one found or ask user to select one of multiple
-             * }*/
-            if(true === $this->containsComposerConfig($dir)) {
+            /* if(extension_loaded('openssl')) {
+              $possible_repos = file_get_contents('https://api.travis-ci.org/repositories.json?search='. $dir);
+              var_dump($possible_repos);
+              set the one found or ask user to select one of multiple
+             * } */
+            if (true === $this->containsComposerConfig($dir)) {
                 $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
                 // add the github link by showing a github icon
                 $html .= '<a href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
             }
 
-            if(array_key_exists('name', $composer)) {
+            if (array_key_exists('name', $composer)) {
                 // add the travis link by showing build status icon
                 $html .= '<a href="http://travis-ci.org/' . $composer['name'] . '">';
                 $html .= '<img src="https://travis-ci.org/' . $composer['name'] . '.png">';
@@ -171,28 +171,29 @@ class Projects
         return $html;
     }
 
-    public function getVhostLink($dir)
+    public function getListDomainsButton($dir)
     {
         $html = '';
 
-        if (false === $this->isVhost($dir)) {
-            $html .= '<a class="btn-new-vhost floatright" ';
-            $html .= ' href="' . WPNXM_ROOT . 'webinterface/index.php?page=vhost&newvhost=' . $dir .'">';
+        if (false === $this->isDomain($dir)) {
+            // display link to add a new domain for this directory
+            $html .= '<a class="btn-new-domain floatright" ';
+            $html .= ' href="' . WPNXM_ROOT . 'webinterface/index.php?page=domains&newdomain=' . $dir . '">';
             $html .= 'New Domain</a>';
         } else {
-            // if there is a vhost config file, display a link to the vhost, too
-            $html .=  '<a class="floatright" href="http://' . $dir . '/">' . $dir . '</a>';
+            // display link to the domain
+            $html .= '<a class="floatright" href="http://' . $dir . '/">' . $dir . '</a>';
         }
 
         return $html;
     }
 
     /**
-     * check if a seperate vhost is added in \bin\nginx\conf\vhosts\
+     * Check, if a seperate domain exists in \bin\nginx\conf\domains\
      */
-    public function isVhost($dir)
+    public function isDomain($dir)
     {
-        return is_file( WPNXM_DIR . '/bin/nginx/conf/vhosts/' . $dir . '.conf' );
+        return is_file(WPNXM_DIR . '/bin/nginx/conf/domains/' . $dir . '.conf');
     }
 
     public function containsTravisConfig($dir)

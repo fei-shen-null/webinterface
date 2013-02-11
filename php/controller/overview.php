@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
@@ -50,16 +50,18 @@ function index()
       'nginx_status'        => Serverstack::getStatus('nginx'),
       'php_status'          => Serverstack::getStatus('php'),
       'mariadb_status'      => Serverstack::getStatus('mariadb'),
-      'memcached_status'    => Serverstack::getStatus('memcached'), // daemon && extension
+      'memcached_status'    => Serverstack::getStatus('memcached'), // daemon && extension ?
       'xdebug_status'       => Serverstack::getStatus('xdebug'),
-      'mongodb_status'      => Serverstack::getStatus('mongodb'),
-      // ...
+      'mongodb_status'      => Serverstack::getStatus('mongodb'), // daemon && extension
+      // your ip
       'my_ip'               => Serverstack::getMyIP(),
-      'mariadb_password'    => Serverstack::getMariaDBPassword(),
-      'mongodb_password'    => Serverstack::getMongoDBPassword(),
-      'memcached_installed' => Serverstack::assertExtensionInstalled('memcached'),
-      'xdebug_installed'    => Serverstack::assertExtensionInstalled('xdebug'),
-      'mongodb_installed'   => Serverstack::assertExtensionInstalled('mongodb'),
+      // passwords
+      'mariadb_password'    => Serverstack::getPassword('mariadb'),
+      'mongodb_password'    => Serverstack::getPassword('mongodb'),
+      // which components are installed
+      'memcached_installed' => Serverstack::isInstalled('memcached'),
+      'xdebug_installed'    => Serverstack::isInstalled('xdebug'),
+      'mongodb_installed'   => Serverstack::isInstalled('mongodb'),
       // extension "com_dotnet" is needed to open logfile with editor, else we disable the log buttons
       'canOpenLogfileWithEditor' => function() {
                                       if(!class_exists('COM') and !extension_loaded("com_dotnet")) {

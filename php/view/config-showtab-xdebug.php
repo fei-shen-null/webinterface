@@ -8,8 +8,10 @@
 </tr>
 </thead>
 
-<?php foreach ($ini_settings as $setting => $values) {
-    echo '<tr><td>' . $setting .'</td><td>' . $values['global_value'] . '</td></tr>';
-} ?>
+<?php
+foreach ($ini_settings as $setting => $values) {
+    echo '<tr><td>' . $setting . '</td><td>' . $values['global_value'] . '</td></tr>';
+}
+?>
 
 </table>

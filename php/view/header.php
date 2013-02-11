@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 ?>
@@ -42,8 +42,6 @@
     <meta name="description" content="WPИ-XM Serverstack for Windows - Webinterface.">
     <link rel="shortcut icon" href="http://wpn-xm.org/favicon.ico" />
     <link type="text/css" href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css"  media="screen, projection" />
-    <script type="text/javascript" src="assets/js/wpnxm.js"></script>
     <?php if (isset($load_jquery) && $load_jquery === true) { ?>
     <!-- jQuery & jQuery UI -->
     <script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
@@ -55,15 +53,20 @@
     <script type="text/javascript" src="assets/js/jquery.modal.js"></script>
     <link type="text/css" href="assets/css/jquery.treeTable.css" rel="stylesheet" />
     <?php } ?>
+    <!-- WPN-XM stuff last in line, because using jQuery and overwriting CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"  media="screen, projection" />
+    <script type="text/javascript" src="assets/js/wpnxm.js"></script>
 </head>
 <body>
 
-<!-- This css style will come alive only, when javascript is disabled.
-     Its for displaying a message for all the security nerds with disabled javascript.
-     We need this reminder, because the WPN-XM configuration pages depend on AJAX. -->
+<!--
+    These CSS will come alive only, when Javascript is disabled.
+    It's displaying a message for all the security nerds with disabled javascript.
+    We need this reminder, because the WPN-XM configuration pages depend on jQuery and AJAX.
+-->
 <noscript><style type="text/css">
-  #page{ display:none; }
-  #javascript-off-errorbox { display:block; font-size:20px; color:red; }
+#page{ display:none; }
+#javascript-off-errorbox { display:block; font-size:20px; color:red; }
 </style></noscript>
 
 <div class="page-wrapper">
@@ -77,8 +80,8 @@
         </h1>
 
         <?php
-            Webinterface\Helper\Viewhelper::renderMenu();
-            Webinterface\Helper\Viewhelper::renderWelcome();
+            Webinterface\Helper\Viewhelper::showMenu();
+            Webinterface\Helper\Viewhelper::showWelcome();
         ?>
 
         <div id="javascript-off-errorbox">
@@ -88,3 +91,4 @@
         </div>
 
         <div class="content-centered">
+<!-- stop "header.php" -->

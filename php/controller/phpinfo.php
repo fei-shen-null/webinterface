@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 

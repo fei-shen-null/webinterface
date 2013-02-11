@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
@@ -36,7 +36,7 @@ namespace Webinterface\Helper;
 
 class Viewhelper
 {
-    public static function renderMenu()
+    public static function showMenu()
     {
         $menu = '<div class="main_menu">
                  <ul>
@@ -50,7 +50,7 @@ class Viewhelper
                 // is phpmyadmin installed?
                 if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
                     $item_number = $item_number + 1;
-                    $password = \Webinterface\Helper\Serverstack::getMariaDBPassword();
+                    $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
                     $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
                     $menu .= '<li class="'.$item_number.'"><a href="'.$href.'">PHPMyAdmin</a></li>';
                 }
@@ -69,7 +69,7 @@ class Viewhelper
         echo $menu;
     }
 
-    public static function renderWelcome()
+    public static function showWelcome()
     {
         if (self::fileCounter(WPNXM_DATA_DIR . '/welcomeMsgCounter.txt', 10) === true) {
             return;

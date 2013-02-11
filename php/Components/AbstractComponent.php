@@ -28,32 +28,83 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
-namespace Webinterface\Helper;
+namespace Webinterface\Components;
 
 /**
- * Virtual Hosts (Local Domains)
+ * WPN-XM Webinterface - Abstract Base Class for Components.
  *
- * VirtualHosts are a term and functionality found on Apache Servers.
- * The VirtualHosts concept is unknown to Nginx.
- * For Nginx it's simply a new server directive - in fact it's a local domain name.
+ * The class provides basic methods to gather pieces of information
+ * about a component.
  */
-class VirtualHosts {
+abstract class AbstractComponent
+{
+    /* @var string Printable name of the component. */
+    public $name;
 
-    public function listVirtualHosts()
+    /* @var string Type (PHP Extensions, Daemon). */
+    public $type;
+
+    /**
+     * Array with some essential files of the component.
+     * For making sure, that the component is installed.
+     */
+    public $files = array();
+
+    /* The configuration file of the component, if any. */
+    public $configFile = '';
+
+    /* The target folder (or base folder) of the installation. */
+    public $installationFolder = '';
+
+    /**
+     * Array with some essential file dependencies of the component.
+     * For making sure, that the component's dependencies are also installed.
+     */
+    public $dependencyFiles = array();
+
+    /**
+     * Checks, if a component is installed.
+     * A component is installed, if all its files exist.
+     * The files are defined in the $files array.
+     *
+     * @return bool True, if installed, false otherwise.
+     */
+    public function isInstalled()
     {
-        $vhosts = array();
-        $handle = opendir(NGINX_VHOSTS_DIR);
-        while ($dir = readdir($handle)) {
-            if ($dir == "." or $dir == "..") { continue; }
-            $vhosts[] = $dir;
+        $bool = false;
+        foreach($this->files as $file) {
+            $bool = $bool && file_exists($file);
         }
-        closedir($handle);
-        asort($vhosts);
-
-        return $vhosts; /* array: fqpn, filename, loaded */
+        return $bool;
     }
+
+    public function checkDependencies()
+    {
+        $bool = false;
+        foreach($this->dependencyFiles as $file) {
+            $bool = $bool && file_exists($file);
+        }
+        return $bool;
+    }
+
+    public function hasDependencies()
+    {
+        return (empty($dependencyFiles) === true) ? false : true;
+    }
+
+    public function getConfigFile()
+    {
+        return $this->configFile;
+    }
+
+    public function getInstallationFolder()
+    {
+        return $this->installationFolder;
+    }
+
+    abstract public function getVersion();
 }

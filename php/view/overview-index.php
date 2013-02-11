@@ -1,36 +1,4 @@
 <?php
-/**
- * WPИ-XM Server Stack - Webinterface
- * Jens-André Koch © 2010 - onwards
- * http://wpn-xm.org/
- *
- *        _\|/_
- *        (o o)
- +-----oOO-{_}-OOo------------------------------------------------------------------+
- |                                                                                  |
- |    LICENSE                                                                       |
- |                                                                                  |
- |    WPИ-XM Serverstack is free software; you can redistribute it and/or modify    |
- |    it under the terms of the GNU General Public License as published by          |
- |    the Free Software Foundation; either version 2 of the License, or             |
- |    (at your option) any later version.                                           |
- |                                                                                  |
- |    WPИ-XM Serverstack is distributed in the hope that it will be useful,         |
- |    but WITHOUT ANY WARRANTY; without even the implied warranty of                |
- |    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 |
- |    GNU General Public License for more details.                                  |
- |                                                                                  |
- |    You should have received a copy of the GNU General Public License             |
- |    along with this program; if not, write to the Free Software                   |
- |    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA    |
- |                                                                                  |
- +----------------------------------------------------------------------------------+
- *
- * @license    GNU/GPL v2 or (at your option) any later version..
- * @author     Jens-André Koch <jakoch@web.de>
- * @copyright  Jens-André Koch (2010 - 2012)
- * @link       http://wpn-xm.org/
- */
 use Webinterface\Helper\Serverstack;
 ?>
 
@@ -119,7 +87,8 @@ use Webinterface\Helper\Serverstack;
                 </tr>
             </table>
 
-             <table class="cs-message-content">
+            <?php if($mongodb_installed === true) { ?>
+            <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
                         Database
@@ -143,7 +112,9 @@ use Webinterface\Helper\Serverstack;
                     </td>
                 </tr>
             </table>
+            <?php } ?>
 
+            <?php if($memcached_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -168,6 +139,7 @@ use Webinterface\Helper\Serverstack;
                     </td>
                 </tr>
             </table>
+            <?php } ?>
 
             <table class="cs-message-content">
                 <tr>
@@ -346,6 +318,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
             </table>
 
+            <?php if($mongodb_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td colspan="5">
@@ -391,7 +364,9 @@ use Webinterface\Helper\Serverstack;
                     </td>
                 </tr>
             </table>
+            <?php } ?>
 
+            <?php if($memcached_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td colspan="2">
@@ -429,6 +404,7 @@ use Webinterface\Helper\Serverstack;
                     </td>
                 </tr>
             </table>
+            <?php } ?>
 
             <table class="cs-message-content">
                 <tr>
@@ -448,7 +424,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td>Extension Type</td>
-                    <td class="right"><?= Serverstack::getXdebugExtensionType(); ?></td>
+                    <td class="right"><?= \Webinterface\Components\XDebug::getXDebugExtensionType(); ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">

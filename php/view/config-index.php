@@ -158,8 +158,8 @@ $(function () {
                   <li><a name="php" href="index.php?page=config#php">PHP</a></li>
                   <li><a name="php-ext" href="index.php?page=config#php-ext">PHP Extensions</a></li>
                    <?php if (FEATURE_3 == true) { ?>
-                  <li><a name="nginx" href="index.php?page=config#nginx">NGINX</a></li>
-                  <li><a name="nginx-vhosts" href="index.php?page=config#nginx-vhosts">NGINX vHosts</a></li>
+                  <li><a name="nginx" href="index.php?page=config#nginx">Nginx</a></li>
+                  <li><a name="nginx-domains" href="index.php?page=config#nginx-domains">Nginx Domains</a></li>
                   <li><a name="mariadb" href="index.php?page=config#mariadb">MariaDB</a></li>
                   <li><a name="mongodb" href="index.php?page=config#mongodb">MongoDB</a></li>
                   <li><a name="xdebug" href="index.php?page=config#xdebug">XDebug</a></li>

@@ -28,55 +28,59 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
 function index()
 {
-    render('page-action', array('no_layout'=>true));
+    $tpl_data = array(
+        'no_layout' => true, // it's a modal dialog
+        'domains' => \Webinterface\Helper\Domains::listDomains()
+    );
+
+    render('page-action', $tpl_data);
 }
-
-
 
 function insert()
 {
-    if(isset($_GET['newvhost']) && !empty($_GET)) {
-        $newVhostName = $_GET['newvhost'];
+    if (isset($_GET['newdomain']) && !empty($_GET)) {
+        $newDomainName = $_GET['newdomain'];
     }
 
-    $vhostFileToCreate = NGINX_VHOSTS_DIR . $newVhostName . '.conf';
+    $domainFileToCreate = NGINX_DOMAINS_DIR . $newDomainName . '.conf';
 
     clearstatcache();
 
     /**
-     * Create folder "vhosts" in "/bin/nginx/conf", if not existant yet.
+     * Create folder "domains" in "/bin/nginx/conf", if not existant yet.
      *
-     * note: this folder is created during installation, but the user might have removed it.
+     * Note: the folder is normally created during installation.
+     * This is just a fallback, in case the user might have removed it.
      */
-    if (!is_dir(NGINX_VHOSTS_DIR)) {
-        mkdir(NGINX_VHOSTS_DIR, 0777);
+    if (!is_dir(NGINX_DOMAINS_DIR)) {
+        mkdir(NGINX_DOMAINS_DIR, 0777);
     }
 
-    // read vhost template file
-    $tplContent = file_get_contents(WPNXM_DATA_DIR . '/config-templates/nginx-vhost-conf.tpl');
+    // read domain template file
+    $tplContent = file_get_contents(WPNXM_DATA_DIR . '/config-templates/nginx-domain-conf.tpl');
 
-    // replace the host name in the vhost template
-    $content = str_replace('%%vhost%%', $newVhostName, $tplContent);
+    // replace the host name in the domain template
+    $content = str_replace('%%domain%%', $newDomainName, $tplContent);
 
-    // write new vhost file using the vhost template as content
-    file_put_contents($vhostFileToCreate, $content);
+    // write new domain file using the domain template as content
+    file_put_contents($domainFileToCreate, $content);
 
-    // Add include-line for new vhost file in "\bin\nginx\conf\vhosts.conf"
+    // Add include-line for new domain file in "\bin\nginx\conf\domains.conf"
 
     clearstatcache();
 
-    $main_vhost_conf_file = NGINX_CONF_DIR . 'vhosts.conf';
+    $domainsMainConfigFile = NGINX_CONF_DIR . 'domains.conf';
 
-    if (!is_writable($main_vhost_conf_file) && !chmod($main_vhost_conf_file, 0777)) {
-        exit('The "vhosts.conf" file is not writeable. Please modify permissions.');
+    if (!is_writable($domainsMainConfigFile) && !chmod($domainsMainConfigFile, 0777)) {
+        exit('The "domains.conf" file is not writeable. Please modify permissions.');
     } else {
-        file_put_contents($main_vhost_conf_file, "\n # automatically added vhost configuration file \n include vhosts/$newVhostName.conf;", FILE_APPEND);
+        file_put_contents($domainsMainConfigFile, "\n # automatically added domain configuration file \n include domains/$newDomainName.conf;", FILE_APPEND);
     }
 
     // check for "COM" (php_com_dotnet.dll)
@@ -88,20 +92,20 @@ function insert()
     $WshShell = new COM("WScript.Shell");
 
     // reload nginx configuration
-    $cmd_restartNginx = 'cmd /c "'.  WPNXM_DIR . '\bin\nginx\nginx.exe -p ' . WPNXM_DIR . ' -c ' . WPNXM_DIR . '\bin\nginx\conf\nginx.conf -s reload"';
-    $oExec = $WshShell->run($cmd_restartNginx , 0, false);
+    $cmd_restartNginx = 'cmd /c "' . WPNXM_DIR . '\bin\nginx\nginx.exe -p ' . WPNXM_DIR . ' -c ' . WPNXM_DIR . '\bin\nginx\conf\nginx.conf -s reload"';
+    $oExec = $WshShell->run($cmd_restartNginx, 0, false);
 
     // add the new virtual host to the windows .hosts file using the "hosts" tool
-    $cmdAddHosts = 'cmd /c "' . WPNXM_DIR . '\bin\tools\hosts' . ' add ' . $_SERVER['SERVER_ADDR'] . ' ' . $newVhostName . ' # added by WPN-XM"' ;
+    $cmdAddHosts = 'cmd /c "' . WPNXM_DIR . '\bin\tools\hosts' . ' add ' . $_SERVER['SERVER_ADDR'] . ' ' . $newDomainName . ' # added by WPN-XM"';
     passthru($cmdAddHosts);
 
     // flush ipcache
     $cmdIpflush = 'ipconfig /flushdns';
-    $oExec = $WshShell->run($cmdIpflush , 0, false);
+    $oExec = $WshShell->run($cmdIpflush, 0, false);
 
     // wait a second for dns flush
     sleep(1);
 
     // forward to new host
-    header("Location: http://$newVhostName/");
+    header("Location: http://$newDomainName/");
 }

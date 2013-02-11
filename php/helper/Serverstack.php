@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
@@ -47,6 +47,37 @@ class Serverstack
         return sprintf('<img style="float:right;" src="%s/exclamation-red-frame.png" alt="" title="%s">',  WPNXM_IMAGES_DIR, htmlspecialchars($image_title_text));
     }
 
+    public static function getInstalledComponents()
+    {
+        $classes = array();
+
+        $files = glob(WPNXM_COMPONENTS_DIR . '*.php');
+
+        foreach ($files as $file) {
+            $pi = pathinfo($file);
+            if($pi['filename'] === 'AbstractComponent') {
+                continue;
+            }
+            $classes[] = $pi['filename']; // get rid of extension
+        }
+
+        return $classes;
+    }
+
+    public static function getInstalledComponentsInstances()
+    {
+        $components = array();
+
+        $classes = self::getInstalledComponents();
+
+        foreach ($classes as $class) {
+            $fqcn = '\Webinterface\Components\\' . $class;
+            $components[] = $object_{$class} = new $fqcn;
+        }
+
+        return $components;
+    }
+
     public static function get_MySQL_datadir()
     {
         $myini_array = file("../mysql/my.ini");
@@ -57,136 +88,37 @@ class Serverstack
         return $mysql_datadir;
     }
 
+    /**
+     * Get Version - Facade.
+     *
+     * @param string $component
+     * @return string
+     * @throws \InvalidArgumentException
+     */
     public static function getVersion($component)
     {
         switch ($component) {
             case 'nginx':
-                return self::getNginxVersion();
+                return (new \Webinterface\Components\Nginx)->getVersion();
                 break;
             case 'mariadb':
-                return self::getMariaDBVersion();
+                return (new \Webinterface\Components\Mariadb)->getVersion();
                 break;
              case 'mongodb':
-                return self::getMongoDBVersion();
+                return (new \Webinterface\Components\Mongodb)->getVersion();
                 break;
             case 'memcached':
-                return self::getMemcachedVersion();
+                return (new \Webinterface\Components\Memcached)->getVersion();
                 break;
             case 'xdebug':
-                return self::getXdebugVersion();
+                return (new \Webinterface\Components\Xdebug)->getVersion();
                 break;
             case 'php':
-                return self::getPHPVersion();
+                return (new \Webinterface\Components\Php)->getVersion();
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
         }
-    }
-
-    /**
-     * Returns MariaDB Version.
-     *
-     * @return string MariaDB Version
-     */
-    public static function getMariaDBVersion()
-    {
-        # fail safe, for unconfigured php.ini files
-        if (!function_exists('mysqli_connect')) {
-            return self::printExclamationMark('Enable mysqli extension in php.ini.');
-        }
-
-        $connection = @mysqli_connect('localhost', 'root', self::getMariaDBPassword());
-
-        if (false === $connection) {
-           # Daemon running? Login credentials correct?
-           #echo ('MySQLi Connection error' . mysqli_connect_errno());
-
-           return self::printExclamationMark('MySQL Connection not possible. Access denied. Check credentials.');
-        } else {
-            # $mysqli->server_info returns e.g. "5.3.0-maria"
-            $arr = explode('-', $connection->server_info);
-
-            return $arr[0];
-
-            // @todo printSuccessMark('MariaDB is up. Connection successful.')
-
-            $connection->close();
-        }
-    }
-
-    public static function getMariaDBPassword()
-    {
-        $ini = new INIReaderWriter(WPNXM_INI);
-
-        return $ini->get('MariaDB', 'password');
-    }
-
-    /**
-     * Returns PHP Version.
-     *
-     * @return string PHP Version
-     */
-    public static function getPHPVersion()
-    {
-        return PHP_VERSION;
-    }
-
-    /**
-     * Returns Nginx Version.
-     *
-     * @return string Nginx Version
-     */
-    public static function getNginxVersion()
-    {
-        if (strpos($_SERVER["SERVER_SOFTWARE"], 'Apache') !== false) {
-            return self::printExclamationMark('Traitor - you are using Apache!');
-        }
-
-        return substr($_SERVER["SERVER_SOFTWARE"], 6);
-    }
-
-    /**
-     * Returns Xdebug Version.
-     *
-     * @return string Xdebug Version
-     */
-    public static function getXdebugVersion()
-    {
-        $xdebug_version = false;
-        $matches = '';
-        $phpinfo = self::fetchPHPInfo(true);
-
-        // Check phpinfo content for Xdebug as Zend Extension
-        if (preg_match('/with\sXdebug\sv([0-9.rcdevalphabeta-]+),/', $phpinfo, $matches)) {
-            $xdebug_version = $matches[1];
-        }
-
-        return $xdebug_version;
-    }
-
-
-    public static function getMongoDBVersion()
-    {
-        if(!extension_loaded('mongo')) {
-            return self::printExclamationMark('The PHP Extension "Mongo" is required.');
-        }
-
-        $m = new \Mongo();
-        // $db = $m->admin; //require admin priviledge
-
-        //$mongodb_info = $db->command(array('buildinfo'=>true));
-        //$mongodb_version = $mongodb_info['version'];
-
-        $mongodb_version = $db->execute('return db.version()');
-
-        return $mongodb_version;
-    }
-
-    public static function getMongoDBPassword()
-    {
-        $ini = new INIReaderWriter(WPNXM_INI);
-
-        return $ini->get('MongoDB', 'password');
     }
 
     /**
@@ -277,24 +209,6 @@ class Serverstack
         return false;
     }
 
-    public static function getXdebugExtensionType()
-    {
-        $phpinfo = self::fetchPHPInfo(true);
-        $matches = '';
-
-        // Check phpinfo content for Xdebug as Zend Extension
-        if (preg_match('/with\sXdebug\sv([0-9.rcdevalphabeta-]+),/', $phpinfo, $matches)) {
-            return 'Zend Extension';
-        }
-
-        // Check phpinfo content for Xdebug as normal PHP extension
-        if (preg_match('/xdebug support/', $phpinfo, $matches)) {
-            return 'PHP Extension';
-        }
-
-        return ':( XDebug not loaded.';
-    }
-
     public static function getPHPExtensionDirectory()
     {
         $phpinfo = self::fetchPHPInfo(true);
@@ -305,23 +219,6 @@ class Serverstack
         }
 
         return $extensionDir;
-    }
-
-    /**
-     * Returns memcached Version.
-     *
-     * @return string memcached Version
-     */
-    public static function getMemcachedVersion()
-    {
-        if (extension_loaded('memcache') === false) {
-            return self::printExclamationMark('The PHP Extension "memcache" is required.');
-        }
-
-        $matches = new Memcache;
-        $matches->addServer('localhost', 11211);
-
-        return $matches->getVersion();
     }
 
     /**
@@ -458,7 +355,7 @@ class Serverstack
 
     public static function getStatus($daemon)
     {
-        if (!self::isDaemonRunning($daemon)) {
+        if (Daemon::isRunning($daemon) === false) {
             $img = WPNXM_IMAGES_DIR . '/status_stop.png';
             $title = $daemon . ' not running!';
         } else {
@@ -469,21 +366,9 @@ class Serverstack
         return '<img style="float:right;" src="'.$img.'" alt="" title="'.$title.'">';
     }
 
-    public static function isDaemonRunning($daemon)
+    public static function isInstalled($component)
     {
-        // shorthands to daemon names; also handle xdebug extension
-        if ($daemon === 'xdebug') { return extension_loaded('xdebug'); }
-        if ($daemon === 'php') { $daemon = 'php-cgi'; }
-        if ($daemon === 'mariadb') { $daemon = 'mysqld'; }
-        if ($daemon === 'mongodb') { $daemon = 'mongod'; }
-
-        // lookup daemon executable in process list
-        static $output = '';
-        $process = WPNXM_DIR . 'bin\tools\process.exe';
-        if ($output == '') { $output = shell_exec($process); }
-        if (strpos($output, $daemon . '.exe') !== false) { return true; }
-
-        return false;
+        return;
     }
 
     /**
@@ -543,6 +428,8 @@ class Serverstack
 
     /**
      * Returns the current IP of the user by asking the WPN-XM webserver.
+     *
+     * @return the current IP of the user.
      */
     public static function getMyIP()
     {
@@ -554,75 +441,24 @@ class Serverstack
         }
     }
 
-    public static function stopDaemon($daemon)
+    /**
+     * Get Password - Facade.
+     *
+     * @param string $component
+     * @return string The Password.
+     * @throws \InvalidArgumentException
+     */
+    public static function getPassword($component)
     {
-        $hide_console = WPNXM_DIR . 'bin\tools\runhiddenconsole.exe ';
-        $process_kill = WPNXM_DIR . 'bin\tools\process.exe -k  ';
-
-        switch ($daemon) {
-            case 'nginx':
-                exec($hide_console . $process_kill . 'nginx.exe');
-                break;
+        switch ($component) {
             case 'mariadb':
-                exec($hide_console . $process_kill . 'mysqld.exe');
+                return (new \Webinterface\Components\Mariadb)->getPassword();
                 break;
-            case 'memcached':
-                exec($hide_console . $process_kill . 'memcached.exe');
-                break;
-            case 'php':
-                exec($hide_console . $process_kill . 'php-cgi.exe');
+             case 'mongodb':
+                return (new \Webinterface\Components\Mongodb)->getPassword();
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('There is no stopDaemon command for the daemon: %s', $daemon));
-        }
-    }
-
-    public static function startDaemon($daemon, $options = '')
-    {
-        $hide_console = WPNXM_DIR . 'bin\tools\runhiddenconsole.exe ';
-
-        switch ($daemon) {
-            case 'nginx':
-                $nginx_daemon = WPNXM_DIR . 'bin\nginx\bin\nginx.exe ';
-                exec($hide_console . $nginx_daemon . $options);
-                break;
-            case 'mariadb':
-                $mysqld_daemon = WPNXM_DIR . 'bin\mariadb\bin\mysqld.exe ';
-                exec($hide_console . $mysqld_daemon . $options);
-                break;
-            case 'memcached':
-                $memcached_daemon = WPNXM_DIR . 'bin\memcached\bin\memcached.exe ';
-                exec($hide_console . $memcached_daemon . $options);
-                break;
-            case 'php':
-                $php_daemon = WPNXM_DIR . 'bin\php\bin\php-cgi.exe ';
-                exec($hide_console . $php_daemon . $options);
-                break;
-            default:
-                throw new \InvalidArgumentException(sprintf('There is no startDaemon command for the daemon: %s', $daemon));
-        }
-    }
-
-    public static function restartDaemon($daemon)
-    {
-        $hide_console = WPNXM_DIR . 'bin\tools\runhiddenconsole.exe ';
-        $restart = 'restart-wpnxm.exe ';
-
-        switch ($daemon) {
-            case 'nginx':
-                exec($hide_console . $restart . 'nginx');
-                break;
-            case 'mariadb':
-                exec($hide_console . $restart . 'mariadb');
-                break;
-            case 'memcached':
-                exec($hide_console . $restart . 'memcached');
-                break;
-            case 'php':
-                exec($hide_console . $restart . 'php');
-                break;
-            default:
-                throw new \InvalidArgumentException(sprintf('There is no restartDaemon command for the daemon: %s', $daemon));
+                throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
         }
     }
 }

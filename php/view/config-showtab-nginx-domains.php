@@ -1,31 +1,31 @@
-<h2>NGINX vHosts</h2>
+<h2>Nginx Domains</h2>
 
 <div class="floatleft">
 
     <fieldset style="width: 350px;">
 
-    <legend><h3>vHosts</h3></legend>
+    <legend><h3>Domains</h3></legend>
 
     <p>
-    You might select the vHosts to load.
-    Selecting a vHost will enable it in "vhost.conf".
-    Deselecting a vHost disables loading.
+    You might select the domains to load.
+    Selecting a domain will enable it in "domain.conf".
+    Deselecting a domain disables loading.
     Remember to restart Nginx for changes to take effect.
     </p>
 
-    <form action="index.php?page=config&action=update_nginx_vhosts" method="post" class="well form-inline">
+    <form action="index.php?page=config&action=update_nginx_domains" method="post" class="well form-inline">
         <table>
             <?php
-            if(!empty($vhosts)) {
-                foreach ($vhosts as $vhost) { /* array: fqpn, filename, loaded */
+            if(!empty($domains)) {
+                foreach ($domains as $domain) { /* array: fqpn, filename, loaded */
 
-                    $checked = (isset($vhost['loaded']) && $vhost['loaded'] === true) ? 'checked="checked"' : '';
+                    $checked = (isset($domain['loaded']) && $domain['loaded'] === true) ? 'checked="checked"' : '';
 
-                    echo '<tr><td>' . $vhost['filename'] . '</td><td><input type="checkbox" ' . $checked . '></td>
-                          <td><a href="index.php?page=openfile&file='.$vhost['filename'].'"Open in Editor</a></td></tr>';
+                    echo '<tr><td>' . $domain['filename'] . '</td><td><input type="checkbox" ' . $checked . '></td>
+                          <td><a href="index.php?page=openfile&file='.$domain['filename'].'"Open in Editor</a></td></tr>';
                 }
             } else {
-                echo '<tr><td>No vHosts files found.</td></tr>';
+                echo '<tr><td>No domains files found.</td></tr>';
             } ?>
         </table>
         <div class="form-actions">
@@ -42,12 +42,12 @@
 
     <fieldset style="width: 350px;">
 
-    <legend><h3>Add New or Edit vHost</h3></legend>
+    <legend><h3>Add New or Edit Domain</h3></legend>
 
     <p>
-    Please select the location (realpath) for the vHost, then add the Servername.
+    Please select the location (realpath) for the domain, then add the Servername.
     You might also provide aliases for the servername. Do not forget to select the checkbox
-    for adding the new vHost domain to your "hosts" file for local name resolution.
+    for adding the new domain domain to your "hosts" file for local name resolution.
     </p>
 
     <form class="well">
@@ -77,7 +77,7 @@
         <ul id="form">
           <li>
             <label class="checkbox">Location (Realpath)</label>
-            <span class="block-help">Path of the project folder you want to create the vhost for.</span>
+            <span class="block-help">Path of the project folder you want to create the domain for.</span>
             <select id="folder">
                 <?php foreach ($project_folders as $folder) { ?>
                 <option value="/<?=$folder?>"><?=$folder?></option>
@@ -89,7 +89,7 @@
             <input type="text" id="servername">
             <span class="example"><b>Example:</b> LALA server</span>
 
-            <label>Add vhost to the hosts file for local name resolution?</label><input type="checkbox">
+            <label>Add domain to the hosts file for local name resolution?</label><input type="checkbox">
 
             <!--<label>(Port)</label>-->
 

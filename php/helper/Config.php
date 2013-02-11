@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
@@ -36,9 +36,6 @@ namespace Webinterface\Helper;
 
 function disable_memcached()
 {
-    include WPNXM_HELPER_DIR . 'phpini.php';
-    include WPNXM_HELPER_DIR . 'serverstack.php';
-
     // kill running memcached daemon
     Serverstack::stopDaemon('memcached');
 
@@ -56,9 +53,6 @@ function disable_memcached()
 
 function enable_memcached()
 {
-    include WPNXM_HELPER_DIR . 'phpini.php';
-    include WPNXM_HELPER_DIR . 'serverstack.php';
-
     // add memcached php extension
     // note: extension name is "memcache", daemon name is "memcached"
     (new PHPExtension)->enable('memcache');
@@ -75,9 +69,6 @@ function enable_memcached()
 
 function disable_xdebug()
 {
-    include WPNXM_HELPER_DIR . 'phpini.php';
-    include WPNXM_HELPER_DIR . 'serverstack.php';
-
     // remove xdebug php extension
     (new PHPExtension)->disable('xdebug');
 
@@ -90,9 +81,6 @@ function disable_xdebug()
 
 function enable_xdebug()
 {
-    include WPNXM_HELPER_DIR . 'phpini.php';
-    include WPNXM_HELPER_DIR . 'serverstack.php';
-
     // add xdebug php extension
     (new PHPExtension)->enable('xdebug');
 
@@ -101,78 +89,4 @@ function enable_xdebug()
 
     //echo 'Xdebug enabled.';
     header('Location: index.php?page=overview');
-}
-
-function xdebug_ini_keys()
-{
-    $xdebug = ini_get_all('xdebug');
-}
-
-/**
- * Returns an array with all vhost conf files
- * associated with their loading state.
- */
-function getVhosts()
-{
-    // fetch all vhosts config files
-    $vhostFiles = array();
-    $vhostFiles = glob(NGINX_VHOSTS_DIR . '*.conf');
-
-    // enhance the array structure a bit, by adding pure filenames
-    $vhosts = array();
-    foreach ($vhostFiles as $key => $fqpn) {
-        $vhosts[] = array(
-            'fqpn' => $fqpn,
-            'filename' => basename($fqpn)
-        );
-    }
-    unset($vhostFiles);
-
-    // ensure the vhost.conf is included in nginx.conf
-    if (isVhostsConfIncludedInNginxConf()) {
-        // we might have some vhosts loaded
-        $loaded_vhosts = array();
-
-        // take a look at vhost.conf
-        $vhost_conf_lines = file(NGINX_CONF_DIR . 'vhosts.conf');
-
-        // examine each line
-        foreach ($vhost_conf_lines as $vhost_conf_line) {
-            // and match all lines with string "included vhosts", but not the ones commented out/off
-            // on match, $matches[1] contains the "filename.conf"
-            if (preg_match('/[^;#]include vhosts\/(.*\\.conf)/', $vhost_conf_line, $matches)) {
-                // add the conf to the loaded vhosts array
-                $loaded_vhosts['filename'] = $matches[1];
-            }
-        }
-    } else {
-        throw new Exception('Line missing in nginx.conf to load the vhosts configuration. Add "include vhosts.conf;".');
-    }
-
-    // loop over all available files
-    foreach ($vhosts as $key => $vhost) {
-        // loop over each loaded_vhost
-        foreach ($loaded_vhosts as $loaded_vhost) {
-            // compare the filenames
-            if ($vhost['filename'] === $loaded_vhost) {
-                // mark the loaded files
-                $vhosts[$key]['loaded'] = true;
-            }
-        }
-    }
-
-    return $vhosts;
-}
-
-function isVhostsConfIncludedInNginxConf()
-{
-    $nginxConfigLines = file(NGINX_CONF_DIR . 'nginx.conf');
-
-    foreach ($nginxConfigLines as $nginx_conf_line) {
-        if (strpos($nginx_conf_line, 'include vhosts.conf;') !== false) {
-            return true;
-        }
-    }
-
-    return false;
 }

@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
@@ -68,6 +68,7 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_DIR', dirname(dirname(__DIR__)) . DS);
     define('WPNXM_WWW_DIR', WPNXM_DIR . 'www' . DS);
     define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface\php\controller' . DS);
+    define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface\php\components' . DS);
     define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface\php\helper' . DS);
     define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface\php\view' . DS);
     define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface\php\data' . DS);
@@ -82,45 +83,60 @@ if (!defined('WPNXM_DIR')) {
     // WPNXM Configuration File
     define('WPNXM_INI', WPNXM_DIR . 'wpnxm.ini');
 
-    // NGINX Configuration and vhosts
-    define('NGINX_CONF_DIR',   WPNXM_DIR . 'bin\nginx\conf' . DS);
-    define('NGINX_VHOSTS_DIR', WPNXM_DIR . 'bin\nginx\conf\vhosts' . DS);
+    // NGINX Configuration
+    define('NGINX_CONF_DIR', WPNXM_DIR . 'bin\nginx\conf' . DS);
+    define('NGINX_DOMAINS_DIR', WPNXM_DIR . 'bin\nginx\conf\domains' . DS);
 
     /**
      * Feature Flags
      */
-    $toggle = false;
+    $toggle = true;
     define('FEATURE_1', $toggle); // "create new project dialog" in php/view/projects-index.php
     define('FEATURE_2', $toggle); // memcached configure button and dialog and switch on/off
-    define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Vhosts, MariaDB, Xdebug
-    define('FEATURE_4', $toggle); // create nginx vhost directly from project list
+    define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Domains, MariaDB, Xdebug
+    define('FEATURE_4', $toggle); // create nginx domains directly from project list
     define('FEATURE_5', $toggle); // xdebug configure and switch on/off
-
 }
 
-//showConstants();
-
 if (!function_exists('showConstants')) {
-    function showConstants()
+
+    function showConstants($return = 'dump')
     {
-        # list path constants
         $array = get_defined_constants(true);
-        echo '<pre>';
-        var_dump($array['user']);
-        echo '</pre>';
-        exit;
+        $user_constants = $array['user'];
+
+        switch ($return) {
+            case 'raw':
+                return $user_constants;
+                break;
+            case 'export':
+                return var_export($user_constants, true);
+                break;
+            case 'dump':
+            default:
+                exit('<pre>' . var_dump($user_constants) . '</pre>');
+                break;
+        }
     }
+
 }
 
 // autoload classes based on a 1:1 mapping from namespace to directory structure.
-spl_autoload_register(function ($class) {
+function autoload($class)
+{
     // return early, if class already loaded
-    if(class_exists($class)) { return; }
+    if (class_exists($class)) {
+        return;
+    }
     // replace namespace separator with directory separator
     $class = strtr($class, '\\', DS);
     $class = str_replace('Webinterface\\', '', $class);
     // get full name of file containing the required class
     $file = __DIR__ . DS . 'php' . DS . $class . '.php';
     //echo 'Autoloading Try -> ' . $file;
-    if (is_file($file)) { include_once $file; }
-});
+    if (is_file($file)) {
+        include_once $file;
+    }
+}
+
+spl_autoload_register('autoload');

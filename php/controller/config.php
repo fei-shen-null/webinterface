@@ -28,7 +28,7 @@
     *
     * @license    GNU/GPL v2 or (at your option) any later version..
     * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - 2012)
+    * @copyright  Jens-André Koch (2010 - onwards)
     * @link       http://wpn-xm.org/
     */
 
@@ -95,15 +95,15 @@ function showtab_mongodb()
     render('config-showtab-mongodb', array('no_layout' => true));
 }
 
-function showtab_nginx_vhosts()
+function showtab_nginx_domains()
 {
     $tpl_data = array(
         'no_layout' => true,
         'project_folders' => (new Webinterface\Helper\Projects())->fetchProjectDirectories(true),
-        'vhosts' => (new Webinterface\Helper\VirtualHosts())->listVirtualHosts()
+        'domains' => (new Webinterface\Helper\Domains())->listDomains()
     );
 
-    render('config-showtab-nginx-vhosts', $tpl_data);
+    render('config-showtab-nginx-domains', $tpl_data);
 }
 
 function showtab_php_ext()
