@@ -171,7 +171,7 @@ class Serverstack
             return self::printExclamationMark('The PHP Extension "Mongo" is required.');
         }
 
-        $m = new Mongo();
+        $m = new \Mongo();
         // $db = $m->admin; //require admin priviledge
 
         //$mongodb_info = $db->command(array('buildinfo'=>true));
@@ -258,6 +258,25 @@ class Serverstack
         return $loaded;
     }
 
+    /**
+     * Tests, if an extension is installed,
+     * by ensuring that the extension file exists and is correctly configured.
+     * Installed: when files exist.
+     * Loaded: when PHP Infos Screen says so.
+     *
+     * @param  string $extension Extension to check.
+     * @return bool   True if installed, false otherwise.
+     */
+    public static function assertExtensionInstalled($extension)
+    {
+        if(self::assertExtensionFileFound($extension) === true and
+           self::assertExtensionConfigured($extension) === true) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static function getXdebugExtensionType()
     {
         $phpinfo = self::fetchPHPInfo(true);
@@ -286,25 +305,6 @@ class Serverstack
         }
 
         return $extensionDir;
-    }
-
-    /**
-     * Tests, if an extension is installed,
-     * by ensuring that the extension file exists and is correctly configured.
-     * Installed: when files exist.
-     * Loaded: when PHP Infos Screen says so.
-     *
-     * @param  string $extension Extension to check.
-     * @return bool   True if installed, false otherwise.
-     */
-    public static function assertExtensionInstalled($extension)
-    {
-        if(self::assertExtensionFileFound($extension) === true and
-           self::assertExtensionConfigured($extension) === true) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
