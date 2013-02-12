@@ -6,12 +6,11 @@
 
     <legend><h3>Domains</h3></legend>
 
-    <p>
-    You might select the domains to load.
-    Selecting a domain will enable it in "domain.conf".
-    Deselecting a domain disables loading.
-    Remember to restart Nginx for changes to take effect.
-    </p>
+    <div class="info">
+       You might select the domains to load.
+       Enable or disable domains in "domain.conf", simply by toggling the checkbox.
+       Remember to restart Nginx for changes to take effect
+    </div>
 
     <form action="index.php?page=config&action=update_nginx_domains" method="post" class="well form-inline">
         <table>
@@ -42,9 +41,9 @@
 
     <fieldset style="width: 350px;">
 
-    <legend><h3>Add New or Edit Domain</h3></legend>
+    <legend><h3>Add or Edit Domain</h3></legend>
 
-    <p>
+    <p class="info">
     Please select the location (realpath) for the domain, then add the Servername.
     You might also provide aliases for the servername. Do not forget to select the checkbox
     for adding the new domain domain to your "hosts" file for local name resolution.
