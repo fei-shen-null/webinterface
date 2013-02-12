@@ -35,7 +35,7 @@
 function index()
 {
     $tpl_data = array(
-        'php_info' => Webinterface\Helper\Serverstack::fetchPHPInfo()
+        'php_info' => Webinterface\Helper\PHPInfo::getPHPInfo()
     );
 
     render('page-action', $tpl_data);
