@@ -20,12 +20,12 @@ use Webinterface\Helper\Serverstack;
                             <div class="title">
                                 <img class="res-header-icon" src="<?= WPNXM_IMAGES_DIR ?>/nginx.png" alt="Report Icon" />
                                 <a href="http://nginx.org/">
-                                    <b>NGINX</b>
+                                    <b>Nginx</b>
                                 </a>
                                 <span class="version"><?= $nginx_version ?></span>
                             </div>
                             <div class="description">
-                                <small>NGINX [engine x] is a high performance http and reverse proxy server, as well as a mail proxy server written by Igor Sysoev.</small>
+                                <small>Nginx [engine x] is a high performance http and reverse proxy server, as well as a mail proxy server written by Igor Sysoev.</small>
                             </div>
                             <div class="license">
                                 <p>
@@ -194,13 +194,13 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                    <td colspan="5">
                         <span class="floatleft">Directory</span>
-                        <span class="floatright"><?= WPNXM_DIR . 'bin\nginx' ?></span>
+                        <span class="floatright"><?= WPNXM_DIR . '\bin\nginx' ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Config</span>
-                        <span class="floatright"><?= WPNXM_DIR . 'bin\nginx\conf\nginx.conf' ?></span>
+                        <span class="floatright"><?= WPNXM_DIR . '\bin\nginx\conf\nginx.conf' ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -338,13 +338,13 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Directory</span>
-                        <span class="floatright"><?= WPNXM_DIR . 'bin\mongodb'; ?></span>
+                        <span class="floatright"><?= WPNXM_DIR . '\bin\mongodb'; ?></span>
                     </td>
                 </tr>
                  <tr>
                     <td colspan="5">
                         <span class="floatleft">Config</span>
-                        <span class="floatright"><?= WPNXM_DIR . 'bin\mongodb\mongodb.conf'; ?></span>
+                        <span class="floatright"><?= WPNXM_DIR . '\bin\mongodb\mongodb.conf'; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -368,7 +368,7 @@ use Webinterface\Helper\Serverstack;
             </table>
             <?php } ?>
 
-            <?php if(Serverstack::assertExtensionInstalled('memcached') === true) { ?>
+            <?php if(Serverstack::isExtensionInstalled('memcached') === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td colspan="2">
@@ -383,7 +383,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td>PHP Extension</td>
-                    <td class="right"><?= Serverstack::assertExtensionInstalled('memcached'); ?></td>
+                    <td class="right"><?= Serverstack::isExtensionInstalled('memcached'); ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
@@ -422,7 +422,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td>Installed &amp; Configured</td>
-                    <td class="right"><?= Serverstack::assertExtensionInstalled('xdebug'); ?></td>
+                    <td class="right"><?= Serverstack::isExtensionInstalled('xdebug'); ?></td>
                 </tr>
                 <tr>
                     <td>Extension Type</td>

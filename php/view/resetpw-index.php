@@ -22,7 +22,7 @@
             success: function(newHTML, textStatus, jqXHR) {
               //xy.hideSpinner();
               $(newHTML).appendTo('div#reset-pw-result'); //.modal();
-            },
+            }
             // ajax error
           });
 

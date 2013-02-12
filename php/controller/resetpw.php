@@ -51,12 +51,15 @@ function update()
     if (!empty($newPassword)) {
         // commands
         $stop_mariadb = "taskkill /f /IM mysqld.exe 1>nul 2>nul";
-        $mysqld_exe = WPNXM_DIR . 'bin\\tools\\runhiddenconsole.exe ' . WPNXM_DIR . "bin\\mariadb\\bin\\mysqld.exe";
-        $start_mariadb_change_pw = $mysqld_exe . " --defaults-file=". WPNXM_DIR . 'bin\\mariadb\\my.ini --init-file=' . WPNXM_DIR . 'bin\\mariadb\\init_passwd_change.txt';
-        $start_mariadb_normal = $mysqld_exe . " --defaults-file=". WPNXM_DIR . 'bin\\mariadb\\my.ini';
+        $mysqld_exe = /*WPNXM_DIR . '\bin\\tools\\RunHiddenConsole.exe ' .*/ WPNXM_DIR . "bin\\mariadb\\bin\\mysqld.exe";
+        $start_mariadb_change_pw = $mysqld_exe . " --defaults-file=" . WPNXM_DIR . '\bin\\mariadb\\my.ini --init-file=' . WPNXM_DIR . '\bin\\mariadb\\init_passwd_change.txt';
+        $start_mariadb_normal = $mysqld_exe . " --defaults-file=" . WPNXM_DIR . '\bin\\mariadb\\my.ini';
 
         // create the init-file with passwd update query
-        file_put_contents( WPNXM_DIR . 'bin\\mariadb\\init_passwd_change.txt', "UPDATE mysql.user SET PASSWORD=PASSWORD('$newPassword') WHERE User='root';\nFLUSH PRIVILEGES;");
+        file_put_contents(
+            WPNXM_DIR . '\bin\mariadb\init_passwd_change.txt',
+            "UPDATE mysql.user SET PASSWORD=PASSWORD('$newPassword') WHERE User='root';\nFLUSH PRIVILEGES;"
+        );
 
         // start mysqld again with init-file to change password
         exec($stop_mariadb);
@@ -67,23 +70,25 @@ function update()
         exec($start_mariadb_normal);
         sleep("3");
 
-        unlink(WPNXM_DIR . 'bin\\mariadb\\init_passwd_change.txt');
+        unlink(WPNXM_DIR . '\bin\mariadb\init_passwd_change.txt');
 
-        $connection = new mysqli("localhost", "root", $newPassword, "mysql");
+        $connection = new \mysqli("localhost", "root", $newPassword, "mysql");
 
         if (mysqli_connect_errno()) {
-            $return = '<div class="error">Database Connection with new password FAILED.<br/>(MySQL ["' . mysqli_connect_errno() . '"]"' . mysqli_connect_error() . '")';
+            $return = '<div class="error">Database Connection with new password FAILED.<br/>';
+            $return .= '(MySQL ["' . mysqli_connect_errno() . '"]"' . mysqli_connect_error() . '")';
         } else {
             $return = '<div class="success">Password changed SUCCESSFULLY.';
 
             // write new password to wpnxm.ini
-            include WPNXM_HELPER_DIR . 'phpini.php';
-            $ini = new INIReaderWriter(WPNXM_INI);
+            $ini = new \Webinterface\Helper\INIReaderWriter(WPNXM_INI);
             $ini->set('MariaDB', 'password', $newPassword);
             $ini->write();
         }
 
         $return .= '<br/><a class="aButton" rel="modal:close" href="#">Close</a></div>'; // provide close button for modal window
+
+        unset($connection);
 
         echo $return; // ajax response
     }

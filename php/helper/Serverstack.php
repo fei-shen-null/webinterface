@@ -195,7 +195,7 @@ class Serverstack
      * @param  string $extension Extension to check.
      * @return bool   True if installed, false otherwise.
      */
-    public static function assertExtensionInstalled($extension)
+    public static function isExtensionInstalled($extension)
     {
         if(self::assertExtensionFileFound($extension) === true and
            self::assertExtensionConfigured($extension) === true) {
@@ -302,7 +302,7 @@ class Serverstack
 
     public static function isInstalled($component)
     {
-        return;
+        return true;
     }
 
     /**
