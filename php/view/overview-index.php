@@ -87,7 +87,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
             </table>
 
-             <?php if(Serverstack::isInstalled('MongoDB') === true) { ?>
+             <?php if($mongodb_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -114,7 +114,7 @@ use Webinterface\Helper\Serverstack;
             </table>
             <?php } ?>
 
-             <?php if(Serverstack::isInstalled('Memcached') === true) { ?>
+             <?php if($memcached_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -318,7 +318,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
             </table>
 
-            <?php if(Serverstack::isInstalled('MongoDB') === true) { ?>
+            <?php if($mongodb_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td colspan="5">
@@ -368,7 +368,7 @@ use Webinterface\Helper\Serverstack;
             </table>
             <?php } ?>
 
-            <?php if(Serverstack::isExtensionInstalled('memcached') === true) { ?>
+            <?php if($memcached_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td colspan="2">
