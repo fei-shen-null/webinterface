@@ -263,7 +263,7 @@ use Webinterface\Helper\Serverstack;
                             echo "onclick=\"alert('PHP Error Log not available. File not found.'); return false;\"";
                         }
                         if(!$canOpenLogfileWithEditor()) {
-                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                            echo "onclick=\"alert('The PHP Extension \"php_com_dotnet.dll\" is required.'); return false;\"";
                         }
                         ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=php-error-log' ?>">Show Log</a>
@@ -309,7 +309,7 @@ use Webinterface\Helper\Serverstack;
                             echo "onclick=\"alert('MariaDB Error Log not available. File not found.'); return false;\"";
                         }
                         if(!$canOpenLogfileWithEditor()) {
-                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                            echo "onclick=\"alert('The PHP Extension \"php_com_dotnet.dll\" is required.'); return false;\"";
                         }
                         ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log' ?>">Show Log</a>
@@ -356,7 +356,7 @@ use Webinterface\Helper\Serverstack;
                             echo "onclick=\"alert('MongoDB Log not available. File not found.'); return false;\"";
                         }
                         if(!$canOpenLogfileWithEditor()) {
-                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                            echo "onclick=\"alert('The PHP Extension \"php_com_dotnet.dll\" is required.'); return false;\"";
                         }
                         ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mongodb-log' ?>">Show Log</a>
