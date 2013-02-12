@@ -65,7 +65,7 @@ use Webinterface\Helper\Serverstack;
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
-                        Database
+                        SQL Database
                     </td>
                     <td>
                         <div class="resourceheader">
@@ -91,7 +91,7 @@ use Webinterface\Helper\Serverstack;
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
-                        Database
+                        NoSQL Database
                     </td>
                     <td>
                         <div class="resourceheader">
@@ -144,7 +144,7 @@ use Webinterface\Helper\Serverstack;
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
-                        Debugger Profiler
+                        Debugger &nbsp; &amp; Profiler
                     </td>
                     <td>
                         <div class="resourceheader">
