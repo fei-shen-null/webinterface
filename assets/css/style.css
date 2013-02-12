@@ -510,15 +510,14 @@ img
 }
 
 .modal a.close-modal {
-    position: absolute;
-    top: 0px;
-    right: 1px;
-    display: block;
-    width: 30px;
-    height: 30px;
-    text-indent: -9999px;
-    background: url('../img/close.png') no-repeat 0 0;
-    z-index: 2;
+  position: absolute;
+  top: -12.5px;
+  right: -12.5px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  text-indent: -9999px;
+  background: url('../img/close.png') no-repeat 0 0;
 }
 
 .modal-spinner {
