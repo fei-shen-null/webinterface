@@ -44,7 +44,7 @@ class Viewhelper
            if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
                $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
                $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
-               return '<a href="'.$href.'">PHPMyAdmin</a>';
+               return '<a href="'.$href.'">phpMyAdmin</a>';
            }
         };
 
