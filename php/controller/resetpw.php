@@ -51,7 +51,7 @@ function update()
     if (!empty($newPassword)) {
         // commands
         $stop_mariadb = "taskkill /f /IM mysqld.exe 1>nul 2>nul";
-        $mysqld_exe = /*WPNXM_DIR . '\bin\\tools\\RunHiddenConsole.exe ' .*/ WPNXM_DIR . "bin\\mariadb\\bin\\mysqld.exe";
+        $mysqld_exe = /*WPNXM_DIR . '\bin\\tools\\RunHiddenConsole.exe ' .*/ WPNXM_DIR . "\bin\\mariadb\\bin\\mysqld.exe";
         $start_mariadb_change_pw = $mysqld_exe . " --defaults-file=" . WPNXM_DIR . '\bin\\mariadb\\my.ini --init-file=' . WPNXM_DIR . '\bin\\mariadb\\init_passwd_change.txt';
         $start_mariadb_normal = $mysqld_exe . " --defaults-file=" . WPNXM_DIR . '\bin\\mariadb\\my.ini';
 

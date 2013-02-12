@@ -208,21 +208,21 @@ use Webinterface\Helper\Serverstack;
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx' ?>">Configure</a>
                         <a class="aButton"
                         <?php
-                        if (!is_file(WPNXM_DIR . 'logs\access.log')) {
+                        if (!is_file(WPNXM_DIR . '\logs\access.log')) {
                             echo "onclick=\"alert('Nginx Access Log not available. File not found.'); return false;\"";
                         }
                         if(!$canOpenLogfileWithEditor()) {
-                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                            echo "onclick=\"alert('The PHP Extension \"php_com_dotnet.dll\" is required.'); return false;\"";
                         }
                         ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-access-log' ?>">Access Log</a>
                         <a class="aButton"
                         <?php
-                        if (!is_file(WPNXM_DIR . 'logs\error.log')) {
+                        if (!is_file(WPNXM_DIR . '\logs\error.log')) {
                             echo "onclick=\"alert('Nginx Error Log not available. File not found.'); return false;\"";
                         }
                         if(!$canOpenLogfileWithEditor()) {
-                            echo "onclick=\"alert('Enable the extension by adding extension=php_com_dotnet.dll to your php.ini.'); return false;\"";
+                            echo "onclick=\"alert('The PHP Extension \"php_com_dotnet.dll\" is required.'); return false;\"";
                         }
                         ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-error-log' ?>">Error Log</a>
@@ -259,7 +259,7 @@ use Webinterface\Helper\Serverstack;
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php' ?>">Configure</a>
                         <a class="aButton"
                         <?php
-                        if (!is_file(WPNXM_DIR . 'logs\php_error.log')) {
+                        if (!is_file(WPNXM_DIR . '\logs\php_error.log')) {
                             echo "onclick=\"alert('PHP Error Log not available. File not found.'); return false;\"";
                         }
                         if(!$canOpenLogfileWithEditor()) {
@@ -305,7 +305,7 @@ use Webinterface\Helper\Serverstack;
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb' ?>">Configure</a>
                         <a class="aButton"
                         <?php
-                        if (!is_file(WPNXM_DIR . 'logs\mariadb_error.log')) {
+                        if (!is_file(WPNXM_DIR . '\logs\mariadb_error.log')) {
                             echo "onclick=\"alert('MariaDB Error Log not available. File not found.'); return false;\"";
                         }
                         if(!$canOpenLogfileWithEditor()) {
@@ -352,7 +352,7 @@ use Webinterface\Helper\Serverstack;
                         <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb' ?>">Configure</a>
                         <a class="aButton"
                         <?php
-                        if (!is_file(WPNXM_DIR . 'logs\mongodb.log')) {
+                        if (!is_file(WPNXM_DIR . '\logs\mongodb.log')) {
                             echo "onclick=\"alert('MongoDB Log not available. File not found.'); return false;\"";
                         }
                         if(!$canOpenLogfileWithEditor()) {

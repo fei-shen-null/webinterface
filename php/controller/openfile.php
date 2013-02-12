@@ -38,19 +38,19 @@ function index()
 
     switch ($file) {
         case 'nginx-access-log':
-            openFile(WPNXM_DIR . 'logs\access.log');
+            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\access.log');
             break;
         case 'nginx-error-log':
-            openFile(WPNXM_DIR . 'logs\error.log');
+            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\error.log');
             break;
         case 'php-error-log':
-            openFile(WPNXM_DIR . 'logs\php_error.log');
+            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\php_error.log');
             break;
         case 'mariadb-error-log':
-            openFile(WPNXM_DIR . 'logs\mariadb_error.log');
+            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\mariadb_error.log');
             break;
         case 'mariadb-log':
-            openFile(WPNXM_DIR . 'logs\mongodb.log');
+            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\mongodb.log');
             break;
         default:
             echo 'You need to append the parameter "file" to the URL, e.g. "openfile.php?file=nginx-access-log". Other values include: "nginx-error-log", "php-error-log".';
