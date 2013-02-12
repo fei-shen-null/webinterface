@@ -13,7 +13,7 @@ window.onload=function()
     setCurrentPageActiveInMainMenu();
 }
 
- <!-- highlight current page in headline main menu -->
+<!-- highlight current page in headline main menu -->
 function setCurrentPageActiveInMainMenu() {
   aObj = document.getElementsByClassName('main_menu')[0].getElementsByTagName('a');
   for(i=0;i<aObj.length;i++) {
@@ -22,3 +22,9 @@ function setCurrentPageActiveInMainMenu() {
     }
   }
 }
+
+<!-- Enable Twitter Bootstrap Tooltips -->
+<!-- Usage: <a href="#" rel="tooltip" title="tooltip text!"> -->
+$(function() {
+    $('[rel=tooltip]').tooltip();
+});

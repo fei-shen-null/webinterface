@@ -37,14 +37,20 @@ namespace Webinterface\Helper;
 class Serverstack
 {
     /**
-     * Prints the Exclaimation Mark Icon with title text.
+     * Prints the Exclaimation Mark Icon.
+     * Uses a tooltip (rel="tootip") show the title text.
      *
      * @param  string $image_title_text
      * @return string HTML
      */
     public static function printExclamationMark($image_title_text = '')
     {
-        return sprintf('<img style="float:right;" src="%s/exclamation-red-frame.png" alt="" title="%s">',  WPNXM_IMAGES_DIR, htmlspecialchars($image_title_text));
+        return sprintf(
+            '<img style="float:right;" src="%s/exclamation-red-frame.png" rel="tooltip" alt="%s" title="%s">',
+            WPNXM_IMAGES_DIR,
+            htmlspecialchars($image_title_text),
+            htmlspecialchars($image_title_text)
+        );
     }
 
     public static function getInstalledComponents()
@@ -64,7 +70,7 @@ class Serverstack
         return $classes;
     }
 
-    public static function getInstalledComponentsInstances()
+    public static function instantiateInstalledComponents()
     {
         $components = array();
 
@@ -76,16 +82,6 @@ class Serverstack
         }
 
         return $components;
-    }
-
-    public static function get_MySQL_datadir()
-    {
-        $myini_array = file("../mysql/my.ini");
-        $key_datadir = key(preg_grep("/^datadir/", $myini_array));
-        $mysql_datadir_array = explode("\"", $myini_array[$key_datadir]);
-        $mysql_datadir = str_replace("/", "\\", $mysql_datadir_array[1]);
-
-        return $mysql_datadir;
     }
 
     /**
@@ -221,32 +217,6 @@ class Serverstack
         return $extensionDir;
     }
 
-
-
-    public static function determinePort($daemon)
-    {
-        switch ($daemon) {
-            case 'nginx':
-                # code...
-                # read from 1) config file, 2) startup parameter or 3) getPortByServiceName() ?
-                break;
-            case 'mariadb':
-                # code...
-                break;
-            case 'memcached':
-                # code...
-                break;
-            case 'xdebug':
-                # code...
-                break;
-            case 'php':
-                # code...
-                break;
-            default:
-                throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
-        }
-    }
-
     /**
      * Attempts to establish a connection to the specified port (on localhost)
      *
@@ -279,17 +249,55 @@ class Serverstack
         }
     }
 
+    /**
+     * Displays the status of the daemon (running or not) by icon.
+     * Shows the daemon status text as tooltip, when hovering.
+     *
+     * @param string $daemon Name of the daemon.
+     * @return string Embeddable image tag with tooltip.
+     */
     public static function getStatus($daemon)
     {
         if (Daemon::isRunning($daemon) === false) {
             $img = WPNXM_IMAGES_DIR . '/status_stop.png';
-            $title = $daemon . ' not running!';
+            $title = self::getDaemonName($daemon) . ' is not running!';
         } else {
             $img = WPNXM_IMAGES_DIR . '/status_run.png';
-            $title = $daemon . ' running.';
+            $title = self::getDaemonName($daemon) . ' is running.';
         }
 
-        return '<img style="float:right;" src="'.$img.'" alt="" title="'.$title.'">';
+        return sprintf(
+            '<img style="float:right;" src="%s" alt="%s" title="%s" rel="tooltip">',
+            $img,
+            $title,
+            $title
+        );
+    }
+
+    public static function getDaemonName($daemon)
+    {
+         switch ($daemon) {
+            case 'nginx':
+                return 'Nginx';
+                break;
+            case 'mariadb':
+                return 'MariaDB';
+                break;
+            case 'memcached':
+                return 'Memcached';
+                break;
+            case 'php':
+                return 'PHP';
+                break;
+            case 'xdebug':
+                return 'XDebug';
+                break;
+             case 'mongodb':
+                return 'MongoDB';
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf(__METHOD__.'() no name for the daemon: "%s"', $daemon));
+        }
     }
 
     public static function isInstalled($component)
@@ -380,7 +388,7 @@ class Serverstack
             case 'mariadb':
                 return (new \Webinterface\Components\Mariadb)->getPassword();
                 break;
-             case 'mongodb':
+            case 'mongodb':
                 return (new \Webinterface\Components\Mongodb)->getPassword();
                 break;
             default:

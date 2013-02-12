@@ -87,7 +87,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
             </table>
 
-            <?php if($mongodb_installed === true) { ?>
+             <?php if(Serverstack::isInstalled('MongoDB') === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -114,7 +114,7 @@ use Webinterface\Helper\Serverstack;
             </table>
             <?php } ?>
 
-            <?php if($memcached_installed === true) { ?>
+             <?php if(Serverstack::isInstalled('Memcached') === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -318,7 +318,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
             </table>
 
-            <?php if($mongodb_installed === true) { ?>
+            <?php if(Serverstack::isInstalled('MongoDB') === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td colspan="5">
@@ -360,13 +360,15 @@ use Webinterface\Helper\Serverstack;
                         }
                         ?>
                            href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mongodb-log' ?>">Show Log</a>
-                        <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a> <?php } ?>
+                        <?php if (class_exists('mysqli')) { ?>
+                        <a class="aButton" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>
             <?php } ?>
 
-            <?php if($memcached_installed === true) { ?>
+            <?php if(Serverstack::assertExtensionInstalled('memcached') === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td colspan="2">

@@ -87,4 +87,14 @@ class MariaDB extends AbstractComponent
 
         return $ini->get('MariaDB', 'password');
     }
+
+    public function getDataDir()
+    {
+        $myini_array = file("../mariadb/my.ini");
+        $key_datadir = key(preg_grep("/^datadir/", $myini_array));
+        $mysql_datadir_array = explode("\"", $myini_array[$key_datadir]);
+        $mysql_datadir = str_replace("/", "\\", $mysql_datadir_array[1]);
+
+        return $mysql_datadir;
+    }
 }
