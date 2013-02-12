@@ -44,7 +44,7 @@ class Viewhelper
            if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
                $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
                $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
-               return '<li><a href="'.$href.'">PHPMyAdmin</a></li>';
+               return '<a href="'.$href.'">PHPMyAdmin</a>';
            }
         };
 
@@ -52,7 +52,7 @@ class Viewhelper
         $adminer_link = function() {
             // is adminer installed?
             if (is_dir(WPNXM_WWW_DIR . 'adminer') === true) {
-                return '<li><a href="' . WPNXM_ROOT . 'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a></li>';
+                return '<a href="' . WPNXM_ROOT . 'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a>';
             }
         };
 
@@ -64,8 +64,8 @@ class Viewhelper
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                             '.$phpmyadmin_link().'
-                             '.$adminer_link().
+                             <li>'.$phpmyadmin_link().'</li>
+                             <li>'.$adminer_link().'</li>' .
                             /* '<li><a href="#">Filter2</a></li>
                              <li class="divider"></li>
                              <li class="nav-header">Nav header</li>
