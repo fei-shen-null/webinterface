@@ -41,12 +41,12 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="WPИ-XM Serverstack for Windows - Webinterface.">
     <link rel="shortcut icon" href="http://wpn-xm.org/favicon.ico" />
+    <!-- jQuery -->
+    <script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
     <!-- Twitter's Bootstrap -->
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <link type="text/css" href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <?php if (isset($load_jquery) && $load_jquery === true) { ?>
-    <!-- jQuery & jQuery UI -->
-    <script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
     <!-- jQuery Plugins -->
     <script type="text/javascript" src="assets/js/jquery.organicTabs.js"></script>
     <script type="text/javascript" src="assets/js/jquery.treeTable.js"></script>

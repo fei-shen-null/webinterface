@@ -38,31 +38,42 @@ class Viewhelper
 {
     public static function showMenu()
     {
-        $menu = '<div class="main_menu">
-                 <ul>
-                    <li class="first 1"><a href="index.php?page=overview">Overview</a></li>
-                    <li class="2"><a href="index.php?page=config">Configuration</a></li>
-                    <li class="3"><a href="index.php?page=projects">Projects & Tools</a></li>';
+        // closure
+        $phpmyadmin_link = function() {
+           // is phpmyadmin installed?
+           if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
+               $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
+               $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
+               return '<li><a href="'.$href.'">PHPMyAdmin</a></li>';
+           }
+        };
 
-                // enter the number from the class attribute above
-                $item_number = 3;
+        // closure
+        $adminer_link = function() {
+            // is adminer installed?
+            if (is_dir(WPNXM_WWW_DIR . 'adminer') === true) {
+                return '<li><a href="' . WPNXM_ROOT . 'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a></li>';
+            }
+        };
 
-                // is phpmyadmin installed?
-                if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
-                    $item_number = $item_number + 1;
-                    $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
-                    $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
-                    $menu .= '<li class="'.$item_number.'"><a href="'.$href.'">PHPMyAdmin</a></li>';
-                }
-
-                // is adminer installed?
-                if (is_dir(WPNXM_WWW_DIR.'adminer') === true) {
-                    $item_number = $item_number + 1;
-                    $menu .= '<li class="'.$item_number.'"><a href="'.WPNXM_ROOT.'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a></li>';
-                }
-
-                $item_number = $item_number + 1;
-                $menu .= '<li class="last '.$item_number.'"><a href="index.php?page=phpinfo">PHP Info</a></li>
+        $menu = '<div class="main_menu navbar">
+                 <ul class="nav">
+                    <li class="first"><a href="index.php?page=overview">Overview</a></li>
+                    <li><a href="index.php?page=config">Configuration</a></li>
+                    <li><a href="index.php?page=projects">Projects & Tools</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                             '.$phpmyadmin_link().'
+                             '.$adminer_link().
+                            /* '<li><a href="#">Filter2</a></li>
+                             <li class="divider"></li>
+                             <li class="nav-header">Nav header</li>
+                             <li><a href="#">Filter1</a></li>
+                             <li><a href="#">Filter2</a></li>*/
+                        '</ul>
+                    </li>
+                    <li class="last"><a href="index.php?page=phpinfo">PHP Info</a></li>
                 </ul>
              </div>';
 
