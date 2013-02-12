@@ -41,15 +41,87 @@ function index()
     render('page-action', $tpl_data);
 }
 
-function update_phpini_setting()
+function showtab()
 {
-    $section = ''; // @todo section? needed to save the directive? string (directive=>value) is unique!?
-    $directive = filter_input(INPUT_POST, 'directive');
-    $value = filter_input(INPUT_POST, 'value');
+    /**
+     * Tab Controller - handles GET requests for tab pages.
+     * Calls to tab pages look like this: "index.php?page=config&action=showtab&tab=xy".
+     * Each tab returns content for inline display in the tabs-content container.
+     */
+    $tab = filter_input(INPUT_GET, 'tab');
+    $tab = strtr($tab, '-', '_'); // minus to underscore conversion
+    $tabAction = 'showtab_' . $tab;
+    if (false === is_callable($tabAction)) {
+        throw new \Exception(sprintf('The controller method "%s" for the Tab "%s" was not found!', $tabAction, $tab));
+    }
+    $tabAction();
+}
 
-    Webinterface\Helper\PHPINI::setDirective($section, $directive, $value);
 
-    echo 'Entry saved.';
+function showtab_help()
+{
+    render('config-showtab-help', array('no_layout' => true));
+}
+
+function showtab_mariadb()
+{
+    render('config-showtab-mariadb', array('no_layout' => true));
+}
+
+function showtab_mongodb()
+{
+    render('config-showtab-mongodb', array('no_layout' => true));
+}
+
+function showtab_nginx()
+{
+    render('config-showtab-nginx', array('no_layout' => true));
+}
+
+
+function showtab_nginx_domains()
+{
+    $tpl_data = array(
+        'no_layout' => true,
+        'project_folders' => (new Webinterface\Helper\Projects())->fetchProjectDirectories(true),
+        'domains' => (new Webinterface\Helper\Domains())->listDomains()
+    );
+
+    render('config-showtab-nginx-domains', $tpl_data);
+}
+
+function showtab_php()
+{
+    $tpl_data = array(
+        'no_layout' => true,
+        'ini' => Webinterface\Helper\PHPINI::read(), // $ini array structure = 'ini_file', 'ini_array'
+    );
+
+    render('config-showtab-php', $tpl_data);
+}
+
+
+function showtab_php_ext()
+{
+    $phpext = new Webinterface\Helper\PHPExtensionManager();
+
+    $tpl_data = array(
+        'no_layout' => true,
+        'available_extensions' => $phpext->getExtensionDirFileList(),
+        'enabled_extensions' => $phpext->getEnabledExtensions()
+    );
+
+    render('config-showtab-phpext', $tpl_data);
+}
+
+function showtab_xdebug()
+{
+    $tpl_data = array(
+        'no_layout' => true,
+        'ini_settings' => ini_get_all('xdebug'),
+    );
+
+    render('config-showtab-xdebug', $tpl_data);
 }
 
 function update_phpextensions()
@@ -65,80 +137,15 @@ function update_phpextensions()
     echo 'Entries saved.';
 }
 
-function showtab()
+
+function update_phpini_setting()
 {
-    /**
-     * Tab Controller - handles GET requests for tab pages.
-     * Calls to tab pages look like this: "index.php?page=config&action=showtab&tab=xy".
-     * Each tab returns content for inline display in the tabs-content container.
-     */
-    $tab = filter_input(INPUT_GET, 'tab');
-    $tab = strtr($tab, '-', '_'); // minus to underscore conversion
-    $tabAction = 'showtab_' . $tab;
-    if (!is_callable($tabAction)) { throw new \Exception('The controller method "'.$tabAction.'" for the Tab "'.$tab.'" was not found!'); }
-    $tabAction();
+    $section = ''; // @todo section? needed to save the directive? string (directive=>value) is unique!?
+    $directive = filter_input(INPUT_POST, 'directive');
+    $value = filter_input(INPUT_POST, 'value');
+
+    Webinterface\Helper\PHPINI::setDirective($section, $directive, $value);
+
+    echo 'Entry saved.';
 }
 
-function showtab_nginx()
-{
-    render('config-showtab-nginx', array('no_layout' => true));
-}
-
-function showtab_mariadb()
-{
-    render('config-showtab-mariadb', array('no_layout' => true));
-}
-
-function showtab_mongodb()
-{
-    render('config-showtab-mongodb', array('no_layout' => true));
-}
-
-function showtab_nginx_domains()
-{
-    $tpl_data = array(
-        'no_layout' => true,
-        'project_folders' => (new Webinterface\Helper\Projects())->fetchProjectDirectories(true),
-        'domains' => (new Webinterface\Helper\Domains())->listDomains()
-    );
-
-    render('config-showtab-nginx-domains', $tpl_data);
-}
-
-function showtab_php_ext()
-{
-    $phpext = new Webinterface\Helper\PHPExtensionManager();
-
-    $tpl_data = array(
-        'no_layout' => true,
-        'available_extensions' => $phpext->getExtensionDirFileList(),
-        'enabled_extensions' =>  $phpext->getEnabledExtensions()
-    );
-
-    render('config-showtab-phpext', $tpl_data);
-}
-
-function showtab_help()
-{
-    render('config-showtab-help', array('no_layout' => true));
-}
-
-function showtab_php()
-{
-    $tpl_data = array(
-        'no_layout' => true,
-        'ini' => Webinterface\Helper\PHPINI::read(), // $ini array structure = 'ini_file', 'ini_array'
-    );
-
-    render('config-showtab-php', $tpl_data);
-}
-
-function showtab_xdebug()
-{
-    $tpl_data = array(
-        'no_layout' => true,
-        'ini_settings' => ini_get_all('xdebug'),
-    );
-
-    render('config-showtab-xdebug', $tpl_data);
-}
