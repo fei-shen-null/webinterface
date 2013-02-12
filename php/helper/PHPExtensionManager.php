@@ -260,20 +260,19 @@ class PHPExtensionManager
     }
 
     /**
-     * Ensures that 'extension_dir' directive is not commented.
+     * This method ensures that the 'extension_dir' directive is not commented in php.ini.
+     * Otherwise PHP will not load any extensions.
      */
     public function checkExtensionDirSet()
     {
-        // look for ### ; extension_dir = "ext" ###
-        // and uncomment the line
-
-        $lines = array();
         $lines = $this->readIni();
 
         foreach ($lines as $line) {
             if (strpos($line, '; extension_dir = "ext"') !== false) {
+                // uncomment the line
                 $new_line = ltrim($line, '; ');
                 $this->replaceLineInPHPINI($line, $new_line);
+                break;
             }
         }
     }
