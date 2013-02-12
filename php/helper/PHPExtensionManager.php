@@ -96,7 +96,7 @@ class PHPExtensionManager
         # load and prepare xdebug php.ini template
         $tpl_content = file_get_contents(WPNXM_DATA_DIR . '/config-templates/xdebug-section-phpini.tpl');
         $search = array('%PHP_EXT_DIR%', '%TEMP_DIR%');
-        $replace = array(WPNXM_DIR . '\bin\php\ext\\', WPNXM_DIR . 'temp');
+        $replace = array(WPNXM_DIR . '\bin\php\ext\\', WPNXM_DIR . '\temp');
         $content = str_replace($search, $replace, $tpl_content);
 
         $new_line =  $content . "\n\n" . $phpiniEOF;
@@ -115,13 +115,13 @@ class PHPExtensionManager
 
         # prepare line to insert
         $new_line = ($enabled === true) ? '' : ';';
-        $new_line .= 'zend_extension="'.WPNXM_DIR.'php\ext\php_xdebug.dll"' . "\n";
+        $new_line .= 'zend_extension="'.WPNXM_DIR.'\php\ext\php_xdebug.dll"' . "\n";
 
         # prepare line to look for in php.ini
         if ($enabled === true) {
-            $old_line = ';zend_extension="'.WPNXM_DIR.'php\ext\php_xdebug.dll"';
+            $old_line = ';zend_extension="'.WPNXM_DIR.'\php\ext\php_xdebug.dll"';
         } else {
-            $old_line = 'zend_extension="'.WPNXM_DIR.'php\ext\php_xdebug.dll"';
+            $old_line = 'zend_extension="'.WPNXM_DIR.'\php\ext\php_xdebug.dll"';
         }
 
         # iterate over php.ini lines
@@ -166,7 +166,9 @@ class PHPExtensionManager
         $old_line = $this->getExtensionLineFromPHPINI($name);
 
         # extension not found, return early
-        if ($old_line === null) { return false; }
+        if ($old_line === null) {
+            return false;
+        }
 
         # extension found, do comment, if line uncommented
         if (strpos($old_line, ';extension') !== false) {
@@ -182,7 +184,9 @@ class PHPExtensionManager
         $old_line = $this->getExtensionLineFromPHPINI($name);
 
         # extension not found, return early
-        if ($old_line === null) { return false; }
+        if ($old_line === null) {
+            return false;
+        }
 
         # extension found, do uncomment, if line commented
         if (strpos($old_line, ';extension=') !== false) {
@@ -218,7 +222,7 @@ class PHPExtensionManager
     {
         $glob = $list = array(); // PHP SYNTAX reminder $glob, $list = array();
 
-        $glob = glob(WPNXM_DIR ."bin/php/ext/*.dll");
+        $glob = glob(WPNXM_DIR . '/bin/php/ext/*.dll');
 
         foreach ($glob as $key => $file) {
             // $list array has the following structure
@@ -246,8 +250,12 @@ class PHPExtensionManager
 
         // check php.ini array for extension entries
         foreach ($lines as $line) {
-            if($line['type'] != 'entry') continue;
-            if($line['key'] != 'extension') continue;
+            if ($line['type'] != 'entry') {
+                continue;
+            }
+            if ($line['key'] != 'extension') {
+                continue;
+            }
             // and stuff them in the array
             $enabled_extensions[] = $line['value'];
         }
