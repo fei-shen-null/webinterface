@@ -42,8 +42,8 @@ class Memcached extends AbstractComponent
     public $installationFolder = '\bin\memcached';
 
     public $files = array(
-        '\bin\memcached\pthreadGC2.dll',
-        '\bin\memcached\memcached.exe'
+        '\bin\memcached\memcached.exe',
+        '\bin\memcached\pthreadGC2.dll'
     );
 
     /**
@@ -59,7 +59,7 @@ class Memcached extends AbstractComponent
             );
         }
 
-        $matches = new Memcache;
+        $matches = new \Memcache;
         $matches->addServer('localhost', 11211);
 
         return $matches->getVersion();
@@ -70,5 +70,38 @@ class Memcached extends AbstractComponent
         $ini = new \Webinterface\Helper\INIReaderWriter(WPNXM_INI);
 
         return $ini->get('MariaDB', 'password');
+    }
+
+    public function disable()
+    {
+        // kill running memcached daemon
+        Serverstack::stopDaemon('memcached');
+
+        // remove memcached php extension
+        // note: extension name is "memcache", daemon name is "memcached"
+        (new PHPExtensionManager)->enable('memcache');
+        // restart php daemon
+        Serverstack::startDaemon('memcached');
+
+        Serverstack::restartDaemon('php');
+
+        //header('Msg: Memcached disabled.');
+        header('Location: index.php?page=overview');
+    }
+
+    public function enable()
+    {
+        // add memcached php extension
+        // note: extension name is "memcache", daemon name is "memcached"
+        (new PHPExtensionManager)->enable('memcache');
+
+        // restart php daemon
+        Serverstack::restartDaemon('php');
+
+        // start memcached daemon
+        Serverstack::startDaemon('memcached');
+
+        //echo 'Memcached enabled.';
+        header('Location: index.php?page=overview');
     }
 }

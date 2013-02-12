@@ -60,7 +60,7 @@ class XDebug extends AbstractComponent
     {
         $xdebug_version = 'false';
         $matches = '';
-        $phpinfo = \Webinterface\Helper\Serverstack::fetchPHPInfo(true);
+        $phpinfo = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
 
         // Check phpinfo content for Xdebug as Zend Extension
         if (preg_match('/with\sXdebug\sv([0-9.rcdevalphabeta-]+),/', $phpinfo, $matches)) {
@@ -72,7 +72,7 @@ class XDebug extends AbstractComponent
 
     public static function getXDebugExtensionType()
     {
-        $phpinfo = \Webinterface\Helper\Serverstack::fetchPHPInfo(true);
+        $phpinfo = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
         $matches = '';
 
         // Check phpinfo content for Xdebug as Zend Extension
@@ -86,5 +86,29 @@ class XDebug extends AbstractComponent
         }
 
         return ':( XDebug not loaded.';
+    }
+
+    public function disable()
+    {
+        // remove xdebug php extension
+        (new PHPExtensionManager)->disable('xdebug');
+
+        // restart php daemon
+        Serverstack::restartDaemon('php');
+
+        //echo 'Xdebug disabled.';
+        header('Location: index.php?page=overview');
+    }
+
+    public function enable()
+    {
+        // add xdebug php extension
+        (new PHPExtensionManager)->enable('xdebug');
+
+        // restart php daemon
+        Serverstack::restartDaemon('php');
+
+        //echo 'Xdebug enabled.';
+        header('Location: index.php?page=overview');
     }
 }
