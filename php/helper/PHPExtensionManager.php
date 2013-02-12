@@ -254,9 +254,7 @@ class PHPExtensionManager
 
         // do a key/value flip, to get rid of the numeric index.
         // this is for being able to easily check for a extension filename with isset in foreach.
-        $enabled_extensions = array_flip($enabled_extensions);
-
-        return $enabled_extensions;
+        return array_flip($enabled_extensions);
     }
 
     /**

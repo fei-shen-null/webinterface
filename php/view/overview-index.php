@@ -323,7 +323,7 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="5">
                         <div class="resourceheader2 bold">
-                        <?= $mongodb_status ?> MongoDB
+                        <?= $mongodb_status ?> <?= $phpext_mongo_status ?> MongoDB
                         </div>
                     </td>
                 </tr>
@@ -373,7 +373,7 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-                        <?= $memcached_status ?> Memcached
+                        <?= $memcached_status ?> <?= $phpext_memcached_status ?> Memcached
                         </div>
                     </td>
                 </tr>

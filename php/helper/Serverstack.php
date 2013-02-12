@@ -258,12 +258,15 @@ class Serverstack
      */
     public static function getStatus($daemon)
     {
+        // extension are loaded; daemons are running
+        $stateText = (strpos($daemon, 'phpext') !== false) ? 'loaded' : 'running';
+
         if (Daemon::isRunning($daemon) === false) {
             $img = WPNXM_IMAGES_DIR . '/status_stop.png';
-            $title = self::getDaemonName($daemon) . ' is not running!';
+            $title = self::getDaemonName($daemon) . ' is not ' . $stateText . '!';
         } else {
             $img = WPNXM_IMAGES_DIR . '/status_run.png';
-            $title = self::getDaemonName($daemon) . ' is running.';
+            $title = self::getDaemonName($daemon) . ' is ' . $stateText . '.';
         }
 
         return sprintf(
@@ -277,6 +280,10 @@ class Serverstack
     public static function getDaemonName($daemon)
     {
          switch ($daemon) {
+            case 'phpext_memcache':
+                return 'PHP Extension Memcache';
+             case 'phpext_mongo':
+                return 'PHP Extension Mongo';
             case 'nginx':
                 return 'Nginx';
                 break;
@@ -290,7 +297,7 @@ class Serverstack
                 return 'PHP';
                 break;
             case 'xdebug':
-                return 'XDebug';
+                return 'PHP Extension XDebug';
                 break;
              case 'mongodb':
                 return 'MongoDB';

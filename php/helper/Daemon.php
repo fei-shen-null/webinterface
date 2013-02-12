@@ -43,8 +43,15 @@ class Daemon
     {
         // shorthands to daemon names; also handle xdebug extension
         switch ($daemon) {
+            case 'phpext_xdebug':
             case 'xdebug':
                 return extension_loaded('xdebug');
+                break;
+            case 'phpext_mongo':
+                return extension_loaded('mongo');
+                break;
+            case 'phpext_memcache':
+                return extension_loaded('memcache');
                 break;
             case 'php':
                 $process_name = 'php-cgi.exe';
