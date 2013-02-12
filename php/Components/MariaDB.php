@@ -57,27 +57,22 @@ class MariaDB extends AbstractComponent
     {
         # fail safe, for unconfigured php.ini files
         if (!function_exists('mysqli_connect')) {
-            return self::printExclamationMark('Enable mysqli extension in php.ini.');
+            return self::printExclamationMark('The PHP Extension "mysqli" is required.');
         }
 
         $connection = @mysqli_connect('localhost', 'root', $this->getPassword());
 
         if (false === $connection) {
-           # Daemon running? Login credentials correct?
-           #echo ('MySQLi Connection error' . mysqli_connect_errno());
-
            return \Webinterface\Helper\Serverstack::printExclamationMark(
-               'MySQL Connection not possible. Access denied. Check credentials.'
+               sprintf(
+                   'MariaDB Connection not possible. Access denied. Check credentials. Error: "%s"',
+                   mysqli_connect_error()
+               )
            );
         } else {
-            # $mysqli->server_info returns e.g. "5.3.0-maria"
             $arr = explode('-', $connection->server_info);
-
-            return $arr[0];
-
-            // @todo printSuccessMark('MariaDB is up. Connection successful.')
-
             $connection->close();
+            return $arr[0];
         }
     }
 
