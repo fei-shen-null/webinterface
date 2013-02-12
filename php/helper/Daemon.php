@@ -42,26 +42,39 @@ class Daemon
     public static function isRunning($daemon)
     {
         // shorthands to daemon names; also handle xdebug extension
-        if ($daemon === 'xdebug') {
-            return extension_loaded('xdebug');
-        }
-        if ($daemon === 'php') {
-            $daemon = 'php-cgi';
-        }
-        if ($daemon === 'mariadb') {
-            $daemon = 'mysqld';
-        }
-        if ($daemon === 'mongodb') {
-            $daemon = 'mongod';
+        switch ($daemon) {
+            case 'xdebug':
+                return extension_loaded('xdebug');
+                break;
+            case 'php':
+                $process_name = 'php-cgi.exe';
+                break;
+            case 'mariadb':
+                $process_name = 'mysqld.exe';
+            break;
+            case 'mongodb':
+                $process_name = 'mongod.exe';
+                break;
+            case 'nginx':
+                $process_name = 'nginx.exe';
+                break;
+            case 'memcached':
+                $process_name = 'memcached.exe';
+                break;
+             default:
+                throw new \InvalidArgumentException(
+                    sprintf(__METHOD__. '() has no command for the daemon: "%s"', $daemon)
+                );
         }
 
         // lookup daemon executable in process list
         static $output = '';
-        $process = WPNXM_DIR . 'bin\tools\process.exe';
-        if ($output == '') {
+        if ($output === '') {
+            $process = WPNXM_DIR . 'bin\tools\process.exe';
             $output = shell_exec($process);
         }
-        if (strpos($output, $daemon . '.exe') !== false) {
+
+        if (strpos($output, $process_name) !== false) {
             return true;
         }
 
@@ -90,7 +103,9 @@ class Daemon
                 exec($hide_console . $php_daemon . $options);
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('There is no startDaemon command for the daemon: %s', $daemon));
+                throw new \InvalidArgumentException(
+                    sprintf(__METHOD__. '() has no command for the daemon: "%s"', $daemon)
+                );
         }
     }
 
@@ -113,7 +128,9 @@ class Daemon
                 exec($hide_console . $process_kill . 'php-cgi.exe');
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('There is no stopDaemon command for the daemon: %s', $daemon));
+                throw new \InvalidArgumentException(
+                    sprintf(__METHOD__. '() has no command for the daemon: "%s"', $daemon)
+                );
         }
     }
 
@@ -136,7 +153,9 @@ class Daemon
                 exec($hide_console . $restart . 'php');
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('There is no restartDaemon command for the daemon: %s', $daemon));
+                throw new \InvalidArgumentException(
+                    sprintf(__METHOD__. '() has no command for the daemon: "%s"', $daemon)
+                );
         }
     }
 
