@@ -5,7 +5,7 @@ namespace Webinterface\Helper;
 /**
  * Wrapper for handling php extensions and the php.ini extension section.
  */
-class PHPExtension
+class PHPExtensionManager
 {
     public $content = '';
 

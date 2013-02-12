@@ -41,7 +41,7 @@ function disable_memcached()
 
     // remove memcached php extension
     // note: extension name is "memcache", daemon name is "memcached"
-    (new PHPExtension)->enable('memcache');
+    (new PHPExtensionManager)->enable('memcache');
     // restart php daemon
     Serverstack::startDaemon('memcached');
 
@@ -55,7 +55,7 @@ function enable_memcached()
 {
     // add memcached php extension
     // note: extension name is "memcache", daemon name is "memcached"
-    (new PHPExtension)->enable('memcache');
+    (new PHPExtensionManager)->enable('memcache');
 
     // restart php daemon
     Serverstack::restartDaemon('php');
@@ -70,7 +70,7 @@ function enable_memcached()
 function disable_xdebug()
 {
     // remove xdebug php extension
-    (new PHPExtension)->disable('xdebug');
+    (new PHPExtensionManager)->disable('xdebug');
 
     // restart php daemon
     Serverstack::restartDaemon('php');
@@ -82,7 +82,7 @@ function disable_xdebug()
 function enable_xdebug()
 {
     // add xdebug php extension
-    (new PHPExtension)->enable('xdebug');
+    (new PHPExtensionManager)->enable('xdebug');
 
     // restart php daemon
     Serverstack::restartDaemon('php');

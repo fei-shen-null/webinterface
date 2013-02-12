@@ -56,8 +56,7 @@ function update_phpextensions()
 {
     $extensions = $_POST['extensions'];
 
-    $ext = new Webinterface\Helper\PHPExtension();
-    $available_extensions = $ext->getExtensionDirFileList();
+    $ext = new Webinterface\Helper\PHPExtensionManager();
 
     foreach ($extensions as $extension) {
         $ext->enable($extension);
@@ -108,7 +107,7 @@ function showtab_nginx_domains()
 
 function showtab_php_ext()
 {
-    $phpext = new Webinterface\Helper\PHPExtension();
+    $phpext = new Webinterface\Helper\PHPExtensionManager();
 
     $tpl_data = array(
         'no_layout' => true,
