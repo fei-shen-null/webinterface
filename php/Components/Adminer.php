@@ -39,10 +39,10 @@ namespace Webinterface\Components;
  */
 class Adminer extends AbstractComponent
 {
-    public $installationFolder = /* WPNXM_ROOT . */ 'www\adminer'; // i wish PHP would support this! PHP6 ?!
+    public $installationFolder = /* WPNXM_ROOT . */ '\www\adminer'; // i wish PHP would support this! PHP6 ?!
 
     public $files = array(
-        'www\adminer\adminer.php'
+        '\www\adminer\adminer.php'
     );
 
     /**

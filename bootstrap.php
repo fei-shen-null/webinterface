@@ -65,8 +65,8 @@ if (!defined('WPNXM_DIR')) {
     define('DS', DIRECTORY_SEPARATOR);
 
     // Path Constants -> "c:/.."
-    define('WPNXM_DIR', dirname(dirname(__DIR__)) . DS);
-    define('WPNXM_WWW_DIR', WPNXM_DIR . 'www' . DS);
+    define('WPNXM_DIR', dirname(dirname(__DIR__)));
+    define('WPNXM_WWW_DIR', WPNXM_DIR . '\www' . DS);
     define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface\php\controller' . DS);
     define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface\php\components' . DS);
     define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface\php\helper' . DS);
@@ -81,11 +81,11 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_IMAGES_DIR', WPNXM_WEBINTERFACE_ROOT . 'assets/img/');
 
     // WPNXM Configuration File
-    define('WPNXM_INI', WPNXM_DIR . 'wpnxm.ini');
+    define('WPNXM_INI', WPNXM_DIR . '\wpnxm.ini');
 
     // NGINX Configuration
-    define('NGINX_CONF_DIR', WPNXM_DIR . 'bin\nginx\conf' . DS);
-    define('NGINX_DOMAINS_DIR', WPNXM_DIR . 'bin\nginx\conf\domains' . DS);
+    define('NGINX_CONF_DIR', WPNXM_DIR . '\bin\nginx\conf' . DS);
+    define('NGINX_DOMAINS_DIR', WPNXM_DIR . '\bin\nginx\conf\domains' . DS);
 
     /**
      * Feature Flags

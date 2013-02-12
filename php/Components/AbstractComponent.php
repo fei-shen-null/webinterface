@@ -49,15 +49,15 @@ abstract class AbstractComponent
     public $type;
 
     /**
-     * Array with some essential files of the component.
+     * @var array Awith some essential files of the component.
      * For making sure, that the component is installed.
      */
     public $files = array();
 
-    /* The configuration file of the component, if any. */
+    /* @var string The configuration file of the component, if any. */
     public $configFile = '';
 
-    /* The target folder (or base folder) of the installation. */
+    /* @var string The target folder (or base folder) of the installation. */
     public $installationFolder = '';
 
     /**
@@ -71,13 +71,18 @@ abstract class AbstractComponent
      * A component is installed, if all its files exist.
      * The files are defined in the $files array.
      *
+     * @param bool If true, checks only the first file (default). Otherwise, checks all files.
      * @return bool True, if installed, false otherwise.
      */
-    public function isInstalled()
+    public function isInstalled($fast = true)
     {
         $bool = false;
         foreach($this->files as $file) {
-            $bool = $bool && file_exists($file);
+            $bool = file_exists(WPNXM_DIR . $file);
+            // stop at the first file found
+            if($bool === true && $fast === true ) {
+                break;
+            }
         }
         return $bool;
     }

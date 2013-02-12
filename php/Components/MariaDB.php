@@ -42,8 +42,8 @@ class MariaDB extends AbstractComponent
     public $installationFolder = '\bin\mariadb';
 
     public $files = array(
-        '\bin\mariadb\my.cnf',
-        '\bin\nginx\bin\mysqld.exe'
+        '\bin\mariadb\my.ini',
+        '\bin\mariadb\bin\mysqld.exe'
     );
 
     public $configFile = '\bin\mariadb\my.cnf';
