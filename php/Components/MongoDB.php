@@ -54,13 +54,19 @@ class MongoDB extends AbstractComponent
             return \Webinterface\Helper\Serverstack::printExclamationMark('The PHP Extension "Mongo" is required.');
         }
 
-        $m = new \Mongo();
-        // $db = $m->admin; //require admin priviledge
+        try {
+            $m = new \Mongo();
+            // $db = $m->admin; //require admin priviledge
 
-        //$mongodb_info = $db->command(array('buildinfo'=>true));
-        //$mongodb_version = $mongodb_info['version'];
+            //$mongodb_info = $db->command(array('buildinfo'=>true));
+            //$mongodb_version = $mongodb_info['version'];
 
-        $mongodb_version = $db->execute('return db.version()');
+            $mongodb_version = $db->execute('return db.version()');
+        } catch(\MongoConnectionException $e) {
+            return \Webinterface\Helper\Serverstack::printExclamationMark(
+                $e->getMessage() . '. Please wake the daemon.'
+            );
+        }
 
         return $mongodb_version;
     }
