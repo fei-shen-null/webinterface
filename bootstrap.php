@@ -83,10 +83,6 @@ if (!defined('WPNXM_DIR')) {
     // WPNXM Configuration File
     define('WPNXM_INI', WPNXM_DIR . '\wpnxm.ini');
 
-    // NGINX Configuration
-    define('NGINX_CONF_DIR', WPNXM_DIR . '\bin\nginx\conf' . DS);
-    define('NGINX_DOMAINS_DIR', WPNXM_DIR . '\bin\nginx\conf\domains' . DS);
-
     /**
      * Feature Flags
      */
