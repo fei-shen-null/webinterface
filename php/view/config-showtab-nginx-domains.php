@@ -18,13 +18,13 @@
             if(!empty($domains)) {
                 foreach ($domains as $domain) { /* array: fqpn, filename, loaded */
 
-                    $checked = (isset($domain['loaded']) && $domain['loaded'] === true) ? 'checked="checked"' : '';
+                    $checked = (isset($domain['enabled']) && $domain['enabled'] === true) ? 'checked="checked"' : '';
 
-                    echo '<tr><td>' . $domain['filename'] . '</td><td><input type="checkbox" ' . $checked . '></td>
+                    echo '<tr><td><input type="checkbox" ' . $checked . '></td><td>' . $domain['filename'] . '</td>
                           <td><a href="index.php?page=openfile&file='.$domain['filename'].'"Open in Editor</a></td></tr>';
                 }
             } else {
-                echo '<tr><td>No domains files found.</td></tr>';
+                echo '<tr><td>No domains configuration files found.</td></tr>';
             } ?>
         </table>
         <div class="form-actions">

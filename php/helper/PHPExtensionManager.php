@@ -31,8 +31,19 @@ class PHPExtensionManager
             }
         }
 
-        if (!$this->comment($name)) {
+        if ($this->comment($name) === false) {
+             echo 'Disabling '. $name;
             $this->addExtension($name, false);
+        }
+    }
+
+    public function disableAll()
+    {
+        $enabledExtensions = $this->getEnabledExtensions();
+        var_dump($enabledExtensions);
+        foreach($enabledExtensions as $name => $file)
+        {
+
         }
     }
 
@@ -44,20 +55,19 @@ class PHPExtensionManager
             }
         }
 
-        $this->checkExtensionDirSet();
+        //$this->checkExtensionDirSet();
 
-        if (!$this->uncomment($name)) {
+        if ($this->uncomment($name) === false) {
+            echo 'Enabling '. $name;
             $this->addExtension($name, true);
         }
     }
 
     public function addExtension($name, $enabled = true)
     {
-        # nah, do not add xdebug as as normal extension
+        #  do not add xdebug as as normal extension
         if ($name === 'xdebug') {
-            $this->addXDebugExtension();
-
-            return;
+            return $this->addXDebugExtension();
         }
 
         # prepare line to insert
@@ -170,9 +180,11 @@ class PHPExtensionManager
             return false;
         }
 
+        $old_line = trim($old_line);
+
         # extension found, do comment, if line uncommented
-        if (strpos($old_line, ';extension') !== false) {
-            $new_line = ';' . $line;
+         if (strpos($old_line, 'extension=') !== false) {
+            $new_line = ';' . $old_line;
             $this->replaceLineInPHPINI($old_line, $new_line);
         }
 
@@ -220,11 +232,12 @@ class PHPExtensionManager
 
     public function getExtensionDirFileList()
     {
-        $glob = $list = array(); // PHP SYNTAX reminder $glob, $list = array();
+        $files = array();
+        $list = array();
 
-        $glob = glob(WPNXM_DIR . '/bin/php/ext/*.dll');
+        $files = glob(WPNXM_DIR . '/bin/php/ext/*.dll');
 
-        foreach ($glob as $key => $file) {
+        foreach ($files as $key => $file) {
             // $list array has the following structure
             // key = filename without suffix
             // value = filename with suffix
@@ -232,14 +245,13 @@ class PHPExtensionManager
             $list[ basename($file, '.dll') ] = basename($file);
         }
 
-        unset($glob);
-
         return $list;
     }
 
     public static function getEnabledExtensions()
     {
         $enabled_extensions = array();
+        $extension = '';
 
         // read php.ini
         $ini_file = php_ini_loaded_file();
@@ -256,9 +268,18 @@ class PHPExtensionManager
             if ($line['key'] != 'extension') {
                 continue;
             }
+
+            $extension = $line['value'];
+
+            // cut everything of after ".dll"
+            // as there might be comments on the line (; #)
+            $extension = substr($extension, 0, strpos($extension, '.dll'));
+
             // and stuff them in the array
-            $enabled_extensions[] = $line['value'];
+            $enabled_extensions[] = $extension . '.dll';
         }
+
+        asort($enabled_extensions);
 
         // do a key/value flip, to get rid of the numeric index.
         // this is for being able to easily check for a extension filename with isset in foreach.

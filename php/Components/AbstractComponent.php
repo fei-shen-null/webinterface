@@ -49,7 +49,7 @@ abstract class AbstractComponent
     public $type;
 
     /**
-     * @var array Awith some essential files of the component.
+     * @var array Array with all essential files of the component.
      * For making sure, that the component is installed.
      */
     public $files = array();

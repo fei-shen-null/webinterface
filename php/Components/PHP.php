@@ -57,4 +57,17 @@ class PHP extends AbstractComponent
     {
         return PHP_VERSION;
     }
+
+    public static function getPHPExtensionDirectory()
+    {
+        $phpinfo = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
+        $matches = '';
+        $extensionDir = '';
+
+        if (preg_match('/extension_dir([ =>\t]*)([^ =>\t]+)/', $phpinfo, $matches)) {
+            $extensionDir = $matches[2];
+        }
+
+        return $extensionDir;
+    }
 }

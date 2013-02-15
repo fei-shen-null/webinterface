@@ -126,15 +126,15 @@ class Serverstack
     public static function assertExtensionFileFound($extension)
     {
         $files = array(
-            'apc'       => 'bin\php\ext\php_apc.dll',
-            'xdebug'    => 'bin\php\ext\php_xdebug.dll',
-            'xhprof'    => 'bin\php\ext\php_xhprof.dll',
+            'apc' => 'bin\php\ext\php_apc.dll',
+            'xdebug' => 'bin\php\ext\php_xdebug.dll',
+            'xhprof' => 'bin\php\ext\php_xhprof.dll',
             'memcached' => 'bin\php\ext\php_memcache.dll', # file without D
-            'zeromq'    => 'bin\php\ext\php_zmq.dll',
-            'mongodb'   => 'bin\php\ext\php_mongo.dll',
-            'nginx'     => 'bin\nginx\nginx.conf',
-            'mariadb'   => 'bin\mariadb\my.ini',
-            'php'       => 'bin\php\php.ini',
+            'zeromq' => 'bin\php\ext\php_zmq.dll',
+            'mongodb' => 'bin\php\ext\php_mongo.dll',
+            'nginx' => 'bin\nginx\nginx.conf',
+            'mariadb' => 'bin\mariadb\my.ini',
+            'php' => 'bin\php\php.ini',
         );
 
         $file = WPNXM_DIR . $files[$extension];
@@ -172,10 +172,10 @@ class Serverstack
                 $loaded = (preg_match('/apc/', $phpinfo, $matches)) ? true : false;
                 break;
             case "zeromq":
-                $loaded =  (preg_match('/zeromq/', $phpinfo, $matches)) ? true : false;
+                $loaded = (preg_match('/zeromq/', $phpinfo, $matches)) ? true : false;
                 break;
             case "mongo":
-                $loaded =  (preg_match('/mongo/', $phpinfo, $matches)) ? true : false;
+                $loaded = (preg_match('/mongo/', $phpinfo, $matches)) ? true : false;
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('There is no assertion for the extension: %s', $extension));
@@ -197,24 +197,12 @@ class Serverstack
      */
     public static function isExtensionInstalled($extension)
     {
-        if(self::assertExtensionFileFound($extension) === true and
-           self::assertExtensionConfigured($extension) === true) {
+        if (self::assertExtensionFileFound($extension) === true and
+            self::assertExtensionConfigured($extension) === true) {
             return true;
         }
 
         return false;
-    }
-
-    public static function getPHPExtensionDirectory()
-    {
-        $phpinfo = PHPInfo::getPHPInfo(true);
-        $matches = '';
-
-        if (preg_match('/extension_dir([ =>\t]*)([^ =>\t]+)/', $phpinfo, $matches)) {
-            $extensionDir = $m[2];
-        }
-
-        return $extensionDir;
     }
 
     /**
@@ -241,7 +229,7 @@ class Serverstack
             case 'xdebug':
                 return self::checkPort('127.0.0.1', '9100');
                 break;
-             case 'mongodb':
+            case 'mongodb':
                 return self::checkPort('127.0.0.1', '27017'); // remember: port 27018 is the admin interface of mongo
                 break;
             default:
@@ -271,18 +259,16 @@ class Serverstack
 
         return sprintf(
             '<img style="float:right;" src="%s" alt="%s" title="%s" rel="tooltip">',
-            $img,
-            $title,
-            $title
+            $img, $title, $title
         );
     }
 
     public static function getDaemonName($daemon)
     {
-         switch ($daemon) {
+        switch ($daemon) {
             case 'phpext_memcache':
                 return 'PHP Extension Memcache';
-             case 'phpext_mongo':
+            case 'phpext_mongo':
                 return 'PHP Extension Mongo';
             case 'nginx':
                 return 'Nginx';
@@ -299,17 +285,38 @@ class Serverstack
             case 'xdebug':
                 return 'PHP Extension XDebug';
                 break;
-             case 'mongodb':
+            case 'mongodb':
                 return 'MongoDB';
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf(__METHOD__.'() no name for the daemon: "%s"', $daemon));
+                throw new \InvalidArgumentException(sprintf(__METHOD__ . '() no name for the daemon: "%s"', $daemon));
         }
     }
 
     public static function isInstalled($component)
     {
-        return true;
+        switch ($component) {
+            case 'php':
+                return true; // base of stack
+                break;
+            case 'nginx':
+                return true; // base of stack
+            case 'xdebug':
+                return (new \Webinterface\Components\Xdebug)->isInstalled();
+                break;
+                break;
+            case 'mariadb':
+                return true; // base of stack
+                break;
+            case 'mongodb':
+                return (new \Webinterface\Components\Mongodb)->isInstalled();
+                break;
+            case 'memcached':
+                return (new \Webinterface\Components\Memcached)->isInstalled();
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf(__METHOD__ . '() has no case for the daemon: "%s"', $daemon));
+        }
     }
 
     /**

@@ -57,7 +57,6 @@ function showtab()
     $tabAction();
 }
 
-
 function showtab_help()
 {
     render('config-showtab-help', array('no_layout' => true));
@@ -77,7 +76,6 @@ function showtab_nginx()
 {
     render('config-showtab-nginx', array('no_layout' => true));
 }
-
 
 function showtab_nginx_domains()
 {
@@ -99,7 +97,6 @@ function showtab_php()
 
     render('config-showtab-php', $tpl_data);
 }
-
 
 function showtab_php_ext()
 {
@@ -127,14 +124,36 @@ function showtab_xdebug()
 function update_phpextensions()
 {
     $extensions = $_POST['extensions'];
+    //var_dump($extensions); /* show extensions to enable */
 
-    $ext = new Webinterface\Helper\PHPExtensionManager();
+    $extensionManager = new Webinterface\Helper\PHPExtensionManager();
+
+    $enabledExtensions = array_flip($extensionManager->getEnabledExtensions());
+
+    $disableTheseExtensions = array_diff($enabledExtensions, $extensions);
+    $disableTheseExtensions = array_values($disableTheseExtensions); // re-index
+
+    //var_dump($disableTheseExtensions); /* show extensions to disable */
 
     foreach ($extensions as $extension) {
-        $ext->enable($extension);
+        $extensionManager->enable($extension);
     }
 
-    echo 'Entries saved.';
+    foreach ($disableTheseExtensions as $extension) {
+        $extensionManager->disable($extension);
+    }
+
+    Webinterface\Helper\Daemon::restartDaemon('php');
+
+    // prepare response data
+    $array = array(
+        'enabled_extensions' => $extensions,
+        'disabled_extensions' => $disableTheseExtensions,
+        'responseText' => 'Extensions updated.'
+    );
+
+    // send as JSON
+    echo json_encode($array);
 }
 
 
@@ -146,6 +165,7 @@ function update_phpini_setting()
 
     Webinterface\Helper\PHPINI::setDirective($section, $directive, $value);
 
-    echo 'Entry saved.';
-}
+    Webinterface\Helper\Daemon::restartDaemon('php');
 
+    echo '<div class="modal"><p class="info">Saved. PHP restarted.</div>';
+}

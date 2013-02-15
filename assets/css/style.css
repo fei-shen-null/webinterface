@@ -51,6 +51,9 @@ img
 .red {
     color: red;
 }
+.green {
+    color: darkgreen;
+}
 
 .title {
     padding-bottom: 12px;

@@ -46,68 +46,63 @@ namespace Webinterface\Helper;
 class Domains
 {
     /**
-     * Returns an array with all domain conf files
-     * associated with their loading state.
+     * Get a list of all domain config files and their loading state.
+     *
+     * @return array Array of all domain conf files and their loading state.
      */
     public static function listDomains()
     {
-        // get all domain config files
-        $domainFiles = glob(NGINX_DOMAINS_DIR . '*.conf');
+        if (false === self::areEnabledDomainsLoadedByNginxConf()) {
+            // tell the world that "nginx.conf" misses "include domains.conf;"
+            exit(sprintf('<div class="error bold" style="font-size: 13px; width: 500px;">
+                %snginx.conf does not include the config files of the domains-enabled folder.<br><br>
+                    Please add "include bin/nginx/conf/domains-enabled/*;" to "nginx.conf".</div>',
+                WPNXM_DIR . '\bin\nginx\conf\\'));
+        }
 
-        // enhance the array structure a bit, by adding pure filenames
+        $enabledDomains = glob(WPNXM_DIR . '\bin\nginx\conf\domains-enabled\*.conf');
+
+        $disabledDomains = glob(WPNXM_DIR . '\bin\nginx\conf\domains-disabled\*.conf');
+
         $domains = array();
-        foreach ($domainFiles as $key => $fqpn) {
-            $domains[] = array(
-                'fqpn' => $fqpn,
-                'filename' => basename($fqpn)
-            );
-        }
-        unset($domainFiles);
 
-        // ensure the domain.conf is included in nginx.conf
-        if (self::isDomainsConfIncludedInNginxConf()) {
-            $loaded_domains = array();
-
-            $domain_conf_lines = file(NGINX_CONF_DIR . 'domains.conf');
-
-            // examine each line
-            foreach ($domain_conf_lines as $domain_conf_line) {
-                // and match all lines with string "included domains", but not the ones commented out/off
-                // on match, $matches[1] contains the "filename.conf"
-                if (preg_match('/[^;#]include domains\/(.*\\.conf)/', $domain_conf_line, $matches)) {
-                    // add the conf to the loaded domains array
-                    $loaded_domains['filename'] = $matches[1];
-                }
-            }
-        } else {
-            throw new \Exception(
-                NGINX_CONF_DIR . 'nginx.conf misses to load the domains configuration. Add "include domains.conf;".'
+        foreach ($enabledDomains as $idx => $file) {
+            $domain = basename($file, '.conf');
+            $domains[$domain] = array(
+                'fullpath' => $file,
+                'filename' => basename($file),
+                'enabled' => true
             );
         }
 
-        // loop over all available domain files and each loaded_domain
-        foreach ($domains as $key => $domain) {
-            foreach ($loaded_domains as $loaded_domain) {
-                // compare the filenames and mark the loaded files
-                if ($domain['filename'] === $loaded_domain) {
-                    $domains[$key]['loaded'] = true;
-                }
-            }
+        foreach ($disabledDomains as $idx => $file) {
+            $domain = basename($file, '.conf');
+            $domains[$domain] = array(
+                'fullpath' => $file,
+                'filename' => basename($file),
+                'enabled' => false
+            );
         }
 
         return $domains;
     }
 
-    public static function isDomainsConfIncludedInNginxConf()
+    /**
+     * Check, if nginx.conf contains the line to load all enabled domains.
+     *
+     * @return boolean True, if line exists, so domains get loaded. Otherwise, false.
+     */
+    public static function areEnabledDomainsLoadedByNginxConf()
     {
-        $nginxConfigLines = file(NGINX_CONF_DIR . 'nginx.conf');
+        $lines = file(WPNXM_DIR . '\bin\nginx\conf\nginx.conf');
 
-        foreach ($nginxConfigLines as $nginx_conf_line) {
-            if (strpos($nginx_conf_line, 'include domains.conf;') !== false) {
-                return true;
+        foreach ($lines as $line) {
+            // return true, if the line exists and is not commented
+            if (preg_match('/(.*)include bin\/nginx\/conf\/domains-enabled\/\*/', $line, $matches)) {
+                $comment = trim($matches[1]);
+                return ($comment === ';' or $comment === '#') ? false : true;
             }
         }
-
         return false;
     }
 

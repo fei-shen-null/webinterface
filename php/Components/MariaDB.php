@@ -85,7 +85,8 @@ class MariaDB extends AbstractComponent
 
     public function getDataDir()
     {
-        $myini_array = file("../mariadb/my.ini");
+        $myini_array = file(WPNXM_DIR . $this->configFile);
+        
         $key_datadir = key(preg_grep("/^datadir/", $myini_array));
         $mysql_datadir_array = explode("\"", $myini_array[$key_datadir]);
         $mysql_datadir = str_replace("/", "\\", $mysql_datadir_array[1]);

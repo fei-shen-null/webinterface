@@ -52,7 +52,7 @@ class OpenFile
       // file check
       if (false === is_file($file)) {
           throw new \InvalidArgumentException(
-              sprintf('Error - File "%s" not found.', $file)
+              sprintf('File not found: "%s".', $file)
           );
       }
 

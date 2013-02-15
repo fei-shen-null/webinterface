@@ -75,7 +75,7 @@ function insert()
 
     clearstatcache();
 
-    $domainsMainConfigFile = NGINX_CONF_DIR . 'domains.conf';
+    $domainsMainConfigFile = WPNXM_DIR . '\bin\nginx\conf\domains.conf';
 
     if (!is_writable($domainsMainConfigFile) && !chmod($domainsMainConfigFile, 0777)) {
         exit('The "domains.conf" file is not writeable. Please modify permissions.');

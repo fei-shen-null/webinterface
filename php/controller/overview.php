@@ -50,21 +50,21 @@ function index()
       'nginx_status'        => Serverstack::getStatus('nginx'),
       'php_status'          => Serverstack::getStatus('php'),
       'mariadb_status'      => Serverstack::getStatus('mariadb'),
-      'memcached_status'    => Serverstack::getStatus('memcached'), // daemon && extension ?
       'xdebug_status'       => Serverstack::getStatus('xdebug'),
-      'mongodb_status'      => Serverstack::getStatus('mongodb'), // daemon && extension
+      'mongodb_status'      => Serverstack::getStatus('mongodb'),               // daemon
+      'phpext_mongo_status' => Serverstack::getStatus('phpext_mongo'),          // extension
+      'memcached_status'    => Serverstack::getStatus('memcached'),             // daemon
+      'phpext_memcached_status' => Serverstack::getStatus('phpext_memcache'),   // extension
       // your ip
       'my_ip'               => Serverstack::getMyIP(),
       // passwords
       'mariadb_password'    => Serverstack::getPassword('mariadb'),
       'mongodb_password'    => Serverstack::getPassword('mongodb'),
-      // which components are installed (daemons)
+      // which additional components are installed
       'memcached_installed' => Serverstack::isInstalled('memcached'),
       'xdebug_installed'    => Serverstack::isInstalled('xdebug'),
       'mongodb_installed'   => Serverstack::isInstalled('mongodb'),
-      // which components are installed (php extensions)
-      'phpext_memcached_status' => Serverstack::getStatus('phpext_memcache'),
-      'phpext_mongo_status' => Serverstack::getStatus('phpext_mongo'),
+
       // extension "com_dotnet" is needed to open logfile with editor, else we disable the log buttons
       'canOpenLogfileWithEditor' => function() {
                                       if(!class_exists('COM') and !extension_loaded("com_dotnet")) {

@@ -90,7 +90,7 @@ class Daemon
 
     public static function startDaemon($daemon, $options = '')
     {
-        $hide_console = WPNXM_DIR . '\bin\tools\runhiddenconsole.exe ';
+        $hide_console = WPNXM_DIR . '\bin\tools\RunhHiddenConsole.exe ';
 
         switch ($daemon) {
             case 'nginx':
@@ -118,7 +118,7 @@ class Daemon
 
     public static function stopDaemon($daemon)
     {
-        $hide_console = WPNXM_DIR . '\bin\tools\runhiddenconsole.exe ';
+        $hide_console = WPNXM_DIR . '\bin\tools\RunhHiddenConsole.exe ';
         $process_kill = WPNXM_DIR . '\bin\tools\process.exe -k  ';
 
         switch ($daemon) {
@@ -143,7 +143,7 @@ class Daemon
 
     public static function restartDaemon($daemon)
     {
-        $hide_console = WPNXM_DIR . '\bin\tools\runhiddenconsole.exe ';
+        $hide_console = WPNXM_DIR . '\bin\tools\RunhHiddenConsole.exe ';
         $restart = 'restart-wpnxm.exe ';
 
         switch ($daemon) {
