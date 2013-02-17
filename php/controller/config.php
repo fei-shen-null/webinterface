@@ -149,7 +149,7 @@ function update_phpextensions()
     $array = array(
         'enabled_extensions' => $extensions,
         'disabled_extensions' => $disableTheseExtensions,
-        'responseText' => 'Extensions updated.'
+        'responseText' => 'Extensions updated - PHP restarting...'
     );
 
     // send as JSON

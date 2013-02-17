@@ -1,7 +1,7 @@
 <h2>
     PHP Extensions
     <small>(<?=count($enabled_extensions)?> of <?=count($available_extensions)?> loaded)</small>
-    <div id="ajax-status" class="floatright hide btn btn-small btn-success">Extensions updated (0)</div>
+    <div id="ajax-status" class="floatright hide btn btn-small btn-success">Updating Extensions.</div>
 </h2>
 
 To enable an extension, check it's checkbox. To disable an extension uncheck it's checkbox. <small>Surprise, surprise!</small>
