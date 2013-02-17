@@ -39,7 +39,8 @@ function setCurrentPageActiveInMainMenu() {
     var aObj = document.getElementsByClassName('main_menu')[0].getElementsByTagName('a');
     for(var i = 0; i < aObj.length; i++) {
         if(document.location.href.indexOf(aObj[i].href)>=0) {
-            aObj[i].className='active';
+            aObj[i].className = 'active';
+            return;
         }
     }
 }
