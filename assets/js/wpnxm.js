@@ -59,7 +59,7 @@ jQuery.fn.extend({
     pulsate: function() {
         var obj = $(this);
         // 3 times
-        for(var i=0; i<3; i++) {
+        for(var i=0; i<2; i++) {
           obj.animate({opacity: 0.2}, 1000, 'linear')
            .animate({opacity: 1}, 1000, 'linear');
         }
@@ -145,12 +145,14 @@ function handlePHPExtensionsForm() {
         $.get("index.php?page=restart&action=restart&daemon=php");
 
         // now new extensions are off or on, lets get their state and update the checkbox display
-
-        // DELAYs
-        $.ajax({ url: "index.php?page=config&action=phpextensionsfrom",
-            success: function(data, textStatus, XMLHttpRequest) {
-                $("#phpExtensionsForm").html(data);
-        }});
+        var updatePHPExtensionsForm = function() {
+            $.ajax({ url: "index.php?page=config&action=renderPHPExtensionsFormContent",
+                success: function(data, textStatus, XMLHttpRequest) {
+                    $("#phpExtensionsFormContent").html(data);
+            }});
+        }
+        // delayed call, because the php daemon needs to startup again
+        setTimeout(updatePHPExtensionsForm, 2200);
 
         // open as modal response
         //$('#ajax-response').modal();

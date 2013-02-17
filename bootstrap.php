@@ -117,6 +117,19 @@ if (!function_exists('showConstants')) {
 
 }
 
+function isAjaxRequest()
+{
+    if(!empty($_SERVER['X-Requested-With']) and $_SERVER['X-Requested-With'] === 'XMLHttpRequest') {
+        return true;
+    }
+
+    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+        return true;
+    }
+
+    return false;
+}
+
 // autoload classes based on a 1:1 mapping from namespace to directory structure.
 function autoload($class)
 {

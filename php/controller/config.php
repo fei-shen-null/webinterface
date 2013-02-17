@@ -207,7 +207,11 @@ function renderPHPExtensionsFormContent()
         $itemsTotal--;
     }
 
-    return $html_checkboxes;
+   if(isAjaxRequest() and !isset($_GET['tab'])) {
+       echo $html_checkboxes;
+   } else {
+       return $html_checkboxes;
+   }
 }
 
 function update_phpini_setting()

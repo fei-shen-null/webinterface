@@ -9,16 +9,16 @@ To enable an extension, check it's checkbox. To disable an extension uncheck it'
       action="index.php?page=config&amp;action=update_phpextensions"
       method="post">
 
+<span id="phpExtensionsFormContent">
 <?php
 // extensions_loaded = daemon state
 //var_dump($loaded_extensions);
-
 echo $form;
 ?>
+</span>
 
 <div style="clear:both; float:right;">
     <input type="submit" class="aButton" value=" Submit ">
     <input type="reset" class="aButton" value=" Reset ">
 </div>
-
 </form>
