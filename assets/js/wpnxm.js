@@ -149,6 +149,7 @@ function handlePHPExtensionsForm() {
             $.ajax({ url: "index.php?page=config&action=renderPHPExtensionsFormContent",
                 success: function(data, textStatus, XMLHttpRequest) {
                     $("#phpExtensionsFormContent").html(data);
+                    $('#ajax-status').hide();
             }});
         }
         // delayed call, because the php daemon needs to startup again
