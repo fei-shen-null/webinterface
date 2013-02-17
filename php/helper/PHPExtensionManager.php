@@ -248,7 +248,17 @@ class PHPExtensionManager
         return $list;
     }
 
-    public static function getEnabledExtensions()
+    public function getExtensionsLoaded()
+    {
+        $extFiles = $this->getExtensionDirFileList();
+        foreach ($extFiles as $key => $value) {
+            $value = str_replace(array('php_', '.dll'), '', $value);
+            $list[$value] = extension_loaded($value);
+        }
+        return $list;
+    }
+
+    public static function getEnabledExtensionsFromIni()
     {
         $enabled_extensions = array();
         $extension = '';

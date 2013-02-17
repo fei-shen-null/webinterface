@@ -105,7 +105,9 @@ function showtab_php_ext()
     $tpl_data = array(
         'no_layout' => true,
         'available_extensions' => $phpext->getExtensionDirFileList(),
-        'enabled_extensions' => $phpext->getEnabledExtensions()
+        'enabled_extensions' => $phpext->getEnabledExtensionsFromIni(),
+        //'loaded_extensions' => $phpext->getExtensionsLoaded()
+        'form' => renderPHPExtensionsFormContent()
     );
 
     render('config-showtab-phpext', $tpl_data);
@@ -128,7 +130,7 @@ function update_phpextensions()
 
     $extensionManager = new Webinterface\Helper\PHPExtensionManager();
 
-    $enabledExtensions = array_flip($extensionManager->getEnabledExtensions());
+    $enabledExtensions = array_flip($extensionManager->getEnabledExtensionsFromIni());
 
     $disableTheseExtensions = array_diff($enabledExtensions, $extensions);
     $disableTheseExtensions = array_values($disableTheseExtensions); // re-index
@@ -143,8 +145,6 @@ function update_phpextensions()
         $extensionManager->disable($extension);
     }
 
-    Webinterface\Helper\Daemon::restartDaemon('php');
-
     // prepare response data
     $array = array(
         'enabled_extensions' => $extensions,
@@ -156,6 +156,59 @@ function update_phpextensions()
     echo json_encode($array);
 }
 
+function renderPHPExtensionsFormContent()
+{
+    $phpext = new Webinterface\Helper\PHPExtensionManager();
+    $available_extensions = $phpext->getExtensionDirFileList();
+    $enabled_extensions = $phpext->getEnabledExtensionsFromIni();
+
+    $html_checkboxes = '';
+    $i = 1; // start at first element
+    $itemsTotal = count($available_extensions); // elements total
+
+    // use list of available_extensions to draw checkboxes
+    foreach ($available_extensions as $name => $file) {
+        // if extension is enabled, check the checkbox
+        $checked = false;
+        if (isset($enabled_extensions[$file])) {
+            $checked = true;
+        }
+
+        /**
+         * Deactivate the checkbox for the XDebug Extension.
+         * XDebug is not loaded as normal PHP extension ([PHP]extension=).
+         * It is loaded as a Zend Engine extension ([ZEND]zend_extension=).
+         */
+        $disabled = '';
+        if (strpos($name, 'xdebug') !== false) {
+            $disabled = 'disabled';
+        }
+
+        // render column opener (everytime on 1 of 12)
+        if($i === 1) {
+            $html_checkboxes .= '<div class="control-group" style="float: left; width: 125px; margin: 10px;">';
+        }
+
+        // the input tag is wrapped by the label tag
+        $html_checkboxes .= '<label class="checkbox';
+        $html_checkboxes .= ($checked === true) ? ' active-element">' : ' not-active-element">';
+        $html_checkboxes .= '<input type="checkbox" name="extensions[]" value="'.$file.'" ';
+        $html_checkboxes .= ($checked === true) ? 'checked="checked" ' : '';
+        $html_checkboxes .=  $disabled.'>';
+        $html_checkboxes .= substr($name, 4);
+        $html_checkboxes .= '</label>';
+
+        if ($i === 12 or $itemsTotal === 1) {
+            $html_checkboxes .= '</div>';
+            $i = 0; /* reset column counter */
+        }
+
+        $i++;
+        $itemsTotal--;
+    }
+
+    return $html_checkboxes;
+}
 
 function update_phpini_setting()
 {

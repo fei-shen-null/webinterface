@@ -137,21 +137,26 @@ function handlePHPExtensionsForm() {
 
         var jsonData = responseText;
 
-        /*for (var i in jsonData.enabled_extensions[i]) {
-            alert(i);
-            $('#phpExtensionsForm input[name="extensions"]').val(jsonData[i]).addClass("active-element");
-        }
-        for (var i in jsonData.disabled_extensions) {
-            $('#phpExtensionsForm input[name="extensions"]').val(jsonData[i]).addClass("non-active-element");
-        }*/
-
+        // this is the response on the changes to PHP INI, lets do some show here
         $('#ajax-status').html(jsonData.responseText).show().pulsate();
+
+        // now restart the php daemon, you will get a 404 Error in "Console - All".
+        // this is unnoticed by the user
+        $.get("index.php?page=restart&action=restart&daemon=php");
+
+        // now new extensions are off or on, lets get their state and update the checkbox display
+
+        // DELAYs
+        $.ajax({ url: "index.php?page=config&action=phpextensionsfrom",
+            success: function(data, textStatus, XMLHttpRequest) {
+                $("#phpExtensionsForm").html(data);
+        }});
 
         // open as modal response
         //$('#ajax-response').modal();
 
         // alert opens as modal response, too
-        alert('status: ' + statusText + '\n\nresponseText: \n' + responseText +
-            '\n\nThe output div should have already been updated with the responseText.');
+        /*alert('status: ' + statusText + '\n\nresponseText: \n' + responseText +
+            '\n\nThe output div should have already been updated with the responseText.');*/
     }
 }; // END of handlePHPExtensionsForm()

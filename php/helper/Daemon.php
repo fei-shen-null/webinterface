@@ -119,7 +119,7 @@ class Daemon
     public static function stopDaemon($daemon)
     {
         $hide_console = WPNXM_DIR . '\bin\tools\RunhHiddenConsole.exe ';
-        $process_kill = WPNXM_DIR . '\bin\tools\process.exe -k  ';
+        $process_kill = WPNXM_DIR . '\bin\tools\Process.exe -k  ';
 
         switch ($daemon) {
             case 'nginx':
@@ -141,29 +141,37 @@ class Daemon
         }
     }
 
+    /**
+     * Restarts a daemon by utilizing "restart-wpnxm.bat".
+     * Especially the php daemon must (re)-started from the outside.
+     *
+     * @param string $daemon
+     * @throws \InvalidArgumentException
+     */
     public static function restartDaemon($daemon)
     {
-        $hide_console = WPNXM_DIR . '\bin\tools\RunhHiddenConsole.exe ';
-        $restart = 'restart-wpnxm.exe ';
+        $restart = WPNXM_DIR . '\restart-wpnxm.bat ';
 
         switch ($daemon) {
             case 'nginx':
-                exec($hide_console . $restart . 'nginx');
+                exec($restart . 'nginx');
                 break;
             case 'mariadb':
-                exec($hide_console . $restart . 'mariadb');
+                exec($restart . 'mariadb');
                 break;
             case 'memcached':
-                exec($hide_console . $restart . 'memcached');
+                exec($restart . 'memcached');
                 break;
             case 'php':
-                exec($hide_console . $restart . 'php');
+                exec($restart . 'php');
                 break;
             default:
                 throw new \InvalidArgumentException(
                     sprintf(__METHOD__. '() has no command for the daemon: "%s"', $daemon)
                 );
         }
+
+        return $r;
     }
 
 }
