@@ -245,7 +245,7 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Directory</span>
-                        <span class="floatright"><?= WPNXM_WWW_DIR . 'bin\php' ?></span>
+                        <span class="floatright"><?= WPNXM_DIR . 'bin\php' ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -291,13 +291,13 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                      <td colspan="5">
                         <span class="floatleft">Directory</span>
-                        <span class="floatright"><?= WPNXM_WWW_DIR . 'bin\mariadb'; ?></span>
+                        <span class="floatright"><?= WPNXM_DIR . 'bin\mariadb'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Config</span>
-                        <span class="floatright"><?= WPNXM_WWW_DIR . 'mariadb\my.ini'; ?></span>
+                        <span class="floatright"><?= WPNXM_DIR . 'mariadb\my.ini'; ?></span>
                     </td>
                 </tr>
                 <tr>
