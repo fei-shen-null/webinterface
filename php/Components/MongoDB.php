@@ -57,18 +57,22 @@ class MongoDB extends AbstractComponent
         try {
             $m = new \Mongo();
 
-            // $db = $m->admin; //require admin privilege
+            //require admin privilege
+            $db = $m->admin;
+
             //$mongodb_info = $db->command(array('buildinfo'=>true));
             //$mongodb_version = $mongodb_info['version'];
 
+            // this returns an array with the keys "retval","ok"
             $mongodb_version = $db->execute('return db.version()');
+
         } catch (\MongoConnectionException $e) {
             return \Webinterface\Helper\Serverstack::printExclamationMark(
                     $e->getMessage() . '. Please wake the daemon.'
             );
         }
 
-        return $mongodb_version;
+        return $mongodb_version['retval']; 
     }
 
     public function getPassword()
