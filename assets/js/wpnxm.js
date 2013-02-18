@@ -143,7 +143,7 @@ function handlePHPExtensionsForm() {
 
         // now restart the php daemon, you will get a 404 Error in "Console - All".
         // this is unnoticed by the user
-        $.get("index.php?page=restart&action=restart&daemon=php");
+        $.get("index.php?page=daemon&action=restart&daemon=php");
 
         // now new extensions are off or on, lets get their state and update the checkbox display
         var updatePHPExtensionsForm = function() {

@@ -36,3 +36,13 @@ function restart()
 {
      Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
 }
+
+function start()
+{
+     Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
+}
+
+function stop()
+{
+     Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
+}

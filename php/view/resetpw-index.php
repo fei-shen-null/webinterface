@@ -1,7 +1,7 @@
 <form id="reset-password-form" style="width:400px;" action="index.php?page=resetpw&action=update" method="POST">
     <fieldset>
         <legend>Change Database Password</legend>
-        <h3>Please enter the new database password (user root):</h3>
+        <h4>Please enter the new database password (user root):</h4>
         <input type="text" name="newPassword">
         <br><br>
         <a class="aButton" rel="modal:close">Cancel</a>

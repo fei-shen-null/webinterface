@@ -394,10 +394,10 @@ use Webinterface\Helper\Serverstack;
                         if (extension_loaded('memcached') === true) {
                             # if memcached is loaded, the button must say and turn Memcached off
                             $button_text = 'Switch off';
-                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config&action=disable-memcached';
+                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=daemon&action=stop&daemon=memcached';
                         } else {
                             $button_text = 'Switch on';
-                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config&action=enable-memcached';
+                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=daemon&action=start&daemon=memcached';
                         }
                         ?>
                            href="<?= $url ?>"><?= $button_text ?>
@@ -437,10 +437,10 @@ use Webinterface\Helper\Serverstack;
                             if (function_exists('xdebug_call_file') === true) {
                                 # if xdebug is loaded, the button must say and turn Xdebug off
                                 $button_text = 'Switch off';
-                                $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config&action=disable-xdebug';
+                                $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=daemon&action=stop&daemon=xdebug';
                             } else {
                                 $button_text = 'Switch on';
-                                $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config&action=enable-xdebug';
+                                $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=daemon&action=start&daemon=xdebug';
                             }
                             ?>
                            href="<?= $url ?>"><?= $button_text ?>

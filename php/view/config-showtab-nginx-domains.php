@@ -75,26 +75,32 @@
 
         <ul id="form">
           <li>
-            <label class="checkbox">Location (Realpath)</label>
-            <span class="block-help">Path of the project folder you want to create the domain for.</span>
+            <label for="folder"><b>Location (Realpath)</b></label>
+            <span class="block-help">Path of the project folder you want to create the domain for.</br>
+                <small><?php echo WPNXM_WWW_ROOT; ?></small>
+            </span>
             <select id="folder">
-                <?php foreach ($project_folders as $folder) { ?>
+                <?php
+                foreach ($project_folders as $folder) { ?>
                 <option value="/<?=$folder?>"><?=$folder?></option>
                 <?php } ?>
             </select>
 
-            <label for="servername">Servername</label>
+            <label for="servername"><b>Servername</b></label>
             <span class="block-help">Enter the servername:</span>
             <input type="text" id="servername">
-            <span class="example"><b>Example:</b> LALA server</span>
 
-            <label>Add domain to the hosts file for local name resolution?</label><input type="checkbox">
+            <label for="addToHostsFile"><b>Add to "hosts"</b></label>
+            <input id="addToHostsFile" type="checkbox">
+            <span class=""block-help">Add domain to the hosts file for local name resolution?</span>
+
+            <br><br>
 
             <!--<label>(Port)</label>-->
 
             <!--<label>(Dynamic DNS)</label>-->
 
-            <label>Aliases - <a id="add-alias"><i class="icon-plus"></i>Add Alias</a></label>
+            <label for="aliases"><b>Aliases</b><a id="add-alias"><i class="icon-plus"></i>Add Alias</a></label>
             <table id="aliases">
                 <tr>
                     <td>Alias 1</td><td><a id="remove-alias"><i class="icon-minus"></i>Remove Alias</a></td>
