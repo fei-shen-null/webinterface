@@ -88,10 +88,8 @@ if (!defined('WPNXM_DIR')) {
      */
     $toggle = true;
     define('FEATURE_1', $toggle); // "create new project dialog" in php/view/projects-index.php
-    define('FEATURE_2', $toggle); // memcached configure button and dialog and switch on/off
     define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Domains, MariaDB, Xdebug
     define('FEATURE_4', $toggle); // create nginx domains directly from project list
-    define('FEATURE_5', $toggle); // xdebug configure and switch on/off
 }
 
 if (!function_exists('showConstants')) {

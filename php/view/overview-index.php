@@ -387,22 +387,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
-                        <?php if (FEATURE_2 == true) { ?>
-                            <a class="aButton" href="index.php?page=config#memcached">Configure</a>
-                        <a class="aButton"
-                        <?php
-                        if (extension_loaded('memcached') === true) {
-                            # if memcached is loaded, the button must say and turn Memcached off
-                            $button_text = 'Switch off';
-                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=daemon&action=stop&daemon=memcached';
-                        } else {
-                            $button_text = 'Switch on';
-                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=daemon&action=start&daemon=memcached';
-                        }
-                        ?>
-                           href="<?= $url ?>"><?= $button_text ?>
-                        </a>
-                        <?php } ?>
+                        <a class="aButton" href="index.php?page=config#memcached">Configure</a>
                     </td>
                 </tr>
             </table>
@@ -430,22 +415,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
-                        <?php if (FEATURE_5 == true) { ?>
                         <a class="aButton" href="index.php?page=config#xdebug">Configure</a>
-                        <a class="aButton"
-                            <?php
-                            if (function_exists('xdebug_call_file') === true) {
-                                # if xdebug is loaded, the button must say and turn Xdebug off
-                                $button_text = 'Switch off';
-                                $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=daemon&action=stop&daemon=xdebug';
-                            } else {
-                                $button_text = 'Switch on';
-                                $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=daemon&action=start&daemon=xdebug';
-                            }
-                            ?>
-                           href="<?= $url ?>"><?= $button_text ?>
-                        </a>
-                        <?php } ?>
                     </td>
                 </tr>
             </table>
