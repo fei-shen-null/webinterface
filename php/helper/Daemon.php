@@ -170,8 +170,6 @@ class Daemon
                     sprintf(__METHOD__. '() has no command for the daemon: "%s"', $daemon)
                 );
         }
-
-        return $r;
     }
 
 }
