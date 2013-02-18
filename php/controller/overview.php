@@ -66,10 +66,7 @@ function index()
       'mongodb_installed'   => Serverstack::isInstalled('mongodb'),
 
       // extension "com_dotnet" is needed to open logfile with editor, else we disable the log buttons
-      'canOpenLogfileWithEditor' => function() {
-                                      if(!class_exists('COM') and !extension_loaded("com_dotnet")) {
-                                      return false;
-                                    }}
+      'canOpenLogfileWithEditor' => (class_exists('COM') and extension_loaded("com_dotnet"))
     );
 
     render('page-action', $tpl_data);

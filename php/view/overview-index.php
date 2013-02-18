@@ -211,7 +211,7 @@ use Webinterface\Helper\Serverstack;
                         if (!is_file(WPNXM_DIR . '\logs\access.log')) {
                             echo "onclick=\"alert('The Nginx Access Log not available. File was not found.'); return false;\"";
                         }
-                        if(!$canOpenLogfileWithEditor()) {
+                        if(false === $canOpenLogfileWithEditor) {
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
@@ -221,7 +221,7 @@ use Webinterface\Helper\Serverstack;
                         if (!is_file(WPNXM_DIR . '\logs\error.log')) {
                             echo "onclick=\"alert('The Nginx Error Log not available. File was not found.'); return false;\"";
                         }
-                        if(!$canOpenLogfileWithEditor()) {
+                        if(false === $canOpenLogfileWithEditor) {
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
@@ -262,7 +262,7 @@ use Webinterface\Helper\Serverstack;
                         if (!is_file(WPNXM_DIR . '\logs\php_error.log')) {
                             echo "onclick=\"alert('The PHP Error Log is not available. File was not found.'); return false;\"";
                         }
-                        if(!$canOpenLogfileWithEditor()) {
+                        if(false === $canOpenLogfileWithEditor) {
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
@@ -308,7 +308,7 @@ use Webinterface\Helper\Serverstack;
                         if (!is_file(WPNXM_DIR . '\logs\mariadb_error.log')) {
                             echo "onclick=\"alert('The MariaDB Error Log is not available. File was not found.'); return false;\"";
                         }
-                        if(!$canOpenLogfileWithEditor()) {
+                        if(false === $canOpenLogfileWithEditor) {
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
@@ -355,7 +355,7 @@ use Webinterface\Helper\Serverstack;
                         if (!is_file(WPNXM_DIR . '\logs\mongodb.log')) {
                             echo " onclick=\"alert('The MongoDB Log is not available. File was not found.'); return false;\"";
                         }
-                        if(!$canOpenLogfileWithEditor()) {
+                        if(false === $canOpenLogfileWithEditor) {
                             echo " onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
