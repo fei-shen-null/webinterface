@@ -58,6 +58,7 @@ function index()
             break;
         case 'mongodb-log':
             Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\mongodb.log');
+            break;
         default:
             throw new InvalidArgumentException(
                 sprintf('The method %s() has no case statement for "%s".', __METHOD__ , $file)
