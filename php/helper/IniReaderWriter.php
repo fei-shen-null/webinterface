@@ -47,10 +47,12 @@ class INIReaderWriter
 
     public function __construct($file = '')
     {
-        if ($file != '') {
-            $this->file = $file;
-            $this->read($file);
+        if(is_file($file) === false) {
+            throw new \Exception(sprintf('File not found: "%s".', $file));
         }
+
+        $this->file = $file;
+        $this->read($file);
     }
 
     public function read($file)
