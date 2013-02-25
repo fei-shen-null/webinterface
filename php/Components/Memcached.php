@@ -79,7 +79,9 @@ class Memcached extends AbstractComponent
 
         // remove memcached php extension
         // note: extension name is "memcache", daemon name is "memcached"
-        (new PHPExtensionManager)->enable('memcache');
+        $o = new PHPExtensionManager;
+        $o->enable('memcache');
+
         // restart php daemon
         Serverstack::startDaemon('memcached');
 
@@ -93,7 +95,8 @@ class Memcached extends AbstractComponent
     {
         // add memcached php extension
         // note: extension name is "memcache", daemon name is "memcached"
-        (new PHPExtensionManager)->enable('memcache');
+        $o = new PHPExtensionManager;
+        $o->enable('memcache');
 
         // restart php daemon
         Serverstack::restartDaemon('php');

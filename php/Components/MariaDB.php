@@ -57,7 +57,7 @@ class MariaDB extends AbstractComponent
     {
         # fail safe, for unconfigured php.ini files
         if (!function_exists('mysqli_connect')) {
-            return self::printExclamationMark('The PHP Extension "mysqli" is required.');
+            return \Webinterface\Helper\Serverstack::printExclamationMark('The PHP Extension "mysqli" is required.');
         }
 
         $connection = @mysqli_connect('localhost', 'root', $this->getPassword());
@@ -86,7 +86,7 @@ class MariaDB extends AbstractComponent
     public function getDataDir()
     {
         $myini_array = file(WPNXM_DIR . $this->configFile);
-        
+
         $key_datadir = key(preg_grep("/^datadir/", $myini_array));
         $mysql_datadir_array = explode("\"", $myini_array[$key_datadir]);
         $mysql_datadir = str_replace("/", "\\", $mysql_datadir_array[1]);

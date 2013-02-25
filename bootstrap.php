@@ -94,6 +94,13 @@ if (!defined('WPNXM_DIR')) {
 
 if (!function_exists('showConstants')) {
 
+    /**
+     * Returns all user defined constants.
+     * Supports several display modes (raw,export, dump).
+     *
+     * @param string $return The display mode: "raw", "export", "dump" (default).
+     * @return
+     */
     function showConstants($return = 'dump')
     {
         $array = get_defined_constants(true);
@@ -115,6 +122,11 @@ if (!function_exists('showConstants')) {
 
 }
 
+/**
+ * Check if the current request is an Ajax request.
+ *
+ * @return boolean True, if Ajax Request. Otherwise, false.
+ */
 function isAjaxRequest()
 {
     if(!empty($_SERVER['X-Requested-With']) and $_SERVER['X-Requested-With'] === 'XMLHttpRequest') {
@@ -128,7 +140,12 @@ function isAjaxRequest()
     return false;
 }
 
-// autoload classes based on a 1:1 mapping from namespace to directory structure.
+/**
+ * The autoloading function includes classes based on
+ * a 1:1 mapping from namespace to directory structure.
+ *
+ * @param string The classname to include.
+ */
 function autoload($class)
 {
     // return early, if class already loaded

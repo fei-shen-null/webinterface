@@ -79,10 +79,13 @@ function showtab_nginx()
 
 function showtab_nginx_domains()
 {
+    $projects = new Webinterface\Helper\Projects;
+    $domains = new Webinterface\Helper\Domains;
+
     $tpl_data = array(
         'no_layout' => true,
-        'project_folders' => (new Webinterface\Helper\Projects())->fetchProjectDirectories(true),
-        'domains' => (new Webinterface\Helper\Domains())->listDomains()
+        'project_folders' => $projects->fetchProjectDirectories(true),
+        'domains' => $domains->listDomains()
     );
 
     render('config-showtab-nginx-domains', $tpl_data);

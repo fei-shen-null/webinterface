@@ -91,7 +91,8 @@ class XDebug extends AbstractComponent
     public function disable()
     {
         // remove xdebug php extension
-        (new PHPExtensionManager)->disable('xdebug');
+        $o = new PHPExtensionManager;
+        $o->disable('xdebug');
 
         // restart php daemon
         Serverstack::restartDaemon('php');
@@ -103,7 +104,8 @@ class XDebug extends AbstractComponent
     public function enable()
     {
         // add xdebug php extension
-        (new PHPExtensionManager)->enable('xdebug');
+        $o = new PHPExtensionManager;
+        $o->enable('xdebug');
 
         // restart php daemon
         Serverstack::restartDaemon('php');

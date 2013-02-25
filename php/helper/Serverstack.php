@@ -95,22 +95,28 @@ class Serverstack
     {
         switch ($component) {
             case 'nginx':
-                return (new \Webinterface\Components\Nginx)->getVersion();
+                $o = new \Webinterface\Components\Nginx;
+                return $o->getVersion();
                 break;
             case 'mariadb':
-                return (new \Webinterface\Components\Mariadb)->getVersion();
+                $o = new \Webinterface\Components\Mariadb;
+                return $o->getVersion();
                 break;
              case 'mongodb':
-                return (new \Webinterface\Components\Mongodb)->getVersion();
+                $o = new \Webinterface\Components\Mongodb;
+                return $o->getVersion();
                 break;
             case 'memcached':
-                return (new \Webinterface\Components\Memcached)->getVersion();
+                $o = new \Webinterface\Components\Memcached;
+                return $o->getVersion();
                 break;
             case 'xdebug':
-                return (new \Webinterface\Components\Xdebug)->getVersion();
+                $o = new \Webinterface\Components\Xdebug;
+                return $o->getVersion();
                 break;
             case 'php':
-                return (new \Webinterface\Components\Php)->getVersion();
+                $o = new \Webinterface\Components\Php;
+                return $o->getVersion();
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
@@ -297,22 +303,21 @@ class Serverstack
     {
         switch ($component) {
             case 'php':
-                return true; // base of stack
-                break;
             case 'nginx':
-                return true; // base of stack
-            case 'xdebug':
-                return (new \Webinterface\Components\Xdebug)->isInstalled();
-                break;
-                break;
             case 'mariadb':
-                return true; // base of stack
+                return true; // always installed - base of the server stack
+                break;
+            case 'xdebug':
+                $o = new \Webinterface\Components\XDebug;
+                return $o->isInstalled();
                 break;
             case 'mongodb':
-                return (new \Webinterface\Components\Mongodb)->isInstalled();
+                $o = new \Webinterface\Components\Mongodb;
+                return $o->isInstalled();
                 break;
             case 'memcached':
-                return (new \Webinterface\Components\Memcached)->isInstalled();
+                $o = new \Webinterface\Components\Memcached;
+                return $o->isInstalled();
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf(__METHOD__ . '() has no case for the daemon: "%s"', $daemon));
@@ -400,10 +405,12 @@ class Serverstack
     {
         switch ($component) {
             case 'mariadb':
-                return (new \Webinterface\Components\Mariadb)->getPassword();
+                $o = new \Webinterface\Components\Mariadb;
+                return $o->getPassword();
                 break;
             case 'mongodb':
-                return (new \Webinterface\Components\Mongodb)->getPassword();
+                $o = new \Webinterface\Components\Mongodb;
+                return $o->getPassword();
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
