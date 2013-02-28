@@ -266,7 +266,7 @@ class PHPExtensionManager
         // read php.ini
         $ini_file = php_ini_loaded_file();
 
-        $ini = new \Webinterface\Helper\INIReaderWriter();
+        $ini = new \Webinterface\Helper\INIReaderWriter($ini_file);
         $ini->read($ini_file);
         $lines = $ini->returnArray();
 

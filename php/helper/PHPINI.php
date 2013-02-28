@@ -45,8 +45,7 @@ class PHPINI
     {
         $ini_file = php_ini_loaded_file();
 
-        $ini = new INIReaderWriter();
-        $ini->read($ini_file);
+        $ini = new INIReaderWriter($ini_file);
         $ini_array  = $ini->returnArray();
 
         return compact('ini_file', 'ini_array');
@@ -57,9 +56,10 @@ class PHPINI
         // $this->doBackup(); @todo add backup functionality, before writing
 
         $ini_file = php_ini_loaded_file();
-        $ini = new INIReaderWriter();
-        $ini->read($ini_file);
+        
+        $ini = new INIReaderWriter($ini_file);
         $ini->set($section, $directive, $value);
+
         $ini->write($ini_file);
 
         return true;

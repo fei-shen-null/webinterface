@@ -47,21 +47,21 @@ class INIReaderWriter
 
     public function __construct($file = '')
     {
-        if(is_file($file) === false) {
+        if($file !== '' and is_file($file) === false) {
             throw new \Exception(sprintf('File not found: "%s".', $file));
         }
 
         $this->file = $file;
-        $this->read($file);
+        $this->read();
     }
 
-    public function read($file)
+    public function read()
     {
         $this->lines = array();
 
         $section = '';
 
-        foreach (file($file) as $line) {
+        foreach (file($this->file) as $line) {
             // comment or whitespace
             if (preg_match('/^\s*(;.*)?$/', $line)) {
                 $this->lines[] = array('type' => 'comment', 'data' => $line);
