@@ -15,8 +15,8 @@
                         List Domains
                     </a>
                 <?php } ?>
-                <h2>Projects <small>(<?=$numberOfProjects?>)</small></h2>
-                <?=$listProjects?>
+                <h2>Projects <small>(<?php echo $numberOfProjects; ?>)</small></h2>
+                <?php echo $listProjects; ?>
             </div>
         </div>
     </div>
@@ -24,8 +24,8 @@
     <div class="right-box">
         <div class="cs-message">
             <div class="cs-message-content-projects">
-                <h2>Tools <small>(<?=$numberOfTools?>)</small></h2>
-                <?=$listTools?>
+                <h2>Tools <small>(<?php echo $numberOfTools; ?>)</small></h2>
+                <?php echo $listTools; ?>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@ Pressing the enter key will saves the new value to your php.ini. Take care!
 Do not forget to restart the PHP daemon in order to let the new settings become alive!
 
 <div class="info">
-    You are editing <?=$ini['ini_file']?>
+    You are editing <?php echo $ini['ini_file']; ?>
     <br>You are only able to modify existing values.
 </div>
 

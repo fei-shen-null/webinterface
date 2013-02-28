@@ -1,6 +1,6 @@
 <h2>
     PHP Extensions
-    <small>(<?=count($enabled_extensions)?> of <?=count($available_extensions)?> loaded)</small>
+    <small>(<?php echo count($enabled_extensions); ?> of <?php echo count($available_extensions); ?> loaded)</small>
     <div id="ajax-status" class="floatright hide btn btn-small btn-success">Updating Extensions.</div>
 </h2>
 

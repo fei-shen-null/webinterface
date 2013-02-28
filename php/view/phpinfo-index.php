@@ -16,7 +16,7 @@
 
     <div id="phpinfo">
         <br/>
-        <?=$php_info;?>
+        <?php echo $php_info; ?>
     </div>
 
 <script type="text/javascript">

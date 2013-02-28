@@ -18,11 +18,11 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?= WPNXM_IMAGES_DIR ?>/nginx.png" alt="Report Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/nginx.png" alt="Report Icon" />
                                 <a href="http://nginx.org/">
                                     <b>Nginx</b>
                                 </a>
-                                <span class="version"><?= $nginx_version ?></span>
+                                <span class="version"><?php echo $nginx_version; ?></span>
                             </div>
                             <div class="description">
                                 <small>Nginx [engine x] is a high performance http and reverse proxy server, as well as a mail proxy server written by Igor Sysoev.</small>
@@ -45,11 +45,11 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?= WPNXM_IMAGES_DIR ?>/php.png" alt="Report Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/php.png" alt="Report Icon" />
                                 <a href="http://php.net/">
                                     <b>PHP</b>
                                 </a>
-                                <span class="version"><?= $php_version ?></span>
+                                <span class="version"><?php echo $php_version; ?></span>
                             </div>
                             <div class="description"><small>PHP is a widely-used general-purpose scripting language that is especially suited for Web development and can be embedded into HTML.</small>
                             </div>
@@ -70,11 +70,11 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?= WPNXM_IMAGES_DIR ?>/mariadb.png" alt="Report Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR ?>/mariadb.png" alt="Report Icon" />
                                 <a href="http://mariadb.org/">
                                     <b>MariaDB</b>
                                 </a>
-                                <span class="version"><?= $mariadb_version; ?></span>
+                                <span class="version"><?php echo $mariadb_version; ?></span>
                             </div>
                             <div class="description"><small>MariaDB is a fork of the world's most popular open source database MySQL by the original author. MariaDb is a binary drop-in replacement for MySQL.</small>
                             </div>
@@ -96,11 +96,11 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?= WPNXM_IMAGES_DIR ?>/mongodb.png" alt="Report Icon" height="16" width="16" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/mongodb.png" alt="Report Icon" height="16" width="16" />
                                 <a href="http://mongodb.org/">
                                     <b>MongoDB</b>
                                 </a>
-                                <span class="version"><?= $mongodb_version ?></span>
+                                <span class="version"><?php echo $mongodb_version; ?></span>
                             </div>
                             <div class="description"><small>MongoDB (from "humongous") is a scalable, high-performance, open source NoSQL database. {name: "Mongo", type: "DB"}</small>
                             </div>
@@ -123,11 +123,11 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?= WPNXM_IMAGES_DIR ?>/report.png" alt="Report Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/report.png" alt="Report Icon" />
                                 <a href="http://memcached.org/">
                                     <b>Memcached</b>
                                 </a>
-                                <span class="version"><?= $memcached_version ?></span>
+                                <span class="version"><?php echo $memcached_version; ?></span>
                             </div>
                             <div class="description"><small>Memcached is a high-performance, distributed memory object caching system. Originally intended for speeding up applications by alleviating database load.</small>
                             </div>
@@ -149,11 +149,11 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?= WPNXM_IMAGES_DIR ?>/xdebug.png" alt="Report Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/xdebug.png" alt="Report Icon" />
                                 <a href="http://xdebug.org/">
                                     <b>Xdebug</b>
                                 </a>
-                                <span class="version"><?= $xdebug_version ?></span>
+                                <span class="version"><?php echo $xdebug_version; ?></span>
                             </div>
                             <div class="description"><small>The Xdebug extension for PHP helps you debugging your scripts by providing a lot of valuable debug information.</small>
                             </div>
@@ -179,33 +179,33 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-                            <?= $nginx_status ?> Nginx
+                            <?php echo $nginx_status; ?> Nginx
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>Host : Port</td>
-                    <td class="right"><?= $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] ?></td>
+                    <td class="right"><?php echo $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']; ?></td>
                 </tr>
                 <tr>
                     <td>Your IP</td>
-                    <td class="right"><?= $my_ip ?></td>
+                    <td class="right"><?php echo $my_ip; ?></td>
                 </tr>
                 <tr>
                    <td colspan="5">
                         <span class="floatleft">Directory</span>
-                        <span class="floatright"><?= WPNXM_DIR . '\bin\nginx' ?></span>
+                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\nginx'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Config</span>
-                        <span class="floatright"><?= WPNXM_DIR . '\bin\nginx\conf\nginx.conf' ?></span>
+                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\nginx\conf\nginx.conf'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
-                        <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx' ?>">Configure</a>
+                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
                         <a class="aButton"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\access.log')) {
@@ -215,7 +215,7 @@ use Webinterface\Helper\Serverstack;
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
-                           href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-access-log' ?>">Access Log</a>
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-access-log'; ?>">Access Log</a>
                         <a class="aButton"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\error.log')) {
@@ -225,7 +225,7 @@ use Webinterface\Helper\Serverstack;
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
-                           href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-error-log' ?>">Error Log</a>
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-error-log'; ?>">Error Log</a>
                     </td>
                 </tr>
             </table>
@@ -234,29 +234,29 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-                        <?= $php_status ?> PHP
+                        <?php echo $php_status; ?> PHP
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="width-40 left">Host : Port</td>
-                    <td class="right"><?= $_SERVER['SERVER_NAME'] ?>:<?= $_SERVER['SERVER_PORT'] ?></td>
+                    <td class="right"><?php echo $_SERVER['SERVER_NAME'] .':'. $_SERVER['SERVER_PORT']; ?></td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Directory</span>
-                        <span class="floatright"><?= WPNXM_DIR . '\bin\php' ?></span>
+                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\php'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Config</span>
-                        <span class="floatright"><?= get_cfg_var('cfg_file_path') ?></span>
+                        <span class="floatright"><?php echo get_cfg_var('cfg_file_path'); ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
-                        <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php' ?>">Configure</a>
+                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php'; ?>">Configure</a>
                         <a class="aButton"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\php_error.log')) {
@@ -266,8 +266,8 @@ use Webinterface\Helper\Serverstack;
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
-                           href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=php-error-log' ?>">Show Log</a>
-                        <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo' ?>">Show phpinfo()</a>
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=php-error-log'; ?>">Show Log</a>
+                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo'; ?>">Show phpinfo()</a>
                     </td>
                 </tr>
             </table>
@@ -276,7 +276,7 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="5">
                         <div class="resourceheader2 bold">
-                        <?= $mariadb_status ?> MariaDB
+                        <?php echo $mariadb_status; ?> MariaDB
                         </div>
                     </td>
                 </tr>
@@ -286,23 +286,23 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="2">Username | Password</td>
-                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?= $mariadb_password ?></span></td>
+                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?php echo $mariadb_password; ?></span></td>
                 </tr>
                 <tr>
                      <td colspan="5">
                         <span class="floatleft">Directory</span>
-                        <span class="floatright"><?= WPNXM_DIR . '\bin\mariadb'; ?></span>
+                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\mariadb'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Config</span>
-                        <span class="floatright"><?= WPNXM_DIR . '\bin\mariadb\my.ini'; ?></span>
+                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\mariadb\my.ini'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5" class="right">
-                        <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb' ?>">Configure</a>
+                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
                         <a class="aButton"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\mariadb_error.log')) {
@@ -312,7 +312,7 @@ use Webinterface\Helper\Serverstack;
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
-                           href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log' ?>">Show Log</a>
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log'; ?>">Show Log</a>
                         <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
                     </td>
                 </tr>
@@ -323,7 +323,7 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="5">
                         <div class="resourceheader2 bold">
-                        <?= $mongodb_status ?> <?= $phpext_mongo_status ?> MongoDB
+                        <?php echo $mongodb_status; ?> <?php echo $phpext_mongo_status; ?> MongoDB
                         </div>
                     </td>
                 </tr>
@@ -333,23 +333,23 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="2">Username | Password</td>
-                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?= $mongodb_password ?></span></td>
+                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?php echo $mongodb_password; ?></span></td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         <span class="floatleft">Directory</span>
-                        <span class="floatright"><?= WPNXM_DIR . '\bin\mongodb'; ?></span>
+                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\mongodb'; ?></span>
                     </td>
                 </tr>
                  <tr>
                     <td colspan="5">
                         <span class="floatleft">Config</span>
-                        <span class="floatright"><?= WPNXM_DIR . '\bin\mongodb\mongodb.conf'; ?></span>
+                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\mongodb\mongodb.conf'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5" class="right">
-                        <a class="aButton" href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb' ?>">Configure</a>
+                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
                         <a class="aButton"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\mongodb.log')) {
@@ -359,7 +359,7 @@ use Webinterface\Helper\Serverstack;
                             echo " onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
                         ?>
-                           href="<?= WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mongodb-log' ?>">Show Log</a>
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mongodb-log'; ?>">Show Log</a>
                         <?php if (class_exists('mysqli')) { ?>
                         <a class="aButton" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
                         <?php } ?>
@@ -373,7 +373,7 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-                        <?= $memcached_status ?> <?= $phpext_memcached_status ?> Memcached
+                        <?php echo $memcached_status; ?> <?php echo $phpext_memcached_status; ?> Memcached
                         </div>
                     </td>
                 </tr>
@@ -383,7 +383,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td>PHP Extension</td>
-                    <td class="right"><?= Serverstack::isExtensionInstalled('memcached'); ?></td>
+                    <td class="right"><?php echo Serverstack::isExtensionInstalled('memcached'); ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
@@ -397,7 +397,7 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="2">
                         <div class="resourceheader2 bold">
-                         <?= $xdebug_status ?> Xdebug
+                         <?php echo $xdebug_status; ?> Xdebug
                         </div>
                     </td>
                 </tr>
@@ -407,11 +407,11 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td>Installed &amp; Configured</td>
-                    <td class="right"><?= Serverstack::isExtensionInstalled('xdebug'); ?></td>
+                    <td class="right"><?php echo Serverstack::isExtensionInstalled('xdebug'); ?></td>
                 </tr>
                 <tr>
                     <td>Extension Type</td>
-                    <td class="right"><?= \Webinterface\Components\XDebug::getXDebugExtensionType(); ?></td>
+                    <td class="right"><?php echo \Webinterface\Components\XDebug::getXDebugExtensionType(); ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">

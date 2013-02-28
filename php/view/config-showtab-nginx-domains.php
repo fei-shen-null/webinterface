@@ -82,7 +82,7 @@
             <select id="folder">
                 <?php
                 foreach ($project_folders as $folder) { ?>
-                <option value="/<?=$folder?>"><?=$folder?></option>
+                <option value="/<?php echo $folder; ?>"><?php echo $folder; ?></option>
                 <?php } ?>
             </select>
 
