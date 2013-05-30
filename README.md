@@ -1,1 +1,1 @@
-Webinterface of the WPN-XM Server Stack.
+Webinterface of the WPN-XM Server Stack. [![Build Status](https://travis-ci.org/WPN-XM/webinterface.png)](https://travis-ci.org/WPN-XM/webinterface)
