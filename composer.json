@@ -26,5 +26,5 @@
     "autoload": {
         "psr-0": { "WPNXMTest\\": "tests/" }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "dev"
 }
