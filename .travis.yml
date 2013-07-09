@@ -12,7 +12,7 @@ services:
 before_script:
 
   # Mongo
-    - pecl -q install mongo-1.3.4 && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+    #- pecl -q install mongo-1.4.1 && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 
   # Composer (PHP dependency solver)
     - curl -s http://getcomposer.org/installer | php
