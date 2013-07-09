@@ -119,7 +119,7 @@ class Serverstack
                 return $o->getVersion();
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
+                throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $component));
         }
     }
 

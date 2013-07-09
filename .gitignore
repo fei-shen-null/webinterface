@@ -48,3 +48,6 @@ phpunit.xml
 /wpnxm-scp/*debug*
 /wpnxm-scp/*release*
 /wpnxm-scp/*.pro.user
+
+# data file for the counter
+php/data/welcomeMsgCounter.txt

@@ -59,10 +59,23 @@ class Memcached extends AbstractComponent
             );
         }
 
-        $matches = new \Memcache;
-        $matches->addServer('localhost', 11211);
+        // hardcoded for now
+        $server = 'localhost';
+        $port = 11211;
 
-        return $matches->getVersion();
+        $memcache = new \Memcache;
+        $memcache->addServer($server, $port);
+
+        $version = @$memcache->getVersion();
+        $available = (bool) $version;
+
+        if ($available && @$memcache->connect($host, $port)) {
+            return $version;
+        } else {
+            return \Webinterface\Helper\Serverstack::printExclamationMark(
+                $e->getMessage() . '. Please wake the Memcache daemon.'
+            );
+        }
     }
 
     public function getPassword()

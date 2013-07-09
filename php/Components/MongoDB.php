@@ -51,7 +51,9 @@ class MongoDB extends AbstractComponent
     public function getVersion()
     {
         if (!extension_loaded('mongo')) {
-            return \Webinterface\Helper\Serverstack::printExclamationMark('The PHP Extension "Mongo" is required.');
+            return \Webinterface\Helper\Serverstack::printExclamationMark(
+                'The PHP Extension "Mongo" is required.'
+            );
         }
 
         try {
@@ -72,7 +74,7 @@ class MongoDB extends AbstractComponent
             );
         }
 
-        return $mongodb_version['retval']; 
+        return $mongodb_version['retval'];
     }
 
     public function getPassword()
