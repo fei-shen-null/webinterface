@@ -35,9 +35,9 @@ before_script:
   #- sudo nginx -c tests/travis/nginx.conf -p "$PWD/"
   #- sleep 3
 
-#script:
+script:
 #  - ./bin/behat --config application/tests/behat.yml  # run behat
-   - phpunit -c ./tests/phpunit.xml.travis             # run php unit
+   - phpunit -c ./tests/phpunit.xml.travis             # run phpunit
 
 notifications:
   irc: "irc.freenode.org#koch"
@@ -46,4 +46,3 @@ notifications:
 # reduce commit history of git checkout
 git:
   depth: 30
-
