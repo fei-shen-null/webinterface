@@ -1,11 +1,38 @@
-Update
+Update Installed Components
+<?php
+//var_dump($components);
+// echo (new \Webinterface\Components\Adminer)->getVersion();
 
-<?php var_dump($components);
+foreach($components as $index => $component)
+{
+    // not supported PHP syntax
+    // echo (new '\Webinterface\Components\\'.$component)->getVersion();
 
- echo (new \Webinterface\Components\Adminer)->getVersion();
- echo (new \Webinterface\Components\MariaDB)->getVersion();
+    $class = '\Webinterface\Components\\'.$component;
 
-var_dump((new \Webinterface\Components\MariaDB)->isInstalled());
+    $version = (new $class)->getVersion();
+    //$installed = (new $class)->isInstalled();
+
+    $components[$index] = array(
+        'name' => $component,
+        'url' => $version,
+        //$installed' => $installed
+    );
+}
+
+echo '<table class="table table-condensed table-hover">
+<thead>
+    <tr>
+        <th>Component</th><th>Version</th>
+    </tr>
+</thead>
+';
+
+foreach($components as $index => $component) {
+    echo '<tr>
+        <td>'.$component['name'].'</td>
+        <td>'.$component['url'].'</td>
+    </tr>';
+}
+echo '</table>';
 ?>
-
-List all Installaed Components | Perform a request to the server asking for new versions

@@ -111,5 +111,15 @@ abstract class AbstractComponent
         return $this->installationFolder;
     }
 
+    public function download($url = '', $targetFolder = '') {
+        if($url === '' or $targetFolder === '')
+        {
+            $url = $this->downloadURL;
+            $taretFolder = $this->installationFolder;
+        }
+
+        // download
+    }
+
     abstract public function getVersion();
 }
