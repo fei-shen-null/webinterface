@@ -1,4 +1,4 @@
-<?php
+﻿<?php
    /**
     * WPИ-XM Server Stack - Webinterface
     * Jens-André Koch © 2010 - onwards
@@ -40,7 +40,7 @@
     <title>WPИ-XM Serverstack for Windows</title>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="WPИ-XM Serverstack for Windows - Webinterface.">
-    <link rel="shortcut icon" href="http://wpn-xm.org/favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
     <!-- jQuery -->
     <script type="text/javascript" src="assets/js/jquery-1.9.1.min.js"></script>
     <!-- Twitter's Bootstrap -->
