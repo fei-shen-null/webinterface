@@ -154,21 +154,46 @@ class Projects
               var_dump($possible_repos);
               set the one found or ask user to select one of multiple
              * } */
+
             if (true === $this->containsComposerConfig($dir)) {
                 $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
                 // add the github link by showing a github icon
-                $html .= '<a href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
+                $html .= '<a class="btn btn-mini pull-right" style="padding-left: 6px; padding-bottom: 1px; margin-left: 3px; border-right-width: 1px;"';
+                $html .= ' href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
             }
 
-            if (array_key_exists('name', $composer)) {
+            $package = $this->getPackagistPackageDescription($composer['name']);
+            $packageName = $this->getPackageName($package);
+
+            if (isset($packageName) === true) {
                 // add the travis link by showing build status icon
-                $html .= '<a href="http://travis-ci.org/' . $composer['name'] . '">';
-                $html .= '<img src="https://travis-ci.org/' . $composer['name'] . '.png">';
+                $html .= '<a class="pull-right" href="http://travis-ci.org/' . $packageName . '">';
+                $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
                 $html .= '</a>';
             }
         }
 
         return $html;
+    }
+
+    public function getPackagistPackageDescription($package = '')
+    {
+        $url = sprintf('https://packagist.org/packages/%s.json', $package);
+        $json = @file_get_contents($url);
+        $array = json_decode($json, true);
+
+        return $array;
+    }
+
+    /**
+     * Returns the correct Package name.
+     *
+     * Note: This is not just the return of $packageDescription['name'], because it's lowercased.
+     * This returns the correct name for building a Travis-CI or Github URL.
+     */
+    public function getPackageName(array $packageDescription = array())
+    {
+        return str_replace('https://github.com/', '', $packageDescription['package']['repository']);
     }
 
     public function getListDomainsButton($dir)
