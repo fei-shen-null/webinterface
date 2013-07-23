@@ -2,7 +2,7 @@ language: php
 
 php:
   #- 5.3
-  - 5.4
+  #- 5.4
   - 5.5
 
 services:
@@ -10,7 +10,6 @@ services:
    - memcache
 
 before_script:
-
   # Mongo
     #- pecl -q install mongo-1.4.1 && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 
@@ -26,16 +25,16 @@ before_script:
     - java -jar selenium-server-standalone-2.31.0.jar > /dev/null
     - sleep 5
   # Chrome Browser Engine
-    - wget http://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip
-    - unzip chromedriver_linux32_23.0.1240.0.zip
-    - sudo mv chromedriver /usr/bin
+  #  - wget http://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip
+  #  - unzip chromedriver_linux32_23.0.1240.0.zip
+  #  - sudo mv chromedriver /usr/bin
   # Nginx
-    - wget http://nginx.org/download/nginx-1.5.2.tar.gz
-    - tar xvzf nginx-1.5.2.tar.gz
-    - "cd nginx-1.5.2 && ./configure --with-http_ssl_module --with-http_stub_status_module && sudo make && sudo make install"
-    - "sudo cp /usr/local/nginx/sbin/nginx /usr/sbin/ && sudo mkdir /var/log/nginx/ && sudo useradd nginx"
-    - sudo nginx -c tests/nginx.conf.travis -p "$PWD/"
-    - sleep 3
+  #  - wget http://nginx.org/download/nginx-1.5.2.tar.gz
+  #  - tar xvzf nginx-1.5.2.tar.gz
+  #  - "cd nginx-1.5.2 && ./configure --with-http_ssl_module --with-http_stub_status_module && sudo make && sudo make install"
+  #  - "sudo cp /usr/local/nginx/sbin/nginx /usr/sbin/ && sudo mkdir /var/log/nginx/ && sudo useradd nginx"
+  #  - sudo nginx -c tests/nginx.conf.travis -p "$PWD/"
+  #  - sleep 3
 
 script:
 #  - ./bin/behat --config application/tests/behat.yml  # run behat
