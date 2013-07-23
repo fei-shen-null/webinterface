@@ -43,4 +43,4 @@ notifications:
 
 # reduce commit history of git checkout
 git:
-  depth: 30
+  depth: 30 
