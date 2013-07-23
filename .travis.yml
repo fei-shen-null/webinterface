@@ -19,21 +19,20 @@ before_script:
     - php composer.phar install --dev --prefer-dist --no-interaction
 
   # X Virtual Frame Buffer
-  #  - "export DISPLAY=:99.0"
-  #  - "sh -e /etc/init.d/xvfb start"
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
   # Selenium
-  #  - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
-  #  - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
-  #  - sleep 5
+    - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
+    - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
+    - sleep 5
   # Chrome Browser Engine
-  #  - "wget http://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip && unzip chromedriver_linux32_23.0.1240.0.zip && sudo mv chromedriver /usr/bin"
+    - "wget http://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip && unzip chromedriver_linux32_23.0.1240.0.zip && sudo mv chromedriver /usr/bin"
   # Nginx
-  #- "wget http://nginx.org/download/nginx-1.2.8.tar.gz && tar xvzf nginx-1.2.8.tar.gz && cd nginx-1.2.8"
-  #- "./configure --with-http_ssl_module --with-http_stub_status_module"
-  #- "sudo make && sudo make install && sudo cp /usr/local/nginx/sbin/nginx /usr/sbin/ && sudo mkdir /var/log/nginx/ && sudo useradd nginx"
-  #- wget config nginx.conf && cp
-  #- sudo nginx -c tests/travis/nginx.conf -p "$PWD/"
-  #- sleep 3
+   - "wget http://nginx.org/download/nginx-1.5.2.tar.gz && tar xvzf nginx-1.5.2.tar.gz"
+   - "cd nginx-1.5.2 && ./configure --with-http_ssl_module --with-http_stub_status_module && sudo make && sudo make install"
+   - "sudo cp /usr/local/nginx/sbin/nginx /usr/sbin/ && sudo mkdir /var/log/nginx/ && sudo useradd nginx"
+   - sudo nginx -c tests/nginx.conf.travis -p "$PWD/"
+   - sleep 3
 
 script:
 #  - ./bin/behat --config application/tests/behat.yml  # run behat
