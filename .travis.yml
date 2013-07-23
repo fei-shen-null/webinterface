@@ -14,8 +14,8 @@ before_script:
     #- pecl -q install mongo-1.4.1 && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 
   # Composer (PHP dependency solver)
-    - curl -s http://getcomposer.org/installer | php
-    - php composer.phar install --dev --prefer-dist --no-interaction
+    - composer self-update
+    - composer install --dev --prefer-dist --no-interaction
 
   # X Virtual Frame Buffer
     - export DISPLAY=:99.0
@@ -29,12 +29,12 @@ before_script:
     - unzip chromedriver_linux32_23.0.1240.0.zip
     - sudo mv chromedriver /usr/bin
   # Nginx
-    - wget http://nginx.org/download/nginx-1.5.2.tar.gz
-  #  - tar xvzf nginx-1.5.2.tar.gz
-  #  - "cd nginx-1.5.2 && ./configure --with-http_ssl_module --with-http_stub_status_module && sudo make && sudo make install"
-  #  - "sudo cp /usr/local/nginx/sbin/nginx /usr/sbin/ && sudo mkdir /var/log/nginx/ && sudo useradd nginx"
-  #  - sudo nginx -c tests/nginx.conf.travis -p "$PWD/"
-  #  - sleep 3
+    #- wget http://nginx.org/download/nginx-1.5.2.tar.gz
+    #- tar xvzf nginx-1.5.2.tar.gz
+    #- "cd nginx-1.5.2 && ./configure --with-http_ssl_module --with-http_stub_status_module && sudo make && sudo make install"
+    #- "sudo cp /usr/local/nginx/sbin/nginx /usr/sbin/ && sudo mkdir /var/log/nginx/ && sudo useradd nginx"
+    #- sudo nginx -c tests/nginx.conf.travis -p "$PWD/"
+    #- sleep 3
 
 script:
 #  - ./bin/behat --config application/tests/behat.yml  # run behat
