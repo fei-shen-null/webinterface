@@ -20,12 +20,12 @@ before_script:
   # X Virtual Frame Buffer
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
+  # Chrome Browser Engine
+    - "wget http://chromedriver.googlecode.com/files/chromedriver_linux64_2.1.zip && unzip chromedriver_linux64_2.1.zip && sudo mv chromedriver /usr/bin"
   # Selenium
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.33.0.jar
     - "java -jar selenium-server-standalone-2.33.0.jar > /dev/null &"
     - sleep 5
-  # Chrome Browser Engine
-    - "wget http://chromedriver.googlecode.com/files/chromedriver_linux32_2.1.zip && unzip chromedriver_linux32_2.1.zip && sudo mv chromedriver /usr/bin"
   # Nginx
     - "wget http://nginx.org/download/nginx-1.5.2.tar.gz && tar xvzf nginx-1.5.2.tar.gz"
     - "cd nginx-1.5.2 && ./configure --with-http_ssl_module --with-http_stub_status_module && sudo make -j8 && sudo make install"
