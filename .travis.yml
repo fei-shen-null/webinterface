@@ -25,9 +25,7 @@ before_script:
     - "java -jar selenium-server-standalone-2.33.0.jar > /dev/null &"
     - sleep 5
   # Chrome Browser Engine
-    - wget http://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip
-    - unzip chromedriver_linux32_23.0.1240.0.zip
-    - sudo mv chromedriver /usr/bin
+    - "wget -q -O- http://chromedriver.googlecode.com/files/chromedriver_linux32_2.1.zip | funzip > /usr/bin/chromedriver && chmod +x /usr/bin/chromedriver"
   # Nginx
     #- wget http://nginx.org/download/nginx-1.5.2.tar.gz
     #- tar xvzf nginx-1.5.2.tar.gz
