@@ -5,8 +5,8 @@ class SeleniumBootstrapTest extends PHPUnit_Extensions_Selenium2TestCase
     {
         $this->isSeleniumAvailable();
 
-        $this->setBrowser('chrome');
-        $this->setBrowserUrl('http://www.google.com/');
+        $this->setBrowser(PHPUNIT_TESTSUITE_EXTENSION_SELENIUM2_BROWSER);
+        $this->setBrowserUrl(PHPUNIT_TESTSUITE_EXTENSION_SELENIUM_TESTS_URL);
     }
 
     public function isSeleniumAvailable()
