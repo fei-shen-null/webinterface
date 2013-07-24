@@ -9,7 +9,7 @@ events {
 }
 
 http {
-    include /usr/local/nginx/conf/mime.types;
+    include mime.types;
     default_type application/octet-stream;
 
     tcp_nopush        on;
@@ -66,7 +66,7 @@ http {
             fastcgi_index  index.php;
             fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
             fastcgi_param PATH_INFO $fastcgi_script_name;
-            include /usr/local/nginx/conf/fastcgi_params;
+            include fastcgi_params;
         }        
     }
 }
