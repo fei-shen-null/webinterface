@@ -18,7 +18,7 @@ class Selenium2ChromeTest extends PHPUnit_Extensions_Selenium2TestCase
         $this->setBrowser('chrome');
         $this->setBrowserUrl('http://127.0.0.1:80/');
 
-        $this->setupSpecificBrowser(
+        $this->setupSpecificBrowser(array(
             'host' => '127.0.0.1',
             'port' => '4444',
             'browserName' => 'Google Chrome',
@@ -29,7 +29,7 @@ class Selenium2ChromeTest extends PHPUnit_Extensions_Selenium2TestCase
                 ))
             ),
             'seleniumServerRequestsTimeout' => '50',
-        );
+        ));
     }
 
     public function isSeleniumAvailable()
