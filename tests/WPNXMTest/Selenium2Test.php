@@ -38,8 +38,8 @@ class Selenium2BootstrapTest extends PHPUnit_Extensions_Selenium2TestCase
 
     public function testTitle()
     {
-        $this->url('http://www.google.com/');
-        $this->assertEquals('Google', $this->title());
+        $this->url('/');
+        $this->assertEquals('WPИ-XM Serverstack for Windows', $this->title());
     }
 
 }
