@@ -12,15 +12,33 @@ http {
     include /usr/local/nginx/conf/mime.types;
     default_type application/octet-stream;
 
-    keepalive_timeout  65;
+    tcp_nopush        on;
+    tcp_nodelay       off;
 
+    # Size Limits
+    client_body_buffer_size   64k;
+    client_header_buffer_size 4k;
+    client_max_body_size      8M;
+
+    # Timeouts
+    client_body_timeout     60;
+    client_header_timeout   20;
+    keepalive_timeout       60;
+    send_timeout            60;
+
+    # FastCGI
     fastcgi_connect_timeout 60;
-    fastcgi_send_timeout 180;
-    fastcgi_read_timeout 180;
-    fastcgi_buffer_size 32k;
-    fastcgi_buffers 16 16k;
-    fastcgi_intercept_errors on; 
+    fastcgi_send_timeout 120;
+    fastcgi_read_timeout 300; # default: 60 secs; when step debugging with XDEBUG, you need to increase this value
+    fastcgi_buffer_size 64k;
+    fastcgi_buffers 4 64k;
+    fastcgi_busy_buffers_size 128k;
+    fastcgi_temp_file_write_size 128k;
+
     gzip on;
+
+    # show all files and folders
+    autoindex on;
 
     upstream php {
         server 127.0.0.1:9000;
@@ -28,6 +46,11 @@ http {
 
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
+
+    # handle files in the root path /www
+    location / {
+        index  index.php index.html index.htm;
+    }
 
     server {
         listen 80 default_server;
@@ -37,12 +60,13 @@ http {
 
         root /home/travis/build/WPN-XM/webinterface;
 
-        location ~ \.php($|/) {
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        location ~ \.php$ {
+            try_files      $uri =404;
+            fastcgi_pass   php;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
             fastcgi_param PATH_INFO $fastcgi_script_name;
             include /usr/local/nginx/conf/fastcgi_params;
-
-            fastcgi_pass php;
-        }
+        }        
     }
 }
