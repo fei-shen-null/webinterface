@@ -38,7 +38,7 @@ before_script:
     - sudo apt-get install php5-fpm
   # Return to project root, create error.log and start Nginx
     - cd /home/travis/build/WPN-XM/webinterface
-    - /etc/init.d/nginx restart
+    - sudo /etc/init.d/nginx restart
     - sleep 3
     - curl http://localhost:80/ -v
     - curl http://localhost:80/index.php -v
