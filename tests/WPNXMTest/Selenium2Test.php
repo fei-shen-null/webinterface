@@ -17,6 +17,19 @@ class Selenium2BootstrapTest extends PHPUnit_Extensions_Selenium2TestCase
         $this->setPort(4444);
         $this->setBrowser('chrome');
         $this->setBrowserUrl('http://127.0.0.1:80/');
+
+        $this->setupSpecificBrowser(
+            'host' => '127.0.0.1',
+            'port' => '4444',
+            'browserName' => 'Google Chrome',
+            'browser' => 'chrome',            
+            'desiredCapabilities' => array(
+                array('chromeOptions' => array(
+                    'args' => array('no-sandbox')
+                ))
+            ),
+            'seleniumServerRequestsTimeout' => '50',
+        );
     }
 
     public function isSeleniumAvailable()
