@@ -41,6 +41,7 @@ before_script:
     - echo "$PWD/"
     - sudo nginx -c /home/travis/build/WPN-XM/webinterface/tests/nginx.conf.travis -p "$PWD/"
     - sleep 3
+    - curl http://localhost:80/ -v
 
 script:
 #  - ./bin/behat --config ./tests/behat.yml  # run behat
