@@ -38,7 +38,7 @@ class SeleniumBootstrapTest extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testTitle()
     {
-        $this->url('http://www.google.com/');
+        $this->open('http://www.google.com/');
         $this->assertEquals('Google', $this->title());
     }
 
