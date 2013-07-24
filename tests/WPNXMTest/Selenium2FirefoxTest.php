@@ -20,7 +20,7 @@ class Selenium2FirefoxTest extends PHPUnit_Extensions_Selenium2TestCase
 
         $this->setupSpecificBrowser(array(
             'host' => '127.0.0.1',
-            'port' => '4444',
+            'port' => 4444,
             'browserName' => 'Mozilla Firefox',
             'browser' => 'firefox',            
             /*'desiredCapabilities' => array(
