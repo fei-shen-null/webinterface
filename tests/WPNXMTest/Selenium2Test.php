@@ -1,9 +1,9 @@
 <?php
-class SeleniumBootstrapTest extends PHPUnit_Extensions_SeleniumTestCase
+class Selenium2BootstrapTest extends PHPUnit_Extensions_Selenium2TestCase
 {
     public static $browsers = array(
         array(
-            'browserName' => '*chrome',
+            'browserName' => 'chrome',
         )
     );
 
