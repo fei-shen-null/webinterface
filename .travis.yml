@@ -10,6 +10,7 @@ services:
    - memcache
 
 before_script:
+     - sudo apt-get update
   # Mongo
     #- pecl -q install mongo-1.4.1 && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 
@@ -23,13 +24,14 @@ before_script:
   # Chrome Browser
     - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-    - sudo apt-get update
     - sudo apt-get install google-chrome-stable
   # Chrome Browser Driver
     - "wget http://chromedriver.googlecode.com/files/chromedriver_linux64_2.1.zip && unzip chromedriver_linux64_2.1.zip && sudo mv chromedriver /usr/bin"
+  # Firefox
+    - sudo apt-get install firefox
   # Selenium
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.33.0.jar
-    - "java -jar selenium-server-standalone-2.33.0.jar > /dev/null &"
+    - "java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar selenium-server-standalone-2.33.0.jar > /dev/null &"
     - sleep 5
   # Nginx
     - "wget http://nginx.org/download/nginx-1.5.2.tar.gz && tar xvzf nginx-1.5.2.tar.gz"
