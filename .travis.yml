@@ -36,11 +36,10 @@ before_script:
     - "cd nginx-1.5.2 && ./configure --with-http_ssl_module --with-http_stub_status_module && sudo make -j8 && sudo make install"
     - "sudo cp /usr/local/nginx/sbin/nginx /usr/sbin/ && sudo mkdir /var/log/nginx/ && sudo useradd nginx"
     - "sudo mkdir /home/travis/build/WPN-XM/webinterface/nginx-1.5.2/logs && sudo touch /home/travis/build/WPN-XM/webinterface/nginx-1.5.2/logs/error.log" 
+    - cd /home/travis/build/WPN-XM/webinterface
     - echo "$PWD/"
     - sudo nginx -c /home/travis/build/WPN-XM/webinterface/tests/nginx.conf.travis -p "$PWD/"
     - sleep 3
-  # GO HOME
-    - cd /home/travis/build/WPN-XM/webinterface
 
 script:
 #  - ./bin/behat --config ./tests/behat.yml  # run behat
