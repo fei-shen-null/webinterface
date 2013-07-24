@@ -35,7 +35,7 @@ http {
 
         charset utf-8; 
 
-        root /;
+        root /home/travis/build/WPN-XM/webinterface;
 
         location ~ \.php($|/) {
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
