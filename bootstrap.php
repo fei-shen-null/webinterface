@@ -66,12 +66,12 @@ if (!defined('WPNXM_DIR')) {
 
     // Path Constants -> "c:/.."
     define('WPNXM_DIR', dirname(dirname(__DIR__)));
-    define('WPNXM_WWW_DIR', WPNXM_DIR . '\www' . DS);
-    define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface\php\controller' . DS);
-    define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface\php\components' . DS);
-    define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface\php\helper' . DS);
-    define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface\php\view' . DS);
-    define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface\php\data' . DS);
+    define('WPNXM_WWW_DIR', WPNXM_DIR . DS .'www' . DS); 
+    define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface'. DS .'php'. DS .'controller' . DS);
+    define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface'. DS .'php'. DS .'components' . DS);
+    define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface'. DS .'php'. DS .'helper' . DS);
+    define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface'. DS .'php'. DS .'view' . DS);
+    define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface'. DS .'php'. DS .'data' . DS);
 
     // Web Path Constants -> "http://.."
     define('SERVER_URL', 'http://' . $_SERVER['SERVER_NAME']);
