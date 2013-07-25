@@ -2,7 +2,7 @@
 
 namespace WPNXMTest;
 
-class BootstrapTest extends PHPUnit_Framework_TestCase
+class BootstrapTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetup()
     {

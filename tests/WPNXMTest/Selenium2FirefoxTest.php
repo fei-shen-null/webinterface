@@ -2,7 +2,7 @@
 
 namespace WPNXMTest;
 
-class Selenium2FirefoxTest extends PHPUnit_Extensions_Selenium2TestCase
+class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
 {
     protected function setUp()
     {
