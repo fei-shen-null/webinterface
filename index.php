@@ -33,7 +33,7 @@ include 'bootstrap.php';
 // page controller
 $page = @$_GET['page'] ?: 'projects';
 $pagecontroller = WPNXM_CONTROLLER_DIR . $page . '.php';
-if (is_file($pagecontroller)) { include $pagecontroller; } else { throw new \Exception('Error: PageController "' . $page . '" not found.'); }
+if (is_file($pagecontroller)) { include $pagecontroller; } else { throw new \Exception('Error: PageController "' . $page . '" not found (' . $pagecontroller . ').'); }
 
 // automatically load helper file if existing
 $helper = WPNXM_HELPER_DIR . $page . '.php';
