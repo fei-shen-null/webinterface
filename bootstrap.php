@@ -65,7 +65,7 @@ if (!defined('WPNXM_DIR')) {
     define('DS', DIRECTORY_SEPARATOR);
 
     // Path Constants -> "c:/.."
-    if(defined(PHPUNIT_TESTSUITE) === true) { 
+    if(defined('PHPUNIT_TESTSUITE') or (DS === '/')) { 
         // Linux Paths
         define('WPNXM_DIR', __DIR__); # only the webinterface folder exists on travis   '.DS.'
         define('WPNXM_WWW_DIR', WPNXM_DIR . DS); # no www folder
