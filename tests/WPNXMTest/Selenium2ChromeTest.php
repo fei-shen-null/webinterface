@@ -12,7 +12,7 @@ class Selenium2ChromeTest extends PHPUnit_Extensions_Selenium2TestCase
             'browser' => 'chrome',
             'desiredCapabilities' => array(
                 array('chromeOptions' => array(
-                    'args' => array('no-sandbox')
+                    'args' => array('--no-sandbox')
                 ))
             ),
             'seleniumServerRequestsTimeout' => '50',
