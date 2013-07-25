@@ -9,7 +9,7 @@ class Selenium2ChromeTest extends PHPUnit_Extensions_Selenium2TestCase
             'host' => '127.0.0.1',
             'port' => 4444,
             'browserName' => 'Google Chrome',
-            'browser' => 'chrome',            
+            'browser' => 'chrome',
             'desiredCapabilities' => array(
                 array('chromeOptions' => array(
                     'args' => array('no-sandbox')
