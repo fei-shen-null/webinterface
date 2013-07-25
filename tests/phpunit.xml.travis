@@ -14,7 +14,7 @@
     bootstrap="./bootstrap.php">
 
     <php>
-        <const name="PHPUNIT_TESTSUITE" value="true"/>
+        <const name="PHPUNIT_TESTSUITE_TRAVIS" value="true"/>
     </php>
 
     <testsuite name="Koch Framework Test Suite">
