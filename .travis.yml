@@ -6,8 +6,8 @@ php:
   - 5.5
 
 services:
-   - mongodb
-   - memcache
+  - mongodb
+  - memcache
 
 before_script:   
   # Mongo
@@ -50,8 +50,11 @@ script:
    - phpunit -c ./tests/phpunit.xml.travis   # run phpunit
 
 notifications:
-  irc: "irc.freenode.org#koch"
   email: false
+  irc: 
+    channels: 
+      - "irc.freenode.org#koch"
+    use_notice: true  
 
 # reduce commit history of git checkout
 git:
