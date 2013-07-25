@@ -161,17 +161,21 @@ function isAjaxRequest()
 function autoload($class)
 {
     // return early, if class already loaded
-    if (class_exists($class)) {
+    if (class_exists($class) === true) {
         return;
     }
+    
     // replace namespace separator with directory separator
     $class = strtr($class, '\\', DS);
     $class = str_replace('Webinterface\\', '', $class);
+
     // get full name of file containing the required class
     $file = __DIR__ . DS . 'php' . DS . $class . '.php';
-    //echo 'Autoloading Try -> ' . $file;
-    if (is_file($file)) {
+    
+    if (is_file($file) === true) {
         include_once $file;
+    } else { 
+        throw new \Exception('Autoloading Failure! "'.$file.'" not found!');
     }
 }
 
