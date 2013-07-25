@@ -69,19 +69,19 @@ if (!defined('WPNXM_DIR')) {
         // Linux Paths
         define('WPNXM_DIR', dirname(__DIR__)); # only the webinterface folder exists on travis   '.DS.'
         define('WPNXM_WWW_DIR', WPNXM_DIR . DS); # no www folder
-        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface/php/controller/');
-        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface/php/components/');
-        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface/php/helper');
-        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface/php/view/');
+        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface/php/Controller/');
+        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface/php/Components/');
+        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface/php/Helper');
+        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface/php/View/');
         define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface/php/data/');
     } else {
         // Windows Paths
         define('WPNXM_DIR', dirname(dirname(__DIR__)));
         define('WPNXM_WWW_DIR', WPNXM_DIR . '\www' . DS);
-        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface\php\controller' . DS);
-        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface\php\components' . DS);
-        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface\php\helper' . DS);
-        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface\php\view' . DS);
+        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface\php\Controller' . DS);
+        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface\php\Components' . DS);
+        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface\php\Helper' . DS);
+        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface\php\View' . DS);
         define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface\php\data' . DS);
     }
 
