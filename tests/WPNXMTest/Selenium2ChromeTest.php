@@ -1,4 +1,7 @@
 <?php
+
+namespace WPNXMTest;
+
 class Selenium2ChromeTest extends PHPUnit_Extensions_Selenium2TestCase
 {
     protected function setUp()

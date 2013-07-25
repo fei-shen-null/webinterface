@@ -1,4 +1,7 @@
 <?php
+
+namespace WPNXMTest;
+
 class SeleniumFirefoxTest extends PHPUnit_Extensions_SeleniumTestCase
 {
     public static $browsers = array(
