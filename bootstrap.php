@@ -168,6 +168,7 @@ function autoload($class)
     // replace namespace separator with directory separator
     $class = strtr($class, '\\', DS);
     $class = str_replace('Webinterface\\', '', $class);
+    $class = str_replace('Webinterface/', '', $class); # for linux, no PSR-0 structure
 
     // get full name of file containing the required class
     $file = __DIR__ . DS . 'php' . DS . $class . '.php';
