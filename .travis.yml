@@ -41,7 +41,6 @@ before_script:
     - sudo /etc/init.d/nginx restart
     - sleep 3
     - curl http://localhost:80/ -v
-    - curl http://localhost:80/index.php -v
 
 script:
 #  - ./bin/behat --config ./tests/behat.yml  # run behat
