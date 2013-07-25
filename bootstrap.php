@@ -67,7 +67,7 @@ if (!defined('WPNXM_DIR')) {
     // Path Constants -> "c:/.."
     if(defined('PHPUNIT_TESTSUITE_TRAVIS') or (DS === '/')) { 
         // Linux Paths
-        define('WPNXM_DIR', dirname(_DIR__)); # only the webinterface folder exists on travis   '.DS.'
+        define('WPNXM_DIR', dirname(__DIR__)); # only the webinterface folder exists on travis   '.DS.'
         define('WPNXM_WWW_DIR', WPNXM_DIR . DS); # no www folder
         define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface/php/controller/');
         define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface/php/components/');
