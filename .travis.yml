@@ -19,20 +19,21 @@ before_script:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
   # Google Chrome Browser
-    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-    - sudo apt-get update
-    - sudo apt-get install google-chrome-stable
+    #- wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    #- sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    #- sudo apt-get update
+    #- sudo apt-get install google-chrome-stable
   # Google Chromium Browser
     #- sudo apt-get update
     #- sudo apt-get install chromium-browser chromium-browser-l10n
   # Chrome Browser Driver
-    - "wget http://chromedriver.googlecode.com/files/chromedriver_linux64_2.1.zip && unzip chromedriver_linux64_2.1.zip && sudo mv chromedriver /usr/bin"
+    #- "wget http://chromedriver.googlecode.com/files/chromedriver_linux64_2.1.zip && unzip chromedriver_linux64_2.1.zip && sudo mv chromedriver /usr/bin"
   # Firefox
     - sudo apt-get install firefox
   # Selenium
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.33.0.jar
-    - "java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar selenium-server-standalone-2.33.0.jar > /dev/null &"
+    #- "java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar selenium-server-standalone-2.33.0.jar > /dev/null &"
+    - "java -Dwebdriver.firefox.driver=/usr/bin/firefox -jar selenium-server-standalone-2.33.0.jar > /dev/null &"
     - sleep 5
   # Nginx
     - sudo apt-get install nginx 
