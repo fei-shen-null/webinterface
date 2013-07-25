@@ -45,7 +45,6 @@ before_script:
     - sudo /etc/init.d/nginx restart
     - sleep 3
     - curl http://localhost:80/ -v
-    - sudo /sbin/ifconfig eth0 | grep 'inet addr:'
 
 script:
 #  - ./bin/behat --config ./tests/behat.yml  # run behat
