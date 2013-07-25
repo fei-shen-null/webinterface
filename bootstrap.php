@@ -71,7 +71,7 @@ if (!defined('WPNXM_DIR')) {
         define('WPNXM_WWW_DIR', WPNXM_DIR . DS); # no www folder
         define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface/php/Controller/');
         define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface/php/Components/');
-        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface/php/Helper');
+        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface/php/Helper/');
         define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface/php/View/');
         define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface/php/data/');
     } else {
