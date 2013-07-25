@@ -25,7 +25,7 @@ before_script:
     #- sudo apt-get install google-chrome-stable
   # Google Chromium Browser
     - sudo apt-get update
-    - sudo apt-get install chromium chromium-l10n
+    - sudo apt-get install chromium-browser
   # Chrome Browser Driver
     - "wget http://chromedriver.googlecode.com/files/chromedriver_linux64_2.1.zip && unzip chromedriver_linux64_2.1.zip && sudo mv chromedriver /usr/bin"
   # Firefox
