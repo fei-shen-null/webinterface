@@ -56,7 +56,7 @@ class Domains
             // tell the world that "nginx.conf" misses "include domains.conf;"
             exit(sprintf('<div class="error bold" style="font-size: 13px; width: 500px;">
                 %snginx.conf does not include the config files of the domains-enabled folder.<br><br>
-                    Please add "include bin/nginx/conf/domains-enabled/*;" to "nginx.conf".</div>',
+                    Please add "include domains-enabled/*;" to "nginx.conf".</div>',
                 WPNXM_DIR . '\bin\nginx\conf\\'));
         }
 
@@ -98,7 +98,7 @@ class Domains
 
         foreach ($lines as $line) {
             // return true, if the line exists and is not commented
-            if (preg_match('/(.*)include bin\/nginx\/conf\/domains-enabled\/\*/', $line, $matches)) {
+            if (preg_match('/(.*)include domains-enabled\/\*/', $line, $matches)) {
                 $comment = trim($matches[1]);
                 return ($comment === ';' or $comment === '#') ? false : true;
             }
