@@ -61,7 +61,9 @@ class INIReaderWriter
 
         $section = '';
 
-        foreach (file($this->file) as $line) {
+        $content = file($this->file);
+
+        foreach ($content as $line) {
             // comment or whitespace
             if (preg_match('/^\s*(;.*)?$/', $line)) {
                 $this->lines[] = array('type' => 'comment', 'data' => $line);
