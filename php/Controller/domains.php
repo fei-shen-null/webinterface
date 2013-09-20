@@ -92,8 +92,8 @@ function insert()
     $WshShell = new COM("WScript.Shell");
 
     // reload nginx configuration
-    $cmd_restartNginx = 'cmd /c "' . WPNXM_DIR . '\bin\nginx\nginx.exe -p ' . WPNXM_DIR . ' -c ' . WPNXM_DIR . '\bin\nginx\conf\nginx.conf -s reload"';
-    $oExec = $WshShell->run($cmd_restartNginx, 0, false);
+    $cmdRestartNginx = 'cmd /c "' . WPNXM_DIR . '\bin\nginx\nginx.exe -p ' . WPNXM_DIR . ' -c ' . WPNXM_DIR . '\bin\nginx\conf\nginx.conf -s reload"';
+    $oExec = $WshShell->run($cmdRestartNginx, 0, false);
 
     // add the new virtual host to the windows .hosts file using the "hosts" tool
     $cmdAddHosts = 'cmd /c "' . WPNXM_DIR . '\bin\tools\hosts' . ' add ' . $_SERVER['SERVER_ADDR'] . ' ' . $newDomainName . ' # added by WPN-XM"';
