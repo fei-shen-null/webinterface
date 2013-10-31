@@ -113,7 +113,7 @@ if (!function_exists('showConstants')) {
      * @param string $return The display mode: "raw", "export", "dump" (default).
      * @return
      */
-    public function showConstants($return = 'dump')
+    function showConstants($return = 'dump')
     {
         $array = get_defined_constants(true);
         $user_constants = $array['user'];
