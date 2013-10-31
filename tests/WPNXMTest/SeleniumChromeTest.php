@@ -32,7 +32,7 @@ class SeleniumChromeTest extends \PHPUnit_Extensions_SeleniumTestCase
             fclose($fp);
         }
 
-        if($selenium_running === false) {
+        if ($selenium_running === false) {
              $this->markTestAsSkipped(
                 'Selenium is not running on localhost:4444. Please start Selenium.'
              );

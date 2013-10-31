@@ -21,6 +21,7 @@ class APC
 
         $info = \apc_sma_info();
         var_dump($info);
+
         return $info['version'];
     }
 }

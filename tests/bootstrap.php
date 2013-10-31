@@ -13,7 +13,6 @@ $paths = array(
 );
 set_include_path(implode(PATH_SEPARATOR, $paths));
 
-
 // Composer Autoloader
 if (is_file(__DIR__ . '/../vendor/autoload.php')) {
     include_once __DIR__ . '/../vendor/autoload.php';

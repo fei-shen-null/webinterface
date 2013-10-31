@@ -100,9 +100,11 @@ class Domains
             // return true, if the line exists and is not commented
             if (preg_match('/(.*)include domains-enabled\/\*/', $line, $matches)) {
                 $comment = trim($matches[1]);
+
                 return ($comment === ';' or $comment === '#') ? false : true;
             }
         }
+
         return false;
     }
 

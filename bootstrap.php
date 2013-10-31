@@ -65,7 +65,7 @@ if (!defined('WPNXM_DIR')) {
     define('DS', DIRECTORY_SEPARATOR);
 
     // Path Constants -> "c:/.."
-    if(defined('PHPUNIT_TESTSUITE_TRAVIS') or (DS === '/')) { 
+    if (defined('PHPUNIT_TESTSUITE_TRAVIS') or (DS === '/')) {
         // Linux Paths
         define('WPNXM_DIR', dirname(__DIR__)); # only the webinterface folder exists on travis   '.DS.'
         define('WPNXM_WWW_DIR', WPNXM_DIR . DS); # no www folder
@@ -164,7 +164,7 @@ function autoload($class)
     if (class_exists($class) === true) {
         return;
     }
-    
+
     // replace namespace separator with directory separator
     $class = strtr($class, '\\', DS);
     $class = str_replace('Webinterface\\', '', $class);
@@ -172,10 +172,10 @@ function autoload($class)
 
     // get full name of file containing the required class
     $file = __DIR__ . DS . 'php' . DS . $class . '.php';
-    
+
     if (is_file($file) === true) {
         include_once $file;
-    } else { 
+    } else {
         throw new \Exception('Autoloading Failure! "'.$file.'" not found!');
     }
 }

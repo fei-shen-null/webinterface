@@ -37,7 +37,7 @@ namespace Webinterface\Helper;
 /**
  * WPN-XM Server Stack - INI Reader and Writer.
  */
-class INIReaderWriter
+class IniReaderWriter
 {
     /* @var array File content, line by line. */
     protected $lines;
@@ -47,7 +47,7 @@ class INIReaderWriter
 
     public function __construct($file = '')
     {
-        if($file !== '' and is_file($file) === false) {
+        if ($file !== '' and is_file($file) === false) {
             throw new \Exception(sprintf('File not found: "%s".', $file));
         }
 

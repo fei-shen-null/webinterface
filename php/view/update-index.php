@@ -3,8 +3,7 @@ Update Installed Components
 //var_dump($components);
 // echo (new \Webinterface\Components\Adminer)->getVersion();
 
-foreach($components as $index => $component)
-{
+foreach ($components as $index => $component) {
     // not supported PHP syntax
     // echo (new '\Webinterface\Components\\'.$component)->getVersion();
 
@@ -28,7 +27,7 @@ echo '<table class="table table-condensed table-hover">
 </thead>
 ';
 
-foreach($components as $index => $component) {
+foreach ($components as $index => $component) {
     echo '<tr>
         <td>'.$component['name'].'</td>
         <td>'.$component['url'].'</td>

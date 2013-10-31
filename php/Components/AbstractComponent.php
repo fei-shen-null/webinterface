@@ -77,22 +77,24 @@ abstract class AbstractComponent
     public function isInstalled($fast = true)
     {
         $bool = false;
-        foreach($this->files as $file) {
+        foreach ($this->files as $file) {
             $bool = file_exists(WPNXM_DIR . $file);
             // stop at the first file found
-            if($bool === true && $fast === true ) {
+            if ($bool === true && $fast === true) {
                 break;
             }
         }
+
         return $bool;
     }
 
     public function checkDependencies()
     {
         $bool = false;
-        foreach($this->dependencyFiles as $file) {
+        foreach ($this->dependencyFiles as $file) {
             $bool = $bool && file_exists($file);
         }
+
         return $bool;
     }
 
@@ -111,9 +113,9 @@ abstract class AbstractComponent
         return $this->installationFolder;
     }
 
-    public function download($url = '', $targetFolder = '') {
-        if($url === '' or $targetFolder === '')
-        {
+    public function download($url = '', $targetFolder = '')
+    {
+        if ($url === '' or $targetFolder === '') {
             $url = $this->downloadURL;
             $taretFolder = $this->installationFolder;
         }

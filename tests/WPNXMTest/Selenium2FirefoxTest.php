@@ -12,7 +12,7 @@ class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
             'host' => '127.0.0.1',
             'port' => 4444,
             'browserName' => 'Mozilla Firefox',
-            'browser' => 'firefox',            
+            'browser' => 'firefox',
             /*'desiredCapabilities' => array(
                 array('chromeOptions' => array(
                     'args' => array('no-sandbox')
@@ -20,7 +20,7 @@ class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
             ),*/
             'seleniumServerRequestsTimeout' => '50',
         ));
-        
+
         $this->setBrowserUrl('http://127.0.0.1:80/');
     }
 
@@ -34,7 +34,7 @@ class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
             fclose($fp);
         }
 
-        if($selenium_running === false) {
+        if ($selenium_running === false) {
              $this->markTestAsSkipped(
                 'Selenium is not running on localhost:4444. Please start Selenium.'
              );
