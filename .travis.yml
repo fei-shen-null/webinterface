@@ -10,6 +10,12 @@ services:
   - memcache
 
 before_script:
+   # install apt-fast to speedup later dependency installation
+    - sudo add-apt-repository -y ppa:apt-fast/stable
+    - sudo apt-get update
+    - sudo apt-get install apt-fast
+   # use apt-fast for installation of dependencies
+    - sudo apt-fast -y update
   # Mongo
     #- pecl -q install mongo-1.4.1 && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   # Composer (PHP dependency solver)
@@ -36,10 +42,10 @@ before_script:
     - "java -Dwebdriver.chrome.driver=/usr/bin/firefox -jar selenium-server-standalone-2.37.0.jar > /dev/null &"
     - sleep 5
   # Nginx
-    - sudo apt-get install nginx
+    - sudo apt-fast -y install nginx
     - sudo cp /home/travis/build/WPN-XM/webinterface/tests/nginx.conf.travis /etc/nginx/nginx.conf
   # PHP-FPM
-    - sudo apt-get install php5-fpm
+    - sudo apt-fast -y install php5-fpm
   # Return to project root, create error.log and start Nginx
     - cd /home/travis/build/WPN-XM/webinterface
     - sudo /etc/init.d/nginx restart
