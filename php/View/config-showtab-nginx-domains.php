@@ -15,7 +15,7 @@
     <form action="index.php?page=config&action=update_nginx_domains" method="post" class="well form-inline">
         <table>
             <?php
-            if(!empty($domains)) {
+            if (!empty($domains)) {
                 foreach ($domains as $domain) { /* array: fqpn, filename, loaded */
 
                     $checked = (isset($domain['enabled']) && $domain['enabled'] === true) ? 'checked="checked"' : '';
@@ -54,21 +54,21 @@
         <script>
         // servername suggestion based on path
         // transfer the 'selected realpath' to the input box 'servername'
-        $('#folder').click(function() {
+        $('#folder').click(function () {
             var selectedText = $("#folder option:selected").text().toLowerCase();
             selectedText = 'www.' + selectedText + '.dev';
             $("input[id='servername']").val(selectedText);
         });
 
         // add alias input field
-        $('#add-alias').click(function() {
+        $('#add-alias').click(function () {
             var addAliasRow = '<tr><td><input type="text" values="aliases[]"></td><td><a id="remove-alias"><i class="icon-minus"></i>Remove Alias</a></td></tr>';
             $("table[id='aliases']").append(addAliasRow);
             $("table[id='aliases'] tr:last-child input").focus();
         });
 
         // remove alias input field
-        $("table[id='aliases']").on("click", "a", function(event) {
+        $("table[id='aliases']").on("click", "a", function (event) {
             $(this).closest("tr").remove();
         });
         </script>

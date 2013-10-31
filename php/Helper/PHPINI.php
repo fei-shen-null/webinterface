@@ -56,7 +56,7 @@ class PHPINI
         // $this->doBackup(); @todo add backup functionality, before writing
 
         $ini_file = php_ini_loaded_file();
-        
+
         $ini = new INIReaderWriter($ini_file);
         $ini->set($section, $directive, $value);
 

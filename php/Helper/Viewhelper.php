@@ -39,17 +39,18 @@ class Viewhelper
     public static function showMenu()
     {
         // closure
-        $phpmyadmin_link = function() {
+        $phpmyadmin_link = function () {
            // is phpmyadmin installed?
            if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
                $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
                $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
+
                return '<a href="'.$href.'">phpMyAdmin</a>';
            }
         };
 
         // closure
-        $adminer_link = function() {
+        $adminer_link = function () {
             // is adminer installed?
             if (is_dir(WPNXM_WWW_DIR . 'adminer') === true) {
                 return '<a href="' . WPNXM_ROOT . 'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a>';

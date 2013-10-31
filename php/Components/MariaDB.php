@@ -72,6 +72,7 @@ class MariaDB extends AbstractComponent
         } else {
             $arr = explode('-', $connection->server_info);
             $connection->close();
+
             return $arr[0];
         }
     }

@@ -11,15 +11,15 @@
 </form>
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-         $('a[rel="ajax:modal"]').click(function(event) {
+    $(document).ready(function () {
+         $('a[rel="ajax:modal"]').click(function (event) {
             //xy.showSpinner();
           $.ajax({
             url: $(this).closest('form').attr('action'),
             method: $(this).closest('form').attr('method'),
             data: "newPassword=" + $(this).closest('form').find('input[name="newPassword"]').val(),
             dataType: 'html',
-            success: function(newHTML, textStatus, jqXHR) {
+            success: function (newHTML, textStatus, jqXHR) {
               //xy.hideSpinner();
               $(newHTML).appendTo('div#reset-pw-result'); //.modal();
             }

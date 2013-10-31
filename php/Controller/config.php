@@ -188,7 +188,7 @@ function renderPHPExtensionsFormContent()
         }
 
         // render column opener (everytime on 1 of 12)
-        if($i === 1) {
+        if ($i === 1) {
             $html_checkboxes .= '<div class="control-group" style="float: left; width: 125px; margin: 10px;">';
         }
 
@@ -210,7 +210,7 @@ function renderPHPExtensionsFormContent()
         $itemsTotal--;
     }
 
-   if(isAjaxRequest() and !isset($_GET['tab'])) {
+   if (isAjaxRequest() and !isset($_GET['tab'])) {
        echo $html_checkboxes;
    } else {
        return $html_checkboxes;

@@ -41,8 +41,7 @@ class PHPExtensionManager
     {
         $enabledExtensions = $this->getEnabledExtensions();
         var_dump($enabledExtensions);
-        foreach($enabledExtensions as $name => $file)
-        {
+        foreach ($enabledExtensions as $name => $file) {
 
         }
     }
@@ -255,6 +254,7 @@ class PHPExtensionManager
             $value = str_replace(array('php_', '.dll'), '', $value);
             $list[$value] = extension_loaded($value);
         }
+
         return $list;
     }
 

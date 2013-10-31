@@ -61,7 +61,7 @@ class Serverstack
 
         foreach ($files as $file) {
             $pi = pathinfo($file);
-            if($pi['filename'] === 'AbstractComponent') {
+            if ($pi['filename'] === 'AbstractComponent') {
                 continue;
             }
             $classes[] = $pi['filename']; // get rid of extension
@@ -87,7 +87,7 @@ class Serverstack
     /**
      * Get Version - Facade.
      *
-     * @param string $component
+     * @param  string                    $component
      * @return string
      * @throws \InvalidArgumentException
      */
@@ -96,26 +96,32 @@ class Serverstack
         switch ($component) {
             case 'nginx':
                 $o = new \Webinterface\Components\Nginx;
+
                 return $o->getVersion();
                 break;
             case 'mariadb':
                 $o = new \Webinterface\Components\Mariadb;
+
                 return $o->getVersion();
                 break;
              case 'mongodb':
                 $o = new \Webinterface\Components\Mongodb;
+
                 return $o->getVersion();
                 break;
             case 'memcached':
                 $o = new \Webinterface\Components\Memcached;
+
                 return $o->getVersion();
                 break;
             case 'xdebug':
                 $o = new \Webinterface\Components\Xdebug;
+
                 return $o->getVersion();
                 break;
             case 'php':
                 $o = new \Webinterface\Components\Php;
+
                 return $o->getVersion();
                 break;
             default:
@@ -247,7 +253,7 @@ class Serverstack
      * Displays the status of the daemon (running or not) by icon.
      * Shows the daemon status text as tooltip, when hovering.
      *
-     * @param string $daemon Name of the daemon.
+     * @param  string $daemon Name of the daemon.
      * @return string Embeddable image tag with tooltip.
      */
     public static function getStatus($daemon)
@@ -309,14 +315,17 @@ class Serverstack
                 break;
             case 'xdebug':
                 $o = new \Webinterface\Components\XDebug;
+
                 return $o->isInstalled();
                 break;
             case 'mongodb':
                 $o = new \Webinterface\Components\Mongodb;
+
                 return $o->isInstalled();
                 break;
             case 'memcached':
                 $o = new \Webinterface\Components\Memcached;
+
                 return $o->isInstalled();
                 break;
             default:
@@ -397,8 +406,8 @@ class Serverstack
     /**
      * Get Password - Facade.
      *
-     * @param string $component
-     * @return string The Password.
+     * @param  string                    $component
+     * @return string                    The Password.
      * @throws \InvalidArgumentException
      */
     public static function getPassword($component)
@@ -406,10 +415,12 @@ class Serverstack
         switch ($component) {
             case 'mariadb':
                 $o = new \Webinterface\Components\Mariadb;
+
                 return $o->getPassword();
                 break;
             case 'mongodb':
                 $o = new \Webinterface\Components\Mongodb;
+
                 return $o->getPassword();
                 break;
             default:

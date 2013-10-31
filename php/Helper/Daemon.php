@@ -145,7 +145,7 @@ class Daemon
      * Restarts a daemon by utilizing "restart-wpnxm.bat".
      * Especially the php daemon must (re)-started from the outside.
      *
-     * @param string $daemon
+     * @param  string                    $daemon
      * @throws \InvalidArgumentException
      */
     public static function restartDaemon($daemon)

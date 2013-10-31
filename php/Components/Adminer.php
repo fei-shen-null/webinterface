@@ -59,8 +59,7 @@ class Adminer extends AbstractComponent
 
         $file_handle = fopen($file, "r");
 
-        for ($i = 0; $i < $maxLines && !feof($file_handle); $i++)
-        {
+        for ($i = 0; $i < $maxLines && !feof($file_handle); $i++) {
             $line_of_text = fgetcsv($file_handle, 1024);
             // lets grab the version from the phpdoc tag
             preg_match('/\* \@version (\d+.\d+.\d+)/', $line_of_text[0], $matches);

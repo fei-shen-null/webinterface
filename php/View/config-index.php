@@ -65,7 +65,7 @@ function submitEdit(value, settings)
       type: "POST",
       data : edits,
       dataType : "json",
-      complete: function(xhr, textStatus) {
+      complete: function (xhr, textStatus) {
           var response = xhr.responseText;
       }
   });

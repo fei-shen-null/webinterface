@@ -113,7 +113,7 @@ if (!function_exists('showConstants')) {
      * @param string $return The display mode: "raw", "export", "dump" (default).
      * @return
      */
-    function showConstants($return = 'dump')
+    public function showConstants($return = 'dump')
     {
         $array = get_defined_constants(true);
         $user_constants = $array['user'];
@@ -141,11 +141,11 @@ if (!function_exists('showConstants')) {
  */
 function isAjaxRequest()
 {
-    if(!empty($_SERVER['X-Requested-With']) and $_SERVER['X-Requested-With'] === 'XMLHttpRequest') {
+    if (!empty($_SERVER['X-Requested-With']) and $_SERVER['X-Requested-With'] === 'XMLHttpRequest') {
         return true;
     }
 
-    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
         return true;
     }
 

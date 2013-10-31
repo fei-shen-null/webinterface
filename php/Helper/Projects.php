@@ -67,7 +67,7 @@ class Projects
     /**
      * Returns the list of directories in the "/www" folder.
      *
-     * @param bool $all True, will return all dirs. False, will exclude tool directories.
+     * @param  bool  $all True, will return all dirs. False, will exclude tool directories.
      * @return array
      */
     public function fetchProjectDirectories($all = false)
@@ -149,7 +149,7 @@ class Projects
 
             $composer = array();
 
-            /* if(extension_loaded('openssl')) {
+            /* if (extension_loaded('openssl')) {
               $possible_repos = file_get_contents('https://api.travis-ci.org/repositories.json?search='. $dir);
               var_dump($possible_repos);
               set the one found or ask user to select one of multiple
