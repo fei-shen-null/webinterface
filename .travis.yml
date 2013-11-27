@@ -39,7 +39,7 @@ before_script:
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.37.0.jar
     #- "java -jar selenium-server-standalone-2.37.0.jar -Dwebdriver.chrome.driver=/usr/bin/chromedriver > /dev/null &"
     # - "java -jar selenium/selenium-server-standalone-2.37.0.jar -Dwebdriver.firefox.driver=firefox > /dev/null &"
-    - java -jar selenium/selenium-server-standalone-2.37.0.jar > /dev/null
+    - java -jar selenium-server-standalone-2.37.0.jar > /dev/null &
     - sleep 5
   # Nginx
     - sudo apt-fast -y install nginx
