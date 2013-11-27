@@ -32,10 +32,9 @@ before_script:
   # Google Chromium Browser
     #- sudo apt-get install chromium-browser chromium-browser-l10n
   # Chrome Browser Driver
-    - "wget http://chromedriver.storage.googleapis.com/2.4/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && sudo mv chromedriver /usr/bin"
+    #- "wget http://chromedriver.storage.googleapis.com/2.4/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && sudo mv chromedriver /usr/bin"
   # Firefox
-    #- sudo apt-get update
-    #- sudo apt-get install firefox
+    - sudo apt-fast -m -y f install firefox
   # Selenium
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.37.0.jar
     #- "java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar selenium-server-standalone-2.37.0.jar > /dev/null &"
