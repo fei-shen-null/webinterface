@@ -36,7 +36,7 @@ function setupjEditable()
          type      : 'textarea',
          cancel    : 'Cancel',
          submit    : 'OK',
-         indicator : '<img src="assets/img/ajax-spinner.gif">',
+         indicator : '<img src="/webinterface/assets/img/ajax-spinner.gif">',
          tooltip   : 'Click to edit..' //<img src="img/pencil.png">
      });
 }
@@ -121,7 +121,7 @@ function setupTabs()
       $(this).addClass('current');
 
       // show ajax loading indicator
-      $('div#tab-content').html('<p style="text-align: center;"><img src="assets/img/ajax-spinner.gif" width="64" height="64" /></p>');
+      $('div#tab-content').html('<p style="text-align: center;"><img src="/webinterface/assets/img/ajax-spinner.gif" width="64" height="64" /></p>');
 
       // load content
       loadTab($(this));
@@ -154,15 +154,15 @@ $(function () {
             <div id="organic-tabs">
 
                 <ul class="nav headings-level-1">
-                  <li><a name="help" href="index.php?page=config#help" class="current">Help</a></li>
-                  <li><a name="php" href="index.php?page=config#php">PHP</a></li>
-                  <li><a name="php-ext" href="index.php?page=config#php-ext">PHP Extensions</a></li>
+                  <li><a name="help" href="/webinterface/index.php?page=config#help" class="current">Help</a></li>
+                  <li><a name="php" href="/webinterface/index.php?page=config#php">PHP</a></li>
+                  <li><a name="php-ext" href="/webinterface/index.php?page=config#php-ext">PHP Extensions</a></li>
                    <?php if (FEATURE_3 == true) { ?>
-                  <li><a name="nginx" href="index.php?page=config#nginx">Nginx</a></li>
-                  <li><a name="nginx-domains" href="index.php?page=config#nginx-domains">Nginx Domains</a></li>
-                  <li><a name="mariadb" href="index.php?page=config#mariadb">MariaDB</a></li>
-                  <li><a name="mongodb" href="index.php?page=config#mongodb">MongoDB</a></li>
-                  <li><a name="xdebug" href="index.php?page=config#xdebug">XDebug</a></li>
+                  <li><a name="nginx" href="/webinterface/index.php?page=config#nginx">Nginx</a></li>
+                  <li><a name="nginx-domains" href="/webinterface/index.php?page=config#nginx-domains">Nginx Domains</a></li>
+                  <li><a name="mariadb" href="/webinterface/index.php?page=config#mariadb">MariaDB</a></li>
+                  <li><a name="mongodb" href="/webinterface/index.php?page=config#mongodb">MongoDB</a></li>
+                  <li><a name="xdebug" href="/webinterface/index.php?page=config#xdebug">XDebug</a></li>
                   <?php } ?>
                 </ul>
 

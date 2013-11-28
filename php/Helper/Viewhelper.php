@@ -59,9 +59,9 @@ class Viewhelper
 
         $menu = '<div class="main_menu navbar">
                  <ul class="nav">
-                    <li class="first"><a href="index.php?page=overview">Overview</a></li>
-                    <li><a href="index.php?page=config">Configuration</a></li>
-                    <li><a href="index.php?page=projects">Projects & Tools</a></li>
+                    <li class="first"><a href="' . WPNXM_WEBINTERFACE_ROOT .'index.php?page=overview">Overview</a></li>
+                    <li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=config">Configuration</a></li>
+                    <li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=projects">Projects & Tools</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -74,7 +74,7 @@ class Viewhelper
                              <li><a href="#">Filter2</a></li>*/
                         '</ul>
                     </li>
-                    <li class="last"><a href="index.php?page=phpinfo">PHP Info</a></li>
+                    <li class="last"><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=phpinfo">PHP Info</a></li>
                 </ul>
              </div>';
 

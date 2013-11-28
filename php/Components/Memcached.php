@@ -101,7 +101,7 @@ class Memcached extends AbstractComponent
         Serverstack::restartDaemon('php');
 
         //header('Msg: Memcached disabled.');
-        header('Location: index.php?page=overview');
+        header('Location: '.WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
     }
 
     public function enable()
@@ -118,6 +118,6 @@ class Memcached extends AbstractComponent
         Serverstack::startDaemon('memcached');
 
         //echo 'Memcached enabled.';
-        header('Location: index.php?page=overview');
+        header('Location: '.WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
     }
 }
