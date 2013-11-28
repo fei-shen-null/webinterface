@@ -46,7 +46,7 @@ class Serverstack
     public static function printExclamationMark($image_title_text = '')
     {
         return sprintf(
-            '<img style="float:right;" src="%s/exclamation-red-frame.png" rel="tooltip" alt="%s" title="%s">',
+            '<img style="float:right;" src="%sexclamation-red-frame.png" rel="tooltip" alt="%s" title="%s">',
             WPNXM_IMAGES_DIR,
             htmlspecialchars($image_title_text),
             htmlspecialchars($image_title_text)
@@ -242,7 +242,10 @@ class Serverstack
                 return self::checkPort('127.0.0.1', '9100');
                 break;
             case 'mongodb':
-                return self::checkPort('127.0.0.1', '27017'); // remember: port 27018 is the admin interface of mongo
+                return self::checkPort('127.0.0.1', '27017');
+                break;
+            case 'mongodb-admin':
+                return self::checkPort('127.0.0.1', '27018');
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
@@ -262,10 +265,10 @@ class Serverstack
         $stateText = (strpos($daemon, 'phpext') !== false) ? 'loaded' : 'running';
 
         if (Daemon::isRunning($daemon) === false) {
-            $img = WPNXM_IMAGES_DIR . '/status_stop.png';
+            $img = WPNXM_IMAGES_DIR . 'status_stop.png';
             $title = self::getDaemonName($daemon) . ' is not ' . $stateText . '!';
         } else {
-            $img = WPNXM_IMAGES_DIR . '/status_run.png';
+            $img = WPNXM_IMAGES_DIR . 'status_run.png';
             $title = self::getDaemonName($daemon) . ' is ' . $stateText . '.';
         }
 
