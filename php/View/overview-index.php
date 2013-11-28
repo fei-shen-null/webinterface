@@ -18,7 +18,7 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/nginx.png" alt="Nginx Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>nginx.png" alt="Nginx Icon" />
                                 <a href="http://nginx.org/">
                                     <b>Nginx</b>
                                 </a>
@@ -45,7 +45,7 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/php.png" alt="PHP Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>php.png" alt="PHP Icon" />
                                 <a href="http://php.net/">
                                     <b>PHP</b>
                                 </a>
@@ -96,7 +96,7 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/mongodb.png" alt="MongoDB Icon" height="16" width="16" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>mongodb.png" alt="MongoDB Icon" height="16" width="16" />
                                 <a href="http://mongodb.org/">
                                     <b>MongoDB</b>
                                 </a>
@@ -123,7 +123,7 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/report.png" alt="Report Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>report.png" alt="Report Icon" />
                                 <a href="http://memcached.org/">
                                     <b>Memcached</b>
                                 </a>
@@ -149,7 +149,7 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>/xdebug.png" alt="Xdebug Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>xdebug.png" alt="Xdebug Icon" />
                                 <a href="http://xdebug.org/">
                                     <b>Xdebug</b>
                                 </a>
