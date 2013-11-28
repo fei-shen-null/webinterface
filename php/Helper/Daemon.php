@@ -90,25 +90,32 @@ class Daemon
 
     public static function startDaemon($daemon, $options = '')
     {
-        $hide_console = WPNXM_DIR . '\bin\tools\RunhHiddenConsole.exe ';
+        $hide_console = WPNXM_DIR . '\bin\tools\RunHiddenConsole.exe ';
 
         switch ($daemon) {
             case 'nginx':
-                $nginx_daemon = WPNXM_DIR . '\bin\nginx\bin\nginx.exe ';
-                exec($hide_console . $nginx_daemon . $options);
+                $nginx_folder = WPNXM_DIR . '\bin\nginx';
+                chdir($nginx_folder); //requierd for nginx
+                exec("start $hide_console nginx.exe $options"); 
                 break;
+            
+            case 'php':
+                $folder = WPNXM_DIR . '\bin\php';
+                chdir($folder); //requierd for nginx
+                exec("start $hide_console php-cgi.exe $options"); 
+                break;
+            
             case 'mariadb':
-                $mysqld_daemon = WPNXM_DIR . '\bin\mariadb\bin\mysqld.exe ';
-                exec($hide_console . $mysqld_daemon . $options);
+                $mysqld_folder = WPNXM_DIR . '\bin\mariadb\bin';
+                chdir($mysqld_folder); //change to folder
+                exec("start $hide_console mysqld.exe $options"); 
                 break;
+            
             case 'memcached':
-                $memcached_daemon = WPNXM_DIR . '\bin\memcached\bin\memcached.exe ';
+                $memcached_daemon = WPNXM_DIR . '\bin\memcached\memcached.exe ';
                 exec($hide_console . $memcached_daemon . $options);
                 break;
-            case 'php':
-                $php_daemon = WPNXM_DIR . '\bin\php\bin\php-cgi.exe ';
-                exec($hide_console . $php_daemon . $options);
-                break;
+            
             default:
                 throw new \InvalidArgumentException(
                     sprintf(__METHOD__. '() has no command for the daemon: "%s"', $daemon)
@@ -118,7 +125,7 @@ class Daemon
 
     public static function stopDaemon($daemon)
     {
-        $hide_console = WPNXM_DIR . '\bin\tools\RunhHiddenConsole.exe ';
+        $hide_console = WPNXM_DIR . '\bin\tools\RunHiddenConsole.exe ';
         $process_kill = WPNXM_DIR . '\bin\tools\Process.exe -k  ';
 
         switch ($daemon) {

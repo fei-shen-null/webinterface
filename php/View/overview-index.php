@@ -180,6 +180,12 @@ use Webinterface\Helper\Serverstack;
                     <td colspan="2">
                         <div class="resourceheader2 bold">
                             <?php echo $nginx_status; ?> Nginx
+                            
+                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>"
+                            >Stop</a>
+                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=nginx'; ?>"
+                            >Start</a>
+
                         </div>
                     </td>
                 </tr>
@@ -205,27 +211,43 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
+                        
                         <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
+                        
                         <a class="aButton"
                         <?php
-                        if (!is_file(WPNXM_DIR . '\logs\access.log')) {
+                        if (!is_file(WPNXM_DIR . '\bin\nginx\logs\access.log')) {
                             echo "onclick=\"alert('The Nginx Access Log not available. File was not found.'); return false;\"";
                         }
-                        if (false === $canOpenLogfileWithEditor) {
+                        /*else if (false === $canOpenLogfileWithEditor) {
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
+                         */
+                        else {
+                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-access-log';
+                            echo "onclick=\"ajaxGET('$url')\""; 
+                           // href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-access-log'; 
+                        }
                         ?>
-                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-access-log'; ?>">Access Log</a>
+                        >Access Log</a>
+                        
                         <a class="aButton"
                         <?php
-                        if (!is_file(WPNXM_DIR . '\logs\error.log')) {
+                        if (!is_file(WPNXM_DIR . '\bin\nginx\logs\error.log')) {
                             echo "onclick=\"alert('The Nginx Error Log not available. File was not found.'); return false;\"";
                         }
-                        if (false === $canOpenLogfileWithEditor) {
+                        /*if (false === $canOpenLogfileWithEditor) {
                             echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
                         }
+                         */
+                        else {
+                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-error-log';
+                            echo "onclick=\"ajaxGET('$url')\""; 
+                           //href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-error-log'; 
+                        }
                         ?>
-                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-error-log'; ?>">Error Log</a>
+                        >Error Log</a>
+                        
                     </td>
                 </tr>
             </table>
@@ -235,6 +257,12 @@ use Webinterface\Helper\Serverstack;
                     <td colspan="2">
                         <div class="resourceheader2 bold">
                         <?php echo $php_status; ?> PHP
+
+                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>"
+                            >Stop</a>
+                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>"
+                            >Start</a>
+
                         </div>
                     </td>
                 </tr>
@@ -262,11 +290,13 @@ use Webinterface\Helper\Serverstack;
                         if (!is_file(WPNXM_DIR . '\logs\php_error.log')) {
                             echo "onclick=\"alert('The PHP Error Log is not available. File was not found.'); return false;\"";
                         }
-                        if (false === $canOpenLogfileWithEditor) {
-                            echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
+                        else {
+                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=php-error-log';
+                            echo "onclick=\"ajaxGET('$url')\""; 
                         }
                         ?>
-                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=php-error-log'; ?>">Show Log</a>
+                        >Show Log</a>
+                        
                         <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo'; ?>">Show phpinfo()</a>
                     </td>
                 </tr>
@@ -303,16 +333,19 @@ use Webinterface\Helper\Serverstack;
                 <tr>
                     <td colspan="5" class="right">
                         <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
+                        
                         <a class="aButton"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\mariadb_error.log')) {
                             echo "onclick=\"alert('The MariaDB Error Log is not available. File was not found.'); return false;\"";
                         }
-                        if (false === $canOpenLogfileWithEditor) {
-                            echo "onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
+                        else {
+                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log';
+                            echo "onclick=\"ajaxGET('$url')\""; 
                         }
                         ?>
-                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log'; ?>">Show Log</a>
+                        >Show Log</a>
+                        
                         <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
                     </td>
                 </tr>
@@ -355,14 +388,17 @@ use Webinterface\Helper\Serverstack;
                         if (!is_file(WPNXM_DIR . '\logs\mongodb.log')) {
                             echo " onclick=\"alert('The MongoDB Log is not available. File was not found.'); return false;\"";
                         }
-                        if (false === $canOpenLogfileWithEditor) {
-                            echo " onclick=\"alert('The PHP Extension php_com_dotnet.dll is required.'); return false;\"";
+                        else {
+                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mongodb-log';
+                            echo "onclick=\"ajaxGET('$url')\""; 
                         }
                         ?>
-                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mongodb-log'; ?>">Show Log</a>
+                         >Show Log</a>
+                        
                         <?php if (class_exists('mysqli')) { ?>
-                        <a class="aButton" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
+                            <a class="aButton" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
                         <?php } ?>
+                            
                     </td>
                 </tr>
             </table>

@@ -164,3 +164,14 @@ function handlePHPExtensionsForm() {
             '\n\nThe output div should have already been updated with the responseText.');*/
     }
 }; // END of handlePHPExtensionsForm()
+
+
+
+function ajaxGET(url, success) {
+    $.ajax({
+            url: url,
+            method: "GET",
+            success: success
+            // ajax error
+          });
+}
