@@ -89,8 +89,8 @@ if (!defined('WPNXM_DIR')) {
     define('SERVER_URL', 'http://' . $_SERVER['SERVER_NAME']);
     define('WPNXM_ROOT', SERVER_URL . ltrim(dirname(dirname(dirname($_SERVER['PHP_SELF']))), '\\') . '/');
     define('WPNXM_WWW_ROOT', WPNXM_ROOT . 'www/');
-    define('WPNXM_WEBINTERFACE_ROOT', WPNXM_ROOT . 'webinterface/');
-    define('WPNXM_IMAGES_DIR', WPNXM_WEBINTERFACE_ROOT . 'assets/img/');
+    define('WPNXM_WEBINTERFACE_ROOT', '/webinterface/');
+    define('WPNXM_IMAGES_DIR', '/webinterface/assets/img/');
 
     // WPNXM Configuration File
     define('WPNXM_INI', WPNXM_DIR . '\wpnxm.ini');

@@ -42,6 +42,9 @@ class OpenFile
     */
    public static function openFile($file)
    {
+       pclose(popen("start /B notepad ". $file, "r")); 
+       /*
+       
       // extension check
       if (!class_exists('COM') and !extension_loaded("com_dotnet")) {
           throw new \Exception(
@@ -60,12 +63,11 @@ class OpenFile
       // @todo ask user for the tool, for now open with notepad
       $tool = 'notepad';
 
-      /**
-       * Notice, that we are not using exec() here.
-       * Using exec() would leave the page loading, till the executed application window is closed.
-       * Running via WScript.Shell will launch the process in the background.
-       */
+       //* Notice, that we are not using exec() here.
+       //* Using exec() would leave the page loading, till the executed application window is closed.
+       //* Running via WScript.Shell will launch the process in the background.
       $WshShell = new \COM("WScript.Shell");
       $WshShell->run('cmd /c ' . $tool . ' ' . $file, 0, false);
+      */
    }
 }

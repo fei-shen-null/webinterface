@@ -49,5 +49,8 @@ phpunit.xml
 /wpnxm-scp/*release*
 /wpnxm-scp/*.pro.user
 
+# netbeans IDE
+/nbproject/
+
 # data file for the counter
 php/data/welcomeMsgCounter.txt
