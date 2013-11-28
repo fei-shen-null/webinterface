@@ -42,10 +42,10 @@ function index()
 
     switch ($file) {
         case 'nginx-access-log':
-            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\bin\nginx\logs\access.log');
+            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\access.log');
             break;
         case 'nginx-error-log':
-            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\bin\nginx\logs\error.log');
+            Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\error.log');
             break;
         case 'php-error-log':
             Webinterface\Helper\OpenFile::openFile(WPNXM_DIR . '\logs\php_error.log');
