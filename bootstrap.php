@@ -86,22 +86,12 @@ if (!defined('WPNXM_DIR')) {
     }
 
     // Web Path Constants -> "http://.."
-    define('SERVER_URL', 'http://' . $_SERVER['SERVER_NAME']);
+    $port = ($_SERVER['SERVER_PORT'] !== '80') ? (':' . $_SERVER['SERVER_PORT']) : ''; // add embedded webserver port, in case its running
+    define('SERVER_URL', 'http://' . $_SERVER['SERVER_NAME'] . $port);
     define('WPNXM_ROOT', SERVER_URL . ltrim(dirname(dirname(dirname($_SERVER['PHP_SELF']))), '\\') . '/');
     define('WPNXM_WWW_ROOT', WPNXM_ROOT . 'www/');
-
-    /**
-     * Provide paths for two servers:
-     * (a) the embedded PHP server with runs /www/webinterface as root and
-     * (b) Nginx.
-     */
-    if (strpos($_SERVER["SERVER_SOFTWARE"], 'nginx') !== false) {
-        define('WPNXM_WEBINTERFACE_ROOT', WPNXM_ROOT . 'webinterface/');
-        define('WPNXM_IMAGES_DIR', WPNXM_WEBINTERFACE_ROOT . 'assets/img/');
-    } else {
-        define('WPNXM_WEBINTERFACE_ROOT', '/webinterface/');
-        define('WPNXM_IMAGES_DIR', '/webinterface/assets/img/');
-    }
+    define('WPNXM_WEBINTERFACE_ROOT', WPNXM_ROOT . 'webinterface/');
+    define('WPNXM_IMAGES_DIR', WPNXM_WEBINTERFACE_ROOT . 'assets/img/');
 
     // WPNXM Configuration File
     define('WPNXM_INI', WPNXM_DIR . '\wpnxm.ini');
