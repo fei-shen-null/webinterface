@@ -10,11 +10,11 @@ class Selenium2ChromeTest extends \PHPUnit_Extensions_Selenium2TestCase
 
         $this->setupSpecificBrowser(array(
             'host' => '127.0.0.1',
-            'port' => 4444,
+            'port' => 5555,
             'browserName' => 'chrome',
             'desiredCapabilities' => array(
                 array('chromeOptions' => array(
-                    'args' => array('--no-sandbox')
+                    'args' => array('no-sandbox')
                 ))
             ),
             'seleniumServerRequestsTimeout' => '50',
