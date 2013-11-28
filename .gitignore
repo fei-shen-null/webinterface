@@ -35,7 +35,7 @@ cache/**/*
 phpunit.xml
 
 # Folder for Inno Setup compiled executables and preprocessed scripts
-/_build 
+/_build
 
 # Folder for Qt Executables
 /Output
@@ -53,4 +53,4 @@ phpunit.xml
 /nbproject/
 
 # data file for the counter
-php/data/welcomeMsgCounter.txt
+/php/data/welcomeMsgCounter.txt
