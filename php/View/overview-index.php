@@ -70,7 +70,7 @@ use Webinterface\Helper\Serverstack;
                     <td>
                         <div class="resourceheader">
                             <div class="title">
-                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR ?>/mariadb.png" alt="MariaDB Icon" />
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR ?>mariadb.png" alt="MariaDB Icon" />
                                 <a href="http://mariadb.org/">
                                     <b>MariaDB</b>
                                 </a>
