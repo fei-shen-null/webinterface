@@ -32,14 +32,13 @@ before_script:
   # Google Chromium Browser
     #- sudo apt-get install chromium-browser chromium-browser-l10n
   # Chrome Browser Driver
-    - "wget http://chromedriver.storage.googleapis.com/2.7/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && sudo mv chromedriver /usr/bin"
+    #- "wget http://chromedriver.storage.googleapis.com/2.7/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && sudo mv chromedriver /usr/bin"
   # Firefox
     - sudo apt-fast -m -y install firefox
   # Selenium
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.37.0.jar
-    - "java -jar selenium-server-standalone-2.37.0.jar -Dwebdriver.chrome.bin=/usr/bin/chromedriver > /dev/null &"
-    # - "java -jar selenium/selenium-server-standalone-2.37.0.jar -Dwebdriver.firefox.bin=firefox > /dev/null &"
-    #- java -jar selenium-server-standalone-2.37.0.jar > /dev/null &
+    #- "java -jar selenium-server-standalone-2.37.0.jar -Dwebdriver.chrome.bin=/usr/bin/chromedriver > /dev/null &"
+    - java -jar selenium/selenium-server-standalone-2.37.0.jar -Dwebdriver.firefox.driver=firefox > /dev/null &
     - sleep 5
   # Nginx
     - sudo apt-fast -y install nginx
@@ -49,7 +48,7 @@ before_script:
   # Return to project root, create error.log and start Nginx
     - cd /home/travis/build/WPN-XM/webinterface
     - sudo /etc/init.d/nginx restart
-    - sleep 3
+    - sleep 2
     - curl http://localhost:80/ -v
 
 script:
