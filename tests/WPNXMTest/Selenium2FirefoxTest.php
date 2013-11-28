@@ -4,6 +4,13 @@ namespace WPNXMTest;
 
 class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
 {
+    public function prepareSession() {
+        $res = parent::prepareSession();
+        $this->url('/');
+        $res->cookie()->remove('PHPUNIT_SELENIUM_TEST_ID');
+        return $res;
+    }
+
     protected function setUp()
     {
         $this->isSeleniumAvailable();
