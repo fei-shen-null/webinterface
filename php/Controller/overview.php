@@ -65,9 +65,24 @@ function index()
       'xdebug_installed'    => Serverstack::isInstalled('xdebug'),
       'mongodb_installed'   => Serverstack::isInstalled('mongodb'),
 
-      // extension "com_dotnet" is needed to open logfile with editor, else we disable the log buttons
-      'canOpenLogfileWithEditor' => (class_exists('COM') and extension_loaded("com_dotnet"))
+        // extension "com_dotnet" is needed to open logfile with editor, else we disable the log buttons
+        //LMT no more needed, files are open by pclose(popen(... 
+      'canOpenLogfileWithEditor' => true //(class_exists('COM') and extension_loaded("com_dotnet"))
     );
 
     render('page-action', $tpl_data);
+}
+
+function stop(){
+    global $action;
+    Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
+    $action="index";
+    index();
+}
+
+function start(){
+    global $action;
+    Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
+    $action="index";
+    index();
 }
