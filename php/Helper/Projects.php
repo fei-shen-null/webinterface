@@ -218,7 +218,7 @@ class Projects
         if (false === $this->isDomain($dir)) {
             // display link to add a new domain for this directory
             $html .= '<a class="btn-new-domain floatright" ';
-            $html .= ' href="' . WPNXM_ROOT . 'webinterface/index.php?page=domains&newdomain=' . $dir . '">';
+            $html .= ' href="' . WPNXM_WEBINTERFACE_ROOT . 'index.php?page=domains&newdomain=' . $dir . '">';
             $html .= 'New Domain</a>';
         } else {
             // display link to the domain

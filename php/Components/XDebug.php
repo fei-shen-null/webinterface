@@ -98,7 +98,7 @@ class XDebug extends AbstractComponent
         Serverstack::restartDaemon('php');
 
         //echo 'Xdebug disabled.';
-        header('Location: index.php?page=overview');
+        header('Location: '.WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
     }
 
     public function enable()
@@ -111,6 +111,6 @@ class XDebug extends AbstractComponent
         Serverstack::restartDaemon('php');
 
         //echo 'Xdebug enabled.';
-        header('Location: index.php?page=overview');
+        header('Location: '.WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
     }
 }

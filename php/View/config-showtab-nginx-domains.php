@@ -12,7 +12,7 @@
        Remember to restart Nginx for changes to take effect
     </div>
 
-    <form action="index.php?page=config&action=update_nginx_domains" method="post" class="well form-inline">
+    <form action="/webinterface/index.php?page=config&action=update_nginx_domains" method="post" class="well form-inline">
         <table>
             <?php
             if (!empty($domains)) {
@@ -21,7 +21,7 @@
                     $checked = (isset($domain['enabled']) && $domain['enabled'] === true) ? 'checked="checked"' : '';
 
                     echo '<tr><td><input type="checkbox" ' . $checked . '></td><td>' . $domain['filename'] . '</td>
-                          <td><a href="index.php?page=openfile&file='.$domain['filename'].'"Open in Editor</a></td></tr>';
+                          <td><a href="/webinterface/index.php?page=openfile&file='.$domain['filename'].'"Open in Editor</a></td></tr>';
                 }
             } else {
                 echo '<tr><td>No domains configuration files found.</td></tr>';

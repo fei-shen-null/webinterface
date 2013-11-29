@@ -9,7 +9,7 @@ window.onload = function() {
     }catch (e) {}
     var e = document.createElement("script");
     e.setAttribute("type", "text/javascript");
-    e.setAttribute("src", "http://localhost/webinterface/assets/js/browser-update.js");
+    e.setAttribute("src", "/webinterface/assets/js/browser-update.js");
     document.body.appendChild(e);
 
     setCurrentPageActiveInMainMenu();
@@ -143,11 +143,11 @@ function handlePHPExtensionsForm() {
 
         // now restart the php daemon, you will get a 404 Error in "Console - All".
         // this is unnoticed by the user
-        $.get("index.php?page=daemon&action=restart&daemon=php");
+        $.get("/webinterface/index.php?page=daemon&action=restart&daemon=php");
 
         // now new extensions are off or on, lets get their state and update the checkbox display
         var updatePHPExtensionsForm = function() {
-            $.ajax({ url: "index.php?page=config&action=renderPHPExtensionsFormContent",
+            $.ajax({ url: "/webinterface/index.php?page=config&action=renderPHPExtensionsFormContent",
                 success: function(data, textStatus, XMLHttpRequest) {
                     $("#phpExtensionsFormContent").html(data);
                     $('#ajax-status').hide();
