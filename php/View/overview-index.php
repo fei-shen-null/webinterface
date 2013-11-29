@@ -295,6 +295,12 @@ use Webinterface\Helper\Serverstack;
                         <div class="resourceheader2 bold">
                         <?php echo $mariadb_status; ?> MariaDB
                         </div>
+
+                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>"
+                            >Stop</a>
+                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>"
+                            >Start</a>
+
                     </td>
                 </tr>
                 <tr>
