@@ -163,13 +163,21 @@ class Projects
             }
 
             $package = $this->getPackagistPackageDescription($composer['name']);
-            $packageName = $this->getPackageName($package);
 
-            if (isset($packageName) === true) {
-                // add the travis link by showing build status icon
-                $html .= '<a class="pull-right" href="http://travis-ci.org/' . $packageName . '">';
-                $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
-                $html .= '</a>';
+            if(isset($package['status']) && $package['status'] === 'error') {
+                \Webinterface\Helper\Serverstack::printExclamationMark(
+                    'The request to packagist.org failed. This might be a service problem.' .
+                    ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
+                );
+            } else {
+                $packageName = $this->getPackageName($package);
+
+                if (isset($packageName) === true) {
+                    // add the travis link by showing build status icon
+                    $html .= '<a class="pull-right" href="http://travis-ci.org/' . $packageName . '">';
+                    $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
+                    $html .= '</a>';
+                }
             }
         }
 
@@ -179,7 +187,14 @@ class Projects
     public function getPackagistPackageDescription($package = '')
     {
         $url = sprintf('https://packagist.org/packages/%s.json', $package);
-        $json = @file_get_contents($url);
+
+        $context = stream_context_create(array(
+            'http' => array(
+                'ignore_errors' => true
+             )
+        ));
+        $json = file_get_contents($url, FALSE, $context);
+
         $array = json_decode($json, true);
 
         return $array;
