@@ -102,7 +102,7 @@ class Daemon
             case 'php':
                 $folder = WPNXM_DIR . '\bin\php';
                 chdir($folder); //requierd for nginx
-                exec("start $hide_console php-cgi.exe $options"); 
+                exec("start $hide_console php-cgi.exe -b localhost:9100 $options"); 
                 break;
             
             case 'mariadb':
