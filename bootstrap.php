@@ -94,7 +94,7 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_IMAGES_DIR', '/webinterface/assets/img/');
 
     // WPNXM Configuration File
-    define('WPNXM_INI', WPNXM_DIR . '\wpnxm.ini');
+    define('WPNXM_INI', WPNXM_DIR . '\wpn-xm.ini');
 
     /**
      * Feature Flags

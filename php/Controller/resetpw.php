@@ -80,7 +80,7 @@ function update()
         } else {
             $return = '<div class="success">Password changed SUCCESSFULLY.';
 
-            // write new password to wpnxm.ini
+            // write new password
             $ini = new \Webinterface\Helper\INIReaderWriter(WPNXM_INI);
             $ini->set('MariaDB', 'password', $newPassword);
             $ini->write();
