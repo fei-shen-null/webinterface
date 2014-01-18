@@ -73,7 +73,7 @@ class Memcached extends AbstractComponent
             return $version;
         } else {
             return \Webinterface\Helper\Serverstack::printExclamationMark(
-                $e->getMessage() . '. Please wake the Memcache daemon.'
+                'Please wake the Memcache daemon.'
             );
         }
     }
