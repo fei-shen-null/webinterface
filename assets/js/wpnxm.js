@@ -40,7 +40,7 @@ function setCurrentPageActiveInMainMenu() {
     for(var i = 0; i < aObj.length; i++) {
         if(document.location.href.indexOf(aObj[i].href)>=0) {
             aObj[i].className = 'active';
-            return;
+
         } else {
             aObj[i].className = '';
         }
