@@ -10,12 +10,12 @@
     |                                                                                  |
     |    LICENSE                                                                       |
     |                                                                                  |
-    |    WPИ-XM Serverstack is free software; you can redistribute it and/or modify    |
+    |    WPИ-XM Server Stack is free software; you can redistribute it and/or modify   |
     |    it under the terms of the GNU General Public License as published by          |
     |    the Free Software Foundation; either version 2 of the License, or             |
     |    (at your option) any later version.                                           |
     |                                                                                  |
-    |    WPИ-XM Serverstack is distributed in the hope that it will be useful,         |
+    |    WPИ-XM Server Stack is distributed in the hope that it will be useful,        |
     |    but WITHOUT ANY WARRANTY; without even the implied warranty of                |
     |    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 |
     |    GNU General Public License for more details.                                  |
@@ -25,11 +25,6 @@
     |    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA    |
     |                                                                                  |
     +----------------------------------------------------------------------------------+
-    *
-    * @license    GNU/GPL v2 or (at your option) any later version..
-    * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - onwards)
-    * @link       http://wpn-xm.org/
     */
 
 namespace Webinterface\Components;
@@ -44,6 +39,9 @@ abstract class AbstractComponent
 {
     /* @var string Printable name of the component. */
     public $name;
+    
+    /* @var string Name of the component in the registry. */
+    public $registryName;
 
     /* @var string Type (PHP Extensions, Daemon). */
     public $type;
@@ -121,6 +119,30 @@ abstract class AbstractComponent
         }
 
         // download
+    }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    public function getRegistryName()
+    {
+        return $this->registryName;
+    }
+    
+    /**
+     * Find out, whether an extension is loaded
+     * 
+     * @param type $name
+     * @return bool <b>TRUE</b> if the extension identified by <i>name</i>
+     * is loaded, <b>FALSE</b> otherwise.
+     */
+    public function isExtensionLoaded($name = null)
+    {
+        $name = ($name === null) ? $name : $this->name;  
+        
+        return extension_loaded($name);
     }
 
     abstract public function getVersion();

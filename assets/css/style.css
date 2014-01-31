@@ -345,15 +345,7 @@ li {
 }
 .main_menu a.active {
     color: #333333 !important;
-    background: #D1D1D1;
-    background: rgb(238,238,238); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(238,238,238,1) 40%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(100%,rgba(204,204,204,1), color-stop(40%,rgba(238,238,238,1)))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(238,238,238,1) 40%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(238,238,238,1) 40%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(238,238,238,1) 40%); /* IE10+ */
-    background: linear-gradient(top, rgba(204,204,204,1) 0%, rgba(238,238,238,1) 40%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+    background: none repeat scroll 0 0 #DDDDDD;
 }
 
 ul.dropdown-menu {

@@ -10,12 +10,12 @@
     |                                                                                  |
     |    LICENSE                                                                       |
     |                                                                                  |
-    |    WPИ-XM Serverstack is free software; you can redistribute it and/or modify    |
+    |    WPИ-XM Server Stack is free software; you can redistribute it and/or modify   |
     |    it under the terms of the GNU General Public License as published by          |
     |    the Free Software Foundation; either version 2 of the License, or             |
     |    (at your option) any later version.                                           |
     |                                                                                  |
-    |    WPИ-XM Serverstack is distributed in the hope that it will be useful,         |
+    |    WPИ-XM Server Stack is distributed in the hope that it will be useful,        |
     |    but WITHOUT ANY WARRANTY; without even the implied warranty of                |
     |    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 |
     |    GNU General Public License for more details.                                  |
@@ -25,11 +25,6 @@
     |    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA    |
     |                                                                                  |
     +----------------------------------------------------------------------------------+
-    *
-    * @license    GNU/GPL v2 or (at your option) any later version..
-    * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - onwards)
-    * @link       http://wpn-xm.org/
     */
 
 namespace Webinterface\Helper;
@@ -37,7 +32,7 @@ namespace Webinterface\Helper;
 class Serverstack
 {
     /**
-     * Prints the Exclaimation Mark Icon.
+     * Prints the Exclamation Mark Icon.
      * Uses a tooltip (rel="tootip") show the title text.
      *
      * @param  string $image_title_text
@@ -47,6 +42,16 @@ class Serverstack
     {
         return sprintf(
             '<img style="float:right;" src="%sexclamation-red-frame.png" rel="tooltip" alt="%s" title="%s">',
+            WPNXM_IMAGES_DIR,
+            htmlspecialchars($image_title_text),
+            htmlspecialchars($image_title_text)
+        );
+    }
+    
+    public static function printExclamationMarkLeft($image_title_text = '')
+    {
+        return sprintf(
+            '<img src="%sexclamation-red-frame.png" rel="tooltip" alt="%s" title="%s">',
             WPNXM_IMAGES_DIR,
             htmlspecialchars($image_title_text),
             htmlspecialchars($image_title_text)
@@ -77,8 +82,8 @@ class Serverstack
         $classes = self::getInstalledComponents();
 
         foreach ($classes as $class) {
-            $fqcn = '\Webinterface\Components\\' . $class;
-            $components[] = $object_{$class} = new $fqcn;
+            $component = '\Webinterface\Components\\' . $class;
+            $components[] = new $component;
         }
 
         return $components;
@@ -87,46 +92,16 @@ class Serverstack
     /**
      * Get Version - Facade.
      *
-     * @param  string                    $component
+     * @param  string $componentName
      * @return string
      * @throws \InvalidArgumentException
      */
-    public static function getVersion($component)
+    public static function getVersion($componentName)
     {
-        switch ($component) {
-            case 'nginx':
-                $o = new \Webinterface\Components\Nginx;
+        $componentClass = '\Webinterface\Components\\' . $componentName;
+        $component      = new $componentClass;
 
-                return $o->getVersion();
-                break;
-            case 'mariadb':
-                $o = new \Webinterface\Components\Mariadb;
-
-                return $o->getVersion();
-                break;
-             case 'mongodb':
-                $o = new \Webinterface\Components\Mongodb;
-
-                return $o->getVersion();
-                break;
-            case 'memcached':
-                $o = new \Webinterface\Components\Memcached;
-
-                return $o->getVersion();
-                break;
-            case 'xdebug':
-                $o = new \Webinterface\Components\Xdebug;
-
-                return $o->getVersion();
-                break;
-            case 'php':
-                $o = new \Webinterface\Components\Php;
-
-                return $o->getVersion();
-                break;
-            default:
-                throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $component));
-        }
+        return $component->getVersion();
     }
 
     /**
@@ -418,16 +393,65 @@ class Serverstack
         switch ($component) {
             case 'mariadb':
                 $o = new \Webinterface\Components\Mariadb;
-
                 return $o->getPassword();
                 break;
             case 'mongodb':
                 $o = new \Webinterface\Components\Mongodb;
-
                 return $o->getPassword();
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
         }
     }
+    
+    public static function getWindowsVersion()
+    {
+        $useragent = $_SERVER['HTTP_USER_AGENT'];
+
+        $regexps = array(
+            'Win 311'         => 'Win16',
+            'Win 95'          => '(Windows 95)|(Win95)|(Windows_95)',
+            'Win ME'          => '(Windows 98)|(Win 9x 4.90)|(Windows ME)',
+            'Win 98'          => '(Windows 98)|(Win98)',
+            'Win 2000'        => '(Windows NT 5.0)|(Windows 2000)',
+            'Win XP'          => '(Windows NT 5.1)|(Windows XP)',
+            'Win Server 2003' => '(Windows NT 5.2)',
+            'Win Vista'       => '(Windows NT 6.0)',
+            'Windows 7'       => '(Windows NT 6.1)',
+            'Windows 8'       => '(Windows NT 6.2)',
+            'WinNT'           => '(Windows NT 4.0)|(WinNT4.0)|(WinNT)|(Windows NT)'
+        );
+
+        foreach ($regexps as $name => $pattern) {
+            if (preg_match('/' . $pattern . '/i', $useragent)) {
+                return $name;
+            }
+        }
+
+        return 'Unknown (' . $useragent . ')';
+    }
+    
+    /**
+     * Returns the Bit-Size.
+     *
+     * @return string BitSize, e.g. 32, 64.
+     */
+    public static function getBitSize()
+    {
+        if (PHP_INT_SIZE === 4) {
+            return 32;
+        }
+
+        if (PHP_INT_SIZE === 8) {
+            return 64;
+        }
+
+        return PHP_INT_SIZE; // 16-bit?
+    }
+    
+    public static function getBitSizeString()
+    {
+        return self::getBitSize() . 'bit';
+    }
+
 }

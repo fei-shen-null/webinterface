@@ -2,6 +2,10 @@
 namespace Webinterface\Components;
 class XHProf
 {
+    public $name = 'XHProf';
+    
+    public $registryName = 'xhprof';
+    
     /**
      * Returns Version.
      *

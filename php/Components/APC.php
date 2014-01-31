@@ -2,6 +2,12 @@
 namespace Webinterface\Components;
 class APC
 {
+    public $name = 'APC';
+    
+    public $type = 'PHP Extension';
+    
+    public $registryName = 'phpext_apc';
+    
     /**
      * Returns Version.
      *
@@ -10,18 +16,19 @@ class APC
     public function getVersion()
     {
         if (extension_loaded('apc') === false) {
-            return \Webinterface\Helper\Serverstack::printExclamationMark(
-                'The APC Extension "memcache" is required.'
+            return \Webinterface\Helper\Serverstack::printExclamationMarkLeft(
+                'The PHP Extension "APC" is required.'
             );
         }
 
-        return \Webinterface\Helper\Serverstack::printExclamationMark(
-            'Not implemented yet.'
-        );
+        //$info = \apc_sma_info();
+        //var_dump($info);
 
-        $info = \apc_sma_info();
-        var_dump($info);
-
-        return $info['version'];
+        return phpversion('apc');
+    }
+    
+    public function getVersionRaw()
+    {
+        return phpversion('apc');
     }
 }

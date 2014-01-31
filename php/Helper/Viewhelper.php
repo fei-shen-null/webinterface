@@ -10,12 +10,12 @@
     |                                                                                  |
     |    LICENSE                                                                       |
     |                                                                                  |
-    |    WPИ-XM Serverstack is free software; you can redistribute it and/or modify    |
+    |    WPИ-XM Server Stack is free software; you can redistribute it and/or modify   |
     |    it under the terms of the GNU General Public License as published by          |
     |    the Free Software Foundation; either version 2 of the License, or             |
     |    (at your option) any later version.                                           |
     |                                                                                  |
-    |    WPИ-XM Serverstack is distributed in the hope that it will be useful,         |
+    |    WPИ-XM Server Stack is distributed in the hope that it will be useful,        |
     |    but WITHOUT ANY WARRANTY; without even the implied warranty of                |
     |    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 |
     |    GNU General Public License for more details.                                  |
@@ -25,11 +25,6 @@
     |    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA    |
     |                                                                                  |
     +----------------------------------------------------------------------------------+
-    *
-    * @license    GNU/GPL v2 or (at your option) any later version..
-    * @author     Jens-André Koch <jakoch@web.de>
-    * @copyright  Jens-André Koch (2010 - onwards)
-    * @link       http://wpn-xm.org/
     */
 
 namespace Webinterface\Helper;
@@ -66,7 +61,9 @@ class Viewhelper
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                              <li>'.$phpmyadmin_link().'</li>
-                             <li>'.$adminer_link().'</li>' .
+                             <li>'.$adminer_link().'</li>
+                             <li class="divider"></li>
+                             <li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>'.
                             /* '<li><a href="#">Filter2</a></li>
                              <li class="divider"></li>
                              <li class="nav-header">Nav header</li>
@@ -86,14 +83,14 @@ class Viewhelper
         if (self::fileCounter(WPNXM_DATA_DIR . '/welcomeMsgCounter.txt', 3) === true) {
             return;
         } else {
-            echo '<h4 class="info">Welcome to the WPИ-XM Serverstack!
+            echo '<h4 class="info">Welcome to the WPИ-XM Server Stack!
                   <p>Congratulations: You have successfully installed WPИ-XM on this system.</p>
                   </h4>';
         }
     }
 
     /**
-     * Uses a file for counting the display of the welcome message.
+     * Uses a file for counting the display times of the welcome message.
      *
      * @param  string  $file       The file containing the counter.
      * @param  int     $max_counts The number of times to return false.
