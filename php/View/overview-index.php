@@ -181,10 +181,13 @@ use Webinterface\Helper\Serverstack;
                         <div class="resourceheader2 bold">
                             <?php echo $nginx_status; ?> Nginx
 
-                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>"
-                            >Stop</a>
-                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=nginx'; ?>"
-                            >Start</a>
+                            <a href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>">
+                                <img alt="Start Nginx" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
+                            </a>
+                            
+                            <a href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=nginx'; ?>">
+                                 <img alt="Stop Nginx" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
+                            </a>
 
                         </div>
                     </td>
@@ -246,10 +249,12 @@ use Webinterface\Helper\Serverstack;
                         <div class="resourceheader2 bold">
                         <?php echo $php_status; ?> PHP
 
-                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>"
-                            >Stop</a>
-                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>"
-                            >Start</a>
+                            <a href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
+                                <img alt="Start PHP" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
+                            </a>
+                            <a href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
+                                <img alt="Stop PHP" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
+                            </a>
 
                         </div>
                     </td>
@@ -295,10 +300,13 @@ use Webinterface\Helper\Serverstack;
                         <div class="resourceheader2 bold">
                         <?php echo $mariadb_status; ?> MariaDB
 
-                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>"
-                            >Stop</a>
-                            <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>"
-                            >Start</a>
+                            <a href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>">
+                                <img alt="Start MariaDb" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
+                            </a>
+                        
+                            <a href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
+                                <img alt="Stop MariaDb" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
+                            </a>
 
                         </div>
                     </td>
@@ -349,6 +357,14 @@ use Webinterface\Helper\Serverstack;
                     <td colspan="5">
                         <div class="resourceheader2 bold">
                         <?php echo $mongodb_status; ?> <?php echo $phpext_mongo_status; ?> MongoDB
+                        
+                         <a href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
+                                <img alt="Start MongoDB" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
+                         </a>
+                         <a href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
+                            <img alt="Stop MongoDB" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
+                         </a>
+                        
                         </div>
                     </td>
                 </tr>
