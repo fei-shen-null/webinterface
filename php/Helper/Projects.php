@@ -45,13 +45,15 @@ class Projects
      */
     private $toolDirectories = array(
         'adminer' => 'adminer/adminer.php',
-        'phpmyadmin' => '',
-        'webgrind' => '',
-        'webinterface' => '',
-        'xhprof' => 'xhprof/xhprof_html',
         'memadmin' => '',
         'phpmemcachedadmin' => '',
-        'rockmongo' => ''
+        'phpmyadmin' => '',
+        'rockmongo' => '',
+        'webgrind' => '',
+        'webinterface' => '',
+        'wincache' => '',
+        'xcache' => '',
+        'xhprof' => 'xhprof/xhprof_html'
     );
 
     public function __construct()
