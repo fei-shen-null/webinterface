@@ -52,6 +52,7 @@ class Projects
         'webgrind' => '',
         'webinterface' => '',
         'wincache' => '',
+        'xcache' => '',
         'xhprof' => 'xhprof/xhprof_html'
     );
 
