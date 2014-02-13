@@ -224,11 +224,11 @@ h2 small {
     text-shadow: 0 1px 0 #FFFFFF;
     white-space: nowrap;
 }
-.aButton:active {
+.aButton:active, .aSmallButton:active {
     position:relative;
     top:1px;
 }
-.aButton:hover {
+.aButton:hover, .aSmallButton:hover {
     border-color: #777;
     color: #333;
     outline: 0 none;
