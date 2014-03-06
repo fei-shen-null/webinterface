@@ -1,0 +1,14 @@
+#
+# .gitignore
+#
+
+*.php diff=php
+
+# do not git export the following directories
+tests export-ignore
+
+# do not git export the following files
+.travis.yml export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+box.json export-ignore
