@@ -36,14 +36,12 @@ window.alert = function () {
  * Highlights the current page in the headline main menu
  */
 function setCurrentPageActiveInMainMenu() {
-    var aObj = document.getElementsByClassName('main_menu')[0].getElementsByTagName('a');
-    for(var i = 0; i < aObj.length; i++) {
-        if(document.location.href.indexOf(aObj[i].href)>=0) {
-            aObj[i].className = 'active';
-
-        } else {
-            aObj[i].className = '';
-        }
+    var location = window.location.href.toString().split(window.location.host)[1];
+    $(".main_menu li a").removeClass("active");
+    $(".main_menu li a[href='" + location  + "']").addClass("active");
+    // special cases
+    if(location.indexOf("update") >= 0) {
+       $("a.dropdown-toggle:contains('Tools')").addClass("active");
     }
 }
 
