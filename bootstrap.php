@@ -90,6 +90,7 @@ if (!defined('WPNXM_DIR')) {
 
     // WPNXM Configuration File
     define('WPNXM_INI', WPNXM_DIR . '\wpn-xm.ini');
+    define('WPNXM_BIN', WPNXM_DIR . '\bin');
 
     /**
      * Feature Flags
@@ -117,10 +118,8 @@ if (!function_exists('showConstants')) {
         switch ($return) {
             case 'raw':
                 return $user_constants;
-                break;
             case 'export':
                 return var_export($user_constants, true);
-                break;
             case 'dump':
             default:
                 exit('<pre>' . var_dump($user_constants) . '</pre>');
