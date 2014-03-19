@@ -1,7 +1,8 @@
-Webinterface of the WPN-XM Server Stack. [![Build Status](https://travis-ci.org/WPN-XM/webinterface.png)](https://travis-ci.org/WPN-XM/webinterface)
+### Webinterface of the WPN-XM Server Stack [![Build Status](https://travis-ci.org/WPN-XM/webinterface.png)](https://travis-ci.org/WPN-XM/webinterface)
 
-Usage
------
+
+#### Usage
+
 
 During the installation process of WPN-XM the webinterface is installed to "/server/www/webinterface".
 By default the webinterface is served by Nginx, but it may also be served by the embedded PHP server.
