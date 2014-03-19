@@ -17,6 +17,6 @@ class Composer extends AbstractComponent
      */
     public function getVersion()
     {
-        return '0.0.0';
+        return '1.0.0';
     }
 }
