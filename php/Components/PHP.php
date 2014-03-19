@@ -38,7 +38,7 @@ class PHP extends AbstractComponent
     
     public $registryName = 'php';
     
-    public $installationFolder = '\bin\nginx';
+    public $installationFolder = '\bin\php';
 
     public $files = array(
         '\bin\php\php.ini',
