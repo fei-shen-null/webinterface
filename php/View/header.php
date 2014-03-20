@@ -41,7 +41,7 @@
     <!-- Twitter's Bootstrap -->
     <script type="text/javascript" src="/webinterface/assets/js/bootstrap.min.js"></script>
     <link type="text/css" href="/webinterface/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <?php if (isset($load_jquery) && $load_jquery === true) { ?>
+    <?php if (isset($load_jquery_additionals) && $load_jquery_additionals === true) { ?>
     <!-- jQuery Plugins -->
     <script type="text/javascript" src="/webinterface/assets/js/jquery.form.js"></script>
     <script type="text/javascript" src="/webinterface/assets/js/jquery.organicTabs.js"></script>

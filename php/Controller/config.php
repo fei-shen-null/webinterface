@@ -30,7 +30,7 @@
 function index()
 {
     $tpl_data = array(
-        'load_jquery' => true
+        'load_jquery_additionals' => true
     );
 
     render('page-action', $tpl_data);

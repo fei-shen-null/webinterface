@@ -32,11 +32,11 @@ function index()
     $projects = new Webinterface\Helper\Projects();
 
     $tpl_data = array(
+        'load_jquery_additionals' => true,
         'numberOfProjects' => $projects->getNumberOfProjects(),
         'listProjects' => $projects->listProjects(),
         'numberOfTools' => $projects->getNumberOfTools(),
-        'listTools' => $projects->listTools(),
-        'load_jquery' => true
+        'listTools' => $projects->listTools()
     );
 
     render('page-action', $tpl_data);

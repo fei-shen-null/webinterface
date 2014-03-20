@@ -30,7 +30,7 @@
 function index()
 {
     $tpl_data = array(
-        'load_jquery'      => true,
+        'load_jquery_additionals'      => true,
         'components'       => \Webinterface\Helper\Serverstack::getInstalledComponents(),
         'windows_version'  => \Webinterface\Helper\Serverstack::getWindowsVersion(),
         'bitsize'          => \Webinterface\Helper\Serverstack::getBitSizeString(),

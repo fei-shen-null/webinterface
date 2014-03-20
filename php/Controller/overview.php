@@ -28,12 +28,13 @@
     */
 
 use Webinterface\Helper\Serverstack;
+use Webinterface\Components\XDebug;
 
 function index()
 {
     $tpl_data = array(
       // load jq, because the database password reset uses jq modal window
-      'load_jquery'         => true,
+      'load_jquery_additionals' => true,
       // version
       'nginx_version'       => Serverstack::getVersion('nginx'),
       'php_version'         => Serverstack::getVersion('php'),
@@ -59,7 +60,9 @@ function index()
       'memcached_installed' => Serverstack::isInstalled('memcached'),
       'xdebug_installed'    => Serverstack::isInstalled('xdebug'),
       'mongodb_installed'   => Serverstack::isInstalled('mongodb'),
-
+      'phpext_memcached_installed' => Serverstack::isExtensionInstalled('memcached'),
+      'phpext_xdebug_installed' => Serverstack::isExtensionInstalled('xdebug'),
+      'xdebug_extension_type' => XDebug::getXDebugExtensionType()
     );
 
     render('page-action', $tpl_data);

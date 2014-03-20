@@ -1,7 +1,3 @@
-<?php
-use Webinterface\Helper\Serverstack;
-?>
-
 <div class="centered">
 
     <div class="left-box">
@@ -419,7 +415,7 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td>PHP Extension</td>
-                    <td class="right"><?php echo Serverstack::isExtensionInstalled('memcached'); ?></td>
+                    <td class="right"><?php echo $phpext_memcached_installed; ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
@@ -443,11 +439,11 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td>Installed &amp; Configured</td>
-                    <td class="right"><?php echo Serverstack::isExtensionInstalled('xdebug'); ?></td>
+                    <td class="right"><?php echo $phpext_xdebug_installed; ?></td>
                 </tr>
                 <tr>
                     <td>Extension Type</td>
-                    <td class="right"><?php echo \Webinterface\Components\XDebug::getXDebugExtensionType(); ?></td>
+                    <td class="right"><?php echo $xdebug_extension_type; ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
