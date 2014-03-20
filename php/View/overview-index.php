@@ -268,10 +268,10 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="2" class="right">                        
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
+                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
                             <img alt="Start PHP" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                         </a>
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
+                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
                             <img alt="Stop PHP" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                         </a>
                         <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php'; ?>">Configure</a>
@@ -321,11 +321,11 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="5" class="right">
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>">
+                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
                             <img alt="Start MariaDb" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                         </a>
 
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
+                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>">
                             <img alt="Stop MariaDb" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                         </a>
                         <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
@@ -377,10 +377,10 @@ use Webinterface\Helper\Serverstack;
                 </tr>
                 <tr>
                     <td colspan="5" class="right">
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
+                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
                                 <img alt="Start MongoDB" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                          </a>
-                         <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
+                         <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
                             <img alt="Stop MongoDB" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                          </a>
                         <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
