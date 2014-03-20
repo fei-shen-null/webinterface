@@ -262,22 +262,16 @@ class Serverstack
                 return 'PHP Extension Mongo';
             case 'nginx':
                 return 'Nginx';
-                break;
             case 'mariadb':
                 return 'MariaDB';
-                break;
             case 'memcached':
                 return 'Memcached';
-                break;
             case 'php':
                 return 'PHP';
-                break;
             case 'xdebug':
                 return 'PHP Extension XDebug';
-                break;
             case 'mongodb':
                 return 'MongoDB';
-                break;
             default:
                 throw new \InvalidArgumentException(sprintf(__METHOD__ . '() no name for the daemon: "%s"', $daemon));
         }
@@ -290,22 +284,15 @@ class Serverstack
             case 'nginx':
             case 'mariadb':
                 return true; // always installed - base of the server stack
-                break;
             case 'xdebug':
                 $o = new \Webinterface\Components\XDebug;
-
                 return $o->isInstalled();
-                break;
             case 'mongodb':
                 $o = new \Webinterface\Components\Mongodb;
-
                 return $o->isInstalled();
-                break;
             case 'memcached':
                 $o = new \Webinterface\Components\Memcached;
-
                 return $o->isInstalled();
-                break;
             default:
                 throw new \InvalidArgumentException(sprintf(__METHOD__ . '() has no case for the daemon: "%s"', $daemon));
         }
@@ -394,11 +381,9 @@ class Serverstack
             case 'mariadb':
                 $o = new \Webinterface\Components\Mariadb;
                 return $o->getPassword();
-                break;
             case 'mongodb':
                 $o = new \Webinterface\Components\Mongodb;
                 return $o->getPassword();
-                break;
             default:
                 throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
         }
