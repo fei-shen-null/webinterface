@@ -69,15 +69,11 @@ function index()
 }
 
 function stop(){
-    global $action;
     Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
-    $action="index";
-    index();
+    redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
 }
 
 function start(){
-    global $action;
     Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
-    $action="index";
-    index();
+    redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
 }
