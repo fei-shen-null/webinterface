@@ -136,6 +136,7 @@ class Serverstack
      *
      * @param  string $extension Extension to check.
      * @return bool   True if loaded, false otherwise.
+     * @throws \InvalidArgumentException
      */
     public static function assertExtensionConfigured($extension)
     {
@@ -197,6 +198,7 @@ class Serverstack
      *
      * @param  string  $daemon Daemon/Service name.
      * @return boolean
+     * @throws \InvalidArgumentException
      */
     public static function portCheck($daemon)
     {
@@ -277,6 +279,14 @@ class Serverstack
         }
     }
 
+    /**
+     * Checks, if a component is installed.
+     * A component is installed, when all its files exists.
+     * 
+     * @param string $component
+     * @return boolean
+     * @throws \InvalidArgumentException
+     */
     public static function isInstalled($component)
     {
         switch ($component) {
