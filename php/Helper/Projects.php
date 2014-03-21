@@ -102,11 +102,11 @@ class Projects
         if ($this->getNumberOfProjects() == 0) {
             $html = "No project dirs found.";
         } else {
-            $html .= '<ul class="projects">';
+            $html .= '<ul class="list-group">';
 
             foreach ($this->dirs as $dir) {
                 // always display the folder
-                $html .= '<li>';
+                $html .= '<li class="list-group-item">';
                 $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
 
                 if (FEATURE_4 == true) {
@@ -124,13 +124,13 @@ class Projects
 
     public function listTools()
     {
-        $html = '<ul class="tools">';
+        $html = '<ul class="list-group">';
 
         foreach ($this->toolDirectories as $dir => $href) {
             if ($href === '') {
-                $html .= '<li><a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a></li>';
+                $html .= '<li class="list-group-item"><a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a></li>';
             } else {
-                $html .='<li><a class="folder" href="' . WPNXM_ROOT . $href . '">' . $dir . '</a></li>';
+                $html .='<li class="list-group-item"><a class="folder" href="' . WPNXM_ROOT . $href . '">' . $dir . '</a></li>';
             }
         }
 

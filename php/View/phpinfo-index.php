@@ -1,23 +1,38 @@
 <h2 class="heading">Server Environment</h2>
 
-    <div class="cs-message-content search">
-        <div id="search">
-            <label><h4>Search in phpinfo()</h4></label>
-            <input id="textToHighlight" type="text" value="xdebug">
-            <button id="highlightButton">Search</button>
-            <button id="resetButton">Reset</button>
-            <div id="search-terms-navbar" style="visibility: hidden;">
-                Search Term found! <span id="hits-counter"></span> Hits.
-                <button id="nextButton">Next</button>
-                <button id="prevButton">Prev</button>
+<div class="panel panel-info search">
+    <div class="panel-heading left"><h4>Search in phpinfo()</h4></div>
+    <div class="panel-body"> 
+        <form class="form-horizontal" role="form" id="search">
+            
+            <!-- Input-Button-Button -->
+            <div class="form-group">  
+              <div class="col-md-10">
+                <div class="input-group">
+                  <input type="text" class="form-control col-md-5" id="textToHighlight" value="xdebug">
+                  <div class="input-group-btn">
+                    <button class="btn btn-info" type="button" id="highlightButton">Search</button>
+                    <button class="btn btn-default" type="button" id="resetButton">Reset</button> 
+                  </div>
+                </div>
+              </div>
+            </div>           
+                       
+        </form>    
+        <!-- Search Results -->
+        <div class="form-group" id="search-terms-navbar" style="visibility: hidden;">
+            <div class="col-sm-offset-2 col-sm-10">
+                <p>Search Term found! <span id="hits-counter"></span> Hits.</p>
+                <button class="btn btn-default btn-md" type="button" id="nextButton">Next</button>
+                <button class="btn btn-default btn-md" type="button" id="prevButton">Prev</button>
             </div>
         </div>
-    </div>
+    </div> 
+</div>
 
-    <div id="phpinfo">
-        <br/>
-        <?php echo $php_info; ?>
-    </div>
+<div class="phpinfo center">
+    <?php echo $php_info; ?>
+</div>
 
 <script type="text/javascript">
 <!--

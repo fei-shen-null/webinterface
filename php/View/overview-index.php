@@ -1,11 +1,9 @@
 <div class="centered">
-
     <div class="left-box">
-
         <h2>Server Software</h2>
-
+        
         <div class="cs-message">
-
+            
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -166,9 +164,7 @@
     </div>
 
     <div class="right-box">
-
         <h2>Configuration</h2>
-
         <div class="cs-message">
 
             <table class="cs-message-content">
@@ -181,38 +177,41 @@
                 </tr>
                 <tr>
                     <td>Host : Port</td>
-                    <td class="right"><?php echo $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']; ?></td>
+                    <td class="pull-right"><?php echo $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']; ?></td>
                 </tr>
                 <tr>
                     <td>Your IP</td>
-                    <td class="right"><?php echo $my_ip; ?></td>
+                    <td class="pull-right"><?php echo $my_ip; ?></td>
                 </tr>
                 <tr>
-                   <td colspan="5">
-                        <span class="floatleft">Directory</span>
-                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\nginx'; ?></span>
+                   <td colspan="2">
+                        <span class="pull-left">Directory</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\nginx'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5">
-                        <span class="floatleft">Config</span>
-                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\nginx\conf\nginx.conf'; ?></span>
+                    <td colspan="2">
+                        <span class="pull-left">Config</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\nginx\conf\nginx.conf'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
                                                 
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>">
+                        <a class="btn btn-default btn-sm pull-left"
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>">
                             <img alt="Start Nginx" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                         </a>
 
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=nginx'; ?>">
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left"
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=nginx'; ?>">
                              <img alt="Stop Nginx" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                         </a>
 
-                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
+                        <a class="btn btn-default btn-sm"
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
 
-                        <a class="aButton"
+                        <a class="btn btn-default btn-sm"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\access.log')) {
                             echo "onclick=\"alert('The Nginx Access Log not available. File was not found.'); return false;\"";
@@ -223,7 +222,7 @@
                         ?>
                         >Access Log</a>
 
-                        <a class="aButton"
+                        <a class="btn btn-default btn-sm"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\error.log')) {
                             echo "onclick=\"alert('The Nginx Error Log not available. File was not found.'); return false;\"";
@@ -248,30 +247,30 @@
                 </tr>
                 <tr>
                     <td class="width-40 left">Host : Port</td>
-                    <td class="right"><?php echo $_SERVER['SERVER_NAME'] .':'. $_SERVER['SERVER_PORT']; ?></td>
+                    <td class="pull-right"><?php echo $_SERVER['SERVER_NAME'] .':'. $_SERVER['SERVER_PORT']; ?></td>
                 </tr>
                 <tr>
-                    <td colspan="5">
-                        <span class="floatleft">Directory</span>
-                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\php'; ?></span>
+                    <td colspan="2">
+                        <span class="pull-left">Directory</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\php'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5">
-                        <span class="floatleft">Config</span>
-                        <span class="floatright"><?php echo get_cfg_var('cfg_file_path'); ?></span>
+                    <td colspan="2">
+                        <span class="pull-left">Config</span>
+                        <span class="pull-right"><?php echo get_cfg_var('cfg_file_path'); ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="right">                        
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
+                    <td class="right" colspan="2">                        
+                        <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
                             <img alt="Start PHP" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                         </a>
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
                             <img alt="Stop PHP" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                         </a>
-                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php'; ?>">Configure</a>
-                        <a class="aButton"
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php'; ?>">Configure</a>
+                        <a class="btn btn-default btn-sm"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\php_error.log')) {
                             echo "onclick=\"alert('The PHP Error Log is not available. File was not found.'); return false;\"";
@@ -282,51 +281,51 @@
                         ?>
                         >Show Log</a>
 
-                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo'; ?>">Show phpinfo()</a>
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo'; ?>">Show phpinfo()</a>
                     </td>
                 </tr>
             </table>
 
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="5">
+                    <td colspan="2">
                         <div class="resourceheader2 bold">
                         <?php echo $mariadb_status; ?> MariaDB
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Host : Port</td>
-                    <td colspan="4" class="right">localhost:3306</td>
+                    <td class="width-40 left">Host : Port</td>
+                    <td class="pull-right">localhost:3306</td>
                 </tr>
                 <tr>
-                    <td colspan="2">Username | Password</td>
-                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?php echo $mariadb_password; ?></span></td>
+                    <td colspan="1">Username | Password</td>
+                    <td class="pull-right"><span class="red">root</span> | <span class="red"><?php echo $mariadb_password; ?></span></td>
                 </tr>
                 <tr>
-                     <td colspan="5">
-                        <span class="floatleft">Directory</span>
-                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\mariadb'; ?></span>
+                     <td colspan="2">
+                        <span class="pull-left">Directory</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\mariadb'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5">
-                        <span class="floatleft">Config</span>
-                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\mariadb\my.ini'; ?></span>
+                    <td colspan="2">
+                        <span class="pull-left">Config</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\mariadb\my.ini'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="right">
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
+                    <td colspan="2" class="right">
+                        <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
                             <img alt="Start MariaDb" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                         </a>
 
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>">
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>">
                             <img alt="Stop MariaDb" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                         </a>
-                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
 
-                        <a class="aButton"
+                        <a class="btn btn-default btn-sm"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\mariadb_error.log')) {
                             echo "onclick=\"alert('The MariaDB Error Log is not available. File was not found.'); return false;\"";
@@ -337,7 +336,7 @@
                         ?>
                         >Show Log</a>
 
-                        <?php if (class_exists('mysqli')) { ?> <a class="aButton" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
+                        <?php if (class_exists('mysqli')) { ?> <a class="btn btn-default btn-sm" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
                     </td>
                 </tr>
             </table>
@@ -345,42 +344,45 @@
             <?php if ($mongodb_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="5">
+                    <td>
                         <div class="resourceheader2 bold">
                         <?php echo $mongodb_status; ?> <?php echo $phpext_mongo_status; ?> MongoDB
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Host : Port</td>
-                    <td colspan="4" class="right">localhost:27017</td>
+                    <td><span class="pull-left">Host : Port</span>
+                        <span class="pull-right">localhost:27017</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2">Username | Password</td>
-                    <td colspan="3" class="right"><span class="red">root</span> | <span class="red"><?php echo $mongodb_password; ?></span></td>
+                    <td>
+                        <span class="pull-left">Username | Password</span>
+                        <span class="red pull-right">root</span> | <span class="red"><?php echo $mongodb_password; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="5">
-                        <span class="floatleft">Directory</span>
-                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\mongodb'; ?></span>
+                    <td>
+                        <span class="pull-left">Directory</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\mongodb'; ?></span>
                     </td>
                 </tr>
                  <tr>
-                    <td colspan="5">
-                        <span class="floatleft">Config</span>
-                        <span class="floatright"><?php echo WPNXM_DIR . '\bin\mongodb\mongodb.conf'; ?></span>
+                    <td>
+                        <span class="pull-left">Config</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\mongodb\mongodb.conf'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="right">
-                        <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
+                    <td class="right">
+                        <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
                                 <img alt="Start MongoDB" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                          </a>
-                         <a class="aSmallButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
+                         <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
                             <img alt="Stop MongoDB" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                          </a>
-                        <a class="aButton" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
-                        <a class="aButton"
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
+                        <a class="btn btn-default btn-sm"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\mongodb.log')) {
                             echo " onclick=\"alert('The MongoDB Log is not available. File was not found.'); return false;\"";
@@ -392,7 +394,7 @@
                         >Show Log</a>
 
                         <?php if (class_exists('mysqli')) { ?>
-                            <a class="aButton" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
+                            <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
                         <?php } ?>
 
                     </td>
@@ -411,15 +413,15 @@
                 </tr>
                 <tr>
                     <td class="width-40 left">Host : Port</td>
-                    <td class="right">localhost:11211</td>
+                    <td class="pull-right">localhost:11211</td>
                 </tr>
                 <tr>
                     <td>PHP Extension</td>
-                    <td class="right"><?php echo $phpext_memcached_installed; ?></td>
+                    <td class="pull-right"><?php echo $phpext_memcached_installed; ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
-                        <a class="aButton" href="index.php?page=config#memcached">Configure</a>
+                        <a class="btn btn-default btn-sm" href="index.php?page=config#memcached">Configure</a>
                     </td>
                 </tr>
             </table>
@@ -435,19 +437,19 @@
                 </tr>
                 <tr>
                     <td class="width-40 left">Host : Port</td>
-                    <td class="right">localhost:9000</td>
+                    <td class="pull-right">localhost:9000</td>
                 </tr>
                 <tr>
                     <td>Installed &amp; Configured</td>
-                    <td class="right"><?php echo $phpext_xdebug_installed; ?></td>
+                    <td class="pull-right"><?php echo $phpext_xdebug_installed; ?></td>
                 </tr>
                 <tr>
                     <td>Extension Type</td>
-                    <td class="right"><?php echo $xdebug_extension_type; ?></td>
+                    <td class="pull-right"><?php echo $xdebug_extension_type; ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
-                        <a class="aButton" href="index.php?page=config#xdebug">Configure</a>
+                        <a class="btn btn-default btn-sm" href="index.php?page=config#xdebug">Configure</a>
                     </td>
                 </tr>
             </table>

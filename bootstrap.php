@@ -148,6 +148,17 @@ function isAjaxRequest()
 }
 
 /**
+ * Redirect to Url.
+ * 
+ * @param string $url
+ */
+function redirect($url)
+{
+    header('Location: ' . $url);
+    exit;
+}
+
+/**
  * The autoloading function includes classes based on
  * a 1:1 mapping from namespace to directory structure.
  *
