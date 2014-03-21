@@ -9,9 +9,10 @@
             <div class="form-group">  
               <div class="col-md-10">
                 <div class="input-group">
-                  <input type="text" class="form-control col-md-5" id="textToHighlight" value="xdebug">
+                  <input type="text" class="form-control col-md-5" style="height:31px;" id="textToHighlight" value="xdebug">
                   <div class="input-group-btn">
-                    <button class="btn btn-info" type="button" id="highlightButton">Search</button>
+                    <button class="btn btn-info" type="button" id="highlightButton">
+                        <span class="glyphicon glyphicon-search"></span> Search</button>
                     <button class="btn btn-default" type="button" id="resetButton">Reset</button> 
                   </div>
                 </div>
