@@ -43,7 +43,7 @@ foreach ($components as $index => $componentName) {
     
     unset($component);
 }
-echo '</table></div></div>';
+echo '</table></div></div></div>';
 
 /**
  * The function prints an update symbol if old_version is lower than new_version.

@@ -22,16 +22,16 @@
         </form>    
         <!-- Search Results -->
         <div class="form-group" id="search-terms-navbar" style="visibility: hidden;">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-10">
                 <p>Search Term found! <span id="hits-counter"></span> Hits.</p>
-                <button class="btn btn-default btn-md" type="button" id="nextButton">Next</button>
-                <button class="btn btn-default btn-md" type="button" id="prevButton">Prev</button>
+                <button class="btn btn-default btn-md" type="button" id="nextButton"><span class="glyphicon glyphicon-arrow-down"></span> Next</button>
+                <button class="btn btn-default btn-md" type="button" id="prevButton"><span class="glyphicon glyphicon-arrow-up"></span> Prev</button>
             </div>
         </div>
     </div> 
 </div>
 
-<div class="phpinfo center">
+<div id="phpinfo" class="phpinfo center">
     <?php echo $php_info; ?>
 </div>
 
