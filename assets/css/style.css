@@ -172,7 +172,7 @@ img {
 }
 
 h1.logo {
-    background: url("http://wpn-xm.org/images/wpnxm-logo.png") no-repeat scroll 0 0 transparent;
+    background: url("../img/wpnxm-logo.png") no-repeat scroll 0 0 transparent;
     height: 88px;
     margin: 31px auto 18px;
     overflow: hidden;
