@@ -155,7 +155,7 @@ class Projects
             if (true === $this->containsComposerConfig($dir)) {
                 $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
                 // add the github link by showing a github icon
-                $html .= '<a class="btn btn-mini pull-right" style="padding-left: 6px; padding-bottom: 1px; margin-left: 3px; border-right-width: 1px;"';
+                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 150px;"';
                 $html .= ' href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
             }
 
