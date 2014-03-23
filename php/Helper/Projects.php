@@ -155,11 +155,12 @@ class Projects
             if (true === $this->containsComposerConfig($dir)) {
                 $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
                 // add the github link by showing a github icon
-                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 150px;"';
+                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
                 $html .= ' href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
             }
 
             $package = $this->getPackagistPackageDescription($composer['name']);
+            var_Dump($package);
 
             if(isset($package['status']) && $package['status'] === 'error') {
                 \Webinterface\Helper\Serverstack::printExclamationMark(
@@ -167,11 +168,12 @@ class Projects
                     ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
                 );
             } else {
-                $packageName = $this->getPackageName($package);
+                //$packageName = $this->getPackageName($package);
+                $packageName = strtolower($package['package']['name']);
 
                 if (isset($packageName) === true) {
                     // add the travis link by showing build status icon
-                    $html .= '<a class="pull-right" href="http://travis-ci.org/' . $packageName . '">';
+                    $html .= '<a style="margin-left: 5px;" href="http://travis-ci.org/' . $packageName . '">';
                     $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
                     $html .= '</a>';
                 }
