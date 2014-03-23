@@ -160,7 +160,6 @@ class Projects
             }
 
             $package = $this->getPackagistPackageDescription($composer['name']);
-            var_Dump($package);
 
             if(isset($package['status']) && $package['status'] === 'error') {
                 \Webinterface\Helper\Serverstack::printExclamationMark(
