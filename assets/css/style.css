@@ -392,6 +392,7 @@ img
 }
 
 .search {
+    width: 20%;
     position: fixed;
     right: 70px;
     border:1px solid #a7a7a7;
