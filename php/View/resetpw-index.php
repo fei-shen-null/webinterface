@@ -4,8 +4,8 @@
         <h4>Please enter the new database password (user root):</h4>
         <input type="text" name="newPassword">
         <br><br>
-        <a class="aButton" rel="modal:close">Cancel</a>
-        <a class="aButton" id="btn-change-password" rel="ajax:modal">Change Password</a>
+        <a class="btn btn-default btn-sm" rel="modal:close">Cancel</a>
+        <a class="btn btn-default btn-sm" id="btn-change-password" rel="ajax:modal">Change Password</a>
         <div id="reset-pw-result"></div>
     </fieldset>
 </form>

@@ -4,14 +4,14 @@
         <div class="cs-message">
             <div class="cs-message-content-projects">
                 <?php if (FEATURE_1 == true) { // @todo feature-flag create new project dialog ?>
-                    <a class="aButton new-project-btn-position floatright"
-                       rel="modal:open" href="/webinterface/index.php?page=projects#newproject" >
+                    <a class="btn btn-default btn-sm new-project-btn-position floatright"
+                       rel="modal:open" href="/webinterface/index.php?page=projects&action=newproject" >
                        New Project
                     </a>
                 <?php } ?>
                  <?php if (FEATURE_4 == true) { // @todo feature-flag create new project dialog ?>
-                    <a class="aButton new-project-btn-position floatright"
-                        rel="modal:open" href="/webinterface/index.php?page=domains#listDomains">
+                    <a class="btn btn-default btn-sm new-project-btn-position floatright"
+                        rel="modal:open" href="/webinterface/index.php?page=domains">
                         List Domains
                     </a>
                 <?php } ?>

@@ -32,12 +32,28 @@ function index()
     $projects = new Webinterface\Helper\Projects();
 
     $tpl_data = array(
-        'numberOfProjects' => $projects->getNumberOfProjects(),
-        'listProjects' => $projects->listProjects(),
-        'numberOfTools' => $projects->getNumberOfTools(),
-        'listTools' => $projects->listTools(),
-        'load_jquery' => true
+        'load_jquery_additionals' => true,
+        'numberOfProjects'        => $projects->getNumberOfProjects(),
+        'listProjects'            => $projects->listProjects(),
+        'numberOfTools'           => $projects->getNumberOfTools(),
+        'listTools'               => $projects->listTools()
     );
 
     render('page-action', $tpl_data);
+}
+
+function newproject()
+{
+    $tpl_data = array(
+        'no_layout' => true
+    );
+
+    render('page-action', $tpl_data);
+}
+
+function createproject()
+{
+    $project = filter_input(INPUT_POST, 'projectname');
+    mkdir(WPNXM_WWW_DIR . DS . $project, 0777);
+    redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=projects');
 }

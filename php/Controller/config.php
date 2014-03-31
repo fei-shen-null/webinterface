@@ -30,7 +30,7 @@
 function index()
 {
     $tpl_data = array(
-        'load_jquery' => true
+        'load_jquery_additionals' => true
     );
 
     render('page-action', $tpl_data);
@@ -102,9 +102,8 @@ function showtab_php_ext()
 
     $tpl_data = array(
         'no_layout' => true,
-        'available_extensions' => $phpext->getExtensionDirFileList(),
-        'enabled_extensions' => $phpext->getEnabledExtensionsFromIni(),
-        //'loaded_extensions' => $phpext->getExtensionsLoaded()
+        'number_available_extensions' => count($phpext->getExtensionDirFileList()),
+        'number_enabled_extensions' => count($phpext->getEnabledExtensionsFromIni()),
         'form' => renderPHPExtensionsFormContent()
     );
 
@@ -174,8 +173,7 @@ function renderPHPExtensionsFormContent()
 
         /**
          * Deactivate the checkbox for the XDebug Extension.
-         * XDebug is not loaded as normal PHP extension ([PHP]extension=).
-         * It is loaded as a Zend Engine extension ([ZEND]zend_extension=).
+         * XDebug is not loaded as normal PHP extension, but as a Zend Engine extension.
          */
         $disabled = '';
         if (strpos($name, 'xdebug') !== false) {
@@ -184,7 +182,7 @@ function renderPHPExtensionsFormContent()
 
         // render column opener (everytime on 1 of 12)
         if ($i === 1) {
-            $html_checkboxes .= '<div class="control-group" style="float: left; width: 125px; margin: 10px;">';
+            $html_checkboxes .= '<div class="form-group" style="float: left; width: 140px; margin: 10px;">';
         }
 
         // the input tag is wrapped by the label tag
@@ -196,6 +194,7 @@ function renderPHPExtensionsFormContent()
         $html_checkboxes .= substr($name, 4);
         $html_checkboxes .= '</label>';
 
+        // 12 elements vertical
         if ($i === 12 or $itemsTotal === 1) {
             $html_checkboxes .= '</div>';
             $i = 0; /* reset column counter */

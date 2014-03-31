@@ -1,4 +1,12 @@
 <h2 class="heading">Updater</h2>
+
+<?php
+// display info box, if registry was updated
+if($registry_updated === true) {
+    echo '<div class="info">The WPN-XM Software Registry was updated.</div>';
+}
+?>
+
 <div class="left-box"> 
     <div class="cs-message">
         <div class="cs-message-content cs-message-content-config">
@@ -35,7 +43,7 @@ foreach ($components as $index => $componentName) {
     
     unset($component);
 }
-echo '</table></div></div>';
+echo '</table></div></div></div>';
 
 /**
  * The function prints an update symbol if old_version is lower than new_version.

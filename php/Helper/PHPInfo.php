@@ -64,7 +64,7 @@ class PHPInfo
         # only the body content
         preg_match_all("=<body[^>]*>(.*)</body>=siU", $buffered_phpinfo, $matches);
         $phpinfo = $matches[1][0];
-
+        
         # enhance the readability of semicolon separated items
         $phpinfo = str_replace(";", "; ", $phpinfo);
         $phpinfo = str_replace('&quot;', '"', $phpinfo);
@@ -80,6 +80,7 @@ class PHPInfo
         $phpinfo = preg_replace('#>(no|off|disabled)#i', '><span style="color:#f00; font-weight: bold;">$1</span>', $phpinfo);
 
         # grab all php extensions for display in an additional table
+        $match_modules = array();
         preg_match_all("^(?:module_)(.*)\"^", $buffered_phpinfo, $match_modules, PREG_SET_ORDER);
 
         // create 4 lists from the whole extensions result set
@@ -92,17 +93,20 @@ class PHPInfo
 
         // create html table listing the extensions
         $html = '';
-        $html .= '<div class="center"><h1>PHP Extensions</h1>';
-        $html .= '<table style="width: 600px";>';
+        $html .= '<div class="panel panel-info content-centered" style="width: 600px">';
+        $html .= '<div class="panel-heading"><h4>PHP Extensions</h4></div>';
+        $html .= '<div class="panel panel-body">';
+        $html .= '<p style="font-size: 12px">Click an extension, to jump to its phpinfo section.</p>';
 
         foreach ($modlists as $modlist) {
-            $html .= '<td valign="top"><ul>';
+            $html .= '<div class="col-md-3"><ul class="list-group">';
             foreach ($modlist as $mod) {
-                $html .= '<li><a href="#module_' . $mod[1] . '">' . $mod[1] . '</a></li>';
+                $html .= '<li class="list-group-item margin-2">';
+                $html .= '<a href="#module_' . $mod[1] . '">' . $mod[1] . '</a></li>';
             }
-            $html .= '</ul></td>';
+            $html .= '</ul></div>';
         }
-        $html .= '</tr></table></div><br>';
+        $html .= '</div></div>';
 
         return $html . $phpinfo;
     }

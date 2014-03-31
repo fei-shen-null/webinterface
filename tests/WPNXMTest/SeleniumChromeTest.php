@@ -42,7 +42,7 @@ class SeleniumChromeTest extends \PHPUnit_Extensions_SeleniumTestCase
     public function testTitle()
     {
         $this->open('/');
-        $this->assertTitle('WPИ-XM Server Stack for Windows');
+        $this->assertTitle('WPИ-XM Server Stack for Windows - @APPVERSION@');
     }
 
 }

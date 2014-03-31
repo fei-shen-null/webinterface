@@ -48,9 +48,9 @@ class PHPINI
 
     public static function setDirective($section, $directive, $value)
     {
-        // $this->doBackup(); @todo add backup functionality, before writing
-
         $ini_file = php_ini_loaded_file();
+        
+        self::doBackup($ini_file);
 
         $ini = new INIReaderWriter($ini_file);
         $ini->set($section, $directive, $value);
@@ -60,13 +60,30 @@ class PHPINI
         return true;
     }
 
-    public static function doBackup()
+    public static function doBackup($file)
     {
-        // copy whole file
-
-        // add date/time to new file name
+        $newFilename = str_replace('.ini', '', $file);
+        $newFilename .= '-backup-' . date("dmy-His") . '.ini';
+    
+        // backup current registry
+        copy($file, $newFilename);
 
         // keep last 3 files, remove older files
+        self::removeOldBackupFiles();
+        
         return true;
     }
+    
+    public static function removeOldBackupFiles()
+    {
+        $files = glob(WPNXM_BIN . '\php\php-backup-*.ini');
+        $c = count($files);
+        if ($c > 3) {
+            rsort($files);            
+            for ($i = 3; $i <= $c; $i++) {
+                unlink(trim($files[$i]));
+            }            
+        }
+    }
+
 }

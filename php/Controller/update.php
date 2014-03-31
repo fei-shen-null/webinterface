@@ -29,35 +29,13 @@
 
 function index()
 {
-    // fetch header date
-    $url = 'https://raw2.github.com/WPN-XM/registry/master/wpnxm-software-registry.php';
-    
-    stream_context_set_default(
-        array(
-            'http' => array(
-                'method' => 'HEAD'
-            )
-        )
-    );
-    
-    $headers = get_headers($url);
-    
-    // parse header date
-    $date_str = str_replace('Date: ', '', $headers[1]);
-    $date = DateTime::createFromFormat('D, d M Y H:i:s O', $date_str);
-    $last_modified = filemtime(WPNXM_DATA_DIR . 'wpnxm-software-registry.php');
-    $update = $date->getTimestamp() >= $last_modified + (7 * 24 * 60 * 60); 
-
-    if($update === true) {
-       file_put_contents(WPNXM_DATA_DIR . 'wpnxm-software-registry.php', file_get_contents($url)); 
-    }    
-    
     $tpl_data = array(
-        'load_jquery' => true,
-        'components' => \Webinterface\Helper\Serverstack::getInstalledComponents(),
-        'registry' => include WPNXM_DATA_DIR . 'wpnxm-software-registry.php',
-        'windows_version' => \Webinterface\Helper\Serverstack::getWindowsVersion(),
-        'bitsize' => \Webinterface\Helper\Serverstack::getBitSizeString() 
+        'load_jquery_additionals'      => true,
+        'components'       => \Webinterface\Helper\Serverstack::getInstalledComponents(),
+        'windows_version'  => \Webinterface\Helper\Serverstack::getWindowsVersion(),
+        'bitsize'          => \Webinterface\Helper\Serverstack::getBitSizeString(),
+        'registry_updated' => \Webinterface\Helper\Updater::updateRegistry(),
+        'registry'         => include WPNXM_DATA_DIR . 'wpnxm-software-registry.php'
     );
 
     render('page-action', $tpl_data);

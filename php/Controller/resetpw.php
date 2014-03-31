@@ -81,7 +81,7 @@ function update()
             $ini->write();
         }
 
-        $return .= '<br/><a class="aButton" rel="modal:close" href="#">Close</a></div>'; // provide close button for modal window
+        $return .= '<br/><a class="btn btn-default btn-sm" rel="modal:close" href="#">Close</a></div>'; // provide close button for modal window
 
         unset($connection);
 

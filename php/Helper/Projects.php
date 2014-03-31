@@ -102,11 +102,11 @@ class Projects
         if ($this->getNumberOfProjects() == 0) {
             $html = "No project dirs found.";
         } else {
-            $html .= '<ul class="projects">';
+            $html .= '<ul class="list-group">';
 
             foreach ($this->dirs as $dir) {
                 // always display the folder
-                $html .= '<li>';
+                $html .= '<li class="list-group-item">';
                 $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
 
                 if (FEATURE_4 == true) {
@@ -124,13 +124,13 @@ class Projects
 
     public function listTools()
     {
-        $html = '<ul class="tools">';
+        $html = '<ul class="list-group">';
 
         foreach ($this->toolDirectories as $dir => $href) {
             if ($href === '') {
-                $html .= '<li><a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a></li>';
+                $html .= '<li class="list-group-item"><a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a></li>';
             } else {
-                $html .='<li><a class="folder" href="' . WPNXM_ROOT . $href . '">' . $dir . '</a></li>';
+                $html .='<li class="list-group-item"><a class="folder" href="' . WPNXM_ROOT . $href . '">' . $dir . '</a></li>';
             }
         }
 
@@ -155,7 +155,7 @@ class Projects
             if (true === $this->containsComposerConfig($dir)) {
                 $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
                 // add the github link by showing a github icon
-                $html .= '<a class="btn btn-mini pull-right" style="padding-left: 6px; padding-bottom: 1px; margin-left: 3px; border-right-width: 1px;"';
+                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
                 $html .= ' href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
             }
 
@@ -167,11 +167,12 @@ class Projects
                     ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
                 );
             } else {
-                $packageName = $this->getPackageName($package);
+                //$packageName = $this->getPackageName($package);
+                $packageName = strtolower($package['package']['name']);
 
                 if (isset($packageName) === true) {
                     // add the travis link by showing build status icon
-                    $html .= '<a class="pull-right" href="http://travis-ci.org/' . $packageName . '">';
+                    $html .= '<a style="margin-left: 5px;" href="http://travis-ci.org/' . $packageName . '">';
                     $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
                     $html .= '</a>';
                 }

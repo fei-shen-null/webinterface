@@ -28,8 +28,8 @@
             } ?>
         </table>
         <div class="form-actions">
-            <button type="submit" class="aButton"><i class="icon-ok"></i>&nbsp;&nbsp;&nbsp;Submit</button>
-            <button type="reset" class="aButton"><i class="icon-remove"></i>&nbsp;&nbsp;&nbsp;Reset</button>
+            <button type="submit" class="btn btn-default btn-sm"><i class="icon-ok"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+            <button type="reset" class="btn btn-default btn-sm"><i class="icon-remove"></i>&nbsp;&nbsp;&nbsp;Reset</button>
         </div>
     </form>
 
@@ -111,8 +111,8 @@
         </ul>
 
         <div class="form-actions">
-            <button type="submit" class="aButton"><i class="icon-ok"></i>&nbsp;&nbsp;&nbsp;Submit</button>
-            <button type="reset" class="aButton"><i class="icon-remove"></i>&nbsp;&nbsp;&nbsp;Reset</button>
+            <button type="submit" class="btn btn-default btn-sm"><i class="icon-ok"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+            <button type="reset" class="btn btn-default btn-sm"><i class="icon-remove"></i>&nbsp;&nbsp;&nbsp;Reset</button>
         </div>
 
     </form>
