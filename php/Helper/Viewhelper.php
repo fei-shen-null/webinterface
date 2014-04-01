@@ -33,25 +33,6 @@ class Viewhelper
 {
     public static function showMenu()
     {
-        // closure
-        $phpmyadmin_link = function () {
-           // is phpmyadmin installed?
-           if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
-               $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
-               $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
-
-               return '<a href="'.$href.'">phpMyAdmin</a>';
-           }
-        };
-
-        // closure
-        $adminer_link = function () {
-            // is adminer installed?
-            if (is_dir(WPNXM_WWW_DIR . 'adminer') === true) {
-                return '<a href="' . WPNXM_ROOT . 'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a>';
-            }
-        };
-
         $menu = '<div class="main_menu navbar">
                  <ul class="nav">
                     <li class="first"><a href="' . WPNXM_WEBINTERFACE_ROOT .'index.php?page=overview">Overview</a></li>
@@ -60,8 +41,8 @@ class Viewhelper
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                             <li>'.$phpmyadmin_link().'</li>
-                             <li>'.$adminer_link().'</li>
+                             <li>'.self::getPhpmyadminLink().'</li>
+                             <li>'.self::getAdminerLink().'</li>
                              <li class="divider"></li>
                              <li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>'.
                             /* '<li><a href="#">Filter2</a></li>
@@ -76,6 +57,23 @@ class Viewhelper
              </div>';
 
         echo $menu;
+    }
+
+    public static function getPhpmyadminLink() {
+       // is phpmyadmin installed?
+       if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
+           $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
+           $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
+
+           return '<a href="'.$href.'">phpMyAdmin</a>';
+       }
+    }
+
+    public static function getAdminerLink() {
+        // is adminer installed?
+        if (is_dir(WPNXM_WWW_DIR . 'adminer') === true) {
+            return '<a href="' . WPNXM_ROOT . 'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a>';
+        }
     }
 
     public static function showWelcome()
@@ -99,23 +97,19 @@ class Viewhelper
     public static function fileCounter($file, $max_counts)
     {
         $max_counts = (int) $max_counts;
-
-        // file to write
         $file = (string) $file;
 
         // if file not existing, create and start counting with 1
         if (is_file($file) === false) {
             file_put_contents($file, 1);
         } else {
-            // read file
+            // read, comparison, incr
             $current = file_get_contents($file);
 
-            // comparison
-            if ($current == $max_counts) {
+            if ((int)$current === (int)$max_counts) {
                 return true;
             }
 
-            // increase counter
             if ($current < $max_counts) {
                 $current++;
                 file_put_contents($file, $current);
