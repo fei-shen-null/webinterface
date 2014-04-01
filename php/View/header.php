@@ -34,17 +34,18 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
     <title>WPИ-XM Server Stack for Windows - <?php echo WPNXM_VERSION; ?></title>
     <meta name="description" content="WPИ-XM Server Stack for Windows - Webinterface.">
+    <meta name="author" content="Jens-André Koch" />
     <link rel="shortcut icon" href="favicon.ico" />
-    
+
     <!-- jQuery -->
     <script type="text/javascript" src="/webinterface/assets/js/jquery-1.9.1.min.js"></script>
     <!-- Twitter's Bootstrap -->
     <script type="text/javascript" src="/webinterface/assets/js/bootstrap.min.js"></script>
     <link type="text/css" href="/webinterface/assets/css/bootstrap.min.css" rel="stylesheet" />
-    
+
     <?php if (isset($load_jquery_additionals) && $load_jquery_additionals === true) { ?>
     <!-- jQuery Plugins -->
     <script type="text/javascript" src="/webinterface/assets/js/jquery.form.js"></script>
@@ -54,11 +55,11 @@
     <script type="text/javascript" src="/webinterface/assets/js/jquery.modal.js"></script>
     <link type="text/css" href="/webinterface/assets/css/jquery.treeTable.css" rel="stylesheet" />
     <?php } ?>
-    
+
     <!-- WPN-XM stuff last in line, because using jQuery and overwriting CSS -->
     <link rel="stylesheet" type="text/css" href="/webinterface/assets/css/style.css"  media="screen, projection" />
     <script type="text/javascript" src="/webinterface/assets/js/wpnxm.js"></script>
-    
+
 </head>
 <body>
 
@@ -73,11 +74,11 @@
 </style></noscript>
 
 <div class="container center">
-    
+
     <h1 class="logo">
         <small style="position:relative; top:90px; left:150px;">Version <?php echo WPNXM_VERSION; ?></small>
     </h1>
-   
+
     <?php
         Webinterface\Helper\Viewhelper::showMenu();
         Webinterface\Helper\Viewhelper::showWelcome();
