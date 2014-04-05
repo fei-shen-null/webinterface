@@ -41,7 +41,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
 
     <!-- jQuery -->
-    <script type="text/javascript" src="/webinterface/assets/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/webinterface/assets/js/jquery.min.js"></script>
     <!-- Twitter's Bootstrap -->
     <script type="text/javascript" src="/webinterface/assets/js/bootstrap.min.js"></script>
     <link type="text/css" href="/webinterface/assets/css/bootstrap.min.css" rel="stylesheet" />
