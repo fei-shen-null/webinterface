@@ -35,7 +35,7 @@ namespace Webinterface\Components;
 class XDebug extends AbstractComponent
 {
     public $name = 'XDebug';
-    
+
     public $registryName = 'phpext_xdebug';
 
     public $type = 'PHP Extension';
@@ -109,5 +109,10 @@ class XDebug extends AbstractComponent
 
         //echo 'Xdebug enabled.';
         header('Location: '.WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
+    }
+
+    public function isProfilerActive()
+    {
+        return ini_get('xdebug.profiler_enable');
     }
 }

@@ -1,9 +1,9 @@
 <div class="centered">
     <div class="left-box">
         <h2>Server Software</h2>
-        
+
         <div class="cs-message">
-            
+
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -197,7 +197,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
-                                                
+
                         <a class="btn btn-default btn-sm pull-left"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>">
                             <img alt="Start Nginx" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
@@ -262,7 +262,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="right" colspan="2">                        
+                    <td class="right" colspan="2">
                         <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
                             <img alt="Start PHP" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                         </a>
@@ -441,7 +441,8 @@
                 </tr>
                 <tr>
                     <td>Installed &amp; Configured</td>
-                    <td class="pull-right"><?php echo $phpext_xdebug_installed; ?></td>
+                    <td class="pull-right"><?php echo $phpext_xdebug_installed; ?>
+                    </td>
                 </tr>
                 <tr>
                     <td>Extension Type</td>
@@ -449,6 +450,14 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
+                        <?php
+                        if($xdebug_profiler_active == true) {
+                            echo '<a class="btn btn-success btn-sm pull-left">Profiler On</a>';
+                        } else {
+                            echo '<a class="btn btn-default btn-sm pull-left">Profiler Off</a>';
+                        }
+                        ?>
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_ROOT; ?>/webgrind/">Open Webgrind</a>
                         <a class="btn btn-default btn-sm" href="index.php?page=config#xdebug">Configure</a>
                     </td>
                 </tr>

@@ -62,7 +62,8 @@ function index()
       'mongodb_installed'   => Serverstack::isInstalled('mongodb'),
       'phpext_memcached_installed' => Serverstack::isExtensionInstalled('memcached'),
       'phpext_xdebug_installed' => Serverstack::isExtensionInstalled('xdebug'),
-      'xdebug_extension_type' => XDebug::getXDebugExtensionType()
+      'xdebug_extension_type' => XDebug::getXDebugExtensionType(),
+      'xdebug_profiler_active' => XDebug::isProfilerActive()
     );
 
     render('page-action', $tpl_data);
