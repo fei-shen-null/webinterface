@@ -209,9 +209,6 @@
                         </a>
 
                         <a class="btn btn-default btn-sm"
-                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
-
-                        <a class="btn btn-default btn-sm"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\access.log')) {
                             echo "onclick=\"alert('The Nginx Access Log not available. File was not found.'); return false;\"";
@@ -233,6 +230,8 @@
                         ?>
                         >Error Log</a>
 
+                        <a class="btn btn-default btn-sm"
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
                     </td>
                 </tr>
             </table>
@@ -269,7 +268,8 @@
                         <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
                             <img alt="Stop PHP" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                         </a>
-                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php'; ?>">Configure</a>
+
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo'; ?>">Show phpinfo()</a>
                         <a class="btn btn-default btn-sm"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\php_error.log')) {
@@ -280,8 +280,7 @@
                         }
                         ?>
                         >Show Log</a>
-
-                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo'; ?>">Show phpinfo()</a>
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#php'; ?>">Configure</a>
                     </td>
                 </tr>
             </table>
@@ -319,11 +318,13 @@
                         <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
                             <img alt="Start MariaDb" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
                         </a>
-
                         <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>">
                             <img alt="Stop MariaDb" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
                         </a>
-                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
+
+                        <?php if (class_exists('mysqli')) { ?>
+                            <a class="btn btn-default btn-sm" href="index.php?page=resetpw" rel="modal:open">Reset Password</a>
+                        <?php } ?>
 
                         <a class="btn btn-default btn-sm"
                         <?php
@@ -336,7 +337,7 @@
                         ?>
                         >Show Log</a>
 
-                        <?php if (class_exists('mysqli')) { ?> <a class="btn btn-default btn-sm" href="index.php?page=resetpw" rel="modal:open">Reset Password</a> <?php } ?>
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
                     </td>
                 </tr>
             </table>
@@ -377,11 +378,16 @@
                     <td class="right">
                         <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
                                 <img alt="Start MongoDB" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
-                         </a>
-                         <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
+                        </a>
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
                             <img alt="Stop MongoDB" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
-                         </a>
-                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
+                        </a>
+
+
+                        <?php if (class_exists('mysqli')) { ?>
+                            <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
+                        <?php } ?>
+
                         <a class="btn btn-default btn-sm"
                         <?php
                         if (!is_file(WPNXM_DIR . '\logs\mongodb.log')) {
@@ -393,10 +399,7 @@
                         ?>
                         >Show Log</a>
 
-                        <?php if (class_exists('mysqli')) { ?>
-                            <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
-                        <?php } ?>
-
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
                     </td>
                 </tr>
             </table>
