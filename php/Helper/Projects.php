@@ -161,21 +161,22 @@ class Projects
 
             $package = $this->getPackagistPackageDescription($composer['name']);
 
-            if(isset($package['status']) && $package['status'] === 'error') {
-                \Webinterface\Helper\Serverstack::printExclamationMark(
-                    'The request to packagist.org failed. This might be a service problem.' .
-                    ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
-                );
-            } else {
+            if(empty($package) === false) {
+
+                if(isset($package['status']) && $package['status'] === 'error') {
+                    \Webinterface\Helper\Serverstack::printExclamationMark(
+                        'The request to packagist.org failed. This might be a service problem.' .
+                        ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
+                    );
+                }
+
                 //$packageName = $this->getPackageName($package);
                 $packageName = strtolower($package['package']['name']);
 
-                if (isset($packageName) === true) {
-                    // add the travis link by showing build status icon
-                    $html .= '<a style="margin-left: 5px;" href="http://travis-ci.org/' . $packageName . '">';
-                    $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
-                    $html .= '</a>';
-                }
+                // add the travis link by showing build status icon
+                $html .= '<a style="margin-left: 5px;" href="http://travis-ci.org/' . $packageName . '">';
+                $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
+                $html .= '</a>';
             }
         }
 
@@ -191,7 +192,8 @@ class Projects
                 'ignore_errors' => true
              )
         ));
-        $json = file_get_contents($url, FALSE, $context);
+        // silenced, because this throws a warning, if offline
+        $json = @file_get_contents($url, FALSE, $context);
 
         $array = json_decode($json, true);
 
