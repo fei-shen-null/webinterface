@@ -457,7 +457,7 @@
                             echo '<a class="btn btn-default btn-sm pull-left">Profiler Off</a>';
                         }
                         ?>
-                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_ROOT; ?>/webgrind/">Open Webgrind</a>
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_ROOT; ?>webgrind/">Open Webgrind</a>
                         <a class="btn btn-default btn-sm" href="index.php?page=config#xdebug">Configure</a>
                     </td>
                 </tr>
