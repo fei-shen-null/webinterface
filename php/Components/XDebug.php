@@ -111,7 +111,7 @@ class XDebug extends AbstractComponent
         header('Location: '.WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
     }
 
-    public function isProfilerActive()
+    public static function isProfilerActive()
     {
         return ini_get('xdebug.profiler_enable');
     }
