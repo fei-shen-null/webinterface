@@ -2,24 +2,24 @@
 
 <div class="panel panel-info search">
     <div class="panel-heading left"><h4>Search in phpinfo()</h4></div>
-    <div class="panel-body"> 
+    <div class="panel-body">
         <form class="form-horizontal" role="form" id="search">
-            
+
             <!-- Input-Button-Button -->
-            <div class="form-group">  
+            <div class="form-group">
               <div class="col-md-10">
                 <div class="input-group">
-                  <input type="text" class="form-control col-md-5" style="height:31px;" id="textToHighlight" value="xdebug">
+                  <input type="text" class="form-control col-md-5" id="textToHighlight" value="xdebug">
                   <div class="input-group-btn">
                     <button class="btn btn-info" type="button" id="highlightButton">
                         <span class="glyphicon glyphicon-search"></span> Search</button>
-                    <button class="btn btn-default" type="button" id="resetButton">Reset</button> 
+                    <button class="btn btn-default" type="button" id="resetButton">Reset</button>
                   </div>
                 </div>
               </div>
-            </div>           
-                       
-        </form>    
+            </div>
+
+        </form>
         <!-- Search Results -->
         <div class="form-group" id="search-terms-navbar" style="visibility: hidden;">
             <div class="col-sm-10">
@@ -28,7 +28,7 @@
                 <button class="btn btn-default btn-md" type="button" id="prevButton"><span class="glyphicon glyphicon-arrow-up"></span> Prev</button>
             </div>
         </div>
-    </div> 
+    </div>
 </div>
 
 <div id="phpinfo" class="phpinfo center">
