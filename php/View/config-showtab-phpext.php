@@ -14,7 +14,7 @@ To enable an extension, check it's checkbox. To disable an extension uncheck it'
 </fieldset>
 
 <div class="right">
-    <button type="submit" class="btn btn-success">Submit</button>
     <button type="reset" class="btn btn-danger">Reset</button>
+    <button type="submit" class="btn btn-success">Submit</button>
 </div>
 </form>
