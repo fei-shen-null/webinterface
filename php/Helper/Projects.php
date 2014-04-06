@@ -113,7 +113,7 @@ class Projects
                     $html .= $this->getListDomainsButton($dir);
                 }
 
-                $html .= $this->getTravisCILink($dir);
+                $html .= $this->getRepositoryLinks($dir);
 
                 $html .= '</li>';
             }
@@ -137,7 +137,10 @@ class Projects
         return $html . '</ul>';
     }
 
-    public function getTravisCILink($dir)
+    /**
+     * Returns links with icons to Github, Travis-CI and Packagist.
+     **/
+    public function getRepositoryLinks($dir)
     {
         $html = '';
 
@@ -152,6 +155,19 @@ class Projects
               set the one found or ask user to select one of multiple
              * } */
 
+            /**
+             * some people set the composer name to "something/somwhere".
+             * that breaks the 1:1 relation between repository name and packagist name,
+             * e.g. github.com/bzick/fenom - fenom/fenom
+             *
+             * given that there is a 1:1 relation of travis-ci repo name and github repo name,
+             * the only way to get the travis repo url is by fetching the git origin url from the config.
+             * 1. read file: '.get/config'
+             * 2. fetch "[remote "origin"] url
+             * 3. extract repo name from URL = $package
+             */
+
+            // get github link
             if (true === $this->containsComposerConfig($dir)) {
                 $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
                 // add the github link by showing a github icon
@@ -170,13 +186,18 @@ class Projects
                     );
                 }
 
-                //$packageName = $this->getPackageName($package);
                 $packageName = strtolower($package['package']['name']);
 
-                // add the travis link by showing build status icon
+                // add the travis link by showing build status badge
                 $html .= '<a style="margin-left: 5px;" href="http://travis-ci.org/' . $packageName . '">';
                 $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
                 $html .= '</a>';
+
+                // add packagist link and download badge
+                /*
+                $html .= '<ul><li><a style="margin-left: 5px;" href="https://packagist.org/packages/' . $composer['name'] . '">';
+                $html .= '<img src="https://poser.pugx.org/' .  $composer['name']  . '/downloads.png">';
+                $html .= '</a></li></ul>';*/
             }
         }
 
