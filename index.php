@@ -27,7 +27,6 @@
     +----------------------------------------------------------------------------------+
     */
 
-// common bootstrap file with paths, constants, etc.
 include 'bootstrap.php';
 
 // page controller
