@@ -420,7 +420,7 @@
                 </tr>
                 <tr>
                     <td>PHP Extension</td>
-                    <td class="pull-right"><?php echo $phpext_memcached_installed; ?></td>
+                    <td class="pull-right"><?php echo ($phpext_memcached_installed === true) ? 'loaded': 'not loaded'; ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="right">
