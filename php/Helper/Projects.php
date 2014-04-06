@@ -145,7 +145,7 @@ class Projects
         $html = '';
 
         // display a link to Travis CI
-        if (true === $this->containsTravisConfig($dir)) {
+        if (true === $this->hasTravisConfig($dir)) {
 
             $composer = array();
 
@@ -168,7 +168,7 @@ class Projects
              */
 
             // get github link
-            if (true === $this->containsComposerConfig($dir)) {
+            if (true === $this->hasComposerConfig($dir)) {
                 $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
                 // add the github link by showing a github icon
                 $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
@@ -257,12 +257,12 @@ class Projects
         return is_file(WPNXM_DIR . '/bin/nginx/conf/domains/' . $dir . '.conf');
     }
 
-    public function containsTravisConfig($dir)
+    public function hasTravisConfig($dir)
     {
         return is_file(WPNXM_WWW_DIR . $dir . '/.travis.yml');
     }
 
-    public function containsComposerConfig($dir)
+    public function hasComposerConfig($dir)
     {
         return is_file(WPNXM_WWW_DIR . $dir . '/composer.json');
     }
