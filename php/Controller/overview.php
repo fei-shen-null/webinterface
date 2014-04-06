@@ -47,10 +47,10 @@ function index()
       'php_status'          => Serverstack::getStatus('php'),
       'mariadb_status'      => Serverstack::getStatus('mariadb'),
       'xdebug_status'       => Serverstack::getStatus('xdebug'),
-      'mongodb_status'      => Serverstack::getStatus('mongodb'),               // daemon
-      'phpext_mongo_status' => Serverstack::getStatus('phpext_mongo'),          // extension
-      'memcached_status'    => Serverstack::getStatus('memcached'),             // daemon
-      'phpext_memcached_status' => Serverstack::getStatus('phpext_memcache'),   // extension
+      'mongodb_status'      => Serverstack::getStatus('mongodb'),
+      'phpext_mongo_status' => Serverstack::getStatus('phpext_mongo'),
+      'memcached_status'    => Serverstack::getStatus('memcached'),
+      'phpext_memcached_status' => Serverstack::getStatus('phpext_memcache'),
       // your ip
       'my_ip'               => Serverstack::getMyIP(),
       // passwords
