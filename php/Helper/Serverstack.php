@@ -47,7 +47,7 @@ class Serverstack
             htmlspecialchars($image_title_text)
         );
     }
-    
+
     public static function printExclamationMarkLeft($image_title_text = '')
     {
         return sprintf(
@@ -130,63 +130,15 @@ class Serverstack
     }
 
     /**
-     * Tests, if an extension is correctly configured.
-     * An Extension is configured, when it gets loaded.
-     * An Extension is loaded, when the PHP Screen says so.
-     *
-     * @param  string $extension Extension to check.
-     * @return bool   True if loaded, false otherwise.
-     * @throws \InvalidArgumentException
-     */
-    public static function assertExtensionConfigured($extension)
-    {
-        $loaded = false;
-        $matches = '';
-
-        $phpinfo = PHPInfo::getPHPInfo();
-
-        switch ($extension) {
-            case "xdebug":
-                // Check phpinfo content for Xdebug as Zend Extension
-                $loaded = (preg_match('/with\sXdebug\sv([0-9.rcdevalphabeta-]+),/', $phpinfo, $matches)) ? true : false;
-
-                // Check phpinfo content for Xdebug as normal PHP extension (?)
-                $loaded = (preg_match('/xdebug support/', $phpinfo, $matches)) ? true : false;
-                break;
-            case "memcached":
-                $loaded = (preg_match('/memcache/', $phpinfo, $matches)) ? true : false;
-                break;
-            case "apc":
-                $loaded = (preg_match('/apc/', $phpinfo, $matches)) ? true : false;
-                break;
-            case "zeromq":
-                $loaded = (preg_match('/zeromq/', $phpinfo, $matches)) ? true : false;
-                break;
-            case "mongo":
-                $loaded = (preg_match('/mongo/', $phpinfo, $matches)) ? true : false;
-                break;
-            default:
-                throw new \InvalidArgumentException(sprintf('There is no assertion for the extension: %s', $extension));
-        }
-
-        unset($phpinfo);
-
-        return $loaded;
-    }
-
-    /**
-     * Tests, if an extension is installed,
-     * by ensuring that the extension file exists and is correctly configured.
-     * Installed: when files exist.
-     * Loaded: when PHP Infos Screen says so.
+     * Tests, if an extension is installed.
+     * The extension file has to exist and the extensions must be loaded.
      *
      * @param  string $extension Extension to check.
      * @return bool   True if installed, false otherwise.
      */
     public static function isExtensionInstalled($extension)
     {
-        if (self::assertExtensionFileFound($extension) === true and
-            self::assertExtensionConfigured($extension) === true) {
+        if (self::assertExtensionFileFound($extension) === true and extension_loaded($extension)) {
             return true;
         }
 
@@ -282,7 +234,7 @@ class Serverstack
     /**
      * Checks, if a component is installed.
      * A component is installed, when all its files exists.
-     * 
+     *
      * @param string $component
      * @return boolean
      * @throws \InvalidArgumentException
@@ -398,7 +350,7 @@ class Serverstack
                 throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
         }
     }
-    
+
     public static function getWindowsVersion()
     {
         $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -425,7 +377,7 @@ class Serverstack
 
         return 'Unknown (' . $useragent . ')';
     }
-    
+
     /**
      * Returns the Bit-Size.
      *
@@ -443,7 +395,7 @@ class Serverstack
 
         return PHP_INT_SIZE; // 16-bit?
     }
-    
+
     public static function getBitSizeString()
     {
         return self::getBitSize() . 'bit';
