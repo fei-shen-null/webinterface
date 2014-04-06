@@ -110,7 +110,7 @@ class Projects
                 $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
 
                 if (FEATURE_4 == true) {
-                    $html .= $this->getListDomainsButton($dir);
+                    $html .= $this->renderDomainLink($dir);
                 }
 
                 $html .= $this->getRepositoryLinks($dir);
@@ -232,7 +232,7 @@ class Projects
         return str_replace('https://github.com/', '', $packageDescription['package']['repository']);
     }
 
-    public function getListDomainsButton($dir)
+    public function renderDomainLink($dir)
     {
         $html = '';
 
