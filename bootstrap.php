@@ -27,14 +27,9 @@
     +----------------------------------------------------------------------------------+
     */
 
-// errors
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-// memory
 ini_set('memory_limit', -1);
-
-// timezone
 date_default_timezone_set('Europe/Berlin');
 
 // drop request and globals
@@ -43,18 +38,9 @@ unset($GLOBALS);
 
 /**
  * Definition of Constants
- *
- * WPNXM_VERSION    -> major.minor.buildnumber
- *
- * Path Constants
- * --------------
- * WPNXM_DIR        -> wpn-xm/ Root Folder (bin, configs, ....)
- * WPNXM_WWW_DIR    -> wpn-xm/www
- * WPNXM_HELPER_DIR -> wpn-xm/www/webinterface/helper
- * WPNXM_WWW_ROOT   -> www path (http:// to the www folder)
  */
 if (!defined('WPNXM_DIR')) {
-    // WPNXM Version String (replaced automatically during build)
+    // WPNXM Version String (major.minor.buildnumber) replaced automatically during build
     define('WPNXM_VERSION', '@APPVERSION@');
 
     define('DS', DIRECTORY_SEPARATOR);
@@ -62,7 +48,7 @@ if (!defined('WPNXM_DIR')) {
     // Path Constants -> "c:/.."
     if (defined('PHPUNIT_TESTSUITE_TRAVIS') or (DS === '/')) {
         // Linux Paths
-        define('WPNXM_DIR', dirname(__DIR__)); # only the webinterface folder exists on travis   '.DS.'
+        define('WPNXM_DIR', dirname(__DIR__)); # only the webinterface folder exists on travis
         define('WPNXM_WWW_DIR', WPNXM_DIR . DS); # no www folder
         define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface/php/Controller/');
         define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface/php/Components/');
@@ -149,7 +135,7 @@ function isAjaxRequest()
 
 /**
  * Redirect to Url.
- * 
+ *
  * @param string $url
  */
 function redirect($url)
