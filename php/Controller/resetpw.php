@@ -29,62 +29,40 @@
 
 function index()
 {
-    render('page-action', array('no_layout' => true));
+    $component = filter_input(INPUT_GET, 'component', FILTER_SANITIZE_STRING);
+
+    $tpl_data = array(
+        'no_layout' => true,
+        'component' => ucfirst($component)
+    );
+    
+    render('page-action', $tpl_data);
 }
 
 function update()
 {
-    /**
-     * Resets the MariaDB Password
-     *
-     * The procedure is described in:
-     * http://dev.mysql.com/doc/mysql-windows-excerpt/5.0/en/resetting-permissions-windows.html
-     */
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-    $newPassword = filter_input(INPUT_GET, 'newPassword', FILTER_SANITIZE_STRING);
-
-    if (!empty($newPassword)) {
-        // commands
-        $stop_mariadb = "taskkill /f /IM mysqld.exe 1>nul 2>nul";
-        $mysqld_exe = /*WPNXM_DIR . '\bin\\tools\\RunHiddenConsole.exe ' .*/ WPNXM_DIR . "\bin\\mariadb\\bin\\mysqld.exe";
-        $start_mariadb_change_pw = $mysqld_exe . " --defaults-file=" . WPNXM_DIR . '\bin\\mariadb\\my.ini --init-file=' . WPNXM_DIR . '\bin\\mariadb\\init_passwd_change.txt';
-        $start_mariadb_normal = $mysqld_exe . " --defaults-file=" . WPNXM_DIR . '\bin\\mariadb\\my.ini';
-
-        // create the init-file with passwd update query
-        file_put_contents(
-            WPNXM_DIR . '\bin\mariadb\init_passwd_change.txt',
-            "UPDATE mysql.user SET PASSWORD=PASSWORD('$newPassword') WHERE User='root';\nFLUSH PRIVILEGES;"
-        );
-
-        // start mysqld again with init-file to change password
-        exec($stop_mariadb);
-        exec($start_mariadb_change_pw);
-        sleep("5");
-
-        exec($stop_mariadb);
-        exec($start_mariadb_normal);
-        sleep("3");
-
-        unlink(WPNXM_DIR . '\bin\mariadb\init_passwd_change.txt');
-
-        $connection = new \mysqli("localhost", "root", $newPassword, "mysql");
-
-        if (mysqli_connect_errno()) {
-            $return = '<div class="error">Database Connection with new password FAILED.<br/>';
-            $return .= '(MySQL ["' . mysqli_connect_errno() . '"]"' . mysqli_connect_error() . '")';
-        } else {
-            $return = '<div class="success">Password changed SUCCESSFULLY.';
-
-            // write new password
-            $ini = new \Webinterface\Helper\INIReaderWriter(WPNXM_INI);
-            $ini->set('MariaDB', 'password', $newPassword);
-            $ini->write();
-        }
-
-        $return .= '<br/><a class="btn btn-default btn-sm" rel="modal:close" href="#">Close</a></div>'; // provide close button for modal window
-
-        unset($connection);
-
-        echo $return; // ajax response
+    if (empty($password) === true) {
+        echo '<div class="alert alert-danger">No Password given!</div>';
+        return;
+    } 
+    
+    $component = filter_input(INPUT_POST, 'component', FILTER_SANITIZE_STRING);
+    
+    if(empty($component) === true) {
+        echo '<div class="alert alert-danger">No Component given!</div>';
+        return;
+    }
+    
+    switch ($component) { 
+        case 'mariadb':
+            $c = new Webinterface\Components\MariaDb();
+            echo $c->setPassword($password);
+        case 'mongodb':
+            $c = new Webinterface\Components\MongoDb();
+            echo $c->setPassword($password);
+        default:
+            echo '<div class="alert alert-danger">Component not found.</div>';
     }
 }

@@ -323,7 +323,8 @@
                         </a>
 
                         <?php if (class_exists('mysqli')) { ?>
-                            <a class="btn btn-default btn-sm" href="index.php?page=resetpw" rel="modal:open">Reset Password</a>
+                            <a class="btn btn-default btn-sm" href="index.php?page=resetpw&component=mariadb"
+                               data-toggle="modal" data-target="#myModal">Reset Password</a>
                         <?php } ?>
 
                         <a class="btn btn-default btn-sm"
@@ -385,7 +386,8 @@
 
 
                         <?php if (class_exists('mysqli')) { ?>
-                            <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;db=mongodb" rel="modal:open">Reset Password</a>
+                            <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;component=mongodb"
+                               data-toggle="modal" data-target="#myModal">Reset Password</a>
                         <?php } ?>
 
                         <a class="btn btn-default btn-sm"

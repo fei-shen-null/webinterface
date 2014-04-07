@@ -15,21 +15,30 @@ window.onload = function() {
     setCurrentPageActiveInMainMenu();
     enableTooltips();
     handlePHPExtensionsForm();
+    
+    onModalHideResetRemoteUrl();
 }
 
 /**
- * override native alert() function with a call to jquery.modal
+ * Allow Modal Content to be fetched from the new remote URL:
+ * by destroying the old modal and removing its remote URL.
+ */ 
+function onModalHideResetRemoteUrl() {
+    $('body').on('hidden.bs.modal', '.modal', function () {
+      $(this).removeData('bs.modal');
+    });
+}
+    
+/**
+ * override native alert() function with a call to bootstrap3 modal
  */
 window.alert = function () {
-  var msg = arguments[0];
-  jQuery('<div class="modal"></div>')
-  .html('<p class="error">' + msg.replace(/\n/g, "<br />") + '</p>')
-  .appendTo('body')
-    .modal({
-      escapeClose: true,
-      clickClose: false,
-      showClose: true
-    });
+  var msg = arguments[0];  
+  var alert = '<p class="error">' + msg.replace(/\n/g, "<br />") + '</p>';
+  $('#myModal .modal-title').html('ALERT');
+  $('#myModal .modal-body').html(alert);
+  $('#myModal button[type="submit"]').hide();
+  $("#myModal").modal('show');
 };
 
 /**

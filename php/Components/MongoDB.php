@@ -82,4 +82,9 @@ class MongoDb extends AbstractComponent
 
         return $ini->get('MongoDB', 'password');
     }
+    
+    public function setPassword($password)
+    {
+        return 'Not implemented, yet.';
+    }
 }

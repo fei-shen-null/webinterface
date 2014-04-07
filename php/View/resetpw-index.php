@@ -1,32 +1,51 @@
-<form id="reset-password-form" style="width:400px;" action="/webinterface/index.php?page=resetpw&action=update" method="POST">
-    <fieldset>
-        <legend>Change Database Password</legend>
-        <h4>Please enter the new database password (user root):</h4>
-        <input type="text" name="newPassword">
-        <br><br>
-        <a class="btn btn-default btn-sm" rel="modal:close">Cancel</a>
-        <a class="btn btn-default btn-sm" id="btn-change-password" rel="ajax:modal">Change Password</a>
-        <div id="reset-pw-result"></div>
-    </fieldset>
-</form>
+ <div class="modal-header">               
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Change Database Password for <?php echo $component; ?></h4>
+</div>
+<div class="modal-body">    
+    <form id="reset-password-form"
+          action="/webinterface/index.php?page=resetpw&action=update" method="POST">
+        <fieldset>            
+            <input type="hidden" name="component" value="<?php echo strtolower($component);?>">
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="password">New Password</label>  
+              <div class="col-md-6">
+              <input id="password" name="password" placeholder="pw" class="form-control input-md" type="text">
+              <span class="help-block">Set new password for user "root"</span>  
+              </div>
+            </div>
+        </fieldset>
+    </form>    
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary" id="modal-ok-button">Ok</button>
+</div>
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function () {
-         $('a[rel="ajax:modal"]').click(function (event) {
-            //xy.showSpinner();
-          $.ajax({
-            url: $(this).closest('form').attr('action'),
-            method: $(this).closest('form').attr('method'),
-            data: "newPassword=" + $(this).closest('form').find('input[name="newPassword"]').val(),
-            dataType: 'html',
-            success: function (newHTML, textStatus, jqXHR) {
-              //xy.hideSpinner();
-              $(newHTML).appendTo('div#reset-pw-result'); //.modal();
-            }
-            // ajax error
-          });
-
-          return false;
-        });
-    });
+$(document).ready(function() {
+   // $("#myModal .modal-title").html('TEST');
+   
+   // rename submit button
+   $('#myModal button[type="submit"]').html('Change Password');
+   
+   // bind submit action
+   $('#myModal button[type="submit"]').bind('click', function(event) {     
+       var form = $("#myModal .modal-body form");
+       
+       $.ajax({
+         type: form.attr('method'),
+         url: form.attr('action'),
+         data: form.serializeArray(),
+         
+         cache: false,
+         success: function(response, status) {
+           $('#myModal .modal-body').html(response);
+         }
+       });
+       
+       event.preventDefault();
+  });
+});
 </script>

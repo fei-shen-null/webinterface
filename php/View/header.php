@@ -52,7 +52,6 @@
     <script type="text/javascript" src="/webinterface/assets/js/jquery.organicTabs.js"></script>
     <script type="text/javascript" src="/webinterface/assets/js/jquery.treeTable.js"></script>
     <script type="text/javascript" src="/webinterface/assets/js/jquery.jeditable.js"></script>
-    <script type="text/javascript" src="/webinterface/assets/js/jquery.modal.js"></script>
     <link type="text/css" href="/webinterface/assets/css/jquery.treeTable.css" rel="stylesheet" />
     <?php } ?>
 

@@ -5,14 +5,16 @@
             <div class="cs-message-content-projects">
                 <?php if (FEATURE_1 == true) { // @todo feature-flag create new project dialog ?>
                     <a class="btn btn-default btn-sm new-project-btn-position floatright"
-                       rel="modal:open" href="/webinterface/index.php?page=projects&action=newproject" >
+                       data-toggle="modal" data-target="#myModal"
+                       href="/webinterface/index.php?page=projects&action=newproject" >
                        New Project
                     </a>
                 <?php } ?>
                  <?php if (FEATURE_4 == true) { // @todo feature-flag create new project dialog ?>
                     <a class="btn btn-default btn-sm new-project-btn-position floatright"
-                        rel="modal:open" href="/webinterface/index.php?page=domains">
-                        List Domains
+                       data-toggle="modal" data-target="#myModal"
+                       href="/webinterface/index.php?page=domains">
+                       List Domains
                     </a>
                 <?php } ?>
                 <h2>Projects <small>(<?php echo $numberOfProjects; ?>)</small></h2>
