@@ -53,7 +53,8 @@ class Projects
         'webinterface' => '',
         'wincache' => '',
         'xcache' => '',
-        'xhprof' => 'xhprof/xhprof_html'
+        'xhprof' => 'xhprof/xhprof_html',
+        'updater' => '' // wpn-xm registry updater
     );
 
     public function __construct()
