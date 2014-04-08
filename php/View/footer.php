@@ -10,7 +10,7 @@
                 <a target="_blank" href="https://github.com/WPN-XM/WPN-XM/issues/new">Report Issue</a> |
                 <a target="_blank" href="http://wpn-xm.org/#donate">Donate</a>
             </p>
-            <p class="floatright"><a href="#">Back to top</a></p>
+            <p class="floatright"><a href="#">Back to top &#9650;</a></p>
         </div>
 
         <div class="clear">
