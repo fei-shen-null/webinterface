@@ -20,7 +20,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary" id="modal-ok-button">Ok</button>
+    <button type="submit" class="btn btn-primary">Ok</button>
 </div>
 
 <script type="text/javascript" charset="utf-8">
