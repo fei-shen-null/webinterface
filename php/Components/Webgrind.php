@@ -3,25 +3,31 @@
 namespace Webinterface\Components;
 
 /**
- * WPN-XM Webinterface - Class for XDebug
+ * WPN-XM Webinterface - Class for Webgrind
  */
-class XDebug extends AbstractComponent
+class Webgrind extends AbstractComponent
 {
+    public $name = 'Webgrind';
+
+    public $registryName = 'webgrind';
+
+    //public $installationFolder = WPNXM_WWW_DIR . 'webgrind/';
+
     public function getVersion()
     {
         ;
     }
-    
+
     /**
      * Set the storage and profiler data folder to "webgrind/config.php".
      * The default folder is the php.ini value of "xdebug.profiler_output_dir".
      */
     public static function setProfilerDataDir($dir = '')
     {
-        if($dir === '') { 
+        if($dir === '') {
             $dir = ini_get('xdebug.profiler_output_dir');
         }
-        
+
         $file = WPNXM_WWW_DIR . 'webgrind/config.php';
 
         $handle = @fopen($file, "r");
@@ -44,7 +50,7 @@ class XDebug extends AbstractComponent
             }
         }
         fclose($handle);
-        
+
         return (bool) file_put_contents($file, $out);
     }
 
