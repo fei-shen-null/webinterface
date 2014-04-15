@@ -81,7 +81,7 @@ if (!defined('WPNXM_DIR')) {
     /**
      * Feature Flags
      */
-    $toggle = false;
+    $toggle = true;
     define('FEATURE_1', $toggle); // "create new project dialog" in php/view/projects-index.php
     define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Domains, MariaDB, Xdebug
     define('FEATURE_4', $toggle); // create nginx domains directly from project list
@@ -109,7 +109,6 @@ if (!function_exists('showConstants')) {
             case 'dump':
             default:
                 exit('<pre>' . var_dump($user_constants) . '</pre>');
-                break;
         }
     }
 
