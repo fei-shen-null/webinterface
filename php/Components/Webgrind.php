@@ -29,13 +29,14 @@ class Webgrind extends AbstractComponent
         }
 
         $file = WPNXM_WWW_DIR . 'webgrind/config.php';
+        $out = '';
 
         $handle = @fopen($file, "r");
         if ($handle) {
             $line = 0;
             while (!feof($handle)) {
                 $line++;
-                $linebuffer = fgets($fh);
+                $linebuffer = fgets($handle);
                 // set storage dir by replacing line 19
                 if ($line === 19) {
                     $linebuffer = '    static $storageDir = \'' . $dir . "'\n";

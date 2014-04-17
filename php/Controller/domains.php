@@ -39,9 +39,7 @@ function index()
 
 function insert()
 {
-    if (isset($_GET['newdomain']) && !empty($_GET)) {
-        $newDomainName = $_GET['newdomain'];
-    }
+    $newDomainName = isset($_GET['newdomain']) ? $_GET['newdomain'] : null;
 
     $domainFileToCreate = NGINX_DOMAINS_DIR . $newDomainName . '.conf';
 

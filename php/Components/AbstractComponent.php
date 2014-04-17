@@ -63,6 +63,8 @@ abstract class AbstractComponent
      * For making sure, that the component's dependencies are also installed.
      */
     public $dependencyFiles = array();
+    
+    public $downloadURL = '';
 
     /**
      * Checks, if a component is installed.
@@ -115,7 +117,7 @@ abstract class AbstractComponent
     {
         if ($url === '' or $targetFolder === '') {
             $url = $this->downloadURL;
-            $taretFolder = $this->installationFolder;
+            $targetFolder = $this->installationFolder;
         }
 
         // download

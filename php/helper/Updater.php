@@ -20,8 +20,8 @@ class Updater
         // silenced: throws warning, if offline
         $headers = @get_headers($url);
 
-        // offline
-        if(empty($header)) {
+        // we are offline
+        if(empty($headers)) {
             return false;
         }
 

@@ -53,7 +53,7 @@ class Adminer extends AbstractComponent
     {
         $file = WPNXM_DIR . $this->files[0];
 
-        $matches = '';
+        $matches = array();
         $maxLines = 8; // read only the first few lines of the file
 
         $file_handle = fopen($file, "r");
@@ -65,6 +65,6 @@ class Adminer extends AbstractComponent
         }
         fclose($file_handle);
 
-        return $versions = $matches[1];
+        return $matches[1];
     }
 }

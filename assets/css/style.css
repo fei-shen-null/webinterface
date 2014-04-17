@@ -477,9 +477,9 @@ img
     position: relative;
     right: 6px;
 }
-.new-project-btn-position:active {
+/*.new-project-btn-position:active {
     position: relative;
-}
+}*/
 
 /* jEditable */
 .editable {
@@ -491,10 +491,6 @@ img
     background-repeat: no-repeat;
 }
 
-.new-vhost-btn {
-
-}
-
 /* message box css */
 .info, .success, .warning, .error {
     border: 1px solid;
@@ -502,6 +498,8 @@ img
     padding:15px 10px 15px 50px;
     background-repeat: no-repeat;
     background-position: 10px center;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
 }
 .info {
     color: #00529B;
