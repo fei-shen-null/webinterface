@@ -56,7 +56,7 @@ class XDebug extends AbstractComponent
     public function getVersion()
     {
         $xdebug_version = 'false';
-        $matches = '';
+        $matches = array();
         $phpinfo = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
 
         // Check phpinfo content for Xdebug as Zend Extension
@@ -70,7 +70,7 @@ class XDebug extends AbstractComponent
     public static function getXDebugExtensionType()
     {
         $phpinfo = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
-        $matches = '';
+        $matches = array();
 
         // Check phpinfo content for Xdebug as Zend Extension
         if (preg_match('/with\sXdebug\sv([0-9.rcdevalphabeta-]+),/', $phpinfo, $matches)) {

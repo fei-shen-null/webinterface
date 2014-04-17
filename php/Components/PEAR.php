@@ -52,7 +52,7 @@ class PEAR
             return \Webinterface\Helper\Serverstack::printExclamationMark('The PHP Extension "mysqli" is required.');
         }
 
-        $matches = '';
+        $matches = array();
         $maxLines = 60; // read only the first few lines of the file
 
         $file_handle = fopen($file, "r");
