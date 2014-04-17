@@ -1,4 +1,6 @@
-### Webinterface of the WPN-XM Server Stack [![Build Status](https://travis-ci.org/WPN-XM/webinterface.png)](https://travis-ci.org/WPN-XM/webinterface)
+### Webinterface of the WPN-XM Server Stack
+
+[![Build Status](https://travis-ci.org/WPN-XM/webinterface.png)](https://travis-ci.org/WPN-XM/webinterface) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WPN-XM/webinterface/badges/quality-score.png?s=5ecbc5c3fae1771e3b5c33a8984f6ff9c477ec0e)](https://scrutinizer-ci.com/g/WPN-XM/webinterface/)
 
 
 #### Usage
@@ -16,6 +18,6 @@ Hint: The webinterface will automatically open up in your browser, when the stac
 b) With embedded PHP server
 
 When using the embedded PHP server to serve the webinterface, it might be used as a control center application for the server stack.
-To start the embedded PHP sever launch the following command on CLI: 
+To start the embedded PHP sever launch the following command on CLI:
 C:\server\bin\php\php -S localhost:90 -t C:\server\www
 You might reach the webinterface via the URL http://localhost:90/webinterface/index.php
