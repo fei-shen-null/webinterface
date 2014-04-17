@@ -109,7 +109,6 @@ if (!function_exists('showConstants')) {
             case 'dump':
             default:
                 exit('<pre>' . var_dump($user_constants) . '</pre>');
-                break;
         }
     }
 
