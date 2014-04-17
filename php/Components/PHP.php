@@ -61,7 +61,6 @@ class PHP extends AbstractComponent
     {
         $phpinfo = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
         
-        $matches = array();
         $extensionDir = '';
 
         if (preg_match('/extension_dir([ =>\t]*)([^ =>\t]+)/', $phpinfo, $matches)) {

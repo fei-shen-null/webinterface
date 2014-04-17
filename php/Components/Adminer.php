@@ -53,7 +53,6 @@ class Adminer extends AbstractComponent
     {
         $file = WPNXM_DIR . $this->files[0];
 
-        $matches = array();
         $maxLines = 8; // read only the first few lines of the file
 
         $file_handle = fopen($file, "r");
