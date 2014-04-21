@@ -92,6 +92,9 @@ class IniReaderWriter
         //throw new Exception('Missing Section or Key');
     }
 
+    /**
+     * @param string $section
+     */
     public function set($section, $key, $value)
     {
         foreach ($this->lines as &$line) {
