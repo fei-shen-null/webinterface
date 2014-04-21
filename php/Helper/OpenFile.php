@@ -33,7 +33,7 @@ class OpenFile
 {
    /**
     * Opens the file (in a background process)
-    * @param $file The file to open.
+    * @param string $file The file to open.
     */
    public static function openFile($file)
    {

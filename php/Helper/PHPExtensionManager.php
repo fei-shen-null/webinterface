@@ -221,6 +221,9 @@ class PHPExtensionManager
         }
     }
 
+    /**
+     * @param string $new_line
+     */
     private function replaceLineInPHPINI($old_line, $new_line)
     {
         $content = $this->readIni();

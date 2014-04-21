@@ -46,6 +46,9 @@ class PHPINI
         return compact('ini_file', 'ini_array');
     }
 
+    /**
+     * @param string $section
+     */
     public static function setDirective($section, $directive, $value)
     {
         $ini_file = php_ini_loaded_file();
@@ -60,6 +63,9 @@ class PHPINI
         return true;
     }
 
+    /**
+     * @param string $file
+     */
     public static function doBackup($file)
     {
         $newFilename = str_replace('.ini', '', $file);

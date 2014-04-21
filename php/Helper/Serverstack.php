@@ -149,7 +149,7 @@ class Serverstack
      * Attempts to establish a connection to the specified port (on localhost)
      *
      * @param  string  $daemon Daemon/Service name.
-     * @return boolean
+     * @return boolean|null
      * @throws \InvalidArgumentException
      */
     public static function portCheck($daemon)
@@ -207,6 +207,9 @@ class Serverstack
         );
     }
 
+    /**
+     * @param string $daemon
+     */
     public static function getDaemonName($daemon)
     {
         switch ($daemon) {
@@ -271,7 +274,7 @@ class Serverstack
      * @param  string  $host    Hostname
      * @param  integer $port    Portnumber
      * @param  integer $timeout Timeout for socket connection in seconds (default is 30).
-     * @return string
+     * @return boolean
      */
     public static function checkPort($host, $port, $timeout = 30)
     {

@@ -34,6 +34,9 @@ namespace Webinterface\Helper;
  */
 class Daemon
 {
+    /**
+     * @param string $daemon
+     */
     public static function isRunning($daemon)
     {
         // shorthands to daemon names; also handle xdebug extension

@@ -75,6 +75,10 @@ class IniReaderWriter
         return $this;
     }
 
+    /**
+     * @param string $section
+     * @param string $key
+     */
     public function get($section, $key)
     {
         foreach ($this->lines as $line) {
