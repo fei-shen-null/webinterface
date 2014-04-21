@@ -60,7 +60,7 @@ class PHP extends AbstractComponent
     public static function getPHPExtensionDirectory()
     {
         $phpinfo = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
-        $matches = '';
+        
         $extensionDir = '';
 
         if (preg_match('/extension_dir([ =>\t]*)([^ =>\t]+)/', $phpinfo, $matches)) {

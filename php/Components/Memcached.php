@@ -68,7 +68,7 @@ class Memcached extends AbstractComponent
         $version = @$memcache->getVersion();
         $available = (bool) $version;
 
-        if ($available && @$memcache->connect($host, $port)) {
+        if ($available && @$memcache->connect($server, $port)) {
             return $version;
         } else {
             return \Webinterface\Helper\Serverstack::printExclamationMark(
