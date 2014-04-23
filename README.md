@@ -1,6 +1,6 @@
 ### Webinterface of the WPN-XM Server Stack
 
-[![Build Status](https://travis-ci.org/WPN-XM/webinterface.png)](https://travis-ci.org/WPN-XM/webinterface) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WPN-XM/webinterface/badges/quality-score.png?s=5ecbc5c3fae1771e3b5c33a8984f6ff9c477ec0e)](https://scrutinizer-ci.com/g/WPN-XM/webinterface/)
+[![Build Status](https://travis-ci.org/WPN-XM/webinterface.svg)](https://travis-ci.org/WPN-XM/webinterface) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WPN-XM/webinterface/badges/quality-score.png?s=5ecbc5c3fae1771e3b5c33a8984f6ff9c477ec0e)](https://scrutinizer-ci.com/g/WPN-XM/webinterface/)
 
 
 #### Usage
