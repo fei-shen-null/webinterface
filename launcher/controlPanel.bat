@@ -11,4 +11,4 @@ process -k php.exe
 start "localhost:90-WPN-XM Server Stack" /MIN ../php/php -S localhost:90 -t ../../www
 
 :: start WPN-XM Server Control Panel
-start http://localhost:90/webinterface
+start http://localhost:90/tools/webinterface
