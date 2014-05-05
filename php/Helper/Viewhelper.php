@@ -41,8 +41,8 @@ class Viewhelper
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                             <li>'.self::getPhpmyadminLink().'</li>
-                             <li>'.self::getAdminerLink().'</li>
+                             <li>'. \Webinterface\Components\PhpMyAdmin::getLink().'</li>
+                             <li>'. \Webinterface\Components\Adminer::getLink().'</li>
                              <li class="divider"></li>
                              <li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>'.
                             /* '<li><a href="#">Filter2</a></li>
@@ -57,23 +57,6 @@ class Viewhelper
              </div>';
 
         echo $menu;
-    }
-
-    public static function getPhpmyadminLink() {
-       // is phpmyadmin installed?
-       if (is_dir(WPNXM_WWW_DIR.'phpmyadmin') === true) {
-           $password = \Webinterface\Helper\Serverstack::getPassword('mariadb');
-           $href = WPNXM_ROOT.'phpmyadmin/index.php?lang=en&server=1&pma_username=root&pma_password='.$password;
-
-           return '<a href="'.$href.'">phpMyAdmin</a>';
-       }
-    }
-
-    public static function getAdminerLink() {
-        // is adminer installed?
-        if (is_dir(WPNXM_WWW_DIR . 'adminer') === true) {
-            return '<a href="' . WPNXM_ROOT . 'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a>';
-        }
     }
 
     public static function showWelcome()
