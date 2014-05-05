@@ -31,16 +31,15 @@ namespace Webinterface\Helper;
 
 class Projects
 {
-    private $dirs = array();
+    private $projectFolders = array();
 
     /**
-     * The "toolDirectories" array contains paths of the "/www" folder.
+     * The "toolDirectories" array contains paths of the "/www/tools" folder.
      * These paths are administration tools for WPN-XM, shipped with the distribution.
+     * Some of these tools do not provide an "index.php" at the top-level.
+     * This array keeps the relation between a "tool folder" and it's "startup script"
+     * or "startup folder with index.php".
      *
-     * In the webinterface, on the page "Projects and Tools", this array is used to
-     * divide the "Tools" folders from your "Your Projects" folders.
-     *
-     * @see fetchProjectDirectories(false)
      * @var array
      */
     private $toolDirectories = array(
@@ -49,38 +48,32 @@ class Projects
         'phpmemcachedadmin' => '',
         'phpmyadmin' => '',
         'rockmongo' => '',
+        'updater' => '', // wpn-xm registry updater
         'webgrind' => '',
-        'webinterface' => '',
+        //'webinterface' => '', // wpn-xm webinterface
         'wincache' => '',
         'xcache' => '',
-        'xhprof' => 'xhprof/xhprof_html',
-        'updater' => '' // wpn-xm registry updater
+        'xhprof' => 'xhprof/xhprof_html'
     );
 
     public function __construct()
     {
-        $this->dirs = $this->fetchProjectDirectories();
+        $this->projectFolders = $this->getProjects();
     }
 
     /**
-     * Returns the list of directories in the "/www" folder.
+     * Returns all project folders from "/www", excluding the "tools" folder.
      *
-     * @param  bool  $all True, will return all dirs. False, will exclude tool directories.
      * @return array
      */
-    public function fetchProjectDirectories($all = false)
+    public function getProjects()
     {
         $dirs = array();
-
-        $handle = opendir(WPNXM_WWW_DIR); # __DIR__
+        $handle = opendir(WPNXM_WWW_DIR);
 
         while ($dir = readdir($handle)) {
-            if ($dir == "." or $dir == "..") {
-                continue;
-            }
-
-            // exclude WPN-XM infrastructure and tool directories
-            if (array_key_exists($dir, $this->toolDirectories) and ($all === false)) {
+            // exclude dot folders and tools folder
+            if ($dir === '.' or $dir === '..' or $dir === 'tools') {
                 continue;
             }
 
@@ -90,9 +83,7 @@ class Projects
         }
 
         closedir($handle);
-
         asort($dirs);
-
         return $dirs;
     }
 
@@ -105,16 +96,16 @@ class Projects
         } else {
             $html .= '<ul class="list-group">';
 
-            foreach ($this->dirs as $dir) {
+            foreach ($this->projectFolders as $dir) {
                 // always display the folder
                 $html .= '<li class="list-group-item">';
                 $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
 
                 if (FEATURE_4 == true) {
-                    $html .= $this->renderDomainLink($dir);
+                    $html .= $this->renderSettingsLink($dir);
                 }
 
-                $html .= $this->getRepositoryLinks($dir);
+                $html .= $this->renderRepositoryLinks($dir);
 
                 $html .= '</li>';
             }
@@ -128,11 +119,8 @@ class Projects
         $html = '<ul class="list-group">';
 
         foreach ($this->toolDirectories as $dir => $href) {
-            if ($href === '') {
-                $html .= '<li class="list-group-item"><a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a></li>';
-            } else {
-                $html .='<li class="list-group-item"><a class="folder" href="' . WPNXM_ROOT . $href . '">' . $dir . '</a></li>';
-            }
+            $link = ($href === '') ? (WPNXM_ROOT . 'tools/' . $dir) : (WPNXM_ROOT . 'tools/' . $href);
+            $html .= '<li class="list-group-item"><a class="folder" href="'.$link.'">' . $dir . '</a></li>';
         }
 
         return $html . '</ul>';
@@ -140,69 +128,95 @@ class Projects
 
     /**
      * Returns links with icons to Github, Travis-CI and Packagist.
-     **/
-    public function getRepositoryLinks($dir)
+     */
+    public function renderRepositoryLinks($dir)
     {
         $html = '';
 
-        // display a link to Travis CI
-        if (true === $this->hasTravisConfig($dir)) {
+        $hasComposerConfig = $this->hasComposerConfig($dir);
 
-            $composer = array();
+        // If the project folder contains a "composer.json" file and is found on "packagist.org",
+        // display a "packgist.org" link.
+        if (true === $hasComposerConfig) {
+            $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
 
-            /* if (extension_loaded('openssl')) {
-              $possible_repos = file_get_contents('https://api.travis-ci.org/repositories.json?search='. $dir);
-              var_dump($possible_repos);
-              set the one found or ask user to select one of multiple
-             * } */
+            // composer.json key "homepage"?
+            if(isset($composer['homepage']) === true) {
+                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
+                $html .= ' href="' . $composer['homepage'] . '"><span class="glyphicon glyphicon-home"></span></a>';
+            }
+        }
+
+        // If the project folder contains a ".git/config" file with a github repo link, display a "github.com" link.
+        if(true === $this->isGitRepoAndHostedOnGithub($dir) && $hasComposerConfig) {
+            $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
+            $html .= ' href="https://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
+        }
+
+        /**
+         * If the project folder contains a ".travis.yml" file, display a "travis-ci.org" link.
+         */
+        /*if (true === $this->hasTravisConfig($dir)) {
 
             /**
-             * some people set the composer name to "something/somwhere".
-             * that breaks the 1:1 relation between repository name and packagist name,
-             * e.g. github.com/bzick/fenom - fenom/fenom
+             * Unresolved Issues
+             *
+             * Some people set their composer name to "something/somwhere", while their github name is "x/y".
+             * That breaks the 1:1 relation between github repository name and packagist name,
+             * An example is: "github.com/bzick/fenom" - "packagist.org/fenom/fenom"
              *
              * given that there is a 1:1 relation of travis-ci repo name and github repo name,
              * the only way to get the travis repo url is by fetching the git origin url from the config.
              * 1. read file: '.get/config'
              * 2. fetch "[remote "origin"] url
              * 3. extract repo name from URL = $package
+             *
+             * Do a "like *" search and set the one found or ask user to select one of multiple.
              */
-
-            // get github link
-            if (true === $this->hasComposerConfig($dir)) {
-                $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
-                // add the github link by showing a github icon
-                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
-                $html .= ' href="http://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
+            /*
+            if (extension_loaded('openssl') === true) {
+                $possible_repos = file_get_contents('https://api.travis-ci.org/repositories.json?search=' . $dir);
+                var_dump($possible_repos);
             }
-
+            */
+          /*
+            // if the package is "composer-ified", it may also be on "packagist.org"
             $package = $this->getPackagistPackageDescription($composer['name']);
 
-            if(empty($package) === false) {
+            //var_dump($package['package']);
 
-                if(isset($package['status']) && $package['status'] === 'error') {
-                    \Webinterface\Helper\Serverstack::printExclamationMark(
-                        'The request to packagist.org failed. This might be a service problem.' .
-                        ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
-                    );
-                }
+            $packageName = strtolower($package['package']['name']);
 
-                $packageName = strtolower($package['package']['name']);
+            // add the travis link by showing build status badge
+            $html .= '<a style="margin-left: 5px;" href="http://travis-ci.org/' . $packageName . '">';
+            $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
+            $html .= '</a>';
 
-                // add the travis link by showing build status badge
-                $html .= '<a style="margin-left: 5px;" href="http://travis-ci.org/' . $packageName . '">';
-                $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
-                $html .= '</a>';
-
-                // add packagist link and download badge
-                /*
-                $html .= '<ul><li><a style="margin-left: 5px;" href="https://packagist.org/packages/' . $composer['name'] . '">';
-                $html .= '<img src="https://poser.pugx.org/' .  $composer['name']  . '/downloads.png">';
-                $html .= '</a></li></ul>';*/
-            }
-        }
+            // add packagist link and download badge
+            $html .= '<ul><li><a style="margin-left: 5px;" href="https://packagist.org/packages/' . $composer['name'] . '">';
+            $html .= '<img src="https://poser.pugx.org/' .  $composer['name']  . '/downloads.png">';
+            $html .= '</a></li></ul>';
+        }*/
 
         return $html;
+    }
+
+    public function isGitRepoAndHostedOnGithub($projectFolder)
+    {
+        $path = WPNXM_WWW_DIR . $projectFolder . '/.git/';
+
+        // is the folder a git repository?
+        if (false === is_dir($path)) {
+            return false;
+        }
+
+        // is the git repository hosted at github?
+        $gitConfig = file_get_contents($path . 'config');
+        if (false === strpos($gitConfig, 'github')) {
+            return false;
+        }
+
+        return true;
     }
 
     public function getPackagistPackageDescription($package = '')
@@ -214,30 +228,41 @@ class Projects
                 'ignore_errors' => true
              )
         ));
-        // silenced, because this throws a warning, if offline
+
+        // silenced: because this throws a warning, if offline
         $json = @file_get_contents($url, FALSE, $context);
 
         $array = json_decode($json, true);
+
+        if(isset($array['status']) && $array['status'] === 'error') {
+            \Webinterface\Helper\Serverstack::printExclamationMark(
+                'The request to packagist.org failed. This might be a service problem.' .
+                ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
+            );
+        }
 
         return $array;
     }
 
     /**
-     * Returns the correct Package name.
-     *
-     * Note: This is not just the return of $packageDescription['name'], because it's lowercased.
-     * This returns the correct name for building a Travis-CI or Github URL.
+     * Returns the correct "package name" for building a Travis-CI or Github URL
+     * This returns [package][repository] instead of [name], which is lowercased.
      */
     public function getPackageName(array $packageDescription = array())
     {
         return str_replace('https://github.com/', '', $packageDescription['package']['repository']);
     }
 
-    public function renderDomainLink($dir)
+    public function renderSettingsLink($dir)
     {
         $html = '';
 
-        if (false === $this->isDomain($dir)) {
+        // display "settings" cog wheel for this project. Modal shows a configuration screen "per project".
+        $html .= '<a class="btn-new-domain floatright" data-toggle="modal" data-target="#myModal" ';
+        $html .= ' href="' . WPNXM_WEBINTERFACE_ROOT . 'index.php?page=projects&action=edit&project=' . $dir . '">';
+        $html .= '<span class="glyphicon glyphicon-cog"></span></a>';
+
+        /*if (false === $this->isDomain($dir)) {
             // display link to add a new domain for this directory
             $html .= '<a class="btn-new-domain floatright" ';
             $html .= ' href="' . WPNXM_WEBINTERFACE_ROOT . 'index.php?page=domains&newdomain=' . $dir . '">';
@@ -245,7 +270,7 @@ class Projects
         } else {
             // display link to the domain
             $html .= '<a class="floatright" href="http://' . $dir . '/">' . $dir . '</a>';
-        }
+        }*/
 
         return $html;
     }
@@ -278,7 +303,7 @@ class Projects
     public function checkWhichToolDirectoriesAreInstalled()
     {
         foreach ($this->toolDirectories as $dir => $href) {
-            if (is_dir(WPNXM_WWW_DIR . $dir) === false) {
+            if (is_dir(WPNXM_WWW_DIR . 'tools\\' . $dir) === false) {
                 unset($this->toolDirectories[$dir]);
             }
         }
@@ -286,7 +311,7 @@ class Projects
 
     public function getNumberOfProjects()
     {
-        return count($this->dirs);
+        return count($this->projectFolders);
     }
 
     public function getNumberOfTools()

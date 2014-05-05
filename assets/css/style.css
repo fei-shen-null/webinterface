@@ -93,6 +93,9 @@ img {
     margin-left: 2px;
 }
 
+.btn-new-domain {
+    color: #888;
+}
 
 .cs-message {
     background: none repeat scroll 0 0 #dadada;
