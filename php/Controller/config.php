@@ -36,6 +36,13 @@ function index()
     render('page-action', $tpl_data);
 }
 
+function project()
+{
+   $project = filter_input(INPUT_GET, 'project');
+
+   echo $project;
+}
+
 function showtab()
 {
     /**
@@ -79,7 +86,7 @@ function showtab_nginx_domains()
 
     $tpl_data = array(
         'no_layout' => true,
-        'project_folders' => $projects->fetchProjectDirectories(true),
+        'project_folders' => $projects->getProjects(true),
         'domains' => $domains->listDomains()
     );
 
@@ -213,7 +220,10 @@ function renderPHPExtensionsFormContent()
 
 function update_phpini_setting()
 {
-    $section = ''; // @todo section? needed to save the directive? string (directive=>value) is unique!?
+    // @todo do we need to set [section], in order to save the directive?
+    // @see IniReaderWriter::set() $section is not used there
+    $section = ''; 
+
     $directive = filter_input(INPUT_POST, 'directive');
     $value = filter_input(INPUT_POST, 'value');
 

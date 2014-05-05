@@ -51,9 +51,28 @@ function newproject()
     render('page-action', $tpl_data);
 }
 
+function edit()
+{
+    $project = filter_input( INPUT_GET, 'project');
+
+    $tpl_data = array(
+        'no_layout' => true,
+        'project' => $project
+    );
+
+    render('page-action', $tpl_data);
+}
+
 function createproject()
 {
     $project = filter_input(INPUT_POST, 'projectname');
     mkdir(WPNXM_WWW_DIR . DS . $project, 0777);
     redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=projects');
+}
+
+function settings()
+{
+   $project = filter_input(INPUT_GET, 'project');
+
+   echo $project;
 }
