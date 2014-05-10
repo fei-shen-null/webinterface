@@ -57,13 +57,13 @@ if (!defined('WPNXM_DIR')) {
         define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface/php/data/');
     } else {
         // Windows Paths
-        define('WPNXM_DIR', dirname(dirname(__DIR__)));
+        define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))));
         define('WPNXM_WWW_DIR', WPNXM_DIR . '\www' . DS);
-        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface\php\Controller' . DS);
-        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface\php\Components' . DS);
-        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface\php\Helper' . DS);
-        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface\php\View' . DS);
-        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface\php\data' . DS);
+        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . '\tools\webinterface\php\Controller' . DS);
+        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . '\tools\webinterface\php\Components' . DS);
+        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . '\tools\webinterface\php\Helper' . DS);
+        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . '\tools\webinterface\php\View' . DS);
+        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . '\tools\webinterface\php\data' . DS);
     }
 
     // Web Path Constants -> "http://.."
@@ -71,12 +71,13 @@ if (!defined('WPNXM_DIR')) {
     define('SERVER_URL', 'http://' . $_SERVER['SERVER_NAME'] . $port);
     define('WPNXM_ROOT', SERVER_URL . ltrim(dirname(dirname(dirname($_SERVER['PHP_SELF']))), '\\') . '/');
     define('WPNXM_WWW_ROOT', WPNXM_ROOT . 'www/');
-    define('WPNXM_WEBINTERFACE_ROOT', '/webinterface/');
-    define('WPNXM_IMAGES_DIR', '/webinterface/assets/img/');
+    define('WPNXM_WEBINTERFACE_ROOT', '/tools/webinterface/');
+    define('WPNXM_ASSETS', '/tools/webinterface/assets/');
+    define('WPNXM_IMAGES_DIR', '/tools/webinterface/assets/img/');
 
     // WPNXM Configuration File
-    define('WPNXM_INI', WPNXM_DIR . DS . 'wpn-xm.ini');
-    define('WPNXM_BIN', WPNXM_DIR . DS . 'bin');
+    define('WPNXM_INI', WPNXM_DIR . '\wpn-xm.ini');
+    define('WPNXM_BIN', WPNXM_DIR . '\bin');
 
     /**
      * Feature Flags
