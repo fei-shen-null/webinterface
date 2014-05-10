@@ -9,31 +9,31 @@ window.onload = function() {
     }catch (e) {}
     var e = document.createElement("script");
     e.setAttribute("type", "text/javascript");
-    e.setAttribute("src", "/webinterface/assets/js/browser-update.js");
+    e.setAttribute("src", "/tools/webinterface/assets/js/browser-update.js");
     document.body.appendChild(e);
 
     setCurrentPageActiveInMainMenu();
     enableTooltips();
     handlePHPExtensionsForm();
-    
+
     onModalHideResetRemoteUrl();
 }
 
 /**
  * Allow Modal Content to be fetched from the new remote URL:
  * by destroying the old modal and removing its remote URL.
- */ 
+ */
 function onModalHideResetRemoteUrl() {
     $('body').on('hidden.bs.modal', '.modal', function () {
       $(this).removeData('bs.modal');
     });
 }
-    
+
 /**
  * override native alert() function with a call to bootstrap3 modal
  */
 window.alert = function () {
-  var msg = arguments[0];  
+  var msg = arguments[0];
   var alert = '<p class="error">' + msg.replace(/\n/g, "<br />") + '</p>';
   $('#myModal .modal-title').html('ALERT');
   $('#myModal .modal-body').html(alert);
