@@ -35,9 +35,9 @@ namespace Webinterface\Components;
 class Adminer extends AbstractComponent
 {
     public $name = 'Adminer';
-    
+
     public $registryName = 'adminer';
-    
+
     public $installationFolder = /* WPNXM_ROOT . */ '\www\adminer'; // i wish PHP would support this! PHP6 ?!
 
     public $files = array(
@@ -53,6 +53,10 @@ class Adminer extends AbstractComponent
     {
         $file = WPNXM_DIR . $this->files[0];
 
+        if(!is_file($file)) {
+            return 'not installed';
+        }
+
         $maxLines = 8; // read only the first few lines of the file
 
         $file_handle = fopen($file, "r");
@@ -66,7 +70,7 @@ class Adminer extends AbstractComponent
 
         return $matches[1];
     }
-    
+
     public static function getLink() {
         // is adminer installed?
         if (is_dir(WPNXM_WWW_DIR . 'tools/adminer') === true) {
