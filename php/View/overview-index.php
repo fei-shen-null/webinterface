@@ -200,12 +200,12 @@
 
                         <a class="btn btn-default btn-sm pull-left"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>">
-                            <img alt="Start Nginx" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
+                            <img alt="Start Nginx" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
 
                         <a class="btn btn-default btn-sm btn-margin-left pull-left"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=nginx'; ?>">
-                             <img alt="Stop Nginx" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
+                             <img alt="Stop Nginx" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
 
                         <a class="btn btn-default btn-sm"
@@ -263,10 +263,10 @@
                 <tr>
                     <td class="right" colspan="2">
                         <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
-                            <img alt="Start PHP" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
+                            <img alt="Start PHP" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
                         <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
-                            <img alt="Stop PHP" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
+                            <img alt="Stop PHP" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
 
                         <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo'; ?>">Show phpinfo()</a>
@@ -316,10 +316,10 @@
                 <tr>
                     <td colspan="2" class="right">
                         <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
-                            <img alt="Start MariaDb" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
+                            <img alt="Start MariaDb" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
                         <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>">
-                            <img alt="Stop MariaDb" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
+                            <img alt="Stop MariaDb" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
 
                         <?php if (class_exists('mysqli')) { ?>
@@ -378,10 +378,10 @@
                 <tr>
                     <td class="right">
                         <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
-                                <img alt="Start MongoDB" src="/webinterface/assets/img/action_run.png" class="res-header-icon">
+                                <img alt="Start MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
                         <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
-                            <img alt="Stop MongoDB" src="/webinterface/assets/img/action_stop.png" class="res-header-icon">
+                            <img alt="Stop MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
 
 
