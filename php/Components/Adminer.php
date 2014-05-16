@@ -41,7 +41,7 @@ class Adminer extends AbstractComponent
     public $installationFolder = /* WPNXM_ROOT . */ '\www\adminer'; // i wish PHP would support this! PHP6 ?!
 
     public $files = array(
-        '\www\adminer\adminer.php'
+        '\www\tools\adminer\adminer.php'
     );
 
     /**
@@ -51,20 +51,24 @@ class Adminer extends AbstractComponent
      */
     public function getVersion()
     {
-        $file = WPNXM_DIR . $this->files[0];
-
-        if(!is_file($file)) {
+        if($this->isInstalled() === false) {
             return 'not installed';
         }
+        
+        $file = WPNXM_DIR . $this->files[0];
 
         $maxLines = 8; // read only the first few lines of the file
 
         $file_handle = fopen($file, "r");
 
         for ($i = 0; $i < $maxLines && !feof($file_handle); $i++) {
-            $line_of_text = fgetcsv($file_handle, 1024);
+            $line = fgets($file_handle, 1024);
             // lets grab the version from the phpdoc tag
-            preg_match('/\* \@version (\d+.\d+.\d+)/', $line_of_text[0], $matches);
+            preg_match('/\* \@version (\d+.\d+.\d+)/', $line, $matches);
+            
+            if(isset($matches[0])) {
+                break;
+            }
         }
         fclose($file_handle);
 

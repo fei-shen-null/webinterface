@@ -60,7 +60,16 @@ class PostgreSQL extends AbstractComponent
      * @return string Version
      */
     public function getVersion()
-    {
-        return \Webinterface\Helper\Serverstack::printExclamationMark('Not implemented yet!');
+    {   
+        if($this->isInstalled(true) === false) {
+            return 'not installed';
+        }
+        
+        $command = 'start \bin\postgresql\bin\pgsql.exe -V';
+        exec($command, $output);
+        
+        $output = str_replace('pgsql (PostgreSQL)', '', $output);
+        
+        return $output;
     }
 }

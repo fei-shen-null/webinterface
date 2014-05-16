@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Webinterface\Components;
 
@@ -6,9 +6,41 @@ use \Webinterface\Components\AbstractComponent;
 
 class PhpMyAdmin extends AbstractComponent
 {
+    public $name = 'phpMyAdmin';
+
+    public $registryName = 'phpmyadmin';
+    
+    public $files = array(
+        '\www\tools\phpmyadmin\libraries\Config.class.php',
+        '\www\tools\phpmyadmin\index.php'
+    );
+
     public function getVersion()
     {
-        echo __CLASS__ . '->' . __METHOD__ . ' : not implemented, yet!';
+        if($this->isInstalled() === false) {
+            return 'not installed';
+        }
+        
+        $file = WPNXM_DIR . $this->files[0];
+
+        $maxLines = 120; // read only the first few lines of the file
+
+        $file_handle = fopen($file, "r");
+
+        for ($i = 0; $i < $maxLines && !feof($file_handle); $i++) {
+            $line = fgets($file_handle, 1024);
+            // lets grab the version from this line:
+            // $this->set('PMA_VERSION', '4.0.0-beta1');   
+            preg_match("#PMA_VERSION', '(.*)'#", $line, $matches);
+            
+            if(isset($matches[0])) {
+                break;
+            }
+        }
+        fclose($file_handle);
+        
+
+        return $matches[1];
     }
 
     public static function getLink()
@@ -20,5 +52,5 @@ class PhpMyAdmin extends AbstractComponent
 
            return '<a href="'.$href.'">phpMyAdmin</a>';
        }
-    } 
+    }
 }

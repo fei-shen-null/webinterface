@@ -1,5 +1,6 @@
 <?php
 namespace Webinterface\Components;
+
 class ZeroMQ
 {
     public $name = 'ZeroMQ';
@@ -10,7 +11,7 @@ class ZeroMQ
     
     public function getVersion()
     {
-        if (extension_loaded('apc') === false) {
+        if (extension_loaded('zmq') === false) {            
             return \Webinterface\Helper\Serverstack::printExclamationMark(
                 'Not implemented yet!'
             );

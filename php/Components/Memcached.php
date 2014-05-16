@@ -52,6 +52,10 @@ class Memcached extends AbstractComponent
      */
     public function getVersion()
     {
+        if($this->isInstalled() === false) {
+            return 'not installed';
+        }
+        
         if (extension_loaded('memcache') === false) {
             return \Webinterface\Helper\Serverstack::printExclamationMark(
                 'The PHP Extension "memcache" is required.'

@@ -57,7 +57,7 @@ if (!defined('WPNXM_DIR')) {
         define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface/php/data/');
     } else {
         // Windows Paths
-        define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))));
+        define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))) . DS);
         define('WPNXM_WWW_DIR', WPNXM_DIR . 'www' . DS);
         define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'tools\webinterface\php\Controller' . DS);
         define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'tools\webinterface\php\Components' . DS);

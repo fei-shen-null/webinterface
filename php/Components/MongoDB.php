@@ -49,6 +49,10 @@ class MongoDb extends AbstractComponent
 
     public function getVersion()
     {
+        if($this->isInstalled() === false) {
+            return 'not installed';
+        }
+        
         if (!extension_loaded('mongo')) {
             return \Webinterface\Helper\Serverstack::printExclamationMark(
                 'The PHP Extension "Mongo" is required.'
