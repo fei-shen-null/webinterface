@@ -18,13 +18,17 @@ echo '<table class="table table-condensed table-hover">
     </tr>
     <tr>
         <td>Windows</td>
-        <td>' . $windows_version . '(' . $bitsize . ')</td>
-        <td>Windows 8.1</td>
+        <td><span style="font-size:14px">' . $windows_version . '(' . $bitsize . ')</span></td>
+        <td><span style="font-size:14px">Windows 8.1</span></td>
     </tr>
 </thead>
 ';
 
 foreach ($components as $index => $componentName) {
+    
+    if($componentName === 'PEAR') {
+        continue;
+    }
     
     $class = '\Webinterface\Components\\'.$componentName;
     $component = new $class;
@@ -34,7 +38,7 @@ foreach ($components as $index => $componentName) {
     
     $html = '<tr>
         <td>' . $component->name . '</td>
-        <td>' . $versionString . '</td>
+        <td><span style="font-size:14px">' . $versionString . '</span></td>       
         <td>' . printUpdatedSign($version, $registry[$component->registryName]['latest']['version']) . '</td>
     </tr>';
     
@@ -53,14 +57,15 @@ echo '</table></div></div></div>';
  */
 function printUpdatedSign($old_version, $new_version)
 {
-    if (version_compare($old_version, $new_version, '<') === true) {
-        $html = '<span class="label label-success">';
-        $html .= $new_version;
-        $html .= '</span><span style="color:green; font-size: 16px">&nbsp;&#x25B2;</span>';
-
+    if (version_compare($old_version, $new_version) === -1) {       
+        $html = '<a href="#"';
+        $html .= ' class="btn btn-success btn-xs" style="font-size: 14px">';
+        $html .= '<span class="glyphicon glyphicon-arrow-up"></span>';
+        $html .= '&nbsp; '.$new_version.'</a>';
+            
         return $html;
     }
 
-    return $new_version;
+    return '<span style="font-size:14px">'. $new_version . '</span>';
 }
 ?>
