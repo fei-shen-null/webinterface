@@ -1,7 +1,7 @@
 <?php
 namespace Webinterface\Components;
 
-class ZeroMQ
+class ZeroMQ extends AbstractComponent
 {
     public $name = 'ZeroMQ';
     

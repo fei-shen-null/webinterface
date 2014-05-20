@@ -1,6 +1,6 @@
 <?php
 namespace Webinterface\Components;
-class XHProf
+class XHProf extends AbstractComponent
 {
     public $name = 'XHProf';
     

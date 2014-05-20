@@ -1,6 +1,6 @@
 <?php
 namespace Webinterface\Components;
-class APC
+class APC extends AbstractComponent
 {
     public $name = 'APC';
     

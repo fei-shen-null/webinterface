@@ -123,11 +123,21 @@ abstract class AbstractComponent
         // download
     }
     
+    /**
+     * Returns the pretty name of this component, e.g. "Xdebug".
+     * 
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
     
+    /**
+     * Returns the registry name of a component, e.g. "phpext_xdebug" for "Xdebug".
+     * 
+     * @return string
+     */
     public function getRegistryName()
     {
         return $this->registryName;

@@ -39,7 +39,7 @@ foreach ($components as $index => $componentName) {
     $html = '<tr>
         <td>' . $component->name . '</td>
         <td><span style="font-size:14px">' . $versionString . '</span></td>       
-        <td>' . printUpdatedSign($version, $registry[$component->registryName]['latest']['version']) . '</td>
+        <td>' . printUpdatedSign($component->getRegistryName(), $version, $registry[$component->registryName]['latest']['version']) . '</td>
     </tr>';
     
     $html = str_replace('float:right', 'float:left', $html);
@@ -55,17 +55,24 @@ echo '</table></div></div></div>';
  * @param string Old version.
  * @param string New version.
  */
-function printUpdatedSign($old_version, $new_version)
+function printUpdatedSign($component, $old_version, $new_version)
 {
-    if (version_compare($old_version, $new_version) === -1) {       
-        $html = '<a href="#"';
+    $url = sprintf(
+        WPNXM_WEBINTERFACE_ROOT . 'index.php?page=update&action=update&component=%s&version=%s',
+        $component, 
+        $new_version
+    );
+
+    if (version_compare($old_version, $new_version) === -1) {
+        $html = '<a href="' . $url . '"';
         $html .= ' class="btn btn-success btn-xs" style="font-size: 14px">';
         $html .= '<span class="glyphicon glyphicon-arrow-up"></span>';
-        $html .= '&nbsp; '.$new_version.'</a>';
-            
+        $html .= '&nbsp; ' . $new_version . '</a>';
+
         return $html;
     }
 
-    return '<span style="font-size:14px">'. $new_version . '</span>';
+    return '<span style="font-size:14px">' . $old_version . '</span>';
 }
+
 ?>
