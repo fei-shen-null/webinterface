@@ -32,6 +32,7 @@ function onModalHideResetRemoteUrl() {
 /**
  * override native alert() function with a call to bootstrap3 modal
  */
+/*
 window.alert = function () {
   var msg = arguments[0];
   var alert = '<p class="error">' + msg.replace(/\n/g, "<br />") + '</p>';
@@ -39,7 +40,7 @@ window.alert = function () {
   $('#myModal .modal-body').html(alert);
   $('#myModal button[type="submit"]').hide();
   $("#myModal").modal('show');
-};
+};*/
 
 /**
  * Highlights the current page in the headline main menu
