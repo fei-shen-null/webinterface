@@ -322,7 +322,7 @@
                             <img alt="Stop MariaDb" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
 
-                        <?php if (class_exists('mysqli')) { ?>
+                        <?php if (class_exists('mysqli', false)) { ?>
                             <a class="btn btn-default btn-sm" href="index.php?page=resetpw&component=mariadb"
                                data-toggle="modal" data-target="#myModal">Reset Password</a>
                         <?php } ?>
@@ -385,7 +385,7 @@
                         </a>
 
 
-                        <?php if (class_exists('mysqli')) { ?>
+                        <?php if (class_exists('mysqli', false)) { ?>
                             <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;component=mongodb"
                                data-toggle="modal" data-target="#myModal">Reset Password</a>
                         <?php } ?>
