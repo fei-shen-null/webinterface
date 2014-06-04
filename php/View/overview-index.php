@@ -186,13 +186,13 @@
                 <tr>
                    <td colspan="2">
                         <span class="pull-left">Directory</span>
-                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\nginx'; ?></span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\nginx'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <span class="pull-left">Config</span>
-                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\nginx\conf\nginx.conf'; ?></span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\nginx\conf\nginx.conf'; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -210,7 +210,7 @@
 
                         <a class="btn btn-default btn-sm"
                         <?php
-                        if (!is_file(WPNXM_DIR . '\logs\access.log')) {
+                        if (!is_file(WPNXM_DIR . 'logs\access.log')) {
                             echo "onclick=\"alert('The Nginx Access Log not available. File was not found.'); return false;\"";
                         } else {
                             $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-access-log';
@@ -221,7 +221,7 @@
 
                         <a class="btn btn-default btn-sm"
                         <?php
-                        if (!is_file(WPNXM_DIR . '\logs\error.log')) {
+                        if (!is_file(WPNXM_DIR . 'logs\error.log')) {
                             echo "onclick=\"alert('The Nginx Error Log not available. File was not found.'); return false;\"";
                         } else {
                             $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=nginx-error-log';
@@ -251,7 +251,7 @@
                 <tr>
                     <td colspan="2">
                         <span class="pull-left">Directory</span>
-                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\php'; ?></span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\php'; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -272,7 +272,7 @@
                         <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=phpinfo'; ?>">Show phpinfo()</a>
                         <a class="btn btn-default btn-sm"
                         <?php
-                        if (!is_file(WPNXM_DIR . '\logs\php_error.log')) {
+                        if (!is_file(WPNXM_DIR . 'logs\php_error.log')) {
                             echo "onclick=\"alert('The PHP Error Log is not available. File was not found.'); return false;\"";
                         } else {
                             $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=php-error-log';
@@ -304,13 +304,13 @@
                 <tr>
                      <td colspan="2">
                         <span class="pull-left">Directory</span>
-                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\mariadb'; ?></span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\mariadb'; ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <span class="pull-left">Config</span>
-                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\mariadb\my.ini'; ?></span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\mariadb\my.ini'; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -329,7 +329,7 @@
 
                         <a class="btn btn-default btn-sm"
                         <?php
-                        if (!is_file(WPNXM_DIR . '\logs\mariadb_error.log')) {
+                        if (!is_file(WPNXM_DIR . 'logs\mariadb_error.log')) {
                             echo "onclick=\"alert('The MariaDB Error Log is not available. File was not found.'); return false;\"";
                         } else {
                             $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mariadb-error-log';
@@ -366,13 +366,13 @@
                 <tr>
                     <td>
                         <span class="pull-left">Directory</span>
-                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\mongodb'; ?></span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\mongodb'; ?></span>
                     </td>
                 </tr>
                  <tr>
                     <td>
                         <span class="pull-left">Config</span>
-                        <span class="pull-right"><?php echo WPNXM_DIR . '\bin\mongodb\mongodb.conf'; ?></span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\mongodb\mongodb.conf'; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -392,7 +392,7 @@
 
                         <a class="btn btn-default btn-sm"
                         <?php
-                        if (!is_file(WPNXM_DIR . '\logs\mongodb.log')) {
+                        if (!is_file(WPNXM_DIR . 'logs\mongodb.log')) {
                             echo " onclick=\"alert('The MongoDB Log is not available. File was not found.'); return false;\"";
                         } else {
                             $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=mongodb-log';
