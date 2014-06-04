@@ -135,6 +135,7 @@
             </table>
             <?php } ?>
 
+            <?php if ($xdebug_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -159,6 +160,7 @@
                     </td>
                 </tr>
             </table>
+            <?php } ?>
 
         </div>
     </div>
@@ -432,6 +434,7 @@
             </table>
             <?php } ?>
 
+            <?php if ($xdebug_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td colspan="2">
@@ -467,6 +470,7 @@
                     </td>
                 </tr>
             </table>
+            <?php } ?>
 
         </div>
     </div>
