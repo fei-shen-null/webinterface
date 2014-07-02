@@ -35,9 +35,9 @@ namespace Webinterface\Components;
 class Nginx extends AbstractComponent
 {
     public $name = 'Nginx';
-    
+
     public $registryName = 'nginx';
-    
+
     public $installationFolder = '\bin\nginx';
 
     public $files = array(
@@ -63,5 +63,10 @@ class Nginx extends AbstractComponent
         }
 
         return substr($_SERVER["SERVER_SOFTWARE"], 6);
+    }
+
+    public function install()
+    {
+        $this->unzip($file, $installationFolder);
     }
 }
