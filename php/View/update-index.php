@@ -58,14 +58,14 @@ echo '</table></div></div></div>';
 function printUpdatedSign($component, $old_version, $new_version)
 {
     $url = sprintf(
-        WPNXM_WEBINTERFACE_ROOT . 'index.php?page=update&action=update&component=%s&version=%s',
+        WPNXM_WEBINTERFACE_ROOT . 'index.php?page=update&action=download&component=%s&version=%s',
         $component, 
         $new_version
     );
 
     if (version_compare($old_version, $new_version) === -1) {
         $html = '<a href="' . $url . '"';
-        $html .= ' class="btn btn-success btn-xs" style="font-size: 14px">';
+        $html .= ' class="download btn btn-success btn-xs" style="font-size: 14px">';
         $html .= '<span class="glyphicon glyphicon-arrow-up"></span>';
         $html .= '&nbsp; ' . $new_version . '</a>';
 
@@ -74,5 +74,43 @@ function printUpdatedSign($component, $old_version, $new_version)
 
     return '<span style="font-size:14px">' . $old_version . '</span>';
 }
-
 ?>
+
+<script> 
+function updateProgress(json) {
+    var progressBar = $('progress');
+    progressBar.attr('value', json.progress.loaded);
+    progressBar.attr('max', json.progress.total);
+}
+
+function download(link) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', link);
+    xhr.send(null);   
+    
+    // 1 second interval for continous xhr response handling
+    var timer;    
+    timer = window.setInterval(function() {
+        // finished?
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            window.clearTimeout(timer);
+            $('progress').replaceWith('<b>Done!</b>');
+        }
+        // append callback data to the body for evaluation (updates the progress bar)
+        $('body').append(' ' + xhr.responseText + ' ');
+    }, 1000);
+};
+
+// intercept clicks on the "Download Component" links
+$("a.download" ).on('click', function(e) {
+    e.preventDefault();
+    
+    // insert the download progress bar
+    $(this).after('<progress id="progress" value="0" max="0">0%</progress>');
+    
+    // trigger AJAX download with curl callback to update the progessbar
+    download(this.href);
+      
+    return false;
+});
+</script>
