@@ -8,7 +8,7 @@ class Updater
         // WPN-XM Software Registry - Latest Version @ GitHub
         $url = 'https://raw2.github.com/WPN-XM/registry/master/wpnxm-software-registry.php';
       
-        // fetch date header
+        // fetch date header (doing a simple HEAD request)
         stream_context_set_default(
             array(
                 'http' => array(
@@ -21,7 +21,7 @@ class Updater
         $headers = @get_headers($url);
 
         // we are offline
-        if(empty($headers)) {
+        if(empty($headers) === true) {
             return false;
         }
         
@@ -37,9 +37,9 @@ class Updater
 
         // do update
         $updated = false;
-        if($needsUpdate === true && $filesize === false) { 
+        if($needsUpdate === true) { 
             
-            // fetch date header
+            // set request method back to GET, to fetch the file
             stream_context_set_default(
                 array(
                     'http' => array(
