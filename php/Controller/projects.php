@@ -42,7 +42,7 @@ function index()
     render('page-action', $tpl_data);
 }
 
-function newproject()
+function create()
 {
     $tpl_data = array(
         'no_layout' => true
@@ -67,7 +67,7 @@ function createproject()
 {
     $project = filter_input(INPUT_POST, 'projectname');
     mkdir(WPNXM_WWW_DIR . DS . $project, 0777);
-    redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=projects');
+    redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=projects');    
 }
 
 function settings()
