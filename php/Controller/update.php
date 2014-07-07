@@ -49,15 +49,9 @@ function download()
     if($component === 'none' or $version === '0.0.0') {
         throw new \InvalidArgumentException();
     }
+      
+    \Webinterface\Helper\Registry::getUrl($component, $version);
 
-    $registry = include WPNXM_DATA_DIR . 'wpnxm-software-registry.php';
-
-    if(!isset($registry[$component][$version])) {
-        throw new \InvalidArgumentException(sprintf('Component "%s" has no version "%s".', $component, $version));
-    }
-    
-    $downloadUrl = $registry[$component][$version];
-    
     \Webinterface\Helper\Downloader::download($downloadUrl);
 }
 

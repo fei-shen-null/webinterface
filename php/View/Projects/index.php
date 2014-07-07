@@ -6,14 +6,14 @@
                 <?php if (FEATURE_1 == true) { // @todo feature-flag create new project dialog ?>
                     <a class="btn btn-default btn-sm new-project-btn-position floatright"
                        data-toggle="modal" data-target="#myModal"
-                       href="/webinterface/index.php?page=projects&action=newproject" >
+                       href="index.php?page=projects&action=create" >
                        New Project
                     </a>
                 <?php } ?>
                  <?php if (FEATURE_4 == true) { // @todo feature-flag create new project dialog ?>
                     <a class="btn btn-default btn-sm new-project-btn-position floatright"
                        data-toggle="modal" data-target="#myModal"
-                       href="/webinterface/index.php?page=domains">
+                       href="index.php?page=domains">
                        List Domains
                     </a>
                 <?php } ?>

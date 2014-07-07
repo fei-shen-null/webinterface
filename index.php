@@ -48,13 +48,13 @@ $action();
 function render($view = 'page-action', $template_vars = array())
 {
     // fallback to current page, if called empty
-    global $page, $action; if ($view === 'page-action') { $view = $page . '-' . $action; }
+    global $page, $action; if ($view === 'page-action') { $view = ucfirst($page) . DS . $action; }
     extract($template_vars);
     ob_start();
     include WPNXM_HELPER_DIR . 'Viewhelper.php';
     if (!isset($no_layout) or $no_layout === false) { include WPNXM_VIEW_DIR . 'header.php'; }
     $view_file = WPNXM_VIEW_DIR . $view . '.php';
-    if (is_file($view_file)) { include $view_file; } else { throw new \Exception('Error: View "' . $view_file . '" not found.'); }
+    if (is_file($view_file)) { include $view_file; } else { throw new \Exception('Error: View "' . $view_file . '" not found.'.$view); }
     if (!isset($no_layout) or $no_layout === false) { include WPNXM_VIEW_DIR . 'footer.php'; }
 
     return ob_end_flush();

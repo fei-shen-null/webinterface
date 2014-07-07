@@ -47,39 +47,39 @@ function showtab()
 {
     /**
      * Tab Controller - handles GET requests for tab pages.
-     * Calls to tab pages look like this: "index.php?page=config&action=showtab&tab=xy".
-     * Each tab returns content for inline display in the tabs-content container.
+     * Ajax calls to tab pages look like this: "index.php?page=config&action=showtab&tab=xy".
+     * Each tab function renders content for inline display in the tabs content container.
      */
     $tab = filter_input(INPUT_GET, 'tab');
     $tab = strtr($tab, '-', '_'); // minus to underscore conversion
-    $tabAction = 'showtab_' . $tab;
+    $tabAction = 'tab_' . $tab;
     if (false === is_callable($tabAction)) {
         throw new \Exception(sprintf('The controller method "%s" for the Tab "%s" was not found!', $tabAction, $tab));
     }
     $tabAction();
 }
 
-function showtab_help()
+function tab_help()
 {
-    render('config-showtab-help', array('no_layout' => true));
+    render('Config\tab-help', array('no_layout' => true));
 }
 
-function showtab_mariadb()
+function tab_mariadb()
 {
-    render('config-showtab-mariadb', array('no_layout' => true));
+    render('Config\tab-mariadb', array('no_layout' => true));
 }
 
-function showtab_mongodb()
+function tab_mongodb()
 {
-    render('config-showtab-mongodb', array('no_layout' => true));
+    render('Config\tab-mongodb', array('no_layout' => true));
 }
 
-function showtab_nginx()
+function tab_nginx()
 {
-    render('config-showtab-nginx', array('no_layout' => true));
+    render('Config\tab-nginx', array('no_layout' => true));
 }
 
-function showtab_nginx_domains()
+function tab_nginx_domains()
 {
     $projects = new Webinterface\Helper\Projects;
     $domains = new Webinterface\Helper\Domains;
@@ -90,20 +90,20 @@ function showtab_nginx_domains()
         'domains' => $domains->listDomains()
     );
 
-    render('config-showtab-nginx-domains', $tpl_data);
+    render('Config\tab-nginx-domains', $tpl_data);
 }
 
-function showtab_php()
+function tab_php()
 {
     $tpl_data = array(
         'no_layout' => true,
         'ini' => Webinterface\Helper\PHPINI::read(), // $ini array structure = 'ini_file', 'ini_array'
     );
 
-    render('config-showtab-php', $tpl_data);
+    render('Config\tab-php', $tpl_data);
 }
 
-function showtab_php_ext()
+function tab_php_ext()
 {
     $phpext = new Webinterface\Helper\PHPExtensionManager();
 
@@ -114,17 +114,17 @@ function showtab_php_ext()
         'form' => renderPHPExtensionsFormContent()
     );
 
-    render('config-showtab-phpext', $tpl_data);
+    render('Config\tab-phpext', $tpl_data);
 }
 
-function showtab_xdebug()
+function tab_xdebug()
 {
     $tpl_data = array(
         'no_layout' => true,
         'ini_settings' => ini_get_all('xdebug'),
     );
 
-    render('config-showtab-xdebug', $tpl_data);
+    render('Config\tab-xdebug', $tpl_data);
 }
 
 function update_phpextensions()

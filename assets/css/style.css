@@ -435,7 +435,7 @@ img
 .clear { clear: both; }
 
 /* Tab Style*/
-#organic-tabs { background: #eee; padding: 10px; margin: 0 0 20px 0; -moz-box-shadow: 0 0 5px #666; -webkit-box-shadow: 0 0 5px #666; width: 820px; }
+#organic-tabs { background: #eee; padding: 10px; margin: 0 0 20px 0; -moz-box-shadow: 0 0 2px #666; -webkit-box-shadow: 0 0 2px #666; width: 820px; }
 
 #organic-tabs .nav { overflow: hidden; margin: -41px 0 5px 0;}
 #organic-tabs .nav li { min-width: 85px; width: auto; float: left; margin: 0 5px 0 0; }
@@ -570,6 +570,7 @@ input[type="tel"]:focus,    input[type="color"]:focus, .uneditable-input:focus {
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
     margin-left: 0px;
     margin-right: 10px;
+    position: relative;
 }
 
 label {

@@ -1,4 +1,4 @@
-<form class="form-horizontal" method="post" action="index.php?page=projects&action=createproject">
+<form class="form-horizontal" method="post" action="index.php?page=projects&action=create">
 <fieldset>
 
 <!-- Form Name -->
