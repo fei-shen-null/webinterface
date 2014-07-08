@@ -17,6 +17,8 @@ window.onload = function() {
     handlePHPExtensionsForm();
 
     onModalHideResetRemoteUrl();
+
+    lazyBindModalSubmitActionToFormUrl();
 }
 
 /**
@@ -184,4 +186,27 @@ function ajaxGET(url, success) {
             success: success
             // ajax error
           });
+}
+
+function lazyBindModalSubmitActionToFormUrl() {
+   // bind submit action
+   $('#myModal').on('click', 'button[type="submit"]', function() {
+       var form = $("#myModal .modal-body form");
+
+       $.ajax({
+         type: form.attr('method'),
+         url: form.attr('action'),
+         data: form.serializeArray(),
+
+         cache: false
+       })
+       .done(function() {
+           $('#myModal .modal-body').html("success");
+       })
+       .fail(function() {
+           $('#myModal .modal-body').html("error");
+       })
+
+       event.preventDefault();
+  });
 }
