@@ -81,7 +81,7 @@
                 </tr>
             </table>
 
-             <?php if ($mongodb_installed === true) { ?>
+            <?php if ($mongodb_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -107,8 +107,35 @@
                 </tr>
             </table>
             <?php } ?>
+            
+            <?php if ($postgresql_installed === true) { ?>
+            <table class="cs-message-content">
+                <tr>
+                    <td class="td-with-image">
+                        SQL Database
+                    </td>
+                    <td>
+                        <div class="resourceheader">
+                            <div class="title">
+                                <img class="res-header-icon" src="<?php echo WPNXM_IMAGES_DIR; ?>postgresql.png" alt="PostgreSQL Icon" height="16" width="16" />
+                                <a href="http://www.postgresql.org/">
+                                    <b>PostgreSQL</b>
+                                </a>
+                                <span class="version"><?php echo $postgresql_version; ?></span>
+                            </div>
+                            <div class="description"><small>PostgreSQL is a powerful, open source object-relational database system.</small>
+                            </div>
+                            <div class="license"><p>
+                                    License: <a href="http://www.postgresql.org/about/licence/">PostgreSQL Licence</a>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <?php } ?>
 
-             <?php if ($memcached_installed === true) { ?>
+            <?php if ($memcached_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
                     <td class="td-with-image">
@@ -379,10 +406,10 @@
                 </tr>
                 <tr>
                     <td class="right">
-                        <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
+                        <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mongodb'; ?>">
                                 <img alt="Start MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
-                        <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mongodb'; ?>">
                             <img alt="Stop MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
 
@@ -404,6 +431,70 @@
                         >Show Log</a>
 
                         <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
+                    </td>
+                </tr>
+            </table>
+            <?php } ?>
+            
+            <?php if ($postgresql_installed === true) { ?>
+            <table class="cs-message-content">
+                <tr>
+                    <td>
+                        <div class="resourceheader2 bold">
+                        <?php echo $postgresql_status; ?> PostgreSQL
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="pull-left">Host : Port</span>
+                        <span class="pull-right">localhost:27017</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="pull-left">Username | Password</span>
+                        <span class="red pull-right">root</span> | <span class="red"><?php echo $postgresql_password; ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="pull-left">Directory</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\pgsql'; ?></span>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        <span class="pull-left">Config</span>
+                        <span class="pull-right"><?php echo WPNXM_DIR . 'bin\pgsql\pgsql.conf'; ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=postgresql'; ?>">
+                                <img alt="Start PgSQL" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
+                        </a>
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=postgresql'; ?>">
+                            <img alt="Stop PgSQL" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
+                        </a>
+
+                        <?php #if (class_exists('mysqli', false)) { ?>
+                           <!-- <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;component=postgresql"
+                               data-toggle="modal" data-target="#myModal">Reset Password</a>
+                           -->
+                        <?php #} ?>
+
+                        <a class="btn btn-default btn-sm"
+                        <?php
+                        if (!is_file(WPNXM_DIR . 'logs\pgsql.log')) {
+                            echo " onclick=\"alert('The PostgreSQL Log is not available. File was not found.'); return false;\"";
+                        } else {
+                            $url = WPNXM_WEBINTERFACE_ROOT . 'index.php?page=openfile&file=postgresql-log';
+                            echo "onclick=\"ajaxGET('$url')\"";
+                        }
+                        ?>
+                        >Show Log</a>
+
+                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#postgresql'; ?>">Configure</a>
                     </td>
                 </tr>
             </table>

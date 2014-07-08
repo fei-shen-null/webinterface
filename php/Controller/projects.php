@@ -53,7 +53,7 @@ function create()
 
 function edit()
 {
-    $project = filter_input( INPUT_GET, 'project');
+    $project = filter_input(INPUT_GET, 'project');
 
     $tpl_data = array(
         'no_layout' => true,
@@ -64,10 +64,32 @@ function edit()
 }
 
 function createproject()
-{
+{   
     $project = filter_input(INPUT_POST, 'projectname');
-    mkdir(WPNXM_WWW_DIR . DS . $project, 0777);
-    redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=projects');    
+    
+    $template = filter_input(INPUT_POST, 'projecttemplate');
+    switch ($template) {
+        case '"Hello World" Project':
+            $template = new Webinterface\Helper\ProjectTemplate();
+            $template->generate();
+            break;
+        case  '"Composer" Project':
+
+            break;
+        case 'Project Folder only':
+        default:
+            break;
+    }
+
+    $bool = mkdir(WPNXM_WWW_DIR . DS . $project, 0777);
+    
+    if($bool === true) {
+       header('Project created', true, '200');
+    } else {
+       header('Project not created.', true, '500');
+    }
+    
+    exit;
 }
 
 function settings()

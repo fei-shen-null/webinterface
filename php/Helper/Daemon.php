@@ -65,6 +65,8 @@ class Daemon
                 break;
             case 'memcached':
                 $process_name = 'memcached.exe';
+            case 'postgresql':
+                $process_name = 'pgsql.exe';
                 break;
              default:
                 throw new \InvalidArgumentException(
