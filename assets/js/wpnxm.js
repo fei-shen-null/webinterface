@@ -177,15 +177,12 @@ function handlePHPExtensionsForm() {
     }
 }; // END of handlePHPExtensionsForm()
 
-
-
 function ajaxGET(url, success) {
     $.ajax({
-            url: url,
-            method: "GET",
-            success: success
-            // ajax error
-          });
+        url: url,
+        method: "GET",
+        success: success
+    });
 }
 
 function lazyBindModalSubmitActionToFormUrl() {
