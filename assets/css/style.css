@@ -411,7 +411,7 @@ img
 .phpinfo pre { margin: 0px; font-family: monospace; }
 .phpinfo a:link {}
 .phpinfo a:hover {}
-.phpinfo table { }
+.phpinfo table { margin-bottom: 12px; }
 .phpinfo .center { text-align: center; }
 .phpinfo .center table { margin-left: auto; margin-right: auto; text-align: left; }
 .phpinfo .center th { text-align: center !important; }
