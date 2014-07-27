@@ -1,3 +1,9 @@
+<h2>PHP Version</h2>
+
+This shows the currently active PHP version. If multiple PHP versions are installed, you might switch between them.
+
+<?php echo $php_versions_form; ?>
+
 <h2>PHP INI Editor</h2>
 The editor allows modifications of existing values in your php.ini.
 Click on a bold section to expand all directives for that section.
