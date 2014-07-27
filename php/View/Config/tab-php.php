@@ -21,21 +21,27 @@ Do not forget to restart the PHP daemon in order to let the new settings become 
 <?php
 $index = 0;
 $node_name = '';
-foreach ($ini['ini_array'] as $key => $value) {
+foreach ($ini['ini_array'] as $key => $value)
+{
     $index = $index + 1;
     $node_name = 'node-' . $index;
     $html = '';
 
-    if ($value['type'] == 'section') {
-        echo '<tr id="'.$node_name.'"><td>'.$value['section'].'</td></tr>'; $section_node_name = $node_name;
+    if ($value['type'] === 'section') {
+        echo '<tr id="'.$node_name.'"><td>'.$value['section'].'</td></tr>';
+        $section_node_name = $node_name;
     }
 
-    if ($value['type'] == 'comment') { }
+    if ($value['type'] === 'comment') {
+        // ain't show nothing, yet
+    }
 
-    if ($value['type'] == 'entry') {
-        echo '<tr id="'.$node_name.'" class="child-of-'.$section_node_name.'"><td>'.$value['key'].'</td>';
-        echo '<td><div class="editable">'; // span tag for jquery.jEditable
-        echo $value['value'] . '</div></td></tr>';
+    if ($value['type'] === 'entry') {
+        echo '<tr id="'.$node_name.'" class="child-of-'.$section_node_name.'">';
+        echo '<td>'.$value['key'].'</td>';
+        // class editable for jquery.jEditable
+        echo '<td><div class="editable">' . $value['value'] . '</div></td>';
+        echo '</tr>';
     }
 }
 ?>
