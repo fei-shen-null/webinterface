@@ -30,26 +30,27 @@
         Twitter Bootstrap3: choose this option to have a project structure set up with a Twitter Bootstrap3 template. 
     -->
 
-    <!-- Select Basic 
-    <div class="control-group">
-      <label class="control-label" for="selectbasic">Select Project Template</label>
-      <div class="controls">
-        <select id="selectbasic" name="selectbasic" class="input-xlarge">
-          <option>Empty</option>
-          <option>Hello World</option>
-          <option>Composer Project</option> 
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="projecttemplate">Select Project Template</label>
+      <div class="col-md-4 controls">
+        <select id="projecttemplate" name="projecttemplate" class="input-xlarge">
+          <option>Project folder only</option>
+          <option>"Hello World" Project</option>
+          <option>"Composer" Project</option> 
+          <!--
           <option>HTML5 Boilerplate</option> 
-          <option>Twitter Bootstrap3</option> 
+          <option>Twitter Bootstrap3</option>
+          -->
         </select>
       </div>
     </div>
-    -->
 
     </fieldset>
     </form>
 </div>
 
 <div class="modal-footer">
-    <button id="buttonSave" name="buttonSave" class="btn btn-success">Create Project</button>
+    <button type="submit" id="buttonSave" name="button" class="btn btn-success">Create Project</button>
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
