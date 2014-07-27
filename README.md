@@ -18,6 +18,6 @@ Hint: The webinterface will automatically open up in your browser, when the stac
 b) With embedded PHP server
 
 When using the embedded PHP server to serve the webinterface, it might be used as a control center application for the server stack.
-To start the embedded PHP sever launch the following command on CLI:
-C:\server\bin\php\php -S localhost:90 -t C:\server\www
+To start it, launch the following command on CLI: C:\server\bin\php\php -S localhost:90 -t C:\server\www
+Or simply use start-scp-server.bat.
 You might reach the webinterface via the URL http://localhost:90/tools/webinterface/index.php
