@@ -42,6 +42,7 @@ function index()
       'memcached_version'   => Serverstack::getVersion('memcached'),
       'xdebug_version'      => Serverstack::getVersion('xdebug'),
       'mongodb_version'     => Serverstack::getVersion('mongodb'),
+      'postgresql_version'  => Serverstack::getVersion('postgresql'),
       // status
       'nginx_status'        => Serverstack::getStatus('nginx'),
       'php_status'          => Serverstack::getStatus('php'),
@@ -51,6 +52,7 @@ function index()
       'phpext_mongo_status' => Serverstack::getStatus('phpext_mongo'),
       'memcached_status'    => Serverstack::getStatus('memcached'),
       'phpext_memcached_status' => Serverstack::getStatus('phpext_memcache'),
+      'postgresql_status'   => Serverstack::getStatus('postgresql'),
       // your ip
       'my_ip'               => Serverstack::getMyIP(),
       // passwords
@@ -60,6 +62,7 @@ function index()
       'memcached_installed' => Serverstack::isInstalled('memcached'),
       'xdebug_installed'    => Serverstack::isInstalled('xdebug'),
       'mongodb_installed'   => Serverstack::isInstalled('mongodb'),
+      'postgresql_installed' => Serverstack::isInstalled('postgresql'),
       'phpext_memcached_installed' => Serverstack::isExtensionInstalled('memcached'),
       'phpext_xdebug_installed' => Serverstack::isExtensionInstalled('xdebug'),
       'xdebug_extension_type' => XDebug::getXDebugExtensionType(),

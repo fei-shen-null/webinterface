@@ -115,12 +115,8 @@ abstract class AbstractComponent
 
     public function download($url = '', $targetFolder = '')
     {
-        if ($url === '' or $targetFolder === '') {
-            $url = $this->downloadURL;
-            $targetFolder = $this->installationFolder;
-        }
-
-        // download
+        $url = ($url === '') ? $this->downloadURL : $url;
+        $targetFolder = ($targetFolder === '') ? $this->installationFolder: $targetFolder;
     }
     
     /**
@@ -146,7 +142,7 @@ abstract class AbstractComponent
     /**
      * Find out, whether an extension is loaded
      * 
-     * @param type $name
+     * @param string $name
      * @return bool <b>TRUE</b> if the extension identified by <i>name</i>
      * is loaded, <b>FALSE</b> otherwise.
      */
@@ -157,5 +153,10 @@ abstract class AbstractComponent
         return extension_loaded($name);
     }
 
+    /**
+     * Returns the Version
+     * 
+     * @return string
+     */
     abstract public function getVersion();
 }

@@ -36,7 +36,7 @@ function setupjEditable()
          type      : 'textarea',
          cancel    : 'Cancel',
          submit    : 'OK',
-         indicator : '<img src="/webinterface/assets/img/ajax-spinner.gif">',
+         indicator : '<img src="<?php echo WPNXM_IMAGES_DIR; ?>ajax-spinner.gif">',
          tooltip   : 'Click to edit..' //<img src="img/pencil.png">
      });
 }
@@ -121,7 +121,7 @@ function setupTabs()
       $(this).addClass('current');
 
       // show ajax loading indicator
-      $('div#tab-content').html('<p style="text-align: center;"><img src="/webinterface/assets/img/ajax-spinner.gif" width="64" height="64" /></p>');
+      $('div#tab-content').html('<p style="text-align: center;"><img src="<?php echo WPNXM_IMAGES_DIR; ?>ajax-spinner.gif" width="64" height="64" /></p>');
 
       // load content
       loadTab($(this));

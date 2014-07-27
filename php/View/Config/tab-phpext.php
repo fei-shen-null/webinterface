@@ -4,9 +4,9 @@
     <div id="ajax-status" class="floatright hide btn btn-small btn-success">Updating Extensions.</div>
 </h2>
 
-To enable an extension, check it's checkbox. To disable an extension uncheck it's checkbox. <small>Surprise, surprise!</small>
+To enable an extension, check it's checkbox. To disable an extension, uncheck it's checkbox. <small>Surprise, surprise!</small>
 <form id="phpExtensionsForm" class="phpextensions form-horizontal"
-      action="/webinterface/index.php?page=config&amp;action=update_phpextensions"
+      action="<?php echo WPNXM_WEBINTERFACE_ROOT; ?>index.php?page=config&amp;action=update_phpextensions"
       method="post">
 
 <fieldset id="phpExtensionsFormContent">

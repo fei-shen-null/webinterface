@@ -17,6 +17,8 @@ window.onload = function() {
     handlePHPExtensionsForm();
 
     onModalHideResetRemoteUrl();
+
+    lazyBindModalSubmitActionToFormUrl();
 }
 
 /**
@@ -148,40 +150,55 @@ function handlePHPExtensionsForm() {
 
         var jsonData = responseText;
 
-        // this is the response on the changes to PHP INI, lets do some show here
-        $('#ajax-status').html(jsonData.responseText).show().pulsate();
+        // after a change to php ini, we are indicating the change and the PHP daemon restart
+        // by showing the ajax status
+        $('#ajax-status').html(jsonData.responseText).removeClass('hide').show().pulsate();
 
-        // now restart the php daemon, you will get a 404 Error in "Console - All".
-        // this is unnoticed by the user
-        $.get("/webinterface/index.php?page=daemon&action=restart&daemon=php");
+        // restart the php daemon
+        $.get("index.php?page=daemon&action=restart&daemon=php");
 
-        // now new extensions are off or on, lets get their state and update the checkbox display
+        // there might be a change in the on/off state of extensions.
+        // fetch their state as HTML checkbox display
         var updatePHPExtensionsForm = function() {
-            $.ajax({ url: "/webinterface/index.php?page=config&action=renderPHPExtensionsFormContent",
+            $.ajax({ url: "index.php?page=config&action=renderPHPExtensionsFormContent",
                 success: function(data, textStatus, XMLHttpRequest) {
                     $("#phpExtensionsFormContent").html(data);
-                    $('#ajax-status').hide();
+                    $('#ajax-status').hide().addClass('hide');
             }});
         }
-        // delayed call, because the php daemon needs to startup again
+
+        // delay this call, because the php daemon needs to startup again
         setTimeout(updatePHPExtensionsForm, 2200);
-
-        // open as modal response
-        //$('#ajax-response').modal();
-
-        // alert opens as modal response, too
-        /*alert('status: ' + statusText + '\n\nresponseText: \n' + responseText +
-            '\n\nThe output div should have already been updated with the responseText.');*/
     }
 }; // END of handlePHPExtensionsForm()
 
-
-
 function ajaxGET(url, success) {
     $.ajax({
-            url: url,
-            method: "GET",
-            success: success
-            // ajax error
-          });
+        url: url,
+        method: "GET",
+        success: success
+    });
+}
+
+function lazyBindModalSubmitActionToFormUrl() {
+   // bind submit action
+   $('#myModal').on('click', 'button[type="submit"]', function() {
+       var form = $("#myModal .modal-body form");
+
+       $.ajax({
+         type: form.attr('method'),
+         url: form.attr('action'),
+         data: form.serializeArray(),
+
+         cache: false
+       })
+       .done(function() {
+           $('#myModal .modal-body').html("success");
+       })
+       .fail(function() {
+           $('#myModal .modal-body').html("error");
+       })
+
+       event.preventDefault();
+  });
 }

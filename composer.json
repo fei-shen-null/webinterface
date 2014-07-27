@@ -18,7 +18,8 @@
         "issues": "https://github.com/wpn-xm/wpn-xm/issues/"
     },
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "jakoch/nginx-conf": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "4.1",

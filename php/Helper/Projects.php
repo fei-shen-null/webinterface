@@ -142,7 +142,7 @@ class Projects
 
             // composer.json key "homepage"?
             if(isset($composer['homepage']) === true) {
-                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
+                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px; width: 28px; height: 20px;"';
                 $html .= ' href="' . $composer['homepage'] . '"><span class="glyphicon glyphicon-home"></span></a>';
             }
         }

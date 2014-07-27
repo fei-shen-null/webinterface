@@ -190,7 +190,7 @@ class Serverstack
      */
     public static function getStatus($daemon)
     {
-        // extension are loaded; daemons are running
+        // extension are loaded and daemons are running
         $stateText = (strpos($daemon, 'phpext') !== false) ? 'loaded' : 'running';
 
         if (Daemon::isRunning($daemon) === false) {
@@ -229,6 +229,8 @@ class Serverstack
                 return 'PHP Extension XDebug';
             case 'mongodb':
                 return 'MongoDB';
+            case 'postgresql':
+                return 'PostgreSQL';
             default:
                 throw new \InvalidArgumentException(sprintf(__METHOD__ . '() no name for the daemon: "%s"', $daemon));
         }
@@ -258,8 +260,11 @@ class Serverstack
             case 'memcached':
                 $o = new \Webinterface\Components\Memcached;
                 return $o->isInstalled();
+            case 'postgresql':
+                $o = new \Webinterface\Components\PostgreSQL;
+                return $o->isInstalled();            
             default:
-                throw new \InvalidArgumentException(sprintf(__METHOD__ . '() has no case for the daemon: "%s"', $daemon));
+                throw new \InvalidArgumentException(sprintf(__METHOD__ . '() has no case for the daemon: "%s"', $component));
         }
     }
 
