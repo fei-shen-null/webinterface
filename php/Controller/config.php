@@ -220,12 +220,12 @@ function renderPHPExtensionsFormContent()
 
 function update_phpini_setting()
 {
-    // @todo do we need to set [section], in order to save the directive?
-    // @see IniReaderWriter::set() $section is not used there
-    $section = ''; 
-
     $directive = filter_input(INPUT_POST, 'directive');
     $value = filter_input(INPUT_POST, 'value');
+
+    // @todo figure out, if we need to set a ini [section], in order to save the directive correctly?
+    // @see IniReaderWriter::set() $section is not used there
+    $section = '';
 
     Webinterface\Helper\PHPINI::setDirective($section, $directive, $value);
 
