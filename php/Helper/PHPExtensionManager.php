@@ -288,14 +288,13 @@ class PHPExtensionManager
             // as there might be comments on the line (; #)
             $extension = substr($extension, 0, strpos($extension, '.dll'));
 
-            // and stuff them in the array
             $enabled_extensions[] = $extension . '.dll';
         }
 
         asort($enabled_extensions);
 
-        // do a key/value flip, to get rid of the numeric index.
-        // this is for being able to easily check for a extension filename with isset in foreach.
+        // get rid of the numeric index, by doing a key/value flip
+        // this allows to easily check for an extension name by using isset in a foreach loop
         return array_flip($enabled_extensions);
     }
 

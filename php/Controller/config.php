@@ -97,6 +97,7 @@ function tab_php()
 {
     $tpl_data = array(
         'no_layout' => true,
+        'php_versions_form' => renderPhpVersionSelectForm(),
         'ini' => Webinterface\Helper\PHPINI::read(), // $ini array structure = 'ini_file', 'ini_array'
     );
 
@@ -153,7 +154,7 @@ function update_phpextensions()
     $array = array(
         'enabled_extensions' => $extensions,
         'disabled_extensions' => $disableTheseExtensions,
-        'responseText' => 'Extensions updated - PHP restarting...'
+        'responseText' => 'Extensions updated. Restarting PHP ...'
     );
 
     // send as JSON
@@ -220,16 +221,55 @@ function renderPHPExtensionsFormContent()
 
 function update_phpini_setting()
 {
-    // @todo do we need to set [section], in order to save the directive?
-    // @see IniReaderWriter::set() $section is not used there
-    $section = ''; 
-
     $directive = filter_input(INPUT_POST, 'directive');
     $value = filter_input(INPUT_POST, 'value');
+
+    // @todo figure out, if we need to set a ini [section], in order to save the directive correctly?
+    // @see IniReaderWriter::set() $section is not used there
+    $section = '';
 
     Webinterface\Helper\PHPINI::setDirective($section, $directive, $value);
 
     Webinterface\Helper\Daemon::restartDaemon('php');
 
     echo '<div class="modal"><p class="info">Saved. PHP restarted.</div>';
+}
+
+function update_phpversionswitch()
+{
+    $new_version = filter_input(INPUT_POST, 'new-php-version');
+
+    Webinterface\Helper\PHPVersionSwitch::switchVersion($new_version);
+
+    Webinterface\Helper\Daemon::restartDaemon('php');
+
+    echo '<div class="modal"><p class="info">PHP version switched. PHP restarted.</div>';
+}
+
+function renderPhpVersionSelectForm()
+{
+    $versionFolders = Webinterface\Helper\PHPVersionSwitch::getVersions();
+    $currentVersion = Webinterface\Helper\PHPVersionSwitch::getCurrentVersion();
+    $number_php_versions = count($versionFolders);
+
+    $options = '';
+    foreach($versionFolders as $folder) {
+        $options .= '<option value="' . $folder['php-version'] . '"';
+        $options .= ($folder['php-version'] === $currentVersion) ? ' selected' : '';
+        $options .= '>' . $folder['php-version'] . '</option>';
+    }
+
+    $html = '<form action="index.php?page=config&action=update_phpversionswitch" method="POST">
+      <p>
+        <select name="new-php-version" size="' . $number_php_versions . '">';
+    $html .= $options;
+    $html .= '</select>
+      </p>
+      <div class="right">
+        <button class="btn btn-danger" type="reset">Reset</button>
+        <button class="btn btn-success" type="submit">Switch</button>
+    </div>
+    </form>';
+
+    return $html;
 }
