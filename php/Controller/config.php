@@ -169,6 +169,7 @@ function renderPHPExtensionsFormContent()
     $html_checkboxes = '';
     $i = 1; // start at first element
     $itemsTotal = count($available_extensions); // elements total
+    $itemsPerColumn = round($itemsTotal/4, 0, PHP_ROUND_HALF_UP);
 
     // use list of available_extensions to draw checkboxes
     foreach ($available_extensions as $name => $file) {
@@ -189,7 +190,7 @@ function renderPHPExtensionsFormContent()
 
         // render column opener (everytime on 1 of 12)
         if ($i === 1) {
-            $html_checkboxes .= '<div class="form-group" style="float: left; width: 140px; margin: 10px;">';
+            $html_checkboxes .= '<div class="form-group">';
         }
 
         // the input tag is wrapped by the label tag
@@ -201,8 +202,7 @@ function renderPHPExtensionsFormContent()
         $html_checkboxes .= substr($name, 4);
         $html_checkboxes .= '</label>';
 
-        // 12 elements vertical
-        if ($i === 12 or $itemsTotal === 1) {
+        if ($i == $itemsPerColumn or $itemsTotal === 1) {
             $html_checkboxes .= '</div>';
             $i = 0; /* reset column counter */
         }
