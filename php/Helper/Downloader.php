@@ -10,7 +10,7 @@ class Downloader
      */
     public static function download($url)
     {
-        $file = fopen(WPNXM_DATA_DIR . basename(url), 'r');
+        $file = fopen(WPNXM_DATA_DIR . basename($url), 'r');
 
         set_time_limit(0); // unlimited max execution time
 
