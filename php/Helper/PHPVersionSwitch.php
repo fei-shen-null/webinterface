@@ -45,7 +45,7 @@ class PHPVersionSwitch
 
     public static function getFolderVersion($dir)
     {
-        $enableErrorLogging = ' -d log_errors=on -d error_log=' . WPNXM_DIR . 'logs/php_error.log';
+        $enableErrorLogging = ' -d log_errors=on -d error_log=' . WPNXM_DIR . 'logs\php_error.log';
 
         $out = shell_exec($dir . '\php.exe -v' . $enableErrorLogging);
 
