@@ -170,7 +170,9 @@ function autoload($class)
     if (is_file($file) === true) {
         include_once $file;
     } else {
-        throw new \Exception('Autoloading Failure! "'.$file.'" not found!');
+        throw new \Exception(
+            sprintf('Autoloading Failure! Class "%s" requested, but file "%s" not found.', $class, $file)
+        );
     }
 }
 
