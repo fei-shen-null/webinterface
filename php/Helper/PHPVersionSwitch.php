@@ -79,7 +79,7 @@ class PHPVersionSwitch
     }
 
     /**
-     * Automatically rename all folders to "php-x.y.z".
+     * Automatically renames all folders starting with "bin\php*" to "php-x.y.z".
      */
     public static function renameFoldersVersionized()
     {
@@ -90,7 +90,22 @@ class PHPVersionSwitch
         foreach($folders as $key => $folder) {
             if(false === strpos($folder['dir'], $folder['php-version'])) {
                 $newFolderName = WPNXM_BIN .'\php-' . $folder['php-version'];
+
+                // chmod, because the folder might be hidden or write protected
+                self::chmodDeep($folder['dir'], 0755);
+
                 rename($folder['dir'], $newFolderName);
+            }
+        }
+    }
+
+    public static function chmodDeep($path, $perms = 0777)
+    {
+        $dir = new \DirectoryIterator($path);
+        foreach ($dir as $item) {
+            chmod($item->getPathname(), $perms);
+            if ($item->isDir() && !$item->isDot()) {
+                self::chmodDeep($item->getPathname());
             }
         }
     }
