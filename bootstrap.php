@@ -80,7 +80,7 @@ if (!defined('WPNXM_DIR')) {
     // WPNXM Configuration File
     define('WPNXM_INI', WPNXM_DIR . 'wpn-xm.ini');
     define('WPNXM_BIN', WPNXM_DIR . 'bin' . DS);
-    define('WPNXM_TEMP', WPNXM_DIR . 'bin\temp' . DS);
+    define('WPNXM_TEMP', WPNXM_DIR . 'temp' . DS);
 
     /**
      * Feature Flags
