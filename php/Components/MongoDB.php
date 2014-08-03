@@ -60,7 +60,7 @@ class MongoDb extends AbstractComponent
         }
 
         try {
-            $m = new \Mongo();
+            $m = new \MongoClient();
 
             //require admin privilege
             $db = $m->admin;
