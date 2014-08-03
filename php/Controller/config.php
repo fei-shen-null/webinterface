@@ -170,7 +170,7 @@ function renderPHPExtensionsFormContent()
     $html_checkboxes = '';
     $i = 1; // start at first element
     $itemsTotal = count($available_extensions); // elements total
-    $itemsPerColumn = round($itemsTotal/4, 0, PHP_ROUND_HALF_UP);
+    $itemsPerColumn = ceil($itemsTotal/4);
 
     // use list of available_extensions to draw checkboxes
     foreach ($available_extensions as $name => $file) {
