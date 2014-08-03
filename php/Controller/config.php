@@ -30,7 +30,9 @@
 function index()
 {
     $tpl_data = array(
-        'load_jquery_additionals' => true
+        'load_jquery_additionals' => true,
+        'mongodb_installed' => Webinterface\Helper\Serverstack::isInstalled('mongodb'),
+        'xdebug_installed' => Webinterface\Helper\Serverstack::isInstalled('xdebug')
     );
 
     render('page-action', $tpl_data);
