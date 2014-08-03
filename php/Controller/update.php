@@ -47,10 +47,10 @@ function download()
     $version = ($version = filter_input(INPUT_GET, 'version')) ? $version : '0.0.0';
 
     if($component === 'none' or $version === '0.0.0') {
-        throw new \InvalidArgumentException();
+        throw new \InvalidArgumentException('Please specify "component" and "version".');
     }
-      
-    \Webinterface\Helper\Registry::getUrl($component, $version);
+
+    $downloadUrl = \Webinterface\Helper\Registry::getUrl($component, $version);
 
     \Webinterface\Helper\Downloader::download($downloadUrl);
 }
