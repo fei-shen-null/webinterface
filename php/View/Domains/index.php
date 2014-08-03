@@ -3,14 +3,13 @@
 <div class="cs-message">
     <table class="cs-message-content" style="width: 100%;">
         <tr>
-            <td class="resourceheader1 bold">Enable/Disable</td>
-            <td class="resourceheader1 bold">Domain Name</td>
-            <td class="resourceheader1 bold">Webfolder</td>
-            <td class="resourceheader1 bold">Config (fullpath)</td>
-            <td class="resourceheader1 bold">Config (filename)</td>
+            <td class="bold">Enable/Disable</td>
+            <td class="bold">Domain Name</td>
+            <td class="bold">Webfolder</td>
+            <td class="bold">Config (fullpath)</td>
+            <td class="bold">Config (filename)</td>
         </tr>
         <?php
-        var_dump($domains);
         $html = '';
         foreach ($domains as $domainName => $domainValues) {
             $html .= '<tr>';
