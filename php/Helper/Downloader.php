@@ -10,7 +10,7 @@ class Downloader
      */
     public static function download($url)
     {
-        $file = fopen(WPNXM_DATA_DIR . basename($url), 'r');
+        $file = fopen(WPNXM_TEMP . basename($url), 'w+');
 
         set_time_limit(0); // unlimited max execution time
 
@@ -20,6 +20,7 @@ class Downloader
             CURLOPT_TIMEOUT => 3600 * 2, // set 2h to not timeout on big files
             CURLOPT_HEADER  => 0,
             CURLOPT_NOPROGRESS => false,
+            CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_PROGRESSFUNCTION => 'curl_progress_callback',
             //CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,

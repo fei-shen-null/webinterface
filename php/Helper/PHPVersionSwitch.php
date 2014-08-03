@@ -5,9 +5,9 @@ class PHPVersionSwitch
 {
     public static function switchVersion($newVersion)
     {
-        $targetFolder     = WPNXM_BIN . '\php';
-        $newVersionFolder = WPNXM_BIN . '\php-' . $newVersion;
-        $oldVersionFolder = WPNXM_BIN . '\php-' . PHP_VERSION;
+        $targetFolder     = WPNXM_BIN . 'php';
+        $newVersionFolder = WPNXM_BIN . 'php-' . $newVersion;
+        $oldVersionFolder = WPNXM_BIN . 'php-' . PHP_VERSION;
 
         if (is_dir($targetFolder) === false) {
             throw new \Exception(sprintf(
@@ -40,7 +40,7 @@ class PHPVersionSwitch
 
     public static function getFolders()
     {
-        return glob(WPNXM_BIN . '\php*', GLOB_ONLYDIR);
+        return glob(WPNXM_BIN . 'php*', GLOB_ONLYDIR);
     }
 
     public static function getFolderVersion($dir)
@@ -52,7 +52,7 @@ class PHPVersionSwitch
 
     public static function getCurrentVersion()
     {
-        return self::getFolderVersion(WPNXM_BIN . '\php');
+        return self::getFolderVersion(WPNXM_BIN . 'php');
     }
 
     public static function getVersions()
