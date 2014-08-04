@@ -36,9 +36,18 @@ use Webinterface\Helper\INIReaderWriter;
  */
 class PHPINI
 {
+    /**
+     * @return array $ini array structure = 'ini_file', 'ini_array'
+     */
     public static function read()
     {
         $ini_file = php_ini_loaded_file();
+
+        if ($ini_file === false) {
+            throw new \Exception(
+                'The path to the loaded php.ini file could not be retrieved. Check PHP folder for a "php.ini" file!'
+            );
+        }
 
         $ini = new INIReaderWriter($ini_file);
         $ini_array  = $ini->returnArray();

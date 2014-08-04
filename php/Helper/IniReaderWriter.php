@@ -42,8 +42,8 @@ class IniReaderWriter
 
     public function __construct($file = '')
     {
-        if ($file !== '' and is_file($file) === false) {
-            throw new \Exception(sprintf('File not found: "%s".', $file));
+        if (is_file($file) === false) {
+            throw new \Exception('INI file not found');
         }
 
         $this->file = $file;

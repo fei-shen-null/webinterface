@@ -91,7 +91,7 @@ class PHPVersionSwitch
 
         foreach($folders as $key => $folder) {
             if(false === strpos($folder['dir'], $folder['php-version'])) {
-                $newFolderName = WPNXM_BIN .'\php-' . $folder['php-version'];
+                $newFolderName = WPNXM_BIN .'php-' . $folder['php-version'];
 
                 // chmod, because the folder might be hidden or write protected
                 self::chmodDeep($folder['dir'], 0755);

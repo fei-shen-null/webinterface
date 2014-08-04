@@ -178,3 +178,22 @@ function autoload($class)
 }
 
 spl_autoload_register('autoload');
+
+function exception_handler(Exception $e)
+{
+    $trace = str_replace(
+        array('#','):'), 
+        array('<br>#',"):<br>&nbsp;&nbsp;&rarr;"), 
+        $e->getTraceAsString()
+    );
+        
+    $html = '<div class="error"><h2>Something Bad Happened</h2>';
+    $html .= '<p>' . $e->getMessage() . '</p>';
+    $html .= '<p>' . $trace . '</p>';
+    $html .= '</div>';
+    
+    echo $html;
+    
+}
+
+set_exception_handler('exception_handler');

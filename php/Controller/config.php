@@ -100,7 +100,7 @@ function tab_php()
     $tpl_data = array(
         'no_layout' => true,
         'php_versions_form' => renderPhpVersionSelectForm(),
-        'ini' => Webinterface\Helper\PHPINI::read(), // $ini array structure = 'ini_file', 'ini_array'
+        'ini' => Webinterface\Helper\PHPINI::read(),
     );
 
     render('Config\tab-php', $tpl_data);
