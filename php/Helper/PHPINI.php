@@ -1,31 +1,12 @@
 <?php
-   /**
-    * WPИ-XM Server Stack - Webinterface
-    * Jens-André Koch © 2010 - onwards
-    * http://wpn-xm.org/
-    *
-    *        _\|/_
-    *        (o o)
-    +-----oOO-{_}-OOo------------------------------------------------------------------+
-    |                                                                                  |
-    |    LICENSE                                                                       |
-    |                                                                                  |
-    |    WPИ-XM Server Stack is free software; you can redistribute it and/or modify   |
-    |    it under the terms of the GNU General Public License as published by          |
-    |    the Free Software Foundation; either version 2 of the License, or             |
-    |    (at your option) any later version.                                           |
-    |                                                                                  |
-    |    WPИ-XM Server Stack is distributed in the hope that it will be useful,        |
-    |    but WITHOUT ANY WARRANTY; without even the implied warranty of                |
-    |    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 |
-    |    GNU General Public License for more details.                                  |
-    |                                                                                  |
-    |    You should have received a copy of the GNU General Public License             |
-    |    along with this program; if not, write to the Free Software                   |
-    |    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA    |
-    |                                                                                  |
-    +----------------------------------------------------------------------------------+
-    */
+/**
+ * WPИ-XM Server Stack
+ * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * http://wpn-xm.org/
+ *
+ * This source file is subject to the terms of the MIT license.
+ * For full copyright and license information, view the bundled LICENSE file.
+ */
 
 namespace Webinterface\Helper;
 
@@ -52,7 +33,7 @@ class PHPINI
     public static function setDirective($section, $directive, $value)
     {
         $ini_file = php_ini_loaded_file();
-        
+
         self::doBackup($ini_file);
 
         $ini = new INIReaderWriter($ini_file);
@@ -70,25 +51,25 @@ class PHPINI
     {
         $newFilename = str_replace('.ini', '', $file);
         $newFilename .= '-backup-' . date("dmy-His") . '.ini';
-    
+
         // backup current registry
         copy($file, $newFilename);
 
         // keep last 3 files, remove older files
         self::removeOldBackupFiles();
-        
+
         return true;
     }
-    
+
     public static function removeOldBackupFiles()
     {
         $files = glob(WPNXM_BIN . '\php\php-backup-*.ini');
         $c = count($files);
         if ($c > 3) {
-            rsort($files);            
+            rsort($files);
             for ($i = 3; $i <= $c; $i++) {
                 unlink(trim($files[$i]));
-            }            
+            }
         }
     }
 

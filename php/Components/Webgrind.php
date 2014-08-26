@@ -1,4 +1,12 @@
 <?php
+/**
+ * WPИ-XM Server Stack
+ * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * http://wpn-xm.org/
+ *
+ * This source file is subject to the terms of the MIT license.
+ * For full copyright and license information, view the bundled LICENSE file.
+ */
 
 namespace Webinterface\Components;
 
@@ -12,7 +20,7 @@ class Webgrind extends AbstractComponent
     public $registryName = 'webgrind';
 
     public $installationFolder =  '\www\tools\webgrind';
-    
+
     public $files = array(
         '\www\tools\webgrind\config.php',
         '\www\tools\webgrind\index.php'
@@ -23,7 +31,7 @@ class Webgrind extends AbstractComponent
         if($this->isInstalled() === false) {
             return 'not installed';
         }
-        
+
         $file = WPNXM_DIR . $this->files[0];
 
         $maxLines = 120; // read only the first few lines of the file
@@ -33,15 +41,15 @@ class Webgrind extends AbstractComponent
         for ($i = 0; $i < $maxLines && !feof($file_handle); $i++) {
             $line = fgets($file_handle, 1024);
             // lets grab the version from this line:
-            // static $webgrindVersion = '1.0';  
+            // static $webgrindVersion = '1.0';
             preg_match("#webgrindVersion = '(.*)'#", $line, $matches);
-            
+
             if(isset($matches[0])) {
                 break;
             }
         }
         fclose($file_handle);
-        
+
         return $matches[1];
     }
 

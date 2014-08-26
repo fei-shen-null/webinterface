@@ -1,31 +1,12 @@
 <?php
-   /**
-    * WPИ-XM Server Stack - Webinterface
-    * Jens-André Koch © 2010 - onwards
-    * http://wpn-xm.org/
-    *
-    *        _\|/_
-    *        (o o)
-    +-----oOO-{_}-OOo------------------------------------------------------------------+
-    |                                                                                  |
-    |    LICENSE                                                                       |
-    |                                                                                  |
-    |    WPИ-XM Server Stack is free software; you can redistribute it and/or modify   |
-    |    it under the terms of the GNU General Public License as published by          |
-    |    the Free Software Foundation; either version 2 of the License, or             |
-    |    (at your option) any later version.                                           |
-    |                                                                                  |
-    |    WPИ-XM Server Stack is distributed in the hope that it will be useful,        |
-    |    but WITHOUT ANY WARRANTY; without even the implied warranty of                |
-    |    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 |
-    |    GNU General Public License for more details.                                  |
-    |                                                                                  |
-    |    You should have received a copy of the GNU General Public License             |
-    |    along with this program; if not, write to the Free Software                   |
-    |    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA    |
-    |                                                                                  |
-    +----------------------------------------------------------------------------------+
-    */
+/**
+ * WPИ-XM Server Stack
+ * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * http://wpn-xm.org/
+ *
+ * This source file is subject to the terms of the MIT license.
+ * For full copyright and license information, view the bundled LICENSE file.
+ */
 
 namespace Webinterface\Components;
 
@@ -39,7 +20,7 @@ abstract class AbstractComponent
 {
     /* @var string Printable name of the component. */
     public $name;
-    
+
     /* @var string Name of the component in the registry. */
     public $registryName;
 
@@ -63,7 +44,7 @@ abstract class AbstractComponent
      * For making sure, that the component's dependencies are also installed.
      */
     public $dependencyFiles = array();
-    
+
     public $downloadURL = '';
 
     /**
@@ -118,44 +99,44 @@ abstract class AbstractComponent
         $url = ($url === '') ? $this->downloadURL : $url;
         $targetFolder = ($targetFolder === '') ? $this->installationFolder: $targetFolder;
     }
-    
+
     /**
      * Returns the pretty name of this component, e.g. "Xdebug".
-     * 
+     *
      * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-    
+
     /**
      * Returns the registry name of a component, e.g. "phpext_xdebug" for "Xdebug".
-     * 
+     *
      * @return string
      */
     public function getRegistryName()
     {
         return $this->registryName;
     }
-    
+
     /**
      * Find out, whether an extension is loaded
-     * 
+     *
      * @param string $name
      * @return bool <b>TRUE</b> if the extension identified by <i>name</i>
      * is loaded, <b>FALSE</b> otherwise.
      */
     public function isExtensionLoaded($name = null)
     {
-        $name = ($name === null) ? $name : $this->name;  
-        
+        $name = ($name === null) ? $name : $this->name;
+
         return extension_loaded($name);
     }
 
     /**
      * Returns the Version
-     * 
+     *
      * @return string
      */
     abstract public function getVersion();

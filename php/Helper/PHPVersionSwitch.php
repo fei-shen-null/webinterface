@@ -1,4 +1,13 @@
 <?php
+/**
+ * WPИ-XM Server Stack
+ * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * http://wpn-xm.org/
+ *
+ * This source file is subject to the terms of the MIT license.
+ * For full copyright and license information, view the bundled LICENSE file.
+ */
+
 namespace Webinterface\Helper;
 
 class PHPVersionSwitch
@@ -26,7 +35,7 @@ class PHPVersionSwitch
                 'You are trying to switch to a PHP version not existing (%s).', $newVersionFolder)
             );
         }
-        
+
         if (rename($targetFolder, $oldVersionFolder) === false) {
             throw new \Exception(sprintf('Renaming (%s) to (%s) failed.', $targetFolder, $oldVersionFolder));
         }

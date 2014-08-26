@@ -1,31 +1,12 @@
 <?php
-   /**
-    * WPИ-XM Server Stack - Webinterface
-    * Jens-André Koch © 2010 - onwards
-    * http://wpn-xm.org/
-    *
-    *        _\|/_
-    *        (o o)
-    +-----oOO-{_}-OOo------------------------------------------------------------------+
-    |                                                                                  |
-    |    LICENSE                                                                       |
-    |                                                                                  |
-    |    WPИ-XM Server Stack is free software; you can redistribute it and/or modify   |
-    |    it under the terms of the GNU General Public License as published by          |
-    |    the Free Software Foundation; either version 2 of the License, or             |
-    |    (at your option) any later version.                                           |
-    |                                                                                  |
-    |    WPИ-XM Server Stack is distributed in the hope that it will be useful,        |
-    |    but WITHOUT ANY WARRANTY; without even the implied warranty of                |
-    |    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 |
-    |    GNU General Public License for more details.                                  |
-    |                                                                                  |
-    |    You should have received a copy of the GNU General Public License             |
-    |    along with this program; if not, write to the Free Software                   |
-    |    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA    |
-    |                                                                                  |
-    +----------------------------------------------------------------------------------+
-    */
+/**
+ * WPИ-XM Server Stack
+ * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * http://wpn-xm.org/
+ *
+ * This source file is subject to the terms of the MIT license.
+ * For full copyright and license information, view the bundled LICENSE file.
+ */
 
 namespace Webinterface\Components;
 
@@ -54,7 +35,7 @@ class Adminer extends AbstractComponent
         if($this->isInstalled() === false) {
             return 'not installed';
         }
-        
+
         $file = WPNXM_DIR . $this->files[0];
 
         $maxLines = 8; // read only the first few lines of the file
@@ -65,7 +46,7 @@ class Adminer extends AbstractComponent
             $line = fgets($file_handle, 1024);
             // lets grab the version from the phpdoc tag
             preg_match('/\* \@version (\d+.\d+.\d+)/', $line, $matches);
-            
+
             if(isset($matches[0])) {
                 break;
             }
