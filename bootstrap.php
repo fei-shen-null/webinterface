@@ -60,7 +60,8 @@ if (!defined('WPNXM_DIR')) {
 
     // WPNXM Configuration File
     define('WPNXM_INI', WPNXM_DIR . 'wpn-xm.ini');
-    define('WPNXM_BIN', WPNXM_DIR . 'bin');
+    define('WPNXM_BIN', WPNXM_DIR . 'bin' . DS);
+    define('WPNXM_TEMP', WPNXM_DIR . 'temp' . DS);
 
     /**
      * Feature Flags
@@ -151,8 +152,29 @@ function autoload($class)
     if (is_file($file) === true) {
         include_once $file;
     } else {
-        throw new \Exception('Autoloading Failure! "'.$file.'" not found!');
+        throw new \Exception(
+            sprintf('Autoloading Failure! Class "%s" requested, but file "%s" not found.', $class, $file)
+        );
     }
 }
 
 spl_autoload_register('autoload');
+
+function exception_handler(Exception $e)
+{
+    $trace = str_replace(
+        array('#','):'), 
+        array('<br>#',"):<br>&nbsp;&nbsp;&rarr;"), 
+        $e->getTraceAsString()
+    );
+        
+    $html = '<div class="error"><h2>Something Bad Happened</h2>';
+    $html .= '<p>' . $e->getMessage() . '</p>';
+    $html .= '<p>' . $trace . '</p>';
+    $html .= '</div>';
+    
+    echo $html;
+    
+}
+
+set_exception_handler('exception_handler');

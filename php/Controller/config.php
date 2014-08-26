@@ -11,7 +11,9 @@
 function index()
 {
     $tpl_data = array(
-        'load_jquery_additionals' => true
+        'load_jquery_additionals' => true,
+        'mongodb_installed' => Webinterface\Helper\Serverstack::isInstalled('mongodb'),
+        'xdebug_installed' => Webinterface\Helper\Serverstack::isInstalled('xdebug')
     );
 
     render('page-action', $tpl_data);
@@ -78,7 +80,8 @@ function tab_php()
 {
     $tpl_data = array(
         'no_layout' => true,
-        'ini' => Webinterface\Helper\PHPINI::read(), // $ini array structure = 'ini_file', 'ini_array'
+        'php_versions_form' => renderPhpVersionSelectForm(),
+        'ini' => Webinterface\Helper\PHPINI::read(),
     );
 
     render('Config\tab-php', $tpl_data);
@@ -150,6 +153,7 @@ function renderPHPExtensionsFormContent()
     $html_checkboxes = '';
     $i = 1; // start at first element
     $itemsTotal = count($available_extensions); // elements total
+    $itemsPerColumn = ceil($itemsTotal/4);
 
     // use list of available_extensions to draw checkboxes
     foreach ($available_extensions as $name => $file) {
@@ -170,7 +174,7 @@ function renderPHPExtensionsFormContent()
 
         // render column opener (everytime on 1 of 12)
         if ($i === 1) {
-            $html_checkboxes .= '<div class="form-group" style="float: left; width: 140px; margin: 10px;">';
+            $html_checkboxes .= '<div class="form-group">';
         }
 
         // the input tag is wrapped by the label tag
@@ -182,8 +186,7 @@ function renderPHPExtensionsFormContent()
         $html_checkboxes .= substr($name, 4);
         $html_checkboxes .= '</label>';
 
-        // 12 elements vertical
-        if ($i === 12 or $itemsTotal === 1) {
+        if ($i == $itemsPerColumn or $itemsTotal === 1) {
             $html_checkboxes .= '</div>';
             $i = 0; /* reset column counter */
         }
@@ -213,4 +216,43 @@ function update_phpini_setting()
     Webinterface\Helper\Daemon::restartDaemon('php');
 
     echo '<div class="modal"><p class="info">Saved. PHP restarted.</div>';
+}
+
+function update_phpversionswitch()
+{
+    $new_version = filter_input(INPUT_POST, 'new-php-version');
+
+    Webinterface\Helper\PHPVersionSwitch::switchVersion($new_version);
+
+    Webinterface\Helper\Daemon::restartDaemon('php');
+
+    echo '<div class="modal"><p class="info">PHP version switched. PHP restarted.</div>';
+}
+
+function renderPhpVersionSelectForm()
+{
+    $versionFolders = Webinterface\Helper\PHPVersionSwitch::getVersions();
+    $currentVersion = Webinterface\Helper\PHPVersionSwitch::getCurrentVersion();
+    $number_php_versions = count($versionFolders);
+
+    $options = '';
+    foreach($versionFolders as $folder) {
+        $options .= '<option value="' . $folder['php-version'] . '"';
+        $options .= ($folder['php-version'] === $currentVersion) ? ' selected' : '';
+        $options .= '>' . $folder['php-version'] . '</option>';
+    }
+
+    $html = '<form action="index.php?page=config&action=update_phpversionswitch" method="POST">
+      <p>
+        <select name="new-php-version" size="' . $number_php_versions . '">';
+    $html .= $options;
+    $html .= '</select>
+      </p>
+      <div class="right">
+        <button class="btn btn-danger" type="reset">Reset</button>
+        <button class="btn btn-success" type="submit">Switch</button>
+    </div>
+    </form>';
+
+    return $html;
 }

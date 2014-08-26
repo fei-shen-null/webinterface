@@ -16,6 +16,12 @@ div.content-centered {
     display: inline-block;
 }
 
+.phpextensions .form-group {
+    float: left; 
+    width: 150px;
+    margin: 10px;
+}
+
 .phpextensions label.active-element:hover {
     background: #FFBABA;
 }

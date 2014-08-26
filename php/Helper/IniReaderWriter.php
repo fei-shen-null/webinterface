@@ -23,8 +23,11 @@ class IniReaderWriter
 
     public function __construct($file = '')
     {
-        if ($file !== '' and is_file($file) === false) {
-            throw new \Exception(sprintf('File not found: "%s".', $file));
+        if (is_file($file) === false) {
+            throw new \Exception(
+                'The path to the loaded php.ini file could not be retrieved. '
+                . 'Check PHP folder for a "php.ini" file!'
+            );
         }
 
         $this->file = $file;

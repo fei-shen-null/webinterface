@@ -26,7 +26,7 @@ class PEAR
     public function getVersion()
     {
         // load and parse a PEAR file to get the version, alternative to "pear.bat -V"
-        $file = WPNXM_BIN . '\php\PEAR\pear\PEAR\Autoloader.php';
+        $file = WPNXM_BIN . 'php\PEAR\pear\PEAR\Autoloader.php';
 
         # fail safe, if PEAR not installed
         if (is_file($file) === false) {

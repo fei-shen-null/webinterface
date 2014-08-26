@@ -161,9 +161,13 @@ $(function () {
                   <li><a name="nginx" href="/webinterface/index.php?page=config#nginx">Nginx</a></li>
                   <li><a name="nginx-domains" href="/webinterface/index.php?page=config#nginx-domains">Nginx Domains</a></li>
                   <li><a name="mariadb" href="/webinterface/index.php?page=config#mariadb">MariaDB</a></li>
-                  <li><a name="mongodb" href="/webinterface/index.php?page=config#mongodb">MongoDB</a></li>
                   <?php } ?>
-                  <li><a name="xdebug" href="/webinterface/index.php?page=config#xdebug">XDebug</a></li>
+                  <?php if($mongodb_installed === true) { ?>
+                      <li><a name="mongodb" href="/webinterface/index.php?page=config#mongodb">MongoDB</a></li>
+                  <?php } ?>
+                  <?php if($xdebug_installed === true) { ?>
+                      <li><a name="xdebug" href="/webinterface/index.php?page=config#xdebug">XDebug</a></li>
+                  <?php } ?>
                 </ul>
 
                 <div id="tab-content" style="overflow: hidden;"></div>
