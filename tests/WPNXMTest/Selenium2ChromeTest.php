@@ -7,8 +7,10 @@ class Selenium2ChromeTest extends \PHPUnit_Extensions_Selenium2TestCase
     protected function setUp()
     {
         $this->isSeleniumAvailable();
+        
+        $this->setBrowser('chrome');
 
-        $this->setupSpecificBrowser(array(
+        /*$this->setupSpecificBrowser(array(
             'host' => '127.0.0.1',
             'port' => 5555,
             'browserName' => 'chrome',
@@ -18,7 +20,7 @@ class Selenium2ChromeTest extends \PHPUnit_Extensions_Selenium2TestCase
                 ))
             ),
             'seleniumServerRequestsTimeout' => '50',
-        ));
+        ));*/
 
         $this->setBrowserUrl('http://127.0.0.1:80/');
     }
