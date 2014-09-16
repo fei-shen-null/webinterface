@@ -14,6 +14,8 @@ class Viewhelper
 {
     public static function showMenu()
     {
+        $updateLink = (FEATURE_2 === true) ? '<li class="divider"></li><li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>' : '';
+
         $menu = '<div class="main_menu navbar">
                  <ul class="nav">
                     <li class="first"><a href="' . WPNXM_WEBINTERFACE_ROOT .'index.php?page=overview">Overview</a></li>
@@ -23,15 +25,14 @@ class Viewhelper
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                              <li>'. \Webinterface\Components\PhpMyAdmin::getLink().'</li>
-                             <li>'. \Webinterface\Components\Adminer::getLink().'</li>
-                             <li class="divider"></li>
-                             <li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>'.
-                            /* '<li><a href="#">Filter2</a></li>
+                             <li>'. \Webinterface\Components\Adminer::getLink().'</li>'.
+                             $updateLink
+                             /* '<li><a href="#">Filter2</a></li>
                              <li class="divider"></li>
                              <li class="nav-header">Nav header</li>
                              <li><a href="#">Filter1</a></li>
                              <li><a href="#">Filter2</a></li>*/
-                        '</ul>
+                        . '</ul>
                     </li>
                     <li class="last"><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=phpinfo">PHP Info</a></li>
                 </ul>

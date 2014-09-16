@@ -107,7 +107,7 @@
                 </tr>
             </table>
             <?php } ?>
-            
+
             <?php if ($postgresql_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
@@ -259,8 +259,10 @@
                         ?>
                         >Error Log</a>
 
+                        <?php if (FEATURE_3 == true) { ?>
                         <a class="btn btn-default btn-sm"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>
@@ -367,7 +369,9 @@
                         ?>
                         >Show Log</a>
 
+                        <?php if (FEATURE_3 == true) { ?>
                         <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>
@@ -430,12 +434,14 @@
                         ?>
                         >Show Log</a>
 
+                        <?php if (FEATURE_3 == true) { ?>
                         <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>
             <?php } ?>
-            
+
             <?php if ($postgresql_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>

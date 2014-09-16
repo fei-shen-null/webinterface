@@ -103,9 +103,12 @@ function tab_php_ext()
 
 function tab_xdebug()
 {
+    $xdebug_installed = Webinterface\Helper\Serverstack::isInstalled('xdebug');
+
     $tpl_data = array(
         'no_layout' => true,
-        'ini_settings' => ini_get_all('xdebug'),
+        'xdebug_installed' => $xdebug_installed,
+        'ini_settings' => ($xdebug_installed) ? ini_get_all('xdebug') : array(),
     );
 
     render('Config\tab-xdebug', $tpl_data);
