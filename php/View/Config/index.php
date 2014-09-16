@@ -162,7 +162,7 @@ $(function () {
                   <li><a name="nginx-domains" href="/webinterface/index.php?page=config#nginx-domains">Nginx Domains</a></li>
                   <li><a name="mariadb" href="/webinterface/index.php?page=config#mariadb">MariaDB</a></li>
                   <?php } ?>
-                  <?php if($mongodb_installed === true) { ?>
+                  <?php if(FEATURE_3 == true && $mongodb_installed === true) { ?>
                       <li><a name="mongodb" href="/webinterface/index.php?page=config#mongodb">MongoDB</a></li>
                   <?php } ?>
                   <?php if($xdebug_installed === true) { ?>

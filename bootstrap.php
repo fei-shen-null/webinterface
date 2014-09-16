@@ -65,11 +65,16 @@ if (!defined('WPNXM_DIR')) {
 
     /**
      * Feature Flags
+     *
+     * Some features are "work in progress". Therefore they are disabled in release versions.
+     * If you want to contribute to the project, set the toggle true and search for "FEATURE_x"
+     * to start hacking. If a feature is implemented, you can remove the feature flag.
      */
-    $toggle = true;
+    $toggle = false;
     define('FEATURE_1', $toggle); // "create new project dialog" in php/view/projects-index.php
+    define('FEATURE_2', $toggle); // tools -> updater [components are fetched, but not extracted and installed into their folders]
     define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Domains, MariaDB, Xdebug
-    define('FEATURE_4', $toggle); // create nginx domains directly from project list
+    define('FEATURE_4', $toggle); // create nginx domains directly from project list [depends on nginx-conf parser]
 }
 
 if (!function_exists('showConstants')) {
@@ -163,18 +168,18 @@ spl_autoload_register('autoload');
 function exception_handler(Exception $e)
 {
     $trace = str_replace(
-        array('#','):'), 
-        array('<br>#',"):<br>&nbsp;&nbsp;&rarr;"), 
+        array('#','):'),
+        array('<br>#',"):<br>&nbsp;&nbsp;&rarr;"),
         $e->getTraceAsString()
     );
-        
+
     $html = '<div class="error"><h2>Something Bad Happened</h2>';
     $html .= '<p>' . $e->getMessage() . '</p>';
     $html .= '<p>' . $trace . '</p>';
     $html .= '</div>';
-    
+
     echo $html;
-    
+
 }
 
 set_exception_handler('exception_handler');
