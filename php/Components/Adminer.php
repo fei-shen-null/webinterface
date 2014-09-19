@@ -59,7 +59,7 @@ class Adminer extends AbstractComponent
     public static function getLink() {
         // is adminer installed?
         if (is_dir(WPNXM_WWW_DIR . 'tools/adminer') === true) {
-            return '<a href="' . WPNXM_ROOT . 'adminer/adminer.php?server=localhost&amp;username=root">Adminer</a>';
+            return '<a href="' . WPNXM_ROOT . 'tools/adminer/adminer.php?server=localhost&amp;username=root">Adminer</a>';
         }
     }
 }
