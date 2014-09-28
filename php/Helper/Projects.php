@@ -30,6 +30,7 @@ class Projects
         'phpmyadmin' => '',
         'rockmongo' => '',
         'updater' => '', // wpn-xm registry updater
+        'uprofiler' => 'uprofiler/uprofiler_html',
         'webgrind' => '',
         //'webinterface' => '', // wpn-xm webinterface
         'wincache' => '',
