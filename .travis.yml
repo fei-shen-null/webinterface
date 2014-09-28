@@ -3,8 +3,8 @@ language: php
 php: [5.4, 5.5, 5.6, hhvm, hhvm-nightly]
 
 services:
-  - mongodb
-  - memcache
+  #- mongodb
+  #- memcache
 
 before_script:
    # install apt-fast to speedup later dependency installation
@@ -21,21 +21,11 @@ before_script:
   # X Virtual Frame Buffer
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
-  # Google Chrome Browser
-    #- wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    #- sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-    #- sudo apt-get update
-    #- sudo apt-get install google-chrome-stable
-  # Google Chromium Browser
-    #- sudo apt-get install chromium-browser chromium-browser-l10n
-  # Chrome Browser Driver
-    - "wget http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && sudo mv chromedriver /usr/bin"
   # Firefox
     - sudo apt-fast -m -y install firefox
   # Selenium
-    - wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar
-    - "java -jar selenium-server-standalone-2.42.2.jar -Dwebdriver.chrome.bin=/usr/bin/chromedriver > /dev/null &"
-    #- java -jar selenium-server-standalone-2.42.2.jar -Dwebdriver.firefox.driver=firefox > /dev/null &
+    - wget http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar
+    - java -jar selenium-server-standalone-2.43.1.jar > /dev/null 2>&1 &
     - sleep 5
   # Nginx
     - sudo apt-fast -y install nginx
@@ -49,8 +39,8 @@ before_script:
     - curl http://localhost:80/ -v
 
 script:
-#  - ./bin/behat --config ./tests/behat.yml  # run behat
-   - phpunit -c ./tests/phpunit.xml.travis   # run phpunit
+#  - ./bin/behat --config ./tests/behat.yml
+   - phpunit -c ./tests/phpunit.xml.travis
 
 notifications:
   email: false
