@@ -1,7 +1,7 @@
 <?php
 /**
- * WP?-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * WPÐ˜-XM Server Stack
+ * Copyright Â© 2010 - 2014 Jens-AndrÃ© Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
