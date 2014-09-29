@@ -44,7 +44,48 @@ class PHPVersionSwitch
             throw new \Exception(sprintf('Renaming (%s) to (%s) failed.', $newVersionFolder, $targetFolder));
         }
 
+        self::checkForPhpIni($newVersionFolder);
+
+        self::setEnvironmentPath($oldVersionFolder);
+
         return true;
+    }
+
+    /**
+     * Check for php.ini file in the PHP folder and activate development ini as fallback.
+     */
+    public static function checkForPhpIni($folder)
+    {
+        $ini = $folder.DS.'php.ini';
+        $iniDev = $folder.DS.'php.ini-development';
+
+        if(false === is_file($ini) && true === is_file($iniDev)) {
+            if (!copy($iniDev, $ini)) {
+                echo "copy $iniDev error...\n";
+            }
+        }
+    }
+
+    /**
+     * Set Folder to PATH var (with implicit PATH cleanup).
+     */
+    public static function setEnvironmentPath($folder)
+    {
+        $paths = explode(';', getenv('path'));
+
+        // remove duplicates (implicit env var cleanup)
+        $paths = array_unique($paths);
+
+        // remove "non existing" paths
+        foreach($paths as $key => $path) {
+            if(!is_dir($path)) {
+                unset($paths[$key]);
+            }
+        }
+
+        $paths[] = $folder;
+
+        putenv('PATH=' . implode(';', $paths));
     }
 
     public static function getFolders()
