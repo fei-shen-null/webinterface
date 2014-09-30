@@ -13,7 +13,7 @@ namespace Webinterface\Components;
 /**
  * WPN-XM Webinterface - Class for MongoDb
  */
-class MongoDb extends AbstractComponent
+class MongoDB extends AbstractComponent
 {
     public $name = 'MongoDb';
 

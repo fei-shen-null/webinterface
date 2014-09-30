@@ -7,7 +7,7 @@
 To enable an extension, check it's checkbox. To disable an extension, uncheck it's checkbox. <small>Surprise, surprise!</small>
 <form id="phpExtensionsForm" class="phpextensions form-horizontal" method="post"
       action="<?php echo WPNXM_WEBINTERFACE_ROOT; ?>index.php?page=config&amp;action=update_phpextensions">
-    
+
     <fieldset id="phpExtensionsFormContent">
     <?php echo $form; ?>
     </fieldset>

@@ -212,7 +212,7 @@ class Projects
         ));
 
         // silenced: because this throws a warning, if offline
-        $json = @file_get_contents($url, FALSE, $context);
+        $json = @file_get_contents($url, false, $context);
 
         $array = json_decode($json, true);
 

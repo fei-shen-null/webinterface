@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * This gets displayed inside a Bootstrap3 modal window.
  * The content is inserted into "modal-dialog > modal-content".

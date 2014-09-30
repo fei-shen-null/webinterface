@@ -13,7 +13,7 @@ namespace Webinterface\Components;
 /**
  * WPN-XM Webinterface - Class for MariaDB
  */
-class MariaDb extends AbstractComponent
+class MariaDB extends AbstractComponent
 {
     public $name = 'MariaDb';
 

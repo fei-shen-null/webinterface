@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>

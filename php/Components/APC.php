@@ -3,11 +3,11 @@ namespace Webinterface\Components;
 class APC extends AbstractComponent
 {
     public $name = 'APC';
-    
+
     public $type = 'PHP Extension';
-    
+
     public $registryName = 'phpext_apc';
-    
+
     /**
      * Returns Version.
      *
@@ -26,7 +26,7 @@ class APC extends AbstractComponent
 
         return phpversion('apc');
     }
-    
+
     public function getVersionRaw()
     {
         return phpversion('apc');
