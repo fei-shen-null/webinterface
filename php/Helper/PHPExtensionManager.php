@@ -246,7 +246,7 @@ class PHPExtensionManager
         $list = array();
 
         $files = glob(WPNXM_DIR . '/bin/php/ext/php_*.dll');
-                
+
         foreach ($files as $key => $file) {
             // $list array has the following structure
             // key = filename without suffix

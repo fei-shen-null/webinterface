@@ -7,7 +7,7 @@ if($registry_updated === true) {
 }
 ?>
 
-<div class="left-box"> 
+<div class="left-box">
     <div class="cs-message">
         <div class="cs-message-content cs-message-content-config">
 <?php
@@ -25,26 +25,26 @@ echo '<table class="table table-condensed table-hover">
 ';
 
 foreach ($components as $index => $componentName) {
-    
+
     if($componentName === 'PEAR') {
         continue;
     }
-    
+
     $class = '\Webinterface\Components\\'.$componentName;
     $component = new $class;
-    
+
     $versionString = $component->getVersion();
     $version = strlen($versionString) > 10 ? '0.0.0' : $versionString;
-    
+
     $html = '<tr>
         <td>' . $component->name . '</td>
-        <td><span style="font-size:14px">' . $versionString . '</span></td>       
+        <td><span style="font-size:14px">' . $versionString . '</span></td>
         <td>' . printUpdatedSign($component->getRegistryName(), $version, $registry[$component->registryName]['latest']['version']) . '</td>
     </tr>';
-    
+
     $html = str_replace('float:right', 'float:left', $html);
     echo $html;
-    
+
     unset($component);
 }
 echo '</table></div></div></div>';
@@ -59,7 +59,7 @@ function printUpdatedSign($component, $old_version, $new_version)
 {
     $url = sprintf(
         WPNXM_WEBINTERFACE_ROOT . 'index.php?page=update&action=download&component=%s&version=%s',
-        $component, 
+        $component,
         $new_version
     );
 
@@ -76,21 +76,23 @@ function printUpdatedSign($component, $old_version, $new_version)
 }
 ?>
 
-<script> 
-function updateProgress(json) {
+<script>
+function updateProgress(json)
+{
     var progressBar = $('progress');
     progressBar.attr('value', json.progress.loaded);
     progressBar.attr('max', json.progress.total);
 }
 
-function download(link) {
+function download(link)
+{
     var xhr = new XMLHttpRequest();
     xhr.open('GET', link);
-    xhr.send(null);   
-    
+    xhr.send(null);
+
     // 1 second interval for continous xhr response handling
-    var timer;    
-    timer = window.setInterval(function() {
+    var timer;
+    timer = window.setInterval(function () {
         // finished?
         if (xhr.readyState === XMLHttpRequest.DONE) {
             window.clearTimeout(timer);
@@ -102,15 +104,15 @@ function download(link) {
 };
 
 // intercept clicks on the "Download Component" links
-$("a.download" ).on('click', function(e) {
+$("a.download" ).on('click', function (e) {
     e.preventDefault();
-    
+
     // insert the download progress bar
     $(this).after('<progress id="progress" value="0" max="0">0%</progress>');
-    
+
     // trigger AJAX download with curl callback to update the progessbar
     download(this.href);
-      
+
     return false;
 });
 </script>

@@ -27,8 +27,7 @@ Do not forget to restart the PHP daemon in order to let the new settings become 
 <?php
 $index = 0;
 $node_name = '';
-foreach ($ini['ini_array'] as $key => $value)
-{
+foreach ($ini['ini_array'] as $key => $value) {
     $index = $index + 1;
     $node_name = 'node-' . $index;
     $html = '';

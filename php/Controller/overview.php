@@ -53,12 +53,14 @@ function index()
     render('page-action', $tpl_data);
 }
 
-function stop(){
+function stop()
+{
     Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
     redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
 }
 
-function start(){
+function start()
+{
     Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
     redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
 }
