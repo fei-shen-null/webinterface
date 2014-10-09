@@ -261,6 +261,9 @@ class PHPExtensionManager
     public function getExtensionsLoaded()
     {
         $extFiles = $this->getExtensionDirFileList();
+
+        $list = array();
+
         foreach ($extFiles as $key => $value) {
             $value = str_replace(array('php_', '.dll'), '', $value);
             $list[$value] = extension_loaded($value);
