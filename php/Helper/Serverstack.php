@@ -307,7 +307,7 @@ class Serverstack
     /**
      * Returns the current IP of the user by asking the WPN-XM webserver.
      *
-     * @return the current IP of the user.
+     * @return string the current IP of the user.
      */
     public static function getMyIP()
     {
@@ -368,9 +368,9 @@ class Serverstack
     }
 
     /**
-     * Returns the Bit-Size.
+     * Returns the Bit-Size as integer.
      *
-     * @return string BitSize, e.g. 32, 64.
+     * @return integer
      */
     public static function getBitSize()
     {
@@ -385,6 +385,11 @@ class Serverstack
         return PHP_INT_SIZE; // 16-bit?
     }
 
+    /**
+     * Returns Bit-Size as string.
+     *
+     * @return string 32bit, 64bit
+     */
     public static function getBitSizeString()
     {
         return self::getBitSize() . 'bit';
