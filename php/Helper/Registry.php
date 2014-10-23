@@ -3,6 +3,9 @@ namespace Webinterface\Helper;
 
 class Registry
 {
+    /**
+     * @return string
+     */
     public static function getUrl($component, $version)
     {
         $registry = include WPNXM_DATA_DIR . 'wpnxm-software-registry.php';

@@ -53,6 +53,7 @@ class PHPVersionSwitch
 
     /**
      * Check for php.ini file in the PHP folder and activate development ini as fallback.
+     * @param string $folder
      */
     public static function checkForPhpIni($folder)
     {
@@ -68,6 +69,7 @@ class PHPVersionSwitch
 
     /**
      * Set Folder to PATH var (with implicit PATH cleanup).
+     * @param string $folder
      */
     public static function setEnvironmentPath($folder)
     {
