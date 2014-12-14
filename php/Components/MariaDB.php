@@ -13,7 +13,7 @@ namespace Webinterface\Components;
 /**
  * WPN-XM Webinterface - Class for MariaDB
  */
-class MariaDB extends AbstractComponent
+class MariaDb extends AbstractComponent
 {
     public $name = 'MariaDb';
 
@@ -49,12 +49,12 @@ class MariaDB extends AbstractComponent
                    mysqli_connect_error()
                )
            );
-        } else {
-            $arr = explode('-', $connection->server_info);
-            $connection->close();
-
-            return $arr[0];
         }
+        // fetch server_info, e.g. "5.5.5-10.1.0-MariaDB" and drop last part
+        $version = str_replace('-MariaDB', '', $connection->server_info);
+        $connection->close();
+
+        return $version;
     }
 
     public function getPassword()
