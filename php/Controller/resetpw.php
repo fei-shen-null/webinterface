@@ -40,9 +40,11 @@ function update()
         case 'mariadb':
             $c = new Webinterface\Components\MariaDb();
             echo $c->setPassword($password);
+            break;
         case 'mongodb':
             $c = new Webinterface\Components\MongoDb();
             echo $c->setPassword($password);
+            break;
         default:
             echo '<div class="alert alert-danger">Component not found.</div>';
     }
