@@ -20,32 +20,5 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Ok</button>
+    <button type="submit" class="btn btn-primary">Change Password</button>
 </div>
-
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function () {
-   // $("#myModal .modal-title").html('TEST');
-
-   // rename submit button
-   $('#myModal button[type="submit"]').html('Change Password');
-
-   // bind submit action
-   $('#myModal button[type="submit"]').bind('click', function (event) {
-       var form = $("#myModal .modal-body form");
-
-       $.ajax({
-         type: form.attr('method'),
-         url: form.attr('action'),
-         data: form.serializeArray(),
-
-         cache: false,
-         success: function (response, status) {
-           $('#myModal .modal-body').html(response);
-         }
-       });
-
-       event.preventDefault();
-  });
-});
-</script>
