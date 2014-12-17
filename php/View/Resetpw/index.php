@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
     <form id="reset-password-form"
-          action="/webinterface/index.php?page=resetpw&action=update" method="POST">
+          action="/tools/webinterface/index.php?page=resetpw&action=update" method="POST">
         <fieldset>
             <input type="hidden" name="component" value="<?php echo strtolower($component);?>">
             <!-- Text input-->
