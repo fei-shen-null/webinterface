@@ -393,7 +393,7 @@
                 <tr>
                     <td>
                         <span class="pull-left">Username | Password</span>
-                        <span class="red pull-right">root</span> | <span class="red"><?php echo $mongodb_password; ?></span>
+                        <span class="red pull-right">root</span> | <span class="red"><?php # echo $mongodb_password; ?></span>
                     </td>
                 </tr>
                 <tr>
