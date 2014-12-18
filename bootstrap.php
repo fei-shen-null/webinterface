@@ -173,13 +173,18 @@ function exception_handler(Exception $e)
         $e->getTraceAsString()
     );
 
-    $html = '<div class="error"><h2>Something Bad Happened</h2>';
+    include WPNXM_VIEW_DIR . 'header.php';
+
+    $html = '<h2 class="heading">Exception</h2>';
+    $html .= '<div class="centered"><div class="cs-message">';
+    $html .= '<div class="cs-message-content" style="width: 100%; font-size: 16px; height: auto !important;">';
+    $html .= '<div class="error"><h2>Something Bad Happened</h3>';
     $html .= '<p>' . $e->getMessage() . '</p>';
     $html .= '<p>' . $trace . '</p>';
-    $html .= '</div>';
-
+    $html .= '</div></div></div></div>';
     echo $html;
 
+    include WPNXM_VIEW_DIR . 'footer.php';
 }
 
 set_exception_handler('exception_handler');
