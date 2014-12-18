@@ -65,15 +65,18 @@ class IniReaderWriter
      */
     public function get($section, $key)
     {
-        foreach ($this->lines as $line) {
-            if($line['type'] != 'entry') continue;
-            //if($line['section'] != $section) continue;
-            if($line['key'] != $key) continue;
-
-            return $line['value'];
+        foreach ($this->lines as $line)
+        {
+            if($line['type'] !== 'entry') { continue; }
+            if($line['section'] != strtolower($section)) { continue; }
+            if($line['key'] != $key) {
+                continue;
+            } else {
+                return $line['value'];
+            }
         }
 
-        //throw new Exception('Missing Section or Key');
+        throw new \Exception('Missing INI section or key.');
     }
 
     /**
