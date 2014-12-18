@@ -38,7 +38,7 @@ function index()
       'my_ip'               => Serverstack::getMyIP(),
       // passwords
       'mariadb_password'    => Serverstack::getPassword('mariadb'),
-      'mongodb_password'    => Serverstack::getPassword('mongodb'),
+      #'mongodb_password'    => Serverstack::getPassword('mongodb'),
       // which additional components are installed
       'memcached_installed' => Serverstack::isInstalled('memcached'),
       'xdebug_installed'    => Serverstack::isInstalled('xdebug'),
