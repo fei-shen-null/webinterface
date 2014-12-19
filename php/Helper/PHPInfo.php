@@ -72,12 +72,8 @@ class PHPInfo
             $i++;
         }
 
-        // create html table listing the extensions
+        // render "list of extensions" with jump to section
         $html = '';
-        $html .= '<div class="panel panel-info content-centered" style="width: 600px">';
-        $html .= '<div class="panel-heading"><h4>PHP Extensions</h4></div>';
-        $html .= '<div class="panel panel-body">';
-        $html .= '<p style="font-size: 12px">Click an extension, to jump to its phpinfo section.</p>';
 
         foreach ($modlists as $modlist) {
             $html .= '<div class="col-md-3"><ul class="list-group">';
@@ -87,7 +83,6 @@ class PHPInfo
             }
             $html .= '</ul></div>';
         }
-        $html .= '</div></div>';
 
         return $html . $phpinfo;
     }
