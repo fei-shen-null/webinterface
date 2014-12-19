@@ -17,7 +17,7 @@ div.content-centered {
 }
 
 .phpextensions .form-group {
-    float: left; 
+    float: left;
     width: 150px;
     margin: 10px;
 }
@@ -32,6 +32,11 @@ div.content-centered {
 
 .phpextensions .checkbox {
     margin-bottom: 2px;
+}
+
+.noshadow {
+    box-shadow: 0 !important;
+    -webkit-box-shadow: 0 !important;
 }
 
 .list-group-item {

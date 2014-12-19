@@ -32,7 +32,13 @@
 </div>
 
 <div id="phpinfo" class="phpinfo center">
-    <?php echo $php_info; ?>
+    <div class="panel panel-info content-centered" style="width: 600px">
+        <div class="panel-heading"><h4>PHP Extensions</h4></div>
+        <div class="panel panel-body noshadow">
+            <p style="font-size: 12px">Click on an extension, to jump to its phpinfo section.</p>
+            <?php echo $php_info; ?>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
