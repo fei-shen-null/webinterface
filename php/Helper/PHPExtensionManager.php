@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -246,7 +246,7 @@ class PHPExtensionManager
         $list = array();
 
         $files = glob(WPNXM_DIR . '/bin/php/ext/php_*.dll');
-                
+
         foreach ($files as $key => $file) {
             // $list array has the following structure
             // key = filename without suffix
@@ -261,6 +261,9 @@ class PHPExtensionManager
     public function getExtensionsLoaded()
     {
         $extFiles = $this->getExtensionDirFileList();
+
+        $list = array();
+
         foreach ($extFiles as $key => $value) {
             $value = str_replace(array('php_', '.dll'), '', $value);
             $list[$value] = extension_loaded($value);

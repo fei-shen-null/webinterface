@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -14,6 +14,9 @@ class Viewhelper
 {
     public static function showMenu()
     {
+        // fetch HTML fragment for the tools topmenu
+        $tools_list_html = file_get_contents(WPNXM_DATA_DIR . 'tools-topmenu.html');
+
         $updateLink = (FEATURE_2 === true) ? '<li class="divider"></li><li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>' : '';
 
         $menu = '<div class="main_menu navbar">
@@ -23,15 +26,14 @@ class Viewhelper
                     <li><a class="active" href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=projects">Projects & Tools</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                             <li>'. \Webinterface\Components\PhpMyAdmin::getLink().'</li>
-                             <li>'. \Webinterface\Components\Adminer::getLink().'</li>'.
+                        <ul class="dropdown-menu">'.
+                             $tools_list_html .
                              $updateLink
-                             /* '<li><a href="#">Filter2</a></li>
+                             /*. '<li><a href="#">Filter2</a></li>
                              <li class="divider"></li>
                              <li class="nav-header">Nav header</li>
                              <li><a href="#">Filter1</a></li>
-                             <li><a href="#">Filter2</a></li>*/
+                             <li><a href="#">Filter2</a></li>'*/
                         . '</ul>
                     </li>
                     <li class="last"><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=phpinfo">PHP Info</a></li>

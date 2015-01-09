@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -49,12 +49,12 @@ class MariaDb extends AbstractComponent
                    mysqli_connect_error()
                )
            );
-        } else {
-            $arr = explode('-', $connection->server_info);
-            $connection->close();
-
-            return $arr[0];
         }
+        // fetch server_info, e.g. "5.5.5-10.1.0-MariaDB" and drop the last part
+        $version = str_replace('-MariaDB', '', $connection->server_info);
+        $connection->close();
+
+        return $version;
     }
 
     public function getPassword()
@@ -74,9 +74,9 @@ class MariaDb extends AbstractComponent
     {
         // commands
         $stop_mariadb = "taskkill /f /IM mysqld.exe 1>nul 2>nul";
-        $mysqld_exe = /*WPNXM_DIR . '\bin\\tools\\RunHiddenConsole.exe ' .*/ WPNXM_DIR . "\bin\\mariadb\\bin\\mysqld.exe";
-        $start_mariadb_change_pw = $mysqld_exe . " --defaults-file=" . WPNXM_DIR . '\bin\\mariadb\\my.ini --init-file=' . WPNXM_DIR . '\bin\\mariadb\\init_passwd_change.txt';
-        $start_mariadb_normal = $mysqld_exe . " --defaults-file=" . WPNXM_DIR . '\bin\\mariadb\\my.ini';
+        $mysqld_exe = WPNXM_BIN . 'mariadb\bin\mysqld.exe';
+        $start_mariadb_change_pw = $mysqld_exe . ' --defaults-file=' . WPNXM_BIN . '\bin\\\mariadb\\\my.ini --init-file=' . WPNXM_BIN . '\bin\\\mariadb\\\init_passwd_change.txt';
+        $start_mariadb_normal = $mysqld_exe . ' --defaults-file=' . WPNXM_BIN . '\bin\\\mariadb\\\my.ini';
 
         // create the init-file with the password update query
         file_put_contents(
@@ -84,13 +84,15 @@ class MariaDb extends AbstractComponent
             "UPDATE mysql.user SET PASSWORD=PASSWORD('$password') WHERE User='root';\nFLUSH PRIVILEGES;"
         );
 
-        // start mysqld and execute the init-file
+        // write new password to wpn-xm ini
+        $ini = new \Webinterface\Helper\INIReaderWriter(WPNXM_INI);
+        $ini->set('mariadb', 'password', $password);
+        $ini->write();
+
+        // stop mysqld and execute the init-file, then restart
         exec($stop_mariadb);
-        exec($start_mariadb_change_pw);
-        sleep(1);
-        exec($stop_mariadb);
+        exec($start_mariadb_change_pw); sleep(2); exec($stop_mariadb);
         exec($start_mariadb_normal);
-        sleep(1);
 
         unlink(WPNXM_DIR . '\bin\mariadb\init_passwd_change.txt');
 
@@ -102,11 +104,6 @@ class MariaDb extends AbstractComponent
             $response .= '(MySQL ["' . mysqli_connect_errno() . '"]"' . mysqli_connect_error() . '")</div>';
         } else {
             $response = '<div class="alert alert-success">Password changed SUCCESSFULLY.</div>';
-
-            // write new password to wpn-xm ini
-            $ini = new \Webinterface\Helper\INIReaderWriter(WPNXM_INI);
-            $ini->set('MariaDB', 'password', $password);
-            $ini->write();
         }
 
         $connection->close();

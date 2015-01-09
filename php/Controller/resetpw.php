@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -40,9 +40,11 @@ function update()
         case 'mariadb':
             $c = new Webinterface\Components\MariaDb();
             echo $c->setPassword($password);
+            break;
         case 'mongodb':
             $c = new Webinterface\Components\MongoDb();
             echo $c->setPassword($password);
+            break;
         default:
             echo '<div class="alert alert-danger">Component not found.</div>';
     }

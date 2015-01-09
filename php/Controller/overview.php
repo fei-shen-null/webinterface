@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -38,7 +38,7 @@ function index()
       'my_ip'               => Serverstack::getMyIP(),
       // passwords
       'mariadb_password'    => Serverstack::getPassword('mariadb'),
-      'mongodb_password'    => Serverstack::getPassword('mongodb'),
+      #'mongodb_password'    => Serverstack::getPassword('mongodb'),
       // which additional components are installed
       'memcached_installed' => Serverstack::isInstalled('memcached'),
       'xdebug_installed'    => Serverstack::isInstalled('xdebug'),
@@ -53,12 +53,14 @@ function index()
     render('page-action', $tpl_data);
 }
 
-function stop(){
+function stop()
+{
     Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
     redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
 }
 
-function start(){
+function start()
+{
     Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
     redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
 }

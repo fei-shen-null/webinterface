@@ -198,35 +198,36 @@
 
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="2">
-                        <div class="resourceheader2 bold">
-                            <?php echo $nginx_status; ?> Nginx
-                        </div>
+                    <td>
+                        <span class="resourceheader2 bold"> <?php echo $nginx_status; ?> Nginx</span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Host : Port</td>
-                    <td class="pull-right"><?php echo $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']; ?></td>
+                    <td>
+                        <span class="pull-left">Host : Port</span>
+                        <span class="pull-right"><?php echo $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Your IP</td>
-                    <td class="pull-right"><?php echo $my_ip; ?></td>
+                    <td>
+                        <span class="pull-left">Your IP</span>
+                        <span class="pull-right"><?php echo $my_ip; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                   <td colspan="2">
+                   <td>
                         <span class="pull-left">Directory</span>
                         <span class="pull-right"><?php echo WPNXM_DIR . 'bin\nginx'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <span class="pull-left">Config</span>
                         <span class="pull-right"><?php echo WPNXM_DIR . 'bin\nginx\conf\nginx.conf'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="right">
-
+                    <td class="right">
                         <a class="btn btn-default btn-sm pull-left"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>">
                             <img alt="Start Nginx" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
@@ -259,7 +260,7 @@
                         ?>
                         >Error Log</a>
 
-                        <?php if (FEATURE_3 == true) { ?>
+                        <?php if (FEATURE_3 === true) { ?>
                         <a class="btn btn-default btn-sm"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
                         <?php } ?>
@@ -269,30 +270,30 @@
 
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="2">
-                        <div class="resourceheader2 bold">
-                        <?php echo $php_status; ?> PHP
-                        </div>
+                    <td>
+                        <span class="resourceheader2 bold"> <?php echo $php_status; ?> PHP</span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-40 left">Host : Port</td>
-                    <td class="pull-right"><?php echo $_SERVER['SERVER_NAME'] .':'. $_SERVER['SERVER_PORT']; ?></td>
+                    <td>
+                        <span class="pull-left">Host : Port</span>
+                        <span class="pull-right"><?php echo $_SERVER['SERVER_NAME'] .':'. $_SERVER['SERVER_PORT']; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <span class="pull-left">Directory</span>
                         <span class="pull-right"><?php echo WPNXM_DIR . 'bin\php'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <span class="pull-left">Config</span>
                         <span class="pull-right"><?php echo get_cfg_var('cfg_file_path'); ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="right" colspan="2">
+                    <td class="right">
                         <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
                             <img alt="Start PHP" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
@@ -318,34 +319,36 @@
 
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="2">
-                        <div class="resourceheader2 bold">
-                        <?php echo $mariadb_status; ?> MariaDB
-                        </div>
+                    <td>
+                        <span class="resourceheader2 bold"><?php echo $mariadb_status; ?> MariaDB</span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-40 left">Host : Port</td>
-                    <td class="pull-right">localhost:3306</td>
+                    <td>
+                        <span class="pull-left">Host : Port</span>
+                        <span class="pull-right">localhost:3306</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="1">Username | Password</td>
-                    <td class="pull-right"><span class="red">root</span> | <span class="red"><?php echo $mariadb_password; ?></span></td>
+                    <td>
+                        <span class="pull-left">Username | Password</span>
+                        <span class="pull-right"><span class="red">root</span> | <span class="red"><?php echo $mariadb_password; ?></span></span>
+                    </td>
                 </tr>
                 <tr>
-                     <td colspan="2">
+                     <td>
                         <span class="pull-left">Directory</span>
                         <span class="pull-right"><?php echo WPNXM_DIR . 'bin\mariadb'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <span class="pull-left">Config</span>
                         <span class="pull-right"><?php echo WPNXM_DIR . 'bin\mariadb\my.ini'; ?></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="right">
+                    <td class="right">
                         <a class="btn btn-default btn-sm pull-left" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
                             <img alt="Start MariaDb" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
@@ -369,7 +372,7 @@
                         ?>
                         >Show Log</a>
 
-                        <?php if (FEATURE_3 == true) { ?>
+                        <?php if (FEATURE_3 === true) { ?>
                         <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
                         <?php } ?>
                     </td>
@@ -380,20 +383,19 @@
             <table class="cs-message-content">
                 <tr>
                     <td>
-                        <div class="resourceheader2 bold">
-                        <?php echo $mongodb_status; ?> <?php echo $phpext_mongo_status; ?> MongoDB
-                        </div>
+                        <span class="resourceheader2 bold"><?php echo $mongodb_status; ?> <?php echo $phpext_mongo_status; ?> MongoDB</span>
                     </td>
                 </tr>
                 <tr>
-                    <td><span class="pull-left">Host : Port</span>
+                    <td>
+                        <span class="pull-left">Host : Port</span>
                         <span class="pull-right">localhost:27017</span>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <span class="pull-left">Username | Password</span>
-                        <span class="red pull-right">root</span> | <span class="red"><?php echo $mongodb_password; ?></span>
+                        <span class="pull-right"><span class="red">root</span> | <span class="red"><?php # echo $mongodb_password; ?></span></span>
                     </td>
                 </tr>
                 <tr>
@@ -417,7 +419,6 @@
                             <img alt="Stop MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
 
-
                         <?php if (class_exists('mysqli', false)) { ?>
                             <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;component=mongodb"
                                data-toggle="modal" data-target="#myModal">Reset Password</a>
@@ -434,7 +435,7 @@
                         ?>
                         >Show Log</a>
 
-                        <?php if (FEATURE_3 == true) { ?>
+                        <?php if (FEATURE_3 === true) { ?>
                         <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
                         <?php } ?>
                     </td>
@@ -446,20 +447,19 @@
             <table class="cs-message-content">
                 <tr>
                     <td>
-                        <div class="resourceheader2 bold">
-                        <?php echo $postgresql_status; ?> PostgreSQL
-                        </div>
+                        <span class="resourceheader2 bold"><?php echo $postgresql_status; ?> PostgreSQL</span>
                     </td>
                 </tr>
                 <tr>
-                    <td><span class="pull-left">Host : Port</span>
-                        <span class="pull-right">localhost:27017</span>
+                    <td>
+                        <span class="pull-left">Host : Port</span>
+                        <span class="pull-right">localhost:5432</span>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <span class="pull-left">Username | Password</span>
-                        <span class="red pull-right">root</span> | <span class="red"><?php echo $postgresql_password; ?></span>
+                        <span class="pull-right"><span class="red">root</span> | <span class="red"><?php echo $postgresql_password; ?></span></span>
                     </td>
                 </tr>
                 <tr>
@@ -509,22 +509,26 @@
             <?php if ($memcached_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="2">
-                        <div class="resourceheader2 bold">
+                    <td>
+                        <span class="resourceheader2 bold">
                         <?php echo $memcached_status; ?> <?php echo $phpext_memcached_status; ?> Memcached
-                        </div>
+                        </span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-40 left">Host : Port</td>
-                    <td class="pull-right">localhost:11211</td>
+                    <td>
+                        <span class="pull-left">Host : Port</span>
+                        <span class="pull-right">localhost:11211</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>PHP Extension</td>
-                    <td class="pull-right"><?php echo ($phpext_memcached_installed === true) ? 'loaded': 'not loaded'; ?></td>
+                    <td>
+                        <span class)"pull-left">PHP Extension</span>
+                        <span class="pull-right"><?php echo ($phpext_memcached_installed === true) ? 'loaded': 'not loaded'; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="right">
+                    <td class="right">
                         <a class="btn btn-default btn-sm" href="index.php?page=config#memcached">Configure</a>
                     </td>
                 </tr>
@@ -534,34 +538,31 @@
             <?php if ($xdebug_installed === true) { ?>
             <table class="cs-message-content">
                 <tr>
-                    <td colspan="2">
-                        <div class="resourceheader2 bold">
-                         <?php echo $xdebug_status; ?> Xdebug
-                        </div>
+                    <td>
+                        <span class="resourceheader2 bold"> <?php echo $xdebug_status; ?> Xdebug </span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="width-40 left">Host : Port</td>
-                    <td class="pull-right">localhost:9000</td>
-                </tr>
-                <tr>
-                    <td>Installed &amp; Configured</td>
-                    <td class="pull-right"><?php echo $phpext_xdebug_installed; ?>
+                    <td>
+                        <span class="pull-left">Host : Port</span>
+                        <span class="pull-right">localhost:9000</span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Extension Type</td>
-                    <td class="pull-right"><?php echo $xdebug_extension_type; ?></td>
+                    <td>
+                        <span class="pull-left">Extension Type</span>
+                        <span class="pull-right"><?php echo $xdebug_extension_type; ?></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="right">
-                        <?php
-                        if($xdebug_profiler_active == true) {
-                            echo '<a class="btn btn-success btn-sm pull-left">Profiler On</a>';
-                        } else {
-                            echo '<a class="btn btn-default btn-sm pull-left">Profiler Off</a>';
-                        }
-                        ?>
+                    <td>
+                        <span class="pull-left">Installed &amp; Configured</span>
+                        <span class="pull-right"><?php echo $phpext_xdebug_installed; ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <a class="btn btn-success btn-sm pull-left"><?php echo ($xdebug_profiler_active === true) ? 'Profiler On' : 'Profiler Off'; ?></a>
                         <a class="btn btn-default btn-sm" href="<?php echo WPNXM_ROOT; ?>/tools/webgrind/">Open Webgrind</a>
                         <a class="btn btn-default btn-sm" href="index.php?page=config#xdebug">Configure</a>
                     </td>

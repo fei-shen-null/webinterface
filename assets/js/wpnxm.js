@@ -181,24 +181,26 @@ function ajaxGET(url, success) {
 }
 
 function lazyBindModalSubmitActionToFormUrl() {
-   // bind submit action
-   $('#myModal').on('click', 'button[type="submit"]', function() {
-       var form = $("#myModal .modal-body form");
+  // bind submit action
+  $('#myModal').on("click", 'input[type="submit"], button[type="submit"]', function (event) {
+      var form = $("#myModal .modal-body form");
 
-       $.ajax({
-         type: form.attr('method'),
-         url: form.attr('action'),
-         data: form.serializeArray(),
+      $.ajax({
+        type: form.attr('method'),
+        url: form.attr('action'),
+        data: form.serializeArray(),
+        cache: false
+      })
+      .done(function(data, textStatus, jqXHR) {
+        $('#myModal .modal-body').html(data);
+        //$('#myModal .modal-body').html("success");
+      })
+      .fail(function() {
+        $('#myModal .modal-body').html("error");
+      });
 
-         cache: false
-       })
-       .done(function() {
-           $('#myModal .modal-body').html("success");
-       })
-       .fail(function() {
-           $('#myModal .modal-body').html("error");
-       })
-
-       event.preventDefault();
+      // cancel the default action (submit)
+      event.preventDefault();
   });
+
 }

@@ -4,30 +4,20 @@ namespace WPNXMTest;
 
 class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
 {
-    public function prepareSession() {
-        $res = parent::prepareSession();
-        $this->url('/');
-        $res->cookie()->remove('PHPUNIT_SELENIUM_TEST_ID');
-        return $res;
+    public function setUp()
+    {
+        //$this->isSeleniumAvailable();
+
+        $this->setHost('127.0.0.1');
+        $this->setPort(4444);
+        $this->setBrowser('firefox');
+        $this->setBrowserUrl('http://127.0.0.1:80/');
+        $this->prepareSession();
     }
 
-    protected function setUp()
+    public function testTheSessionStartedInSetupAndCanBeUsedNow()
     {
-        $this->isSeleniumAvailable();
-
-        $this->setupSpecificBrowser(array(
-            'host' => '127.0.0.1',
-            'port' => 4444,
-            'browserName' => 'firefox',
-            /*'desiredCapabilities' => array(
-                array('chromeOptions' => array(
-                    'args' => array('no-sandbox')
-                ))
-            ),*/
-            'seleniumServerRequestsTimeout' => '50',
-        ));
-
-        $this->setBrowserUrl('http://127.0.0.1:80/');
+        $this->assertStringEndsWith('about:blank', $this->url());
     }
 
     public function isSeleniumAvailable()

@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -30,6 +30,7 @@ class Projects
         'phpmyadmin' => '',
         'rockmongo' => '',
         'updater' => '', // wpn-xm registry updater
+        'uprofiler' => 'uprofiler/uprofiler_html',
         'webgrind' => '',
         //'webinterface' => '', // wpn-xm webinterface
         'wincache' => '',
@@ -97,14 +98,18 @@ class Projects
 
     public function listTools()
     {
-        $html = '<ul class="list-group">';
+        $html = '';
 
         foreach ($this->toolDirectories as $dir => $href) {
             $link = ($href === '') ? (WPNXM_ROOT . 'tools/' . $dir) : (WPNXM_ROOT . 'tools/' . $href);
             $html .= '<li class="list-group-item"><a class="folder" href="'.$link.'">' . $dir . '</a></li>';
         }
 
-        return $html . '</ul>';
+        // write the html list to file. this acts as a cache for the tools topmenu
+        // the file is rewritten each time "Tools & Projects" is opened
+        file_put_contents(WPNXM_DATA_DIR . 'tools-topmenu.html', $html);
+
+        return '<ul class="list-group">' . $html . '</ul>';
     }
 
     /**
@@ -211,7 +216,7 @@ class Projects
         ));
 
         // silenced: because this throws a warning, if offline
-        $json = @file_get_contents($url, FALSE, $context);
+        $json = @file_get_contents($url, false, $context);
 
         $array = json_decode($json, true);
 
@@ -276,12 +281,10 @@ class Projects
 
     /**
      * tools directories are hardcoded.
-     * because we don't know which ones the user installed,
-     * we check for existence.
+     * because we don't know which ones the user installed, we check for existence.
      * if a tool dir is not there, remove it from the list.
-     * this affects the counter.
      */
-    public function checkWhichToolDirectoriesAreInstalled()
+    public function checkWhichToolsAreInstalled()
     {
         foreach ($this->toolDirectories as $dir => $href) {
             if (is_dir(WPNXM_WWW_DIR . 'tools\\' . $dir) === false) {
@@ -297,7 +300,7 @@ class Projects
 
     public function getNumberOfTools()
     {
-        $this->checkWhichToolDirectoriesAreInstalled();
+        $this->checkWhichToolsAreInstalled();
 
         return count($this->toolDirectories);
     }

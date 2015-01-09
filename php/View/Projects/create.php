@@ -9,7 +9,7 @@
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="projectname">Project Name</label>  
+      <label class="col-md-4 control-label" for="projectname">Project Name</label>
       <div class="col-md-4 controls">
         <input id="projectname" name="projectname" placeholder="projectname" class="form-control input-md" type="text">
         <!--<span class="help-block">Folder: xy\projectname</span> -->
@@ -27,7 +27,7 @@
         Hello World:        choose this option to get a basic hello world project.
         Composer:           choose this option to have a project stub created using the Composer template.
         HTML5 Boilerplate:  choose this option to have a project structure set up with a HTML5 Boilerplate template.
-        Twitter Bootstrap3: choose this option to have a project structure set up with a Twitter Bootstrap3 template. 
+        Twitter Bootstrap3: choose this option to have a project structure set up with a Twitter Bootstrap3 template.
     -->
 
     <!-- Select Basic -->
@@ -37,9 +37,9 @@
         <select id="projecttemplate" name="projecttemplate" class="input-xlarge">
           <option>Project folder only</option>
           <option>"Hello World" Project</option>
-          <option>"Composer" Project</option> 
+          <option>"Composer" Project</option>
           <!--
-          <option>HTML5 Boilerplate</option> 
+          <option>HTML5 Boilerplate</option>
           <option>Twitter Bootstrap3</option>
           -->
         </select>

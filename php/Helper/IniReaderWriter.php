@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -65,15 +65,18 @@ class IniReaderWriter
      */
     public function get($section, $key)
     {
-        foreach ($this->lines as $line) {
-            if($line['type'] != 'entry') continue;
-            //if($line['section'] != $section) continue;
-            if($line['key'] != $key) continue;
-
-            return $line['value'];
+        foreach ($this->lines as $line)
+        {
+            if($line['type'] !== 'entry') { continue; }
+            if($line['section'] != strtolower($section)) { continue; }
+            if($line['key'] != $key) {
+                continue;
+            } else {
+                return $line['value'];
+            }
         }
 
-        //throw new Exception('Missing Section or Key');
+        throw new \Exception('Missing INI section or key.');
     }
 
     /**

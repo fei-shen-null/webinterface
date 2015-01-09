@@ -1,7 +1,7 @@
 <?php
 /**
- * WP?-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * WPÐ˜-XM Server Stack
+ * Copyright Â© 2010 - onwards, Jens-AndrÃ© Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -44,7 +44,50 @@ class PHPVersionSwitch
             throw new \Exception(sprintf('Renaming (%s) to (%s) failed.', $newVersionFolder, $targetFolder));
         }
 
+        self::checkForPhpIni($newVersionFolder);
+
+        self::setEnvironmentPath($oldVersionFolder);
+
         return true;
+    }
+
+    /**
+     * Check for php.ini file in the PHP folder and activate development ini as fallback.
+     * @param string $folder
+     */
+    public static function checkForPhpIni($folder)
+    {
+        $ini = $folder.DS.'php.ini';
+        $iniDev = $folder.DS.'php.ini-development';
+
+        if(false === is_file($ini) && true === is_file($iniDev)) {
+            if (!copy($iniDev, $ini)) {
+                echo "copy $iniDev error...\n";
+            }
+        }
+    }
+
+    /**
+     * Set Folder to PATH var (with implicit PATH cleanup).
+     * @param string $folder
+     */
+    public static function setEnvironmentPath($folder)
+    {
+        $paths = explode(';', getenv('path'));
+
+        // remove duplicates (implicit env var cleanup)
+        $paths = array_unique($paths);
+
+        // remove "non existing" paths
+        foreach($paths as $key => $path) {
+            if(!is_dir($path)) {
+                unset($paths[$key]);
+            }
+        }
+
+        $paths[] = $folder;
+
+        putenv('PATH=' . implode(';', $paths));
     }
 
     public static function getFolders()
