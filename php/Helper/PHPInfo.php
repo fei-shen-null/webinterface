@@ -43,7 +43,7 @@ class PHPInfo
         $buffered_phpinfo = self::getPHPInfoContent();
 
         # only the body content
-        preg_match_all("=<body[^>]*>(.*)</body>=siU", $buffered_phpinfo, $matches);
+        preg_match_all("#<body[^>]*>(.*)</body>#siU", $buffered_phpinfo, $matches);
         $phpinfo = $matches[1][0];
 
         # enhance the readability of semicolon separated items
@@ -83,6 +83,7 @@ class PHPInfo
             }
             $html .= '</ul></div>';
         }
+        $html .= '</div></div>';
 
         return $html . $phpinfo;
     }
