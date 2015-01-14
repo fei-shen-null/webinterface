@@ -83,7 +83,6 @@ class PHPInfo
             }
             $html .= '</ul></div>';
         }
-        $html .= '</div></div>';
 
         return $html . $phpinfo;
     }
