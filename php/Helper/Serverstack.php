@@ -266,9 +266,6 @@ class Serverstack
     {
         $socket = fsockopen($host, $port, $errorNumber, $errorString, $timeout);
 
-        echo $host . $port;
-        echo $socket;
-
         if (!$socket) {
             return false;
         }
@@ -314,9 +311,8 @@ class Serverstack
         $ip = @file_get_contents('http://wpn-xm.org/myip.php');
         if (preg_match('/^\d+\.\d+\.\d+\.\d+$/', $ip) === 1) {
             return $ip;
-        } else {
-            return '0.0.0.0';
         }
+        return '0.0.0.0';
     }
 
     /**
