@@ -47,7 +47,8 @@ function index()
       'phpext_memcached_installed' => Serverstack::isExtensionInstalled('memcached'),
       'phpext_xdebug_installed' => Serverstack::isExtensionInstalled('xdebug'),
       'xdebug_extension_type' => XDebug::getXDebugExtensionType(),
-      'xdebug_profiler_active' => XDebug::isProfilerActive()
+      'xdebug_profiler_active' => XDebug::isProfilerActive(),
+      'server_is_nginx' => (strpos($_SERVER["SERVER_SOFTWARE"], 'nginx') !== false) ? true : false
     );
 
     render('page-action', $tpl_data);
@@ -63,4 +64,19 @@ function start()
 {
     Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
     redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
+}
+
+function restart()
+{
+    Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
+
+    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+      // restart - ajax request
+    } else {
+      // restart - non-ajax restart
+
+      // let windows wait some seconds
+      sleep(3);
+      redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
+    }
 }
