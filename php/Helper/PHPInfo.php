@@ -83,6 +83,7 @@ class PHPInfo
             }
             $html .= '</ul></div>';
         }
+        $html .= '</div></div>'; // why is this needed?
 
         return $html . $phpinfo;
     }
