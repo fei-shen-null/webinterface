@@ -58,7 +58,7 @@ class Daemon
         // lookup daemon executable in process list
         static $output = '';
         if ($output === '') {
-            $process = WPNXM_DIR . '\bin\tools\process.exe';
+            $process = WPNXM_DIR . 'bin\tools\process.exe';
             $output = shell_exec($process);
         }
 
@@ -71,29 +71,29 @@ class Daemon
 
     public static function startDaemon($daemon, $options = '')
     {
-        $hide_console = WPNXM_DIR . '\bin\tools\RunHiddenConsole.exe ';
+        $hide_console = WPNXM_DIR . 'bin\tools\RunHiddenConsole.exe ';
 
         switch ($daemon) {
             case 'nginx':
-                $nginx_folder = WPNXM_DIR . '\bin\nginx';
+                $nginx_folder = WPNXM_DIR . 'bin\nginx';
                 chdir($nginx_folder); //requierd for nginx
                 exec("start $hide_console nginx.exe $options");
                 break;
 
             case 'php':
-                $folder = WPNXM_DIR . '\bin\php';
+                $folder = WPNXM_DIR . 'bin\php';
                 chdir($folder); //requierd for nginx
                 exec("start $hide_console php-cgi.exe -b localhost:9100 $options");
                 break;
 
             case 'mariadb':
-                $mysqld_folder = WPNXM_DIR . '\bin\mariadb\bin';
+                $mysqld_folder = WPNXM_DIR . 'bin\mariadb\bin';
                 chdir($mysqld_folder); //change to folder
                 exec("start $hide_console mysqld.exe $options");
                 break;
 
             case 'memcached':
-                $memcached_daemon = WPNXM_DIR . '\bin\memcached\memcached.exe ';
+                $memcached_daemon = WPNXM_DIR . 'bin\memcached\memcached.exe ';
                 exec($hide_console . $memcached_daemon . $options);
                 break;
 
@@ -106,8 +106,8 @@ class Daemon
 
     public static function stopDaemon($daemon)
     {
-        $hide_console = WPNXM_DIR . '\bin\tools\RunHiddenConsole.exe ';
-        $process_kill = WPNXM_DIR . '\bin\tools\Process.exe -k  ';
+        $hide_console = WPNXM_DIR . 'bin\tools\RunHiddenConsole.exe ';
+        $process_kill = WPNXM_DIR . 'bin\tools\Process.exe -k  ';
 
         switch ($daemon) {
             case 'nginx':
@@ -138,7 +138,9 @@ class Daemon
      */
     public static function restartDaemon($daemon)
     {
-        $restart = WPNXM_DIR . '\restart-wpnxm.bat ';
+        chdir(WPNXM_DIR);
+
+        $restart = 'restart-wpnxm.bat ';
 
         switch ($daemon) {
             case 'nginx':
