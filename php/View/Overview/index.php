@@ -457,6 +457,10 @@
                         </a>
                         <?php } ?>
 
+                        <?php if (\Webinterface\Helper\Daemon::isRunning('mongodb')) { ?>
+                            <a class="btn btn-default btn-sm" href="http://localhost:28017/">Show WebAdmin</a>
+                        <?php } ?>
+
                         <?php if (class_exists('mysqli', false)) { ?>
                             <a class="btn btn-default btn-sm" href="index.php?page=resetpw&amp;component=mongodb"
                                data-toggle="modal" data-target="#myModal">Reset Password</a>
