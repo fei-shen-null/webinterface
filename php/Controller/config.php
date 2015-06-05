@@ -160,16 +160,20 @@ function renderPHPExtensionsFormContent()
 
     // use list of available_extensions to draw checkboxes
     foreach ($available_extensions as $name => $file) {
-
-        // Skip XDebug. Its a Zend Engine extension.
-        if (strpos($name, 'xdebug') !== false) {
-            continue;
-        }
-
         // if extension is enabled, check the checkbox
         $checked = false;
         if (isset($enabled_extensions[$file])) {
             $checked = true;
+        }
+
+        /**
+         * Set disabled state of "zend_extension"s (deactivate the checkbox).
+         * XDebug, Opcache is not loaded as normal PHP extension, but as a Zend Engine extension.
+         */
+        $disabled = '';
+        echo $name . '<br>';
+        if ($name === 'php_xdebug' or $name === 'php_opcache') {
+            $disabled = 'disabled';
         }
 
         // render column opener (everytime on 1 of 12)
@@ -182,7 +186,7 @@ function renderPHPExtensionsFormContent()
         $html_checkboxes .= ($checked === true) ? ' active-element">' : ' not-active-element">';
         $html_checkboxes .= '<input type="checkbox" name="extensions[]" value="'.$file.'" ';
         $html_checkboxes .= ($checked === true) ? 'checked="checked" ' : '';
-        $html_checkboxes .= '>';
+        $html_checkboxes .=  $disabled.'>';
         $html_checkboxes .= substr($name, 4);
         $html_checkboxes .= '</label>';
 
