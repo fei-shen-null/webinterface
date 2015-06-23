@@ -188,3 +188,10 @@ function exception_handler(Exception $e)
 }
 
 set_exception_handler('exception_handler');
+
+// create tools menu (cached html menu)
+if(!file_exists(WPNXM_DATA_DIR . 'tools-topmenu.html')) {
+    $projects = new Webinterface\Helper\Projects;
+    $projects->listTools();
+    unset($projects);
+}
