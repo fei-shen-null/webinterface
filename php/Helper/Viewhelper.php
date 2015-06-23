@@ -64,7 +64,6 @@ class Viewhelper
     public static function fileCounter($file, $max_counts)
     {
         $max_counts = (int) $max_counts;
-        $file = (string) $file;
 
         // if file not existing, create and start counting with 1
         if (is_file($file) === false) {

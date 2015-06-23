@@ -73,7 +73,7 @@ class Projects
     {
         $html = '';
 
-        if ($this->getNumberOfProjects() == 0) {
+        if ($this->getNumberOfProjects() === 0) {
             $html = "No project dirs found.";
         } else {
             $html .= '<ul class="list-group">';
@@ -98,6 +98,8 @@ class Projects
 
     public function listTools()
     {
+        $this->checkWhichToolsAreInstalled();
+
         $html = '';
 
         foreach ($this->toolDirectories as $dir => $href) {
@@ -105,8 +107,9 @@ class Projects
             $html .= '<li class="list-group-item"><a class="folder" href="'.$link.'">' . $dir . '</a></li>';
         }
 
-        // write the html list to file. this acts as a cache for the tools topmenu
-        // the file is rewritten each time "Tools & Projects" is opened
+        // write the html list to file. this acts as a cache for the tools topmenu.
+        // the file is rewritten each time "Tools & Projects" is opened,
+        // because the user might have deleted or installed a new tool.
         file_put_contents(WPNXM_DATA_DIR . 'tools-topmenu.html', $html);
 
         return '<ul class="list-group">' . $html . '</ul>';
