@@ -171,7 +171,6 @@ function renderPHPExtensionsFormContent()
          * XDebug, Opcache is not loaded as normal PHP extension, but as a Zend Engine extension.
          */
         $disabled = '';
-        echo $name . '<br>';
         if ($name === 'php_xdebug' or $name === 'php_opcache') {
             $disabled = 'disabled';
         }
