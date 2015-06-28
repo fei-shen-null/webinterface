@@ -32,9 +32,9 @@ class Webgrind extends AbstractComponent
             return 'not installed';
         }
 
-        $file = WPNXM_DIR . $this->files[0];
+        $file = WPNXM_DIR . $this->files[1];
 
-        $maxLines = 120; // read only the first few lines of the file
+        $maxLines = 10; // read only the first few lines of the file
 
         $file_handle = fopen($file, "r");
 
