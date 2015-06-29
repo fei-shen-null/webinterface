@@ -101,7 +101,9 @@ class PHPVersionSwitch
 
         $out = shell_exec($dir . '\php.exe -v' . $enableErrorLogging);
 
-        return trim(substr($out, 4, 6));
+        preg_match('#PHP\s(\d+\.\d+\.\d+)\s\(cli\)#', $out, $matches);
+                
+        return $matches[1];
     }
 
     public static function getCurrentVersion()
@@ -139,11 +141,13 @@ class PHPVersionSwitch
     {
         $folders = self::determinePhpVersions();
 
-        array_shift($folders); // pop first item, its "bin\php"
+        // pop first item, its "bin\php"
+        array_shift($folders); 
 
+        // rename all other crude "php" folder names into "php-{version}" folder
         foreach($folders as $key => $folder) {
             if(false === strpos($folder['dir'], $folder['php-version'])) {
-                $newFolderName = WPNXM_BIN .'php-' . $folder['php-version'];
+                $newFolderName = WPNXM_BIN . 'php-' . $folder['php-version'];
 
                 // chmod, because the folder might be hidden or write protected
                 self::chmodDeep($folder['dir'], 0755);
