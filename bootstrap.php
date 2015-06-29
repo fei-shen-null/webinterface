@@ -134,36 +134,47 @@ function redirect($url)
 }
 
 /**
- * The autoloading function includes classes based on
- * a 1:1 mapping from namespace to directory structure.
+ * PSR-4 Autoloader
  *
  * @param string The classname to include.
  */
-function autoload($class)
-{
+spl_autoload_register(function($class) {
+
     // return early, if class already loaded
     if (class_exists($class) === true) {
+        return true;
+    }
+
+    // the project-specific namespace prefix
+    $prefix = 'Webinterface\\';
+
+    // base directory for the namespace prefix (normally "/src/")
+    $base_dir = __DIR__ . DS . 'php' . DS;
+
+    // does the class use the namespace prefix?
+    $len = strlen($prefix);
+    if (strncmp($prefix, $class, $len) !== 0) {
+        // no, move to the next registered autoloader
         return;
     }
 
-    // replace namespace separator with directory separator
-    $class = strtr($class, '\\', DS);
-    $class = str_replace('Webinterface\\', '', $class);
-    $class = str_replace('Webinterface/', '', $class); # for linux, no PSR-0 structure
+    // get the relative class name
+    $relative_class = substr($class, $len);
 
-    // get full name of file containing the required class
-    $file = __DIR__ . DS . 'php' . DS . $class . '.php';
+    // replace the namespace prefix with the base directory,
+    // replace namespace separators with directory separators in the relative class name,
+    // append with .php
+    $file = $base_dir . str_replace('\\', DS, $relative_class) . '.php';
 
-    if (is_file($file) === true) {
-        include_once $file;
-    } else {
+    // if the file exists, require it
+    if (file_exists($file) === true) {
+        require $file;
+    } /*else {
         throw new \Exception(
             sprintf('Autoloading Failure! Class "%s" requested, but file "%s" not found.', $class, $file)
         );
-    }
-}
-
-spl_autoload_register('autoload');
+    }*/
+});
 
 function exception_handler(Exception $e)
 {
