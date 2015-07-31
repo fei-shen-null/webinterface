@@ -2,7 +2,7 @@
 
 This shows the currently active PHP version. If multiple PHP versions are installed, you might switch between them.
 
-<?php echo $php_versions_form; ?>
+<?php echo $php_version_switcher_form; ?>
 
 <h2>PHP INI Editor</h2>
 The editor allows modifications of existing values in your php.ini.
@@ -25,16 +25,16 @@ Do not forget to restart the PHP daemon in order to let the new settings become 
 </thead>
 
 <?php
-$index = 0;
-$node_name = '';
+$i = 0;
+$nodeName = '';
 foreach ($ini['ini_array'] as $key => $value) {
-    $index = $index + 1;
-    $node_name = 'node-' . $index;
+    $i = $i + 1;
+    $nodeName = 'node-' . $i;
     $html = '';
 
     if ($value['type'] === 'section') {
-        echo '<tr id="'.$node_name.'"><td>'.$value['section'].'</td></tr>';
-        $section_node_name = $node_name;
+        echo '<tr id="'.$nodeName.'"><td>'.$value['section'].'</td></tr>';
+        $sectionNodeName = $nodeName;
     }
 
     if ($value['type'] === 'comment') {
@@ -42,7 +42,7 @@ foreach ($ini['ini_array'] as $key => $value) {
     }
 
     if ($value['type'] === 'entry') {
-        echo '<tr id="'.$node_name.'" class="child-of-'.$section_node_name.'">';
+        echo '<tr id="'.$nodeName.'" class="child-of-'.$sectionNodeName.'">';
         echo '<td>'.$value['key'].'</td>';
         // class editable for jquery.jEditable
         echo '<td><div class="editable">' . $value['value'] . '</div></td>';

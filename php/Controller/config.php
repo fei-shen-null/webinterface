@@ -80,7 +80,7 @@ function tab_php()
 {
     $tpl_data = array(
         'no_layout' => true,
-        'php_versions_form' => renderPhpVersionSelectForm(),
+        'php_version_switcher_form' => renderPhpVersionSwitcherForm(),
         'ini' => Webinterface\Helper\PHPINI::read(),
     );
 
@@ -232,7 +232,7 @@ function update_phpversionswitch()
     echo '<div class="modal"><p class="info">PHP version switched. PHP restarted.</div>';
 }
 
-function renderPhpVersionSelectForm()
+function renderPhpVersionSwitcherForm()
 {
     $versionFolders = Webinterface\Helper\PHPVersionSwitch::getVersions();
     $currentVersion = Webinterface\Helper\PHPVersionSwitch::getCurrentVersion();
