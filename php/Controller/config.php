@@ -234,28 +234,32 @@ function update_phpversionswitch()
 
 function renderPhpVersionSwitcherForm()
 {
-    $versionFolders = Webinterface\Helper\PHPVersionSwitch::getVersions();
-    $currentVersion = Webinterface\Helper\PHPVersionSwitch::getCurrentVersion();
+    $versionFolders      = Webinterface\Helper\PHPVersionSwitch::getVersions();
+    $currentVersion      = Webinterface\Helper\PHPVersionSwitch::getCurrentVersion();
     $number_php_versions = count($versionFolders);
 
     $options = '';
-    foreach($versionFolders as $folder) {
+    foreach ($versionFolders as $folder) {
         $options .= '<option value="' . $folder['php-version'] . '"';
         $options .= ($folder['php-version'] === $currentVersion) ? ' selected' : '';
         $options .= '>' . $folder['php-version'] . '</option>';
     }
 
-    $html = '<form action="index.php?page=config&action=update_phpversionswitch" method="POST">
-      <p>
-        <select name="new-php-version" size="' . $number_php_versions . '">';
+    $html = '<form action="index.php?page=config&action=update_phpversionswitch" method="POST">';
+    
+    $html .= '<p><select name="new-php-version" size="' . $number_php_versions . '">';
     $html .= $options;
-    $html .= '</select>
-      </p>
-      <div class="right">
-        <button class="btn btn-danger" type="reset">Reset</button>
-        <button class="btn btn-success" type="submit">Switch</button>
-    </div>
-    </form>';
+    $html .= '</select></p>';
+    
+    // show switch button only, if multiple PHP version present
+    if ($number_php_versions > 1) {
+        $html .= '<div class="right">';
+        $html .= '<button class="btn btn-danger" type="reset">Reset</button>';
+        $html .= '<button class="btn btn-success" type="submit">Switch</button>';
+        $html .= '</div>';
+    }
+    
+    $html .= '</form>';
 
     return $html;
 }
