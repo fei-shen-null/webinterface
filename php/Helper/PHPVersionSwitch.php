@@ -90,13 +90,12 @@ class PHPVersionSwitch
         putenv('PATH=' . implode(';', $paths));
     }
 
-    public static function getFolders()
+    public static function getPhpVersionFromFolder($dir)
     {
-        return glob(WPNXM_BIN . 'php*', GLOB_ONLYDIR);
-    }
-
-    public static function getFolderVersion($dir)
-    {
+        if(!is_file($dir . '\php.exe')) {
+            return '0.0.0'; // php.exe was not found
+        }
+            
         $enableErrorLogging = ' -d log_errors=on -d error_log=' . WPNXM_DIR . 'logs\php_error.log';
 
         $out = shell_exec($dir . '\php.exe -v' . $enableErrorLogging);
@@ -108,30 +107,52 @@ class PHPVersionSwitch
 
     public static function getCurrentVersion()
     {
-        return self::getFolderVersion(WPNXM_BIN . 'php');
+        return self::getPhpVersionFromFolder(WPNXM_BIN . 'php');
     }
 
+    /**
+     * First apply an automatic folder name fix on all PHP folders.
+     * Then return the now properly versionized PHP folders.
+     * @return array
+     */
     public static function getVersions()
-    {
+    {        
         self::renameFoldersVersionized();
 
         return self::determinePhpVersions();
     }
+    
+    public static function getPhpFolders()
+    {
+        return glob(WPNXM_BIN . 'php*', GLOB_ONLYDIR);
+    }
 
     public static function determinePhpVersions()
     {
-        $dirs = self::getFolders();
+        $folders = self::getPhpFolders();
 
         // fetch php version from all php folders
-        foreach($dirs as $key => $dir) {
-            $php_version = self::getFolderVersion($dir);
-            $dirs[$key] = array(
-                'dir' => $dir,
-                'php-version' => $php_version
+        foreach($folders as $key => $folder) {            
+            
+            $phpVersion = self::getPhpVersionFromFolder($folder);
+          
+            $folders[$key] = array(
+                'dir' => $folder,
+                'php-version' => $phpVersion
             );
         }
-
-        return $dirs;
+        
+        return self::removeInvalidFolders($folders);
+    }
+    
+    public static function removeInvalidFolders(array $folders)
+    {
+        foreach ($folders as $key => $folder){
+            if($folder['php-version'] === '0.0.0') {
+                unset($folders[$key]);
+            }
+        }
+        return $folders;
     }
 
     /**
@@ -139,13 +160,14 @@ class PHPVersionSwitch
      */
     public static function renameFoldersVersionized()
     {
-        $folders = self::determinePhpVersions();
-
+        $folders = self::determinePhpVersions();       
+        
         // pop first item, its "bin\php"
         array_shift($folders); 
 
         // rename all other crude "php" folder names into "php-{version}" folder
         foreach($folders as $key => $folder) {
+                                   
             if(false === strpos($folder['dir'], $folder['php-version'])) {
                 $newFolderName = WPNXM_BIN . 'php-' . $folder['php-version'];
 

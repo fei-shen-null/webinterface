@@ -81,20 +81,27 @@ function loadTab(tabObj)
 
   // get the page from the href
   var href = tabObj.attr('href');   // href="index.php?page=config#php"
-  var page = href.split('#')[1].toLowerCase(); // [index.php?page=config, php], return 1st element from array
+  var tab = href.split('#')[1].toLowerCase(); // [index.php?page=config, php], return 1st element from array
 
-  var href = 'index.php?page=config&action=showtab&tab=' + page;
+  // target action for loading the tab content via AJAX is "showtab"
+  var href = 'index.php?page=config&action=showtab&tab=' + tab;
 
   // target content for the incoming content
   var containerId = 'div#tab-content';  // selector for the target container
 
   // load content via ajax, load additional js for certain pages and "activate" it
   $(containerId).load(href, function () {
-    if (page === 'php') {
+    if (tab === 'php') {
       setupTreeTable();
       setupjEditable();
     }
     $(containerId).fadeIn('fast');
+    
+    // Set URL to remember TAB on page refresh.
+    // The original AJAX content URL is "index.php?page=config&action=showtab&tab=PAGE",
+    // but we need to get the full content (config page) and request the TAB content (ajax).
+    // That URL is "index.php?page=config#tab"
+    window.history.pushState("", "", 'index.php?page=config#' + tab);
   });
 }
 
