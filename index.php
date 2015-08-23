@@ -8,6 +8,8 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
+define('TIME_STARTED', microtime(true));
+
 include 'bootstrap.php';
 
 // page controller

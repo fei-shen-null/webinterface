@@ -17,6 +17,7 @@
              WPИ-XM Serverstack for Windows - Version <?php echo WPNXM_VERSION; ?>
             <p>&#169; 2010-<?php echo date("Y"); ?> by <a href="http://jakoch.de/">Jens-Andr&#x00E9; Koch</a> Softwaresystemtechnik.
                 <br />
+                Page generated in <?=round((microtime(true) - TIME_STARTED), 3);?>s.
             </p>
         </div>
     </div>
