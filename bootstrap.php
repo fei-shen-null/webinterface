@@ -62,7 +62,10 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_INI', WPNXM_DIR . 'wpn-xm.ini');
     define('WPNXM_BIN', WPNXM_DIR . 'bin' . DS);
     define('WPNXM_TEMP', WPNXM_DIR . 'temp' . DS);
-
+        
+    // Composer managed Vendor folder
+    define('VENDOR_DIR', __DIR__ . '/vendor/');
+    
     /**
      * Feature Flags
      *
@@ -76,6 +79,16 @@ if (!defined('WPNXM_DIR')) {
     define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Domains, MariaDB, Xdebug
     define('FEATURE_4', $toggle); // create nginx domains directly from project list [depends on nginx-conf parser]
 }
+
+// Register Composer Autoloader
+if (!is_file(VENDOR_DIR . 'autoload.php')) {
+    throw new \RuntimeException(
+        'Could not find "vendor/autoload.php".' . PHP_EOL .
+        'Did you forget to run "composer install --dev"?' . PHP_EOL
+    );
+}
+require VENDOR_DIR . 'autoload.php';
+
 
 if (!function_exists('showConstants')) {
 
