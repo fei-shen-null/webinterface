@@ -21,21 +21,21 @@ class Serverstack
      */
     public static function printExclamationMark($image_title_text = '')
     {
+        $title = htmlspecialchars($image_title_text);
+
         return sprintf(
             '<img style="float:right;" src="%sexclamation-red-frame.png" rel="tooltip" alt="%s" title="%s">',
-            WPNXM_IMAGES_DIR,
-            htmlspecialchars($image_title_text),
-            htmlspecialchars($image_title_text)
+            WPNXM_IMAGES_DIR, $title, $title
         );
     }
 
     public static function printExclamationMarkLeft($image_title_text = '')
     {
+        $title = htmlspecialchars($image_title_text);
+
         return sprintf(
             '<img src="%sexclamation-red-frame.png" rel="tooltip" alt="%s" title="%s">',
-            WPNXM_IMAGES_DIR,
-            htmlspecialchars($image_title_text),
-            htmlspecialchars($image_title_text)
+            WPNXM_IMAGES_DIR, $title, $title
         );
     }
 
@@ -63,8 +63,7 @@ class Serverstack
         $classes = self::getInstalledComponents();
 
         foreach ($classes as $class) {
-            $component = '\Webinterface\Components\\' . $class;
-            $components[] = new $component;
+            $components[] = self::Component($class);
         }
 
         return $components;
@@ -79,10 +78,20 @@ class Serverstack
      */
     public static function getVersion($componentName)
     {
-        $componentClass = '\Webinterface\Components\\' . $componentName;
-        $component      = new $componentClass;
+        return self::Component($componentName)->getVersion();
+    }
 
-        return $component->getVersion();
+    /**
+     * Instantiate Component by name
+     *
+     * @param string $componentName
+     * @return object
+     */
+    public static function Component($componentName)
+    {
+        $componentClass = '\Webinterface\Components\\' . $componentName;
+
+        return new $componentClass;
     }
 
     /**
@@ -193,28 +202,23 @@ class Serverstack
      */
     public static function getDaemonName($daemon)
     {
-        switch ($daemon) {
-            case 'phpext_memcache':
-                return 'PHP Extension Memcache';
-            case 'phpext_mongo':
-                return 'PHP Extension Mongo';
-            case 'nginx':
-                return 'Nginx';
-            case 'mariadb':
-                return 'MariaDB';
-            case 'memcached':
-                return 'Memcached';
-            case 'php':
-                return 'PHP';
-            case 'xdebug':
-                return 'PHP Extension XDebug';
-            case 'mongodb':
-                return 'MongoDB';
-            case 'postgresql':
-                return 'PostgreSQL';
-            default:
-                throw new \InvalidArgumentException(sprintf(__METHOD__ . '() no name for the daemon: "%s"', $daemon));
+        $daemonNames = [
+            'mariadb'         => 'MariaDB',
+            'memcached'       => 'Memcached',
+            'mongodb'         => 'MongoDB',
+            'nginx'           => 'Nginx',
+            'php'             => 'PHP',
+            'phpext_memcache' => 'PHP Extension Memcache',
+            'phpext_mongo'    => 'PHP Extension Mongo';
+            'postgresql'      => 'PostgreSQL',
+            'xdebug'          => 'PHP Extension XDebug',
+        ];
+
+        if(isset($daemonNames[$daemon])) {
+            return $daemonNames[$daemon];
         }
+
+        throw new \InvalidArgumentException(sprintf(__METHOD__ . '() no name for the daemon: "%s"', $daemon));
     }
 
     /**
@@ -227,26 +231,12 @@ class Serverstack
      */
     public static function isInstalled($component)
     {
-        switch ($component) {
-            case 'php':
-            case 'nginx':
-            case 'mariadb':
-                return true; // always installed - base of the server stack
-            case 'xdebug':
-                $o = new \Webinterface\Components\XDebug;
-                return $o->isInstalled();
-            case 'mongodb':
-                $o = new \Webinterface\Components\Mongodb;
-                return $o->isInstalled();
-            case 'memcached':
-                $o = new \Webinterface\Components\Memcached;
-                return $o->isInstalled();
-            case 'postgresql':
-                $o = new \Webinterface\Components\PostgreSQL;
-                return $o->isInstalled();
-            default:
-                throw new \InvalidArgumentException(sprintf(__METHOD__ . '() has no case for the daemon: "%s"', $component));
+        // these components are always installed. base of the server stack.
+        if($component === 'php' or $component === 'nginx' or $component === 'mariadb') {
+                return true;
         }
+
+        return self::Component($component)->isInstalled();
     }
 
     /**
@@ -326,14 +316,12 @@ class Serverstack
     {
         switch ($component) {
             case 'mariadb':
-                $o = new \Webinterface\Components\Mariadb;
-                return $o->getPassword();
+               return self::Component('Mariadb')->getPassword();
             case 'mongodb':
-                $o = new \Webinterface\Components\Mongodb;
-                return $o->getPassword();
-            default:
-                throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
+               return self::Component('Mongodb')->getPassword();
         }
+
+        throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
     }
 
     public static function getWindowsVersion()
