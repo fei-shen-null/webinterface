@@ -202,20 +202,20 @@ class Serverstack
      */
     public static function getDaemonName($daemon)
     {
-        $daemonNames = [
+        $daemons = [
             'mariadb'         => 'MariaDB',
             'memcached'       => 'Memcached',
             'mongodb'         => 'MongoDB',
             'nginx'           => 'Nginx',
             'php'             => 'PHP',
             'phpext_memcache' => 'PHP Extension Memcache',
-            'phpext_mongo'    => 'PHP Extension Mongo';
+            'phpext_mongo'    => 'PHP Extension Mongo',
             'postgresql'      => 'PostgreSQL',
             'xdebug'          => 'PHP Extension XDebug',
         ];
 
-        if(isset($daemonNames[$daemon])) {
-            return $daemonNames[$daemon];
+        if(isset($daemons[$daemon])) {
+            return $daemons[$daemon];
         }
 
         throw new \InvalidArgumentException(sprintf(__METHOD__ . '() no name for the daemon: "%s"', $daemon));
