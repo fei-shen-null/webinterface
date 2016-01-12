@@ -203,15 +203,15 @@ class Serverstack
     public static function getDaemonName($daemon)
     {
         $daemonNames = [
-            'mariadb' => 'MariaDB',
-            'memcached' => 'Memcached',
-            'mongodb' => 'MongoDB',
-            'nginx' => 'Nginx',
-            'php' => 'PHP',
+            'mariadb'         => 'MariaDB',
+            'memcached'       => 'Memcached',
+            'mongodb'         => 'MongoDB',
+            'nginx'           => 'Nginx',
+            'php'             => 'PHP',
             'phpext_memcache' => 'PHP Extension Memcache',
-            'phpext_mongo' => 'PHP Extension Mongo',
-            'postgresql' => 'PostgreSQL',
-            'xdebug' => 'PHP Extension XDebug',
+            'phpext_mongo'    => 'PHP Extension Mongo';
+            'postgresql'      => 'PostgreSQL',
+            'xdebug'          => 'PHP Extension XDebug',
         ];
 
         if(isset($daemonNames[$daemon])) {
