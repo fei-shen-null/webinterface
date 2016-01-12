@@ -144,31 +144,21 @@ class Serverstack
      */
     public static function portCheck($daemon)
     {
-        switch ($daemon) {
-            case 'nginx':
-                return self::checkPort('127.0.0.1', '80');
-                break;
-            case 'mariadb':
-                return self::checkPort('127.0.0.1', '3306');
-                break;
-            case 'memcached':
-                return self::checkPort('127.0.0.1', '11211');
-                break;
-            case 'php':
-                return self::checkPort('127.0.0.1', '9000');
-                break;
-            case 'xdebug':
-                return self::checkPort('127.0.0.1', '9100');
-                break;
-            case 'mongodb':
-                return self::checkPort('127.0.0.1', '27017');
-                break;
-            case 'mongodb-admin':
-                return self::checkPort('127.0.0.1', '27018');
-                break;
-            default:
-                throw new \InvalidArgumentException(sprintf('There is no assertion for the daemon: %s', $daemon));
+        $defaulPorts = [
+            'nginx'         => '80',
+            'mariadb'       => '3306',
+            'memcached'     => '11211',
+            'php'           => '9000',
+            'xdebug'        => '9100',
+            'mongodb'       => '27017',
+            'mongodb-admin' => '27018'
+        ];
+
+        if(isset($defaultPort[$daemon])) {
+            return self::checkPort('127.0.0.1', $defaultPort[$daemon]);
         }
+
+        throw new \InvalidArgumentException(sprintf('No default port found the daemon: %s', $daemon));
     }
 
     /**
