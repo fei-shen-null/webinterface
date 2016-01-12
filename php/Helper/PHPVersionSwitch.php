@@ -102,7 +102,9 @@ class PHPVersionSwitch
 
         $out = shell_exec($dir . '\php.exe -v' . $enableErrorLogging);
 
-        preg_match('#PHP\s(\d+\.\d+\.\d+)\s\(cli\)#', $out, $matches);
+        preg_match('#PHP\s((\d+\.\d+\.\d+)((?:(alpha|beta|rc)\d+))?)\s\(cli\)#i', $out, $matches);
+
+        #var_dump($out, $matches);
 
         return $matches[1];
     }
