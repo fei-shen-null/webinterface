@@ -137,9 +137,15 @@ class Projects
         }
 
         // If the project folder contains a ".git/config" file with a github repo link, display a "github.com" link.
-        if(true === $this->isGitRepoAndHostedOnGithub($dir) && $hasComposerConfig) {
+        if(true === $this->isGitRepoAndHostedOnGithub($dir)) {
+            if(isset($composer['name']) === true) {
+                $githubLink = 'https://github.com/' . $composer['name'];
+            } else {
+                $githubLink = 'https://github.com/' . $this->getProjectNameFromGitConfig($dir);
+            }
+
             $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
-            $html .= ' href="https://github.com/' . $composer['name'] . '"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
+            $html .= ' href="'.$githubLink.'"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
         }
 
         /**
@@ -190,22 +196,28 @@ class Projects
         return $html;
     }
 
-    public function isGitRepoAndHostedOnGithub($projectFolder)
+    public function readProjectGitConfig($dir)
     {
-        $path = WPNXM_WWW_DIR . $projectFolder . '/.git/';
+        return file_get_contents(WPNXM_WWW_DIR . $dir . '/.git/config');
+    }
 
-        // is the folder a git repository?
-        if (false === is_dir($path)) {
-            return false;
+    public function getProjectNameFromGitConfig($dir)
+    {
+        $gitConfig = $this->readProjectGitConfig($dir);
+        preg_match('#github.com(?:\:|/)(.*).git#i', $gitConfig, $matches);
+        return $matches[1];
+    }
+
+    public function isGitRepoAndHostedOnGithub($dir)
+    {
+        if($this->hasGitConfig($dir) === true) {
+            $gitConfig = $this->readProjectGitConfig($dir);
+            if (false !== strpos($gitConfig, 'github')) {
+                return true;
+            }
         }
 
-        // is the git repository hosted at github?
-        $gitConfig = file_get_contents($path . 'config');
-        if (false === strpos($gitConfig, 'github')) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
     public function getPackagistPackageDescription($package = '')
@@ -280,6 +292,11 @@ class Projects
     public function hasComposerConfig($dir)
     {
         return is_file(WPNXM_WWW_DIR . $dir . '/composer.json');
+    }
+
+    public function hasGitConfig($dir)
+    {
+        return is_file(WPNXM_WWW_DIR . $dir . '/.git/config');
     }
 
     /**
