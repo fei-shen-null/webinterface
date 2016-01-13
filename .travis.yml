@@ -28,8 +28,8 @@ before_script:
   # Firefox
     - sudo apt-fast -m -y install firefox
   # Selenium
-    - wget http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar
-    - java -jar selenium-server-standalone-2.43.1.jar > /dev/null 2>&1 &
+    - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
+    - java -jar selenium-server-standalone-2.48.2.jar > /dev/null 2>&1 &
     - sleep 5
   # Nginx
     - sudo apt-fast -y install nginx
