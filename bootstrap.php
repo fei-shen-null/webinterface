@@ -62,10 +62,10 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_INI', WPNXM_DIR . 'wpn-xm.ini');
     define('WPNXM_BIN', WPNXM_DIR . 'bin' . DS);
     define('WPNXM_TEMP', WPNXM_DIR . 'temp' . DS);
-        
+
     // Composer managed Vendor folder
-    define('VENDOR_DIR', __DIR__ . '/vendor/');
-    
+    define('VENDOR_DIR', __DIR__ . '\vendor\\');
+
     /**
      * Feature Flags
      *
