@@ -59,7 +59,12 @@ function tab_mongodb()
 
 function tab_nginx()
 {
-    render('Config\tab-nginx', array('no_layout' => true));
+    $tpl_data = array(
+        'no_layout' => true,
+        'nginx_access_toggle_form' => renderNginxAccessToggleFrom()
+    );
+
+    render('Config\tab-nginx', $tpl_data);
 }
 
 function tab_nginx_domains()
@@ -145,6 +150,65 @@ function update_phpextensions()
 
     // send as JSON
     echo json_encode($array);
+}
+
+function renderNginxAccessToggleFrom()
+{
+    // $("input[name=nginx_access_toggle]:checked").val()
+
+    $nginxConfig = new \Webinterface\Components\Nginx\Config;
+    $allow_only_local_access = $nginxConfig->isAllowedOnlyLocalAccess();
+
+    // form
+    $html = '<form action="index.php?page=config&action=update_nginx_access_state" method="POST">';
+
+    $html .= '<div class="btn-group" data-toggle="buttons">';
+    $html .= '<h3>Nginx Access Toggle</h3>';
+
+    // radiobutton "allow only local access"
+    $html .= '<label class="btn ';
+    $html .= ($allow_only_local_access === true) ? 'btn-success active' : 'btn-default';
+    $html .= '">';
+    $html .= '<input type="radio" name="nginx_access_toggle" value="allow_only_local_access" ';
+    $html .= ($allow_only_local_access === true) ? 'checked="checked" ' : '';
+    $html .= '>allow only local access</label>';
+
+    // radiobutton "allow_access_from_any-computer"
+    $html .= '<label class="btn ';
+    $html .= ($allow_only_local_access === false) ? 'btn-success active' : 'btn-default';
+    $html .= '">';
+    $html .= '<input type="radio" name="nginx_access_toggle" value="allow_access_from_any_computer" ';
+    $html .= ($allow_only_local_access === false) ? 'checked="checked" ' : '';
+    $html .= '>allow access from any computer</label>';
+
+    $html .= '</div>';
+
+    // form buttons
+    $html .= '<div class="right">
+                <button type="reset" class="btn btn-danger"><i class="icon-remove"></i> Reset</button>
+                <button type="submit" class="btn btn-success"><i class="icon-ok"></i> Submit</button>
+              </div>';
+
+    $html .= '</form>';
+
+    return $html;
+}
+
+function update_nginx_access_state()
+{
+    $toggle_state = $_POST['nginx_access_toggle'];
+
+    $nginxConfig = new \Webinterface\Components\Nginx\Config;
+
+    if($toggle_state === 'allow_access_from_any_computer') {
+        $nginxConfig->allowAccessFromAnyComputer();
+    } elseif($toggle_state === 'allow_only_local_access') {
+        $nginxConfig->allowOnlyLocalAccess();
+    } else {
+        throw new \Exception('The "nginx_access_toggle" value is missing!');
+    }
+
+    echo '<div class="modal"><p class="info">Saved. Nginx Access...</div>';
 }
 
 function renderPHPExtensionsFormContent()
@@ -246,19 +310,19 @@ function renderPhpVersionSwitcherForm()
     }
 
     $html = '<form action="index.php?page=config&action=update_phpversionswitch" method="POST">';
-    
+
     $html .= '<p><select name="new-php-version" size="' . $number_php_versions . '">';
     $html .= $options;
     $html .= '</select></p>';
-    
+
     // show switch button only, if multiple PHP version present
     if ($number_php_versions > 1) {
         $html .= '<div class="right">';
-        $html .= '<button class="btn btn-danger" type="reset">Reset</button>';
-        $html .= '<button class="btn btn-success" type="submit">Switch</button>';
+        $html .= '<button class="btn btn-danger" type="reset"><i class="icon-remove"></i> Reset</button>&nbsp;';
+        $html .= '<button class="btn btn-success" type="submit"><i class="icon-ok"></i> Switch</button>';
         $html .= '</div>';
     }
-    
+
     $html .= '</form>';
 
     return $html;
