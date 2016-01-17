@@ -1,4 +1,4 @@
-<h2>Xdebug - PHP Debugger &amp; Profiler</h2>
+<h2>XDebug - PHP Debugger &amp; Profiler</h2>
 
 <?php if($xdebug_installed === true) { ?>
 

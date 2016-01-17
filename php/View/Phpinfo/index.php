@@ -24,8 +24,8 @@
         <div class="form-group" id="search-terms-navbar" style="visibility: hidden;">
             <div class="col-sm-10">
                 <p>Search Term found! <span id="hits-counter"></span> Hits.</p>
-                <button class="btn btn-default btn-md" type="button" id="nextButton"><span class="glyphicon glyphicon-arrow-down"></span> Next</button>
-                <button class="btn btn-default btn-md" type="button" id="prevButton"><span class="glyphicon glyphicon-arrow-up"></span> Prev</button>
+                <button class="btn btn-default btn-md" type="button" id="nextButton"><i class="icon-arrow-down"></i> Next</button>
+                <button class="btn btn-default btn-md" type="button" id="prevButton"><i class="icon-arrow-up"></i> Prev</button>
             </div>
         </div>
     </div>

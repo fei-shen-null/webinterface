@@ -66,7 +66,7 @@ function printUpdatedSign($component, $old_version, $new_version)
     if (version_compare($old_version, $new_version) === -1) {
         $html = '<a href="' . $url . '"';
         $html .= ' class="download btn btn-success btn-xs" style="font-size: 14px">';
-        $html .= '<span class="glyphicon glyphicon-arrow-up"></span>';
+        $html .= '<i class="icon-arrow-up"></i>';
         $html .= '&nbsp; ' . $new_version . '</a>';
 
         return $html;
