@@ -19,7 +19,6 @@ class PHPInfo
      */
     public static function getPHPInfoContent()
     {
-        # fetch the output of phpinfo into a buffer and assign it to a variable
         ob_start();
         phpinfo();
         $buffered_phpinfo = ob_get_contents();
@@ -43,12 +42,15 @@ class PHPInfo
         $buffered_phpinfo = self::getPHPInfoContent();
 
         # only the body content
-        preg_match_all("#<body[^>]*>(.*)</body>#siU", $buffered_phpinfo, $matches);
-        $phpinfo = $matches[1][0];
+        preg_match("#<body[^>]*>(.*)</body>#simU", $buffered_phpinfo, $matches);
+        $phpinfo = $matches[1];
 
-        # enhance the readability of semicolon separated items
-        $phpinfo = str_replace(";", "; ", $phpinfo);
+        # enhance the readability of items
+        $phpinfo = str_replace(";", "; ", $phpinfo);      // semicolon separated items
         $phpinfo = str_replace('&quot;', '"', $phpinfo);
+
+        // compile options, remove quotes and add line-break before
+        $phpinfo = preg_replace("#\"\s(--.*)\"#simU", "<br>$1", $phpinfo);
 
         if ($strip_tags === true) {
             $phpinfo = strip_tags($phpinfo);
