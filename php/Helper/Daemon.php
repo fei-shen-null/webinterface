@@ -82,8 +82,8 @@ class Daemon
 
             case 'php':
                 $folder = WPNXM_DIR . 'bin\php';
-                chdir($folder); //requierd for nginx
-                exec("start $hide_console php-cgi.exe -b localhost:9100 $options");
+                chdir($folder); //required for nginx
+                exec("start $hide_console php-cgi.exe -b localhost:9100 $options"); // @todo use php-cgi-spawner
                 break;
 
             case 'mariadb':
@@ -140,7 +140,7 @@ class Daemon
     {
         chdir(WPNXM_DIR);
 
-        $restart = 'restart-wpnxm.bat ';
+        $restart = 'start /B restart.bat ';
 
         switch ($daemon) {
             case 'nginx':
@@ -154,6 +154,9 @@ class Daemon
                 break;
             case 'php':
                 exec($restart . 'php');
+                break;
+            case 'graceful-php':
+                Webinterface\Helper\PHPGracefulRestart::restart();
                 break;
             default:
                 throw new \InvalidArgumentException(
