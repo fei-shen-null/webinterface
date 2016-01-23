@@ -22,16 +22,9 @@ class PHPINI
      */
     public static function read()
     {
-        $ini_file = php_ini_loaded_file();
-
-        if ($ini_file === false) {
-            throw new \Exception(
-                'The path to the loaded php.ini file could not be retrieved. Check PHP folder for a "php.ini" file!'
-            );
-        }
-
-        $ini = new INIReaderWriter($ini_file);
-        $ini_array  = $ini->returnArray();
+        $ini_file  = php_ini_loaded_file();
+        $iniReader = new INIReaderWriter($ini_file);
+        $ini_array = $iniReader->returnArray();
 
         return compact('ini_file', 'ini_array');
     }
@@ -42,12 +35,9 @@ class PHPINI
     public static function setDirective($section, $directive, $value)
     {
         $ini_file = php_ini_loaded_file();
-
         self::doBackup($ini_file);
-
         $ini = new INIReaderWriter($ini_file);
         $ini->set($section, $directive, $value);
-
         $ini->write($ini_file);
 
         return true;
@@ -60,16 +50,15 @@ class PHPINI
     {
         $newFilename = str_replace('.ini', '', $file);
         $newFilename .= '-backup-' . date("dmy-His") . '.ini';
-
-        // backup current registry
-        copy($file, $newFilename);
-
-        // keep last 3 files, remove older files
+        copy($file, $newFilename); // backup current registry
         self::removeOldBackupFiles();
 
         return true;
     }
 
+    /**
+     * keep last 3 files, remove older files.
+     */
     public static function removeOldBackupFiles()
     {
         $files = glob(WPNXM_BIN . 'php\php-backup-*.ini');
