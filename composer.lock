@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "82dd6a300d037bdfd4eca5b92e0c9aeb",
-    "content-hash": "a35252b22ef976e2bcf3298a6a86a35b",
+    "hash": "585e1110f69bdce83ad0f8cdafbb16d0",
+    "content-hash": "2a1948fcece20bc10b096d3d0cc190ba",
     "packages": [
         {
             "name": "jakoch/nginx-conf",
