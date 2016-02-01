@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "82dd6a300d037bdfd4eca5b92e0c9aeb",
+    "content-hash": "a35252b22ef976e2bcf3298a6a86a35b",
     "packages": [
         {
             "name": "jakoch/nginx-conf",
@@ -508,12 +509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "16237aabbb5efa6e2f7953ca245ba3b64f988514"
+                "reference": "374e1d4c2b71575d2717aa8aa9def0051ae83a05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/16237aabbb5efa6e2f7953ca245ba3b64f988514",
-                "reference": "16237aabbb5efa6e2f7953ca245ba3b64f988514",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/374e1d4c2b71575d2717aa8aa9def0051ae83a05",
+                "reference": "374e1d4c2b71575d2717aa8aa9def0051ae83a05",
                 "shasum": ""
             },
             "require": {
@@ -535,6 +536,7 @@
                 "sebastian/environment": "~1.3",
                 "sebastian/exporter": "~1.2",
                 "sebastian/global-state": "~1.0",
+                "sebastian/object-enumerator": "~1.0",
                 "sebastian/resource-operations": "~1.0",
                 "sebastian/version": "~1.0",
                 "symfony/yaml": "~2.1|~3.0"
@@ -574,7 +576,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-01-24 07:05:38"
+            "time": "2016-01-29 14:30:19"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -980,17 +982,63 @@
             "time": "2015-10-12 03:26:01"
         },
         {
+            "name": "sebastian/object-enumerator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/object-enumerator.git",
+                "reference": "3b6d44d30fb93c4a3d796591ad6de547f1fb75e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/3b6d44d30fb93c4a3d796591ad6de547f1fb75e5",
+                "reference": "3b6d44d30fb93c4a3d796591ad6de547f1fb75e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "sebastian/recursion-context": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Traverses array structures and object graphs to enumerate all referenced objects",
+            "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
+            "time": "2016-01-28 11:45:41"
+        },
+        {
             "name": "sebastian/recursion-context",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "913401df809e99e4f47b27cdd781f4a258d58791"
+                "reference": "7ff5b1b3dcc55b8ab8ae61ef99d4730940856ee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/913401df809e99e4f47b27cdd781f4a258d58791",
-                "reference": "913401df809e99e4f47b27cdd781f4a258d58791",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/7ff5b1b3dcc55b8ab8ae61ef99d4730940856ee7",
+                "reference": "7ff5b1b3dcc55b8ab8ae61ef99d4730940856ee7",
                 "shasum": ""
             },
             "require": {
@@ -1030,7 +1078,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2015-11-11 19:50:13"
+            "time": "2016-01-28 05:39:29"
         },
         {
             "name": "sebastian/resource-operations",
