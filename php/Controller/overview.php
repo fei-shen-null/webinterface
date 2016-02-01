@@ -8,8 +8,8 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-use Webinterface\Helper\Serverstack;
 use Webinterface\Components\XDebug;
+use Webinterface\Helper\Serverstack;
 
 function index()
 {
