@@ -54,27 +54,30 @@ class PHPGracefulRestart
         // (4) start PHP on CLI and get stdout
         exec("php.exe -v", $stdout);
 
-        // (5) parse output lines and get the extension name
-        foreach($stdout as $idx => $line)
+        if(isset($stdout) && is_array($stdout))
         {
-            if($line === '') {
-                continue;
-            }
+            // (5) parse output lines and get the extension name
+            foreach($stdout as $idx => $line)
+            {
+                if($line === '') {
+                    continue;
+                }
 
-            if(strpos($line, 'Unable to load dynamic library') !== false) {
-                /**
-                 * $line = "PHP Warning:  PHP Startup: Unable to load dynamic library 'ext\php_odbc.dll'"
-                 * $matches[1] = "php_odbc"
-                 */
-                if(preg_match("#\'\\w+(.*).dll\'#i", $line, $matches)) {
-                    $extension = str_replace('\\', '', $matches[1]);
+                if(strpos($line, 'Unable to load dynamic library') !== false) {
+                    /**
+                     * $line = "PHP Warning:  PHP Startup: Unable to load dynamic library 'ext\php_odbc.dll'"
+                     * $matches[1] = "php_odbc"
+                     */
+                    if(preg_match("#\'\\w+(.*).dll\'#i", $line, $matches)) {
+                        $extension = str_replace('\\', '', $matches[1]);
 
-                    // (6) write extension name to JSON file for informing the user
-                    self::logExtensionError($extension);
+                        // (6) write extension name to JSON file for informing the user
+                        self::logExtensionError($extension);
 
-                    // (7) deactive this extension in php.ini
-                    $phpext = new PHPExtensionManager;
-                    $phpext->disable($extension);
+                        // (7) deactive this extension in php.ini
+                        $phpext = new PHPExtensionManager;
+                        $phpext->disable($extension);
+                    }
                 }
             }
         }
