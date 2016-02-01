@@ -46,8 +46,6 @@ class PHPGracefulRestart
     /**
      * deactivateExtensionsWithStartupErrors
      * see restart, points 4-7.
-     *
-     * @return [type] [description]
      */
     public static function deactivateExtensionsWithStartupErrors()
     {
