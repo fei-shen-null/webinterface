@@ -81,6 +81,9 @@ class PHPGracefulRestart
         }
     }
 
+    /**
+     * @param string $data
+     */
     public static function logExtensionError($data)
     {
         $logfile = '../logs/php_startup_errors.json';
@@ -88,6 +91,9 @@ class PHPGracefulRestart
         self::appendJsonFile($logfile, $data);
     }
 
+    /**
+     * @param string $filename
+     */
     public static function appendJsonFile($filename, $data)
     {
         $handle = fopen($filename, 'a+');

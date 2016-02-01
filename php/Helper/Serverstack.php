@@ -139,7 +139,7 @@ class Serverstack
      * Attempts to establish a connection to the specified port (on localhost)
      *
      * @param  string  $daemon Daemon/Service name.
-     * @return boolean|null
+     * @return boolean
      * @throws \InvalidArgumentException
      */
     public static function portCheck($daemon)
