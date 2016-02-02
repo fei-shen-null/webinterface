@@ -154,8 +154,8 @@ class Serverstack
             'mongodb-admin' => '27018'
         ];
 
-        if(isset($defaultPort[$daemon])) {
-            return self::checkPort('127.0.0.1', $defaultPort[$daemon]);
+        if(isset($defaultPorts[$daemon])) {
+            return self::checkPort('127.0.0.1', $defaultPorts[$daemon]);
         }
 
         throw new \InvalidArgumentException(sprintf('No default port found the daemon: %s', $daemon));
