@@ -34,3 +34,14 @@ The webinterface has a debug screen showing Constants and their values.
 It might be helpful, when working with Paths.
 
 `http://localhost/tools/webinterface/index.php?page=debug`
+
+##### Frontend Dependencies
+
+The frontend dependencies are managed with [Bower](http://bower.io/)
+and defined in the dependencies section of [`bower.json`](https://github.com/WPN-XM/webinterface/blob/master/bower.json#L28).
+
+- Bootstrap     - https://github.com/twbs/bootstrap
+- JQuery        - https://github.com/jquery/jquery
+- Typeahead.js  - https://github.com/twitter/typeahead.js
+- Pace          - https://github.com/HubSpot/pace
+- MetisMenu     - https://github.com/onokumus/metisMenu
