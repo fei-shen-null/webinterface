@@ -250,7 +250,7 @@ class Serverstack
             return false;
         }
 
-        @fclose($socket);
+        fclose($socket);
 
         return true;
     }
