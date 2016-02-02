@@ -189,28 +189,36 @@ spl_autoload_register(function($class) {
     }*/
 });
 
-function exception_handler(Exception $e)
+function exception_handler($e) /** Throwable **/
 {
-    $trace = str_replace(
-        array('#','):'),
-        array('<br>#',"):<br>&nbsp;&nbsp;&rarr;"),
-        $e->getTraceAsString()
-    );
+    $html = '<div class="centered" style="font-size: 16px;">';
+    $html .= '<div class="panel panel-danger">';
+    $html .= '  <div class="panel-heading">';
+    $html .= '    <h3 class="panel-title">Error</h3>';
+    $html .= '  </div>';
+    $html .= '  <div class="panel-body">';
+    $html .= '    <b>' . $e->getMessage() . '</b>';
+    $html .= '    <p><pre>' . $e->getTraceAsString() . '</pre></p>';
+    $html .= '  </div>';
+    $html .= '</div>';
+    $html .= '</div>';
 
-    include WPNXM_VIEW_DIR . 'header.php';
-
-    $html = '<h2 class="heading">Exception</h2>';
-    $html .= '<div class="centered"><div class="cs-message">';
-    $html .= '<div class="cs-message-content" style="width: 100%; font-size: 16px; height: auto !important;">';
-    $html .= '<div class="error"><h2>Something Bad Happened</h3>';
-    $html .= '<p>' . $e->getMessage() . '</p>';
-    $html .= '<p>' . $trace . '</p>';
-    $html .= '</div></div></div></div>';
     echo $html;
-
-    include WPNXM_VIEW_DIR . 'footer.php';
 }
 
+/**
+ * Convert Errors to ErrorException.
+ */
+function error_handler($errno, $errstr, $errfile, $errline, array $errcontext) {
+    // error was suppressed with the @-operator
+    if (0 === error_reporting()) {
+        return false;
+    }
+
+    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+}
+
+set_error_handler('error_handler');
 set_exception_handler('exception_handler');
 
 // create tools menu (cached html menu)
