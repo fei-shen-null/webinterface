@@ -1,22 +1,22 @@
 {
   "name": "webinterface",
+  "description": "Webinterface of the WPN-XM Server Stack",
   "homepage": "https://github.com/WPN-XM/webinterface",
   "authors": [
     "Jens A. Koch <jakoch@web.de>"
   ],
-  "description": "Webinterface of the WPN-XM Server Stack",
+  "license": "MIT",
+  "keywords": [
+    "wpn-xm",
+    "webinterface"
+  ],
+  "private": true,
   "main": "index.php",
   "moduleType": [
     "amd",
     "es6",
     "globals"
   ],
-  "keywords": [
-    "wpn-xm",
-    "webinterface"
-  ],
-  "license": "MIT",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -26,9 +26,10 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.2.0",
-    "bootstrap": "~3.3.6",
-    "pace": "*",
-    "typeahead.js": "*"
+    "bootstrap":      "~3.3.6",
+    "jquery":         "~2.2.0",
+    "pace":           "*",
+    "typeahead.js":   "*",
+    "metisMenu":      "~2.4.0"
   }
 }
