@@ -48,6 +48,10 @@ script:
 #  - ./bin/behat --config ./tests/behat.yml
    - phpunit -c ./tests/phpunit.xml.travis
 
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover /home/travis/build/WPN-XM/webinterface/logs/clover.xml
+
 notifications:
   email: false
   irc:
