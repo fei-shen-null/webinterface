@@ -64,7 +64,7 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_TEMP', WPNXM_DIR . 'temp' . DS);
 
     // Composer managed Vendor folder
-    define('VENDOR_DIR', __DIR__ . '\vendor\\');
+    define('VENDOR_DIR', __DIR__ . DS . 'vendor' . DS);
 
     /**
      * Feature Flags
