@@ -25,8 +25,7 @@ class IniReaderWriter
     {
         if (is_file($file) === false) {
             throw new \Exception(
-                'The path to the loaded php.ini file could not be retrieved. '
-                . 'Check PHP folder for a "php.ini" file!'
+                'The php.ini file could not be found. Check PHP folder for a "php.ini" file!'
             );
         }
 
@@ -67,8 +66,14 @@ class IniReaderWriter
     {
         foreach ($this->lines as $line)
         {
-            if($line['type'] !== 'entry') { continue; }
-            if($line['section'] != strtolower($section)) { continue; }
+            if($line['type'] !== 'entry') {
+                continue;
+            }
+
+            if($line['section'] != strtolower($section)) {
+                continue;
+            }
+
             if($line['key'] != $key) {
                 continue;
             } else {
@@ -85,9 +90,13 @@ class IniReaderWriter
     public function set($section, $key, $value)
     {
         foreach ($this->lines as &$line) {
-            if($line['type'] != 'entry') continue;
+            if($line['type'] != 'entry') {
+                continue;
+            }
             //if($line['section'] != $section) continue;
-            if($line['key'] != $key) continue;
+            if($line['key'] != $key) {
+                continue;
+            }
             $line['value'] = $value;
             $line['data'] = $key . " = " . $value . "\r\n";
 
