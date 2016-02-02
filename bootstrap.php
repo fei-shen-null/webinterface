@@ -192,7 +192,7 @@ spl_autoload_register(function($class) {
 function exception_handler($e) /** Throwable **/
 {
     $html = '<div class="centered" style="font-size: 16px;">';
-    $html .= '<div class="panel panel-danger">';
+    $html .= '<div class="panel panel-red">';
     $html .= '  <div class="panel-heading">';
     $html .= '    <h3 class="panel-title">Error</h3>';
     $html .= '  </div>';
