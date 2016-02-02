@@ -29,7 +29,6 @@
     "bootstrap":      "~3.3.6",
     "jquery":         "~2.2.0",
     "pace":           "*",
-    "typeahead.js":   "*",
-    "metisMenu":      "~2.4.0"
+    "typeahead.js":   "*"
   }
 }
