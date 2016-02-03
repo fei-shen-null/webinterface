@@ -21,6 +21,9 @@
     <meta name="author" content="Jens-André Koch" />
     <link rel="shortcut icon" href="favicon.ico" />
 
+    <!-- Pace.js -->
+    <script src="<?=WPNXM_ASSETS?>js/pace/pace.min.js"></script>
+    <link type="text/css" href="<?=WPNXM_ASSETS?>css/pace.css" rel="stylesheet" />
     <!-- jQuery -->
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.min.js"></script>
     <!-- Twitter's Bootstrap -->
@@ -39,12 +42,11 @@
     <!-- WPN-XM stuff last in line, because using jQuery and overwriting CSS -->
     <link rel="stylesheet" type="text/css" href="<?=WPNXM_ASSETS?>css/style.css"  media="screen, projection" />
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/wpnxm.js"></script>
-
 </head>
 <body>
 
 <!--
-    These CSS will come alive only, when Javascript is disabled.
+    The CSS will come alive only, when Javascript is disabled.
     It's displaying a message for all the security nerds with disabled javascript.
     We need this reminder, because the WPN-XM configuration pages depend on jQuery and AJAX.
 -->
