@@ -229,20 +229,22 @@
                 <tr>
                     <td class="right">
                         <?php if($server_is_nginx === false) { ?>
-                        <a class="btn btn-default btn-sm pull-left" rel="tooltip" data-original-title="Start Nginx."
+                        <a class="btn btn-default btn-sm pull-left"
+                           rel="tooltip" data-original-title="Start Nginx"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>">
-                            <img alt="Start Nginx" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
+                           <img alt="Start Nginx" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
 
-                        <a class="btn btn-default btn-sm btn-margin-left pull-left" rel="tooltip" data-original-title="Stop Nginx."
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left"
+                           rel="tooltip" data-original-title="Stop Nginx"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=nginx'; ?>">
-                             <img alt="Stop Nginx" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
+                           <img alt="Stop Nginx" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
                         <?php } else { ?>
                          <a class="btn btn-default btn-sm btn-margin-left pull-left restart-btn"
-                            rel="tooltip" data-original-title="Restart Nginx."
+                            rel="tooltip" data-original-title="Restart Nginx"
                             href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=restart&daemon=nginx'; ?>">
-                             <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
+                            <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
                         </a>
                         <?php } ?>
 
@@ -303,17 +305,19 @@
                 <tr>
                     <td class="right">
                         <?php if($server_is_nginx === false) { ?>
-                        <a class="btn btn-default btn-sm pull-left" rel="tooltip" data-original-title="Start PHP."
+                        <a class="btn btn-default btn-sm pull-left"
+                           rel="tooltip" data-original-title="Start PHP"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=php'; ?>">
-                            <img alt="Start PHP" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
+                           <img alt="Start PHP" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
-                        <a class="btn btn-default btn-sm btn-margin-left pull-left" rel="tooltip" data-original-title="Stop PHP."
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left"
+                           rel="tooltip" data-original-title="Stop PHP"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=php'; ?>">
-                            <img alt="Stop PHP" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
+                           <img alt="Stop PHP" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
                         <?php } else { ?>
                          <a class="btn btn-default btn-sm btn-margin-left pull-left restart-btn"
-                            rel="tooltip" data-original-title="Restart PHP."
+                            rel="tooltip" data-original-title="Restart PHP"
                             href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=restart&daemon=php'; ?>">
                              <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
                         </a>
@@ -368,19 +372,21 @@
                 <tr>
                     <td class="right">
                         <?php if($server_is_nginx === false) { ?>
-                        <a class="btn btn-default btn-sm pull-left" rel="tooltip" data-original-title="Start MariaDb."
+                        <a class="btn btn-default btn-sm pull-left"
+                           rel="tooltip" data-original-title="Start MariaDb"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mariadb'; ?>">
-                            <img alt="Start MariaDb" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
+                           <img alt="Start MariaDb" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
-                        <a class="btn btn-default btn-sm btn-margin-left pull-left" rel="tooltip" data-original-title="Stop MariaDb."
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left"
+                           rel="tooltip" data-original-title="Stop MariaDb"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mariadb'; ?>">
-                            <img alt="Stop MariaDb" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
+                           <img alt="Stop MariaDb" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
                         <?php } else { ?>
                          <a class="btn btn-default btn-sm btn-margin-left pull-left restart-btn"
-                            rel="tooltip" data-original-title="Restart MariaDb."
+                            rel="tooltip" data-original-title="Restart MariaDb"
                             href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=restart&daemon=mariadb'; ?>">
-                             <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
+                            <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
                         </a>
                         <?php } ?>
 
@@ -441,19 +447,21 @@
                 <tr>
                     <td class="right">
                         <?php if($server_is_nginx === false) { ?>
-                        <a class="btn btn-default btn-sm pull-left" rel="tooltip" data-original-title="Start MongoDb."
+                        <a class="btn btn-default btn-sm pull-left"
+                           rel="tooltip" data-original-title="Start MongoDb"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=mongodb'; ?>">
-                                <img alt="Start MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
+                           <img alt="Start MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
-                        <a class="btn btn-default btn-sm btn-margin-left pull-left" rel="tooltip" data-original-title="Stop MongoDb."
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left"
+                           rel="tooltip" data-original-title="Stop MongoDb"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=mongodb'; ?>">
-                            <img alt="Stop MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
+                           <img alt="Stop MongoDB" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
                         <?php } else { ?>
                          <a class="btn btn-default btn-sm btn-margin-left pull-left restart-btn"
                             rel="tooltip" data-original-title="Restart MongoDb."
                             href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=restart&daemon=mongodb'; ?>">
-                             <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
+                            <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
                         </a>
                         <?php } ?>
 
@@ -519,19 +527,21 @@
                 <tr>
                     <td class="right">
                         <?php if($server_is_nginx === false) { ?>
-                        <a class="btn btn-default btn-sm pull-left" rel="tooltip" data-original-title="Start PostgreSQL."
+                        <a class="btn btn-default btn-sm pull-left"
+                           rel="tooltip" data-original-title="Start PostgreSQL"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=start&daemon=postgresql'; ?>">
-                                <img alt="Start PgSQL" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
+                           <img alt="Start PgSQL" src="<?=WPNXM_IMAGES_DIR?>action_run.png" class="res-header-icon">
                         </a>
                         <a class="btn btn-default btn-sm btn-margin-left pull-left restart-btn"
-                           rel="tooltip" data-original-title="Stop PostgreSQL."
+                           rel="tooltip" data-original-title="Stop PostgreSQL"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=postgresql'; ?>">
                             <img alt="Stop PgSQL" src="<?=WPNXM_IMAGES_DIR?>action_stop.png" class="res-header-icon">
                         </a>
                         <?php } else { ?>
-                         <a class="btn btn-default btn-sm btn-margin-left pull-left" rel="tooltip" data-original-title="Restart PostgreSQL."
+                        <a class="btn btn-default btn-sm btn-margin-left pull-left"
+                           rel="tooltip" data-original-title="Restart PostgreSQL"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=restart&daemon=postgresql'; ?>">
-                             <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
+                           <img alt="Restart Nginx" src="<?=WPNXM_IMAGES_DIR?>action_restart.png" class="res-header-icon">
                         </a>
                         <?php } ?>
 
@@ -632,7 +642,8 @@ $(function(){
 
     // test, if script on the server is available with a timeout request
     // if the timeout is not reached, we assume the server is running and do the "non-timeout" call to href
-    function doGetRequestIfServerIsRunning(title) {
+    function doGetRequestIfServerIsRunning(title)
+    {
         $.ajax({
           url: "index.php",
           type: "HEAD",
@@ -662,16 +673,17 @@ $(function(){
             start_icon = "/tools/webinterface/assets/img/status_run.png";
         var indicator = $('img[data-original-title^="'+serverName+'"]');
 
-        if(state == 'off') {
+        if(state === 'off') {
           indicator.attr("src", stop_icon).attr("alt", msg_not_running).attr("data-original-title", msg_not_running);
         }
 
-        if(state == 'on') {
+        if(state === 'on') {
           indicator.attr("src", start_icon).attr("alt", msg_running).attr("data-original-title", msg_running);
         }
     }
 
-    function actionRestartDaemon(event) {
+    function actionRestartDaemon(event)
+    {
         var $this = $(this),
             url = $this.attr('href'),
             title = $this.attr('data-original-title');
@@ -684,7 +696,7 @@ $(function(){
             statusIndicator(title, 'off')
           }
         }).always(function() {
-          setTimeout(console.log("wait 2,5sec"), 2500);
+          setTimeout(console.log("Waiting... 2,5sec"), 2500);
           // run timer, to check if the server is up again
           doGetRequestIfServerIsRunning(title);
         });
