@@ -1,10 +1,42 @@
-<!-- This css style will come alive only, when javascript is disabled.
-     Its for displaying a message for all the security nerds with disabled javascript.
-     We need this reminder, because the WPN-XM configuration pages depend on AJAX. -->
-<noscript><style type="text/css">
-  #page{ display:none; }
-  #javascript-off-errorbox { display:block; font-size:20px; color:red; }
-</style></noscript>
+<h2 class="heading">Configuration</h2>
+
+<div class="col-md-10 content-centered">
+
+    <!-- Configuration Panel -->
+    <div class="panel panel-default text-left" id="configuration-panel">
+        <div class="panel-heading panel-heading-gray">
+          <h4>Configuration</h4>
+        </div>
+        <div class="panel-body panel-body-gray" id="tab-content" style="overflow: hidden;">
+
+            <!-- tabs left -->
+            <div class="tabs-left">
+                <ul class="nav nav-tabs" id="configuration-tabs" data-tabs="tabs">
+                  <li class="active"><a name="help" href="/webinterface/index.php?page=config#help">Help</a></li>
+                  <li><a name="php" href="/webinterface/index.php?page=config#php">PHP</a></li>
+                  <li><a name="php-ext" href="/webinterface/index.php?page=config#php-ext">PHP Extensions</a></li>
+                  <?php if (FEATURE_3 == true) { ?>
+                  <li><a name="nginx" href="/webinterface/index.php?page=config#nginx">Nginx</a></li>
+                  <li><a name="nginx-domains" href="/webinterface/index.php?page=config#nginx-domains">Nginx Domains</a></li>
+                  <li><a name="mariadb" href="/webinterface/index.php?page=config#mariadb">MariaDB</a></li>
+                  <?php } ?>
+                  <?php if(FEATURE_3 == true && $mongodb_installed === true) { ?>
+                  <li><a name="mongodb" href="/webinterface/index.php?page=config#mongodb">MongoDB</a></li>
+                  <?php } ?>
+                  <?php if($xdebug_installed === true) { ?>
+                  <li><a name="xdebug" href="/webinterface/index.php?page=config#xdebug">XDebug</a></li>
+                  <?php } ?>
+                </ul>
+            </div>
+
+            <!-- The tab content is fetched via Ajax and inserted into the tab-pane. -->
+            <div class="tab-content">
+              <div class="tab-pane active" id="the-tab-pane">bla</div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- ./col-md-10 -->
 
 <script>
 function setupTreeTable()
@@ -13,13 +45,11 @@ function setupTreeTable()
   $("table#treeTable").treeTable({
     clickableNodeNames: true
   });
-
   // Make visible that a row is clicked
   $("table#treeTable tbody tr").mousedown(function () {
     $("tr.selected").removeClass("selected"); // Deselect currently selected rows
     $(this).addClass("selected");
   });
-
   // Make row selected, when span is clicked
   $("table#treeTable tbody tr span").mousedown(function () {
     $($(this).parents("tr")[0]).trigger("mousedown");
@@ -29,23 +59,22 @@ function setupTreeTable()
 function setupjEditable()
 {
   $('.editable').editable(submitEdit, {
-         indicator : 'Saving...',
-         tooltip   : 'Click to edit...'
-     });
+    indicator : 'Saving...',
+    tooltip   : 'Click to edit...'
+  });
   $('.edit_area').editable(submitEdit, {
-         type      : 'textarea',
-         cancel    : 'Cancel',
-         submit    : 'OK',
-         indicator : '<img src="<?php echo WPNXM_IMAGES_DIR; ?>ajax-spinner.gif">',
-         tooltip   : 'Click to edit..' //<img src="img/pencil.png">
-     });
+    type      : 'textarea',
+    cancel    : 'Cancel',
+    submit    : 'OK',
+    indicator : '<img src="<?php echo WPNXM_IMAGES_DIR; ?>ajax-spinner.gif">',
+    tooltip   : 'Click to edit..' //<img src="img/pencil.png">
+  });
 }
 
 function submitEdit(value, settings)
 {
   var edits = new Object();
   var origvalue = this.revert;
-  var textbox = this;
   var result = value;
 
   // ok, we have the value, but not the "name of the directive".
@@ -73,21 +102,20 @@ function submitEdit(value, settings)
   return(result);
 };
 
-function loadTab(tabObj)
+function loadTab(tabObject)
 {
-  if (!tabObj || !tabObj.length) {
+  if (!tabObject || !tabObject.length) {
     return;
   }
 
-  // get the page from the href
-  var href = tabObj.attr('href');   // href="index.php?page=config#php"
-  var tab = href.split('#')[1].toLowerCase(); // [index.php?page=config, php], return 1st element from array
+  // get the requested tab from the attribute "name" of the link
+  var tab = tabObject.attr('name');
 
   // target action for loading the tab content via AJAX is "showtab"
   var href = 'index.php?page=config&action=showtab&tab=' + tab;
 
   // target content for the incoming content
-  var containerId = 'div#tab-content';  // selector for the target container
+  var containerId = 'div#the-tab-pane';  // selector for the target container
 
   // load content via ajax, load additional js for certain pages and "activate" it
   $(containerId).load(href, function () {
@@ -96,7 +124,7 @@ function loadTab(tabObj)
       setupjEditable();
     }
     $(containerId).fadeIn('fast');
-    
+
     // Set URL to remember TAB on page refresh.
     // The original AJAX content URL is "index.php?page=config&action=showtab&tab=PAGE",
     // but we need to get the full content (config page) and request the TAB content (ajax).
@@ -108,8 +136,8 @@ function loadTab(tabObj)
 function setupTabs()
 {
   // define selectors
-  var tabsNavigation = 'div#organic-tabs > ul.nav';
-  var activeTab = tabsNavigation + ' li a.current';
+  var configTabs = '#configuration-tabs';
+  var activeTab = configTabs + ' li.active a';
 
   // load the first tab on page load (current active tab)
   if ($(activeTab).length > 0) {
@@ -117,18 +145,18 @@ function setupTabs()
   }
 
   // intercept clicks on the tab items
-  $(tabsNavigation + ' li a').click(function () {
+  $(configTabs + ' li a').click(function () {
 
-      // do not reload content of current tab
-      if ($(this).hasClass('current')) {
+      // do not reload content of currently active tab
+      if ($(this).hasClass('active')) {
         return false;
       }
-      // switch current to the new tab
-      $(tabsNavigation + ' li a.current').removeClass('current');
-      $(this).addClass('current');
+      // switch currently active to the new tab
+      $(configTabs + ' li.active').removeClass('active');
+      $(this).parent('li').addClass('active');
 
       // show ajax loading indicator
-      $('div#tab-content').html('<p style="text-align: center;"><img src="<?php echo WPNXM_IMAGES_DIR; ?>ajax-spinner.gif" width="64" height="64" /></p>');
+      $('div#the-tab-pane').html('<p style="text-align: center;"><img src="<?php echo WPNXM_IMAGES_DIR; ?>ajax-spinner.gif" width="64" height="64" /></p>');
 
       // load content
       loadTab($(this));
@@ -141,8 +169,8 @@ function handleRedirectToTab()
 {
   var anchor = window.location.href.split('#')[1];
   if (anchor != '') {
-        var tabToSelect = $('#organic-tabs').find('a[name="'+anchor+'"]');
-        $(tabToSelect).trigger('click');
+    var tabToSelect = $('#configuration-tabs').find('a[name="'+anchor+'"]');
+    $(tabToSelect).trigger('click');
   }
 }
 
@@ -151,38 +179,3 @@ $(function () {
   handleRedirectToTab();
 });
 </script>
-
-<h2 class="heading">Configuration</h2>
-
-<div class="left-box">
-    <div class="cs-message">
-        <div class="cs-message-content cs-message-content-config">
-
-            <div id="organic-tabs">
-
-                <ul class="nav headings-level-1">
-                  <li><a name="help" href="/webinterface/index.php?page=config#help" class="current">Help</a></li>
-                  <li><a name="php" href="/webinterface/index.php?page=config#php">PHP</a></li>
-                  <li><a name="php-ext" href="/webinterface/index.php?page=config#php-ext">PHP Extensions</a></li>
-                  <?php if (FEATURE_3 == true) { ?>
-                  <li><a name="nginx" href="/webinterface/index.php?page=config#nginx">Nginx</a></li>
-                  <li><a name="nginx-domains" href="/webinterface/index.php?page=config#nginx-domains">Nginx Domains</a></li>
-                  <li><a name="mariadb" href="/webinterface/index.php?page=config#mariadb">MariaDB</a></li>
-                  <?php } ?>
-                  <?php if(FEATURE_3 == true && $mongodb_installed === true) { ?>
-                      <li><a name="mongodb" href="/webinterface/index.php?page=config#mongodb">MongoDB</a></li>
-                  <?php } ?>
-                  <?php if($xdebug_installed === true) { ?>
-                      <li><a name="xdebug" href="/webinterface/index.php?page=config#xdebug">XDebug</a></li>
-                  <?php } ?>
-                </ul>
-
-                <div id="tab-content" style="overflow: hidden;"></div>
-
-            </div>
-
-          </div>
-    </div>
-</div>
-
-</div>
