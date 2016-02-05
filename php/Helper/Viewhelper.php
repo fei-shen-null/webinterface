@@ -47,11 +47,23 @@ class Viewhelper
     {
         if (self::fileCounter(WPNXM_DATA_DIR . '/welcomeMsgCounter.txt', 3) === true) {
             return;
-        } else {
-            echo '<h4 class="info">Welcome to the WPИ-XM Server Stack!
-                  <p>Congratulations: You have successfully installed WPИ-XM on this system.</p>
-                  </h4>';
         }
+
+        echo '<div class="row">
+                <div class="col-md-7 content-centered">
+                  <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-gray">
+                        <span class="pull-left" style="font-size: 30px">
+                            <i class="empty heart icon" style="padding-top:14px"></i>
+                        </span>
+                        <h4>Welcome to the WPИ-XM Server Stack!</h4>
+                    </div>
+                    <div class="panel-body panel-body-gray">
+                        <p>Congratulations! You have successfully installed WPИ-XM on this system.</p>
+                    </div>
+                  </div>
+                </div>
+             </div>';
     }
 
     /**
