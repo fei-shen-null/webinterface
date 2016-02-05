@@ -9,16 +9,63 @@ body {
     line-height: 15px;
 }
 
+/* do not display the error box for "disabled javascript" by default.
+   it's enabled from the noscript section in the header.php. */
+#javascript-off-errorbox {
+    display: none;
+}
+
+#wrapper {
+    width: 100%;
+}
+
+/* Panel */
+.panel-default {
+    border: 1px solid rgba(34,36,38,.15);
+    border-radius: .28571429rem;
+    background-color: transparent;
+}
+/** Gray Panel **/
+.panel-default > .panel-heading-gray {
+    background-color: #eeeeee;
+}
+.panel-default > .panel-body-gray {
+    background-color: #F4F4F4;
+}
+
+.icon {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.icon>.icon:not(.close) {
+    display: block;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: auto;
+    line-height: 1;
+    vertical-align: middle;
+    font-size: 9em;
+    opacity: .8;
+}
+
 div.content-centered {
-    /*border: 1px dotted red; leave this for debugging*/
+    /*border: 1px dotted red;*/ /* leave this for debugging */
     margin-left: auto;
     margin-right: auto;
-    display: inline-block;
+    float: none;
 }
 
 .phpextensions .form-group {
     float: left;
-    width: 150px;
     margin: 10px;
 }
 
@@ -27,11 +74,12 @@ div.content-centered {
 }
 
 .phpextensions label.not-active-element:hover {
-    background: lightgreen;
+    background: #90EE90;
 }
 
 .phpextensions .checkbox {
-    margin-bottom: 2px;
+    /*margin-bottom: 2px;*/
+    margin: 7px 0 0 0;
 }
 
 .noshadow {
@@ -143,7 +191,7 @@ img {
     margin-top: 3px;
     margin-bottom: 2px;
     text-align: left;
-    box-shadow: 1px 1px 0 #cccccc;
+    box-shadow: rgb(170, 170, 170) 1px 1px 1px 0px;
     font-size: 12px;
 }
 
@@ -158,20 +206,12 @@ img {
     font-size: 13px;
 }
 
-#tab-content {
-    padding-left: 12px;
-    padding-right: 12px;
-    overflow: hidden;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
 .res-header-icon {
     vertical-align: text-top;
 }
 
 .btn-default {
-    background-color:transparent;
+    background-color: #F7f7f7;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
     border-radius:4px;
@@ -183,6 +223,15 @@ img {
     font-family:Arial;
     font-size:12px;
     font-weight:bold;
+}
+
+.panel-red {
+    border-color: rgb(217, 83, 79);
+}
+.panel-red .panel-heading {
+    border-color: rgb(217, 83, 79);
+    color: rgb(255, 255, 255);
+    background-color: rgb(217, 83, 79);
 }
 
 h1.logo {
@@ -272,6 +321,7 @@ h1.headline {margin-top: 40px; margin-bottom: 30px; font-size: 20px;}
     width: 75%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 15px;
 }
 
 .centered {
@@ -397,7 +447,7 @@ img
     border: 0px;
 }
 
-.inset-panel, .phpinfo table, #organic-tabs {
+.inset-panel, .phpinfo table {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.04);
     box-shadow: 0 1px 1px white, 0 0 1px 0 rgba(0, 0, 0, 0.5) inset;
     padding: 10px;
@@ -418,64 +468,29 @@ img
 #highlight { background:yellow; }
 .highlight { background-color:yellow; color:inherit; text-decoration:inherit }
 
+/* phpinfo() */
+
 .phpinfo {}
 .phpinfo pre { margin: 0px; font-family: monospace; }
 .phpinfo a:link {}
 .phpinfo a:hover {}
 .phpinfo table { margin-bottom: 12px; }
 .phpinfo .center { text-align: center; }
-.phpinfo .center table { margin-left: auto; margin-right: auto; text-align: left; }
+.phpinfo .center table { margin-left: auto; margin-right: auto; text-align: left; width: 80%;}
 .phpinfo .center th { text-align: center !important; }
 .phpinfo td, th { font-size: 12px; vertical-align: middle; }
 .phpinfo h1 { font-size: 22px;}
-
 .phpinfo .p { text-align: left; }
-.phpinfo .e { min-width: 60px; border-bottom: 1px dotted #AAAAAA; color: #000000; font-weight: bold;
-
-}
+.phpinfo .e { min-width: 265px; border-bottom: 1px dotted #AAAAAA; color: #000000; font-weight: bold; }
 .phpinfo .h { background-color: #9999cc; font-weight: bold; color: #000000;}
 .phpinfo .v { background-color: #cccccc; color: #000000; }
 .phpinfo .vr { background-color: #cccccc; text-align: right; color: #000000; }
 .phpinfo img { border: 0 none; float: right; }
 .phpinfo hr { background-color: #CCCCCC; border: 0 none; color: #000000; height: 1px; width: 600px; margin: 15px auto; }
 
-/* Organic Tabs */
-
 /* Generic Utility */
 .hide { display: none; }
 .clear { clear: both; }
-
-/* Tab Style*/
-#organic-tabs { background: #eee; padding: 10px; margin: 0 0 20px 0; -moz-box-shadow: 0 0 2px #666; -webkit-box-shadow: 0 0 2px #666; width: 820px; }
-
-#organic-tabs .nav { overflow: hidden; margin: -41px 0 5px 0;}
-#organic-tabs .nav li { min-width: 85px; width: auto; float: left; margin: 0 5px 0 0; }
-#organic-tabs .nav li.last { margin-right: 0; }
-#organic-tabs .nav li a { display: block; padding: 6px 10px; font-size: 11px; text-align: center; border: 1px solid #999;
-                          border-radius: 4px 4px 0 0; border-bottom: 0px; text-shadow: 0 1px 1px #FFFFFF; color: #444;
-                          background: rgb(238,238,238); /* Old browsers */
-                          background: -moz-linear-gradient(top, rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%); /* FF3.6+ */
-                          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,1)), color-stop(100%,rgba(204,204,204,1))); /* Chrome,Safari4+ */
-                          background: -webkit-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Chrome10+,Safari5.1+ */
-                          background: -o-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Opera 11.10+ */
-                          background: -ms-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* IE10+ */
-                          background: linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C */
-                          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-}
-#organic-tabs .nav li a:hover { background-color: #EEE !important; color: #333; }
-#organic-tabs .nav li a.current { background: #EEE; font-weight: bold; border-bottom: 1px solid #eee; box-shadow: 1px 0 0 #BBB;}
-
-#organic-tabs ul { list-style: none; padding: 0;}
-#organic-tabs ul li a { display: block; padding: 4px; color: #444; }
-#organic-tabs ul li a:hover { }
-/* #organic-tabs ul li:last-child a { border: none; } */
-
-#organic-tabs ul li.nav-one a.current, #organic-tabs ul.featured li a:hover { background-color: #0575f4; color: white;}
-#organic-tabs ul li.nav-two a.current, #organic-tabs ul.core li a:hover { background-color: #d30000; color: white; }
-#organic-tabs ul li.nav-three a.current, #organic-tabs ul.jquerytuts li a:hover { background-color: #8d01b0; color: white; }
-#organic-tabs ul li.nav-four a.current, #organic-tabs ul.classics li a:hover { background-color: #FE4902; color: white; }
-
-#organic-tabs div#tab-content h2 { margin-top: 5px; }
 
 .floatleft {
     float: left;
@@ -486,10 +501,7 @@ img
 }
 
 .new-project-btn-position {
-    margin-left: 4px;
-    padding: 4px;
-    position: relative;
-    right: 6px;
+    margin: 5px 0px 0px 5px;
 }
 /*.new-project-btn-position:active {
     position: relative;
@@ -503,44 +515,6 @@ img
 .editable-hover {
     background-image:  url("../img/pencil.png");
     background-repeat: no-repeat;
-}
-
-/* message box css */
-.info, .success, .warning, .error {
-    border: 1px solid;
-    margin: 10px 0px;
-    padding:15px 10px 15px 50px;
-    background-repeat: no-repeat;
-    background-position: 10px center;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
-}
-.info {
-    color: #00529B;
-    background-color: #BDE5F8;
-    background-image: url('../img/messagebox/info.png');
-}
-.success {
-    color: #4F8A10;
-    background-color: #DFF2BF;
-    background-image:url('../img/messagebox/success.png');
-}
-.warning {
-    color: #9F6000;
-    background-color: #FEEFB3;
-    background-image: url('../img/messagebox/warning.png');
-}
-.error {
-    color: #D8000C;
-    background-color: #FFBABA;
-    background-image: url('../img/messagebox/error.png');
-}
-
-/* do not display the javascript off error box,
-   it's enabled by the css set by the noscript section
-   in the configuration page */
-#javascript-off-errorbox {
-    display: none;
 }
 
 /* Forms */
@@ -605,14 +579,8 @@ label, input, button, select, textarea {
     line-height: 18px;
 }
 
-fieldset {
-    border: 0 none;
-    margin: 0;
-    padding: 0;
-}
-
 legend {
-
+    border: 0;
 }
 
 .active-element {
@@ -654,18 +622,6 @@ legend {
 }
 
 /* Glyphs */
-[class^="icon-"], [class*=" icon-"] {
-    background-image: url("../img/glyphicons-halflings.png");
-    background-position: 14px 14px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    height: 14px;
-    line-height: 14px;
-    vertical-align: text-top;
-    width: 14px;
-}
-[class^="icon-"]:last-child, [class*=" icon-"]:last-child {
-}
 .icon-white {
     background-image: url("../img/glyphicons-halflings-white.png");
 }
@@ -1088,4 +1044,81 @@ legend {
 }
 .icon-fullscreen {
     background-position: -456px -144px;
+}
+
+/* Tabs - right, left and below tabs */
+#tab-content {
+    overflow: visible !important;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.tabs-left {
+    margin-left: -139px;
+}
+.tabbable {
+  position: absolute;
+  left: -58px;
+  top: 85px;
+}
+#configuration-panel > .panel-body {
+  min-height: 380px;
+}
+/*.tab-content {
+    top: -350px;
+    position: relative;
+}*/
+.tabs-right > .nav-tabs {
+  border-bottom: 0;
+}
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+.tabs-left > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-right: 0;
+  margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+  float: left;
+  /*border-right: 1px solid rgba(34,36,38,.15);*/
+}
+
+.tabs-left > .nav-tabs > li > a {
+  margin-right: -1px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
+  border-color: #ddd transparent #ddd #ddd;
+  *border-right-color: #ffffff;
+  background-color: #F4F4F4;
+
+  border-top-left-radius: .28571429rem;
+  border-bottom-left-radius: .28571429rem;
+
+  border-left: 1px solid rgba(34,36,38,.15);
+  border-top: 1px solid rgba(34,36,38,.15);
+  border-bottom: 1px solid rgba(34,36,38,.15);
 }
