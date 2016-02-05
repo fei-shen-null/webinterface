@@ -71,26 +71,23 @@ class Projects
 
     public function listProjects()
     {
-        $html = '';
-
         if ($this->getNumberOfProjects() === 0) {
-            $html = "No project dirs found.";
-        } else {
-            $html .= '<ul class="list-group">';
+            return "No project dirs found.";
+        }
 
-            foreach ($this->projectFolders as $dir) {
-                // always display the folder
-                $html .= '<li class="list-group-item">';
-                $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
+        $html = '<ul class="list-group text-left">';
 
-                if (FEATURE_4 == true) {
-                    $html .= $this->renderSettingsLink($dir);
-                }
+        foreach ($this->projectFolders as $dir) {
+            // always display the folder
+            $html .= '<li class="list-group-item">';
+            $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
 
-                $html .= $this->renderRepositoryLinks($dir);
-
-                $html .= '</li>';
+            if (FEATURE_4 === true) {
+                $html .= $this->renderSettingsLink($dir);
             }
+
+            $html .= $this->renderRepositoryLinks($dir);
+            $html .= '</li>';
         }
 
         return $html . '</ul>';
@@ -112,7 +109,7 @@ class Projects
         // because the user might have deleted or installed a new tool.
         file_put_contents(WPNXM_DATA_DIR . 'tools-topmenu.html', $html);
 
-        return '<ul class="list-group">' . $html . '</ul>';
+        return '<ul class="list-group text-left">' . $html . '</ul>';
     }
 
     /**
