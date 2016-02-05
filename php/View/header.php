@@ -29,6 +29,8 @@
     <!-- Twitter's Bootstrap -->
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/bootstrap.min.js"></script>
     <link type="text/css" href="<?=WPNXM_ASSETS?>css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Semantic UI Icon -->
+    <link type="text/css" href="<?=WPNXM_ASSETS?>css/icon.min.css" rel="stylesheet" />
 
     <?php if (isset($load_jquery_additionals) && $load_jquery_additionals === true) { ?>
     <!-- jQuery Plugins -->
@@ -66,11 +68,10 @@
         Webinterface\Helper\Viewhelper::showWelcome();
     ?>
 
-    <div id="javascript-off-errorbox">
-      <div class="error">
-      Please enable "javascript" in your browser in order to use this application.
-      </div>
+    <div class="alert alert-danger fade in" id="javascript-off-errorbox">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> Please enable "javascript" in your browser in order to use this application.
     </div>
 
-    <div class="content-centered">
+    <div class="col-md-12 content-centered">
 <!-- stop "header.php" -->
