@@ -50,7 +50,7 @@ class Projects
      */
     public function getProjects()
     {
-        $dirs = array();
+        $dirs   = array();
         $handle = opendir(WPNXM_WWW_DIR);
 
         while ($dir = readdir($handle)) {
@@ -66,6 +66,7 @@ class Projects
 
         closedir($handle);
         asort($dirs);
+
         return $dirs;
     }
 
@@ -100,8 +101,12 @@ class Projects
         $html = '';
 
         foreach ($this->toolDirectories as $dir => $href) {
+
             $link = ($href === '') ? (WPNXM_ROOT . 'tools/' . $dir) : (WPNXM_ROOT . 'tools/' . $href);
-            $html .= '<li class="list-group-item"><a class="folder" href="'.$link.'">' . $dir . '</a></li>';
+
+            $html .= '<li class="list-group-item">';
+            $html .= '<a class="folder" href="'.$link.'">' . $dir . '</a>';
+            $html .= '</li>';
         }
 
         // write the html list to file. this acts as a cache for the tools topmenu.
@@ -117,23 +122,30 @@ class Projects
      */
     public function renderRepositoryLinks($dir)
     {
-        $html = '';
+        $html = '<div class="btn-group pull-right" style="margin-right: 10px; margin-top: -4px;">';
 
-        $hasComposerConfig = $this->hasComposerConfig($dir);
-
-        // If the project folder contains a "composer.json" file and is found on "packagist.org",
-        // display a "packgist.org" link.
-        if (true === $hasComposerConfig) {
+        /**
+         * Home - Link to project website
+         *
+         * If the project folder contains a "composer.json" file
+         * display a home link using the homepage attribute
+         */
+        if (true === $this->hasComposerConfig($dir)) {
             $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
 
-            // composer.json key "homepage"?
             if(isset($composer['homepage']) === true) {
-                $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px; width: 28px; height: 20px;"';
-                $html .= ' href="' . $composer['homepage'] . '"><span class="glyphicon glyphicon-home"></span></a>';
+                $html .= '<a class="btn btn-default btn-xs" href="' . $composer['homepage'] . '">';
+                $html .= '<i class="large home icon"></i>';
+                $html .= '</a>';
             }
         }
 
-        // If the project folder contains a ".git/config" file with a github repo link, display a "github.com" link.
+        /**
+         * Github - Link to project on Github
+         *
+         * If the project folder contains a ".git/config" file
+         * with a github repo link, display a "github.com" link.
+         */
         if(true === $this->isGitRepoAndHostedOnGithub($dir)) {
             if(isset($composer['name']) === true) {
                 $githubLink = 'https://github.com/' . $composer['name'];
@@ -141,11 +153,14 @@ class Projects
                 $githubLink = 'https://github.com/' . $this->getProjectNameFromGitConfig($dir);
             }
 
-            $html .= '<a class="btn btn-default btn-xs" style="margin-left: 5px;"';
-            $html .= ' href="'.$githubLink.'"><img src="' . WPNXM_IMAGES_DIR . 'github_icon.png"/></a>';
+            $html .= '<a class="btn btn-default btn-xs" href="'.$githubLink.'">';
+            $html .= '<img src="' . WPNXM_IMAGES_DIR . 'github-mark.png" style="height: 18px; width: 17px;" />';
+            $html .= '</a>';
         }
 
         /**
+         * Travis-CI
+         *
          * If the project folder contains a ".travis.yml" file, display a "travis-ci.org" link.
          */
         /*if (true === $this->hasTravisConfig($dir)) {
@@ -190,7 +205,7 @@ class Projects
             $html .= '</a></li></ul>';
         }*/
 
-        return $html;
+        return $html . '</div>';
     }
 
     public function readProjectGitConfig($dir)

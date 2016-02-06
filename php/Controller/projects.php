@@ -46,9 +46,9 @@ function edit()
 
 function createproject()
 {
-    $project = filter_input(INPUT_POST, 'projectname');
-
+    $project  = filter_input(INPUT_POST, 'projectname');
     $template = filter_input(INPUT_POST, 'projecttemplate');
+
     switch ($template) {
         case '"Hello World" Project':
             $template = new Webinterface\Helper\ProjectTemplate();
@@ -62,9 +62,7 @@ function createproject()
             break;
     }
 
-    $bool = mkdir(WPNXM_WWW_DIR . DS . $project, 0777);
-
-    if($bool === true) {
+    if(mkdir(WPNXM_WWW_DIR . DS . $project, 0777)) {
        header('Project created', true, '200');
     } else {
        header('Project not created.', true, '500');

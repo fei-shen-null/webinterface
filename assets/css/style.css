@@ -88,7 +88,7 @@ div.content-centered {
 }
 
 .list-group-item {
-    padding: 5px 15px !important;
+    padding: 6px 15px !important;
     background: none repeat scroll 0 0 #F4F4F4;
     border: 0;
 }
@@ -1094,6 +1094,7 @@ legend {
 .tabs-left > .nav-tabs {
   float: left;
   /*border-right: 1px solid rgba(34,36,38,.15);*/
+  border: 0px;
 }
 
 .tabs-left > .nav-tabs > li > a {
