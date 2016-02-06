@@ -114,7 +114,6 @@ function loadTabContent(tabObject)
   // target action for loading the tab content via AJAX is "showtab"
   var href = 'index.php?page=config&action=showtab&tab=' + tab;
 
-  // target element for the incoming content
   var containerId = 'div#the-tab-pane';  // selector for the target container
 
   // load content via ajax, load additional js for certain pages and "activate" it
@@ -139,9 +138,9 @@ function setupTabs()
   var activeTab  = $(configTabs + ' li.active a');
 
   // load the first tab on page load (current active tab)
-  /*if (activeTab.length > 0) {
+  if (activeTab.length > 0) {
     loadTabContent(activeTab);
-  }*/
+  }
 
   // intercept clicks on the tab items
   $(configTabs + ' li a').click(function () {
