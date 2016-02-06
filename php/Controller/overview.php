@@ -25,30 +25,30 @@ function index()
       'mongodb_version'     => Serverstack::getVersion('mongodb'),
       'postgresql_version'  => Serverstack::getVersion('postgresql'),
       // status
-      'nginx_status'        => Serverstack::getStatus('nginx'),
-      'php_status'          => Serverstack::getStatus('php'),
-      'mariadb_status'      => Serverstack::getStatus('mariadb'),
-      'xdebug_status'       => Serverstack::getStatus('xdebug'),
-      'mongodb_status'      => Serverstack::getStatus('mongodb'),
-      'phpext_mongo_status' => Serverstack::getStatus('phpext_mongo'),
-      'memcached_status'    => Serverstack::getStatus('memcached'),
-      'phpext_memcached_status' => Serverstack::getStatus('phpext_memcache'),
-      'postgresql_status'   => Serverstack::getStatus('postgresql'),
+      'nginx_status_icon'            => Serverstack::getStatusIcon('nginx'),
+      'php_status_icon'              => Serverstack::getStatusIcon('php'),
+      'mariadb_status_icon'          => Serverstack::getStatusIcon('mariadb'),
+      'xdebug_status_icon'           => Serverstack::getStatusIcon('xdebug'),
+      'mongodb_status_icon'          => Serverstack::getStatusIcon('mongodb'),
+      'phpext_mongo_status_icon'     => Serverstack::getStatusIcon('phpext_mongo'),
+      'memcached_status_icon'        => Serverstack::getStatusIcon('memcached'),
+      'phpext_memcached_status_icon' => Serverstack::getStatusIcon('phpext_memcache'),
+      'postgresql_status_icon'       => Serverstack::getStatusIcon('postgresql'),
       // your ip
-      'my_ip'               => Serverstack::getMyIP(),
+      'my_ip'                        => Serverstack::getMyIP(),
       // passwords
-      'mariadb_password'    => Serverstack::getPassword('mariadb'),
+      'mariadb_password'             => Serverstack::getPassword('mariadb'),
       #'mongodb_password'    => Serverstack::getPassword('mongodb'),
       // which additional components are installed
-      'memcached_installed' => Serverstack::isInstalled('memcached'),
-      'xdebug_installed'    => Serverstack::isInstalled('xdebug'),
-      'mongodb_installed'   => Serverstack::isInstalled('mongodb'),
-      'postgresql_installed' => Serverstack::isInstalled('postgresql'),
-      'phpext_memcached_installed' => Serverstack::isExtensionInstalled('memcached'),
-      'phpext_xdebug_installed' => Serverstack::isExtensionInstalled('xdebug'),
-      'xdebug_extension_type' => XDebug::getXDebugExtensionType(),
-      'xdebug_profiler_active' => XDebug::isProfilerActive(),
-      'server_is_nginx' => (strpos($_SERVER["SERVER_SOFTWARE"], 'nginx') !== false) ? true : false
+      'memcached_installed'         => Serverstack::isInstalled('memcached'),
+      'xdebug_installed'            => Serverstack::isInstalled('xdebug'),
+      'mongodb_installed'           => Serverstack::isInstalled('mongodb'),
+      'postgresql_installed'        => Serverstack::isInstalled('postgresql'),
+      'phpext_memcached_installed'  => Serverstack::isExtensionInstalled('memcached'),
+      'phpext_xdebug_installed'     => Serverstack::isExtensionInstalled('xdebug'),
+      'xdebug_extension_type'       => XDebug::getXDebugExtensionType(),
+      'xdebug_profiler_active'      => XDebug::isProfilerActive(),
+      'server_is_nginx'             => (strpos($_SERVER["SERVER_SOFTWARE"], 'nginx') !== false) ? true : false
     );
 
     render('page-action', $tpl_data);

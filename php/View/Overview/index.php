@@ -199,7 +199,7 @@
             <table class="cs-message-content">
                 <tr>
                     <td>
-                        <span class="resourceheader2 bold"> <?php echo $nginx_status; ?> Nginx</span>
+                        <span class="resourceheader2 bold"> <?php echo $nginx_status_icon; ?> Nginx</span>
                     </td>
                 </tr>
                 <tr>
@@ -228,7 +228,8 @@
                 </tr>
                 <tr>
                     <td class="right">
-                        <?php if($server_is_nginx === false) { ?>
+
+                        <?php if($server_is_nginx === false) { var_dump($php_status_icon); ?>
                         <a class="btn btn-default btn-sm pull-left"
                            rel="tooltip" data-original-title="Start Nginx"
                            href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview&action=stop&daemon=nginx'; ?>">
@@ -281,7 +282,7 @@
             <table class="cs-message-content">
                 <tr>
                     <td>
-                        <span class="resourceheader2 bold"> <?php echo $php_status; ?> PHP</span>
+                        <span class="resourceheader2 bold"> <?php echo $php_status_icon; ?> PHP</span>
                     </td>
                 </tr>
                 <tr>
@@ -342,7 +343,7 @@
             <table class="cs-message-content">
                 <tr>
                     <td>
-                        <span class="resourceheader2 bold"><?php echo $mariadb_status; ?> MariaDB</span>
+                        <span class="resourceheader2 bold"><?php echo $mariadb_status_icon; ?> MariaDB</span>
                     </td>
                 </tr>
                 <tr>
@@ -417,7 +418,7 @@
             <table class="cs-message-content">
                 <tr>
                     <td>
-                        <span class="resourceheader2 bold"><?php echo $mongodb_status; ?> <?php echo $phpext_mongo_status; ?> MongoDB</span>
+                        <span class="resourceheader2 bold"><?php echo $mongodb_status_icon; ?> <?php echo $phpext_mongo_status_icon; ?> MongoDB</span>
                     </td>
                 </tr>
                 <tr>
@@ -497,7 +498,7 @@
             <table class="cs-message-content">
                 <tr>
                     <td>
-                        <span class="resourceheader2 bold"><?php echo $postgresql_status; ?> PostgreSQL</span>
+                        <span class="resourceheader2 bold"><?php echo $postgresql_status_icon; ?> PostgreSQL</span>
                     </td>
                 </tr>
                 <tr>
@@ -573,7 +574,7 @@
                 <tr>
                     <td>
                         <span class="resourceheader2 bold">
-                        <?php echo $memcached_status; ?> <?php echo $phpext_memcached_status; ?> Memcached
+                        <?php echo $memcached_status_icon; ?> <?php echo $phpext_memcached_status_icon; ?> Memcached
                         </span>
                     </td>
                 </tr>
@@ -601,7 +602,7 @@
             <table class="cs-message-content">
                 <tr>
                     <td>
-                        <span class="resourceheader2 bold"> <?php echo $xdebug_status; ?> Xdebug </span>
+                        <span class="resourceheader2 bold"> <?php echo $xdebug_status_icon; ?> Xdebug </span>
                     </td>
                 </tr>
                 <tr>

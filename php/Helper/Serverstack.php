@@ -168,7 +168,7 @@ class Serverstack
      * @param  string $daemon Name of the daemon.
      * @return string Embeddable image tag with tooltip.
      */
-    public static function getStatus($daemon)
+    public static function getStatusIcon($daemon)
     {
         // extension are loaded and daemons are running
         $stateText = (strpos($daemon, 'phpext') !== false) ? 'loaded' : 'running';
