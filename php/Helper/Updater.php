@@ -18,13 +18,11 @@ class Updater
         $url = 'https://raw.githubusercontent.com/WPN-XM/registry/master/wpnxm-software-registry.php';
 
         // fetch date header (doing a simple HEAD request)
-        stream_context_set_default(
-            array(
-                'http' => array(
-                    'method' => 'HEAD'
-                )
-            )
-        );
+        stream_context_set_default([
+            'http' => [
+                'method' => 'HEAD'
+            ]
+        ]);
 
         // silenced: throws warning, if offline
         $headers = @get_headers($url, 1);
@@ -48,13 +46,11 @@ class Updater
         if($needsUpdate === true) {
 
             // set request method back to GET, to fetch the file
-            stream_context_set_default(
-                array(
-                    'http' => array(
-                        'method' => 'GET'
-                    )
-                )
-            );
+            stream_context_set_default([
+                'http' => [
+                    'method' => 'GET'
+                ]
+            ]);
 
            $updated = file_put_contents($file, file_get_contents($url));
         }

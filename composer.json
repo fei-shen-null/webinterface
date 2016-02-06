@@ -26,6 +26,9 @@
         "phpunit/phpunit-selenium": "*"
     },
     "autoload": {
-        "psr-0": { "WPNXMTest\\": "tests/" }
+        "psr-4": { "Webinterface\\": "php/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "WPNXMTest\\": "tests/" }
     }
 }

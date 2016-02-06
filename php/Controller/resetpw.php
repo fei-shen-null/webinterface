@@ -12,10 +12,10 @@ function index()
 {
     $component = filter_input(INPUT_GET, 'component', FILTER_SANITIZE_STRING);
 
-    $tpl_data = array(
+    $tpl_data = [
         'no_layout' => true,
         'component' => ucfirst($component)
-    );
+    ];
 
     render('page-action', $tpl_data);
 }

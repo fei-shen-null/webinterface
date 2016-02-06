@@ -21,10 +21,10 @@ class PHP extends AbstractComponent
 
     public $installationFolder = '\bin\php';
 
-    public $files = array(
+    public $files = [
         '\bin\php\php.ini',
         '\bin\php\php.exe'
-    );
+    ];
 
     public $configFile = '\bin\php\php.ini';
 

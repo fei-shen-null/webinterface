@@ -102,7 +102,7 @@ function submitEdit(value, settings)
   return(result);
 };
 
-function loadTab(tabObject)
+function loadTabContent(tabObject)
 {
   if (!tabObject || !tabObject.length) {
     return;
@@ -114,7 +114,7 @@ function loadTab(tabObject)
   // target action for loading the tab content via AJAX is "showtab"
   var href = 'index.php?page=config&action=showtab&tab=' + tab;
 
-  // target content for the incoming content
+  // target element for the incoming content
   var containerId = 'div#the-tab-pane';  // selector for the target container
 
   // load content via ajax, load additional js for certain pages and "activate" it
@@ -123,7 +123,7 @@ function loadTab(tabObject)
       setupTreeTable();
       setupjEditable();
     }
-    $(containerId).fadeIn('fast');
+    $(containerId).fadeIn('slow');
 
     // Set URL to remember TAB on page refresh.
     // The original AJAX content URL is "index.php?page=config&action=showtab&tab=PAGE",
@@ -135,31 +135,33 @@ function loadTab(tabObject)
 
 function setupTabs()
 {
-  // define selectors
   var configTabs = '#configuration-tabs';
-  var activeTab = configTabs + ' li.active a';
+  var activeTab  = $(configTabs + ' li.active a');
 
   // load the first tab on page load (current active tab)
-  if ($(activeTab).length > 0) {
-    loadTab($(activeTab));
-  }
+  /*if (activeTab.length > 0) {
+    loadTabContent(activeTab);
+  }*/
 
   // intercept clicks on the tab items
   $(configTabs + ' li a').click(function () {
 
+      var tab = $(this);
+      var parent_li = tab.parent('li');
+
       // do not reload content of currently active tab
-      if ($(this).hasClass('active')) {
+      if (parent_li.hasClass('active')) {
         return false;
       }
-      // switch currently active to the new tab
+
+      // set the new tab "active"
       $(configTabs + ' li.active').removeClass('active');
-      $(this).parent('li').addClass('active');
+      parent_li.addClass('active');
 
       // show ajax loading indicator
       $('div#the-tab-pane').html('<p style="text-align: center;"><img src="<?php echo WPNXM_IMAGES_DIR; ?>ajax-spinner.gif" width="64" height="64" /></p>');
 
-      // load content
-      loadTab($(this));
+      loadTabContent(tab);
 
       return false;
   });
@@ -168,7 +170,7 @@ function setupTabs()
 function handleRedirectToTab()
 {
   var anchor = window.location.href.split('#')[1];
-  if (anchor != '') {
+  if (anchor !== '') {
     var tabToSelect = $('#configuration-tabs').find('a[name="'+anchor+'"]');
     $(tabToSelect).trigger('click');
   }

@@ -31,7 +31,7 @@ abstract class AbstractComponent
      * @var array Array with all essential files of the component.
      * For making sure, that the component is installed.
      */
-    public $files = array();
+    public $files = [];
 
     /* @var string The configuration file of the component, if any. */
     public $configFile = '';
@@ -43,7 +43,7 @@ abstract class AbstractComponent
      * Array with some essential file dependencies of the component.
      * For making sure, that the component's dependencies are also installed.
      */
-    public $dependencyFiles = array();
+    public $dependencyFiles = [];
 
     public $downloadURL = '';
 

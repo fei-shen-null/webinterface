@@ -35,7 +35,7 @@ class IniReaderWriter
 
     public function read()
     {
-        $this->lines = array();
+        $this->lines = [];
 
         $section = '';
 
@@ -44,14 +44,14 @@ class IniReaderWriter
         foreach ($content as $line) {
             // comment or whitespace
             if (preg_match('/^\s*(;.*)?$/', $line)) {
-                $this->lines[] = array('type' => 'comment', 'data' => $line);
+                $this->lines[] = ['type' => 'comment', 'data' => $line];
             // section
             } elseif (preg_match('/\[(.*)\]/', $line, $match)) {
                 $section = $match[1];
-                $this->lines[] = array('type' => 'section', 'data' => $line, 'section' => $section);
+                $this->lines[] = ['type' => 'section', 'data' => $line, 'section' => $section];
             // entry
             } elseif (preg_match('/^\s*(.*?)\s*=\s*(.*?)\s*$/', $line, $match)) {
-                $this->lines[] = array('type' => 'entry', 'data' => $line, 'section' => $section, 'key' => $match[1], 'value' => $match[2]);
+                $this->lines[] = ['type' => 'entry', 'data' => $line, 'section' => $section, 'key' => $match[1], 'value' => $match[2]];
             }
         }
 

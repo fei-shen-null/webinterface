@@ -10,9 +10,9 @@
 
 function index()
 {
-    $tpl_data = array(
+    $tpl_data = [
         'constants' => showConstants('raw') // showConstants() is defined in bootstrap.php
-    );
+    ];
 
     render('page-action', $tpl_data);
 }

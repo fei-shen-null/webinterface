@@ -23,9 +23,9 @@ class XDebug extends AbstractComponent
 
     public $installationFolder = '\bin\php\ext';
 
-    public $files = array(
+    public $files = [
         '\bin\php\ext\php_xdebug.dll'
-    );
+    ];
 
     public $configFile = '\bin\php\php.ini';
 

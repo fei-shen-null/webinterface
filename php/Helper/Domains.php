@@ -36,28 +36,27 @@ class Domains
                 WPNXM_DIR . '\bin\nginx\conf\\'));
         }
 
-        $enabledDomains = glob(WPNXM_DIR . '\bin\nginx\conf\domains-enabled\*.conf');
-
+        $enabledDomains  = glob(WPNXM_DIR . '\bin\nginx\conf\domains-enabled\*.conf');
         $disabledDomains = glob(WPNXM_DIR . '\bin\nginx\conf\domains-disabled\*.conf');
 
-        $domains = array();
+        $domains = [];
 
         foreach ($enabledDomains as $idx => $file) {
             $domain = basename($file, '.conf');
-            $domains[$domain] = array(
+            $domains[$domain] = [
                 'fullpath' => $file,
                 'filename' => basename($file),
-                'enabled' => true
-            );
+                'enabled'  => true
+            ];
         }
 
         foreach ($disabledDomains as $idx => $file) {
             $domain = basename($file, '.conf');
-            $domains[$domain] = array(
+            $domains[$domain] = [
                 'fullpath' => $file,
                 'filename' => basename($file),
-                'enabled' => false
-            );
+                'enabled'  => false
+            ];
         }
 
         return $domains;

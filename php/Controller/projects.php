@@ -12,22 +12,22 @@ function index()
 {
     $projects = new Webinterface\Helper\Projects();
 
-    $tpl_data = array(
+    $tpl_data = [
         'load_jquery_additionals' => true,
         'numberOfProjects'        => $projects->getNumberOfProjects(),
         'listProjects'            => $projects->listProjects(),
         'numberOfTools'           => $projects->getNumberOfTools(),
         'listTools'               => $projects->listTools()
-    );
+    ];
 
     render('page-action', $tpl_data);
 }
 
 function create()
 {
-    $tpl_data = array(
+    $tpl_data = [
         'no_layout' => true
-    );
+    ];
 
     render('page-action', $tpl_data);
 }
@@ -36,10 +36,10 @@ function edit()
 {
     $project = filter_input(INPUT_GET, 'project');
 
-    $tpl_data = array(
+    $tpl_data = [
         'no_layout' => true,
         'project' => $project
-    );
+    ];
 
     render('page-action', $tpl_data);
 }

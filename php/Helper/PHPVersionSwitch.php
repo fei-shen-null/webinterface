@@ -140,10 +140,10 @@ class PHPVersionSwitch
 
             $phpVersion = self::getPhpVersionFromFolder($folder);
 
-            $folders[$key] = array(
+            $folders[$key] = [
                 'dir' => $folder,
                 'php-version' => $phpVersion
-            );
+            ];
         }
 
         return self::removeInvalidFolders($folders);

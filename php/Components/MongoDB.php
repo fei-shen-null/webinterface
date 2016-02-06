@@ -21,10 +21,10 @@ class MongoDB extends AbstractComponent
 
     public $installationFolder = '\bin\mongodb';
 
-    public $files = array(
+    public $files = [
         '\bin\mongodb\mongodb.conf',
         '\bin\mongodb\bin\mongod.exe'
-    );
+    ];
 
     public $configFile = '\bin\mongodb\mongodb.conf';
 
@@ -46,7 +46,7 @@ class MongoDB extends AbstractComponent
             //require admin privilege
             $db = $m->admin;
 
-            //$mongodb_info = $db->command(array('buildinfo'=>true));
+            //$mongodb_info = $db->command(['buildinfo' => true]);
             //$mongodb_version = $mongodb_info['version'];
 
             // this returns an array with the keys "retval","ok"

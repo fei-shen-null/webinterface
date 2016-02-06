@@ -11,6 +11,7 @@
 namespace Webinterface\Helper;
 
 use Webinterface\Helper\PHPExtensionManager;
+use Webinterface\Helper\Daemon;
 
 class PHPGracefulRestart
 {
@@ -40,7 +41,7 @@ class PHPGracefulRestart
         self::deactivateExtensionsWithStartupErrors();
 
         // (8) restart PHP (non-gracefully this time)
-        Webinterface\Helper\Daemon::restartDaemon('php');
+        Daemon::restartDaemon('php');
     }
 
     /**
@@ -50,7 +51,7 @@ class PHPGracefulRestart
     public static function deactivateExtensionsWithStartupErrors()
     {
         // (4) start PHP on CLI and get stdout
-        exec("php.exe -v", $stdout);
+        exec(WPNXM_BIN . "php\php.exe -v", $stdout);
 
         if(isset($stdout) && is_array($stdout))
         {
@@ -86,7 +87,7 @@ class PHPGracefulRestart
      */
     public static function logExtensionError($data)
     {
-        $logfile = '../logs/php_startup_errors.json';
+        $logfile = WPNXM_DIR . '\logs\php_startup_errors.json';
 
         self::appendJsonFile($logfile, $data);
     }
@@ -112,7 +113,7 @@ class PHPGracefulRestart
             fwrite($handle, ',', 1);
         }
 
-        fwrite($handle, json_encode(array($data)));
+        fwrite($handle, json_encode([$data]));
         fclose($handle);
     }
 }

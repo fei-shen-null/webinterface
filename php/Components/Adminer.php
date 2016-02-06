@@ -21,9 +21,9 @@ class Adminer extends AbstractComponent
 
     public $installationFolder = /* WPNXM_ROOT . */ '\www\adminer'; // i wish PHP would support this! PHP6 ?!
 
-    public $files = array(
+    public $files = [
         '\www\tools\adminer\adminer.php'
-    );
+    ];
 
     /**
      * Returns PHP Version.

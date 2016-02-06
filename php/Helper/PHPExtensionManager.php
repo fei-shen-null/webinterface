@@ -11,7 +11,8 @@
 namespace Webinterface\Helper;
 
 /**
- * Wrapper for handling php extensions and the php.ini extension section.
+ * Wrapper for handling PHP and ZEND extensions
+ * and modifying the php.ini extension section.
  */
 class PHPExtensionManager
 {
@@ -19,7 +20,7 @@ class PHPExtensionManager
 
     public function readIni()
     {
-        if ($this->content === '') {
+        if (empty($this->content)) {
             $this->content = file(php_ini_loaded_file());
         }
 
@@ -28,7 +29,7 @@ class PHPExtensionManager
 
     public function writeIni($content)
     {
-        return file_put_contents(php_ini_loaded_file(), $content);
+        return (bool) file_put_contents(php_ini_loaded_file(), $content);
     }
 
     public function disable($name)
@@ -40,17 +41,8 @@ class PHPExtensionManager
         }
 
         if ($this->comment($name) === false) {
-             echo 'Disabling '. $name;
+            echo 'Disabling '. $name;
             $this->addExtension($name, false);
-        }
-    }
-
-    public function disableAll()
-    {
-        $enabledExtensions = $this->getEnabledExtensions();
-        var_dump($enabledExtensions);
-        foreach ($enabledExtensions as $name => $file) {
-
         }
     }
 
@@ -82,38 +74,59 @@ class PHPExtensionManager
         $new_line .= 'extension=' . $name . "\n";
 
         # read php.ini and determine position of last extension entry
-        $lines = array();
         $lines = $this->readIni();
-        $index = $this->getIndexOfLastExtensionEntry($lines);
+        $index = $this->getIndexOfLastPHPExtensionEntry($lines);
 
         # insert new line after the last extension entry
         array_splice($lines, $index + 1, 0, $new_line);
 
         # write php.ini
-        $content = array();
+        $content = [];
         $content = implode('', $lines);
 
         return $this->writeIni($content);
     }
 
+    /**
+     * ensure that php.ini contains [Xdebug] section
+     *
+     * @return bool True, when section for xdebug exists.
+     */
+    public function checkXdebugSectionExists()
+    {
+        $lines = $this->readIni();
+
+        foreach ($lines as $index => $line) {
+            if(strpos($line, '[XDebug]') !== false) {
+                return true; # if found, end.
+            }
+        }
+        return false;
+    }
+
     public function addXdebugExtension()
     {
-        # read php.ini
-        $lines = array();
-        $lines = $this->readIni();
-        # ensure that php.ini contains [Xdebug] section
-        foreach ($lines as $index => $line) {
-            if(strpos($line, '[XDebug]') !== false) return; # if found, end.
+        // exit early, if section exists already
+        if($this->checkXdebugSectionExists() === true) {
+            return;
         }
-        unset($lines);
 
         # xdebug section missing; insert XDebug extension template somewhere near php.ini EOF
         $phpiniEOF = '; Local Variables:';
 
         # load and prepare xdebug php.ini template
         $tpl_content = file_get_contents(WPNXM_DATA_DIR . '/config-templates/xdebug-section-phpini.tpl');
-        $search = array('%PHP_EXT_DIR%', '%TEMP_DIR%');
-        $replace = array(WPNXM_DIR . '\bin\php\ext\\', WPNXM_DIR . '\temp');
+
+        $search = [
+            '%PHP_EXT_DIR%',
+            '%TEMP_DIR%'
+        ];
+
+        $replace = [
+            WPNXM_DIR . '\bin\php\ext\\',
+            WPNXM_DIR . '\temp'
+        ];
+
         $content = str_replace($search, $replace, $tpl_content);
 
         $new_line =  $content . "\n\n" . $phpiniEOF;
@@ -127,7 +140,7 @@ class PHPExtensionManager
         # ;zend_extension_manager.optimizer_ts
 
         # read php.ini
-        $lines = array();
+        $lines = [];
         $lines = $this->readIni();
 
         # prepare line to insert
@@ -149,13 +162,13 @@ class PHPExtensionManager
         }
 
         # write php.ini
-        $content = array();
+        $content = [];
         $content = implode('', $lines);
 
         return $this->writeIni($content);
     }
 
-    private function getIndexOfLastExtensionEntry(array $lines)
+    private function getIndexOfLastPHPExtensionEntry(array $lines)
     {
         $index_last_extension = 0;
         $last_extension_index = '';
@@ -190,7 +203,7 @@ class PHPExtensionManager
         $old_line = trim($old_line);
 
         # extension found, do comment, if line uncommented
-         if (strpos($old_line, 'extension=') !== false) {
+        if (strpos($old_line, 'extension=') !== false) {
             $new_line = ';' . $old_line;
             $this->replaceLineInPHPINI($old_line, $new_line);
         }
@@ -230,51 +243,92 @@ class PHPExtensionManager
     }
 
     /**
+     * @param string $old_line
      * @param string $new_line
      */
     private function replaceLineInPHPINI($old_line, $new_line)
     {
-        $content = $this->readIni();
-        $content_replaced = str_replace($old_line, $new_line, $content);
-
-        return $this->writeIni($content_replaced);
+        return $this->writeIni(str_replace($old_line, $new_line, $this->readIni()));
     }
 
-    public function getExtensionDirFileList()
+    /**
+     * Returns an array with all PHP extensions.
+     *
+     * $list array has the following structure:
+     * key = filename without suffix
+     * value = filename with suffix
+     *
+     * @return array PHP extensions ['php_apc' => 'php_apc.dll']
+     */
+    public function getAllExtensionFiles()
     {
-        $files = array();
-        $list = array();
+        static $extensions = [];
+
+        if(!empty($extensions)) {
+            return $extensions;
+        }
 
         $files = glob(WPNXM_DIR . '/bin/php/ext/php_*.dll');
 
         foreach ($files as $key => $file) {
-            // $list array has the following structure
-            // key = filename without suffix
-            // value = filename with suffix
-            // e.g. $list = array ( 'php_apc' => 'php_apc.dll' )
-            $list[ basename($file, '.dll') ] = basename($file);
+            $value = basename($file);
+            $key = str_replace(['php_', '.dll'], '', $value);
+            $extensions[ $key ] = $value;
+        }
+
+        return $extensions;
+    }
+
+
+    public static function getZendExtensionsWhitelist()
+    {
+        return array_flip([
+            'opcache', // Zend Engine OpCache
+            'xdebug',  // XDebug
+            'ioncube'  // IonCube Loader
+        ]);
+    }
+
+    public function getPHPExtensions()
+    {
+        return array_diff_key($this->getAllExtensionFiles(), self::getZendExtensionsWhitelist());
+    }
+
+    public function getZendExtensions()
+    {
+        return array_intersect_key($this->getAllExtensionFiles(), self::getZendExtensionsWhitelist());
+    }
+
+    public function getExtensionsLoaded($onlyZendExtensions = false)
+    {
+        $extensions = ($onlyZendExtensions === true)
+            ? $this->getZendExtensions()
+            : $this->getPHPExtensions();
+
+        $list = [];
+
+        foreach ($extensions as $key => $value) {
+            if(extension_loaded($key) === true) {
+                $list[$key] = true;
+            }
         }
 
         return $list;
     }
 
-    public function getExtensionsLoaded()
+    public function getEnabledZendExtensions()
     {
-        $extFiles = $this->getExtensionDirFileList();
-
-        $list = array();
-
-        foreach ($extFiles as $key => $value) {
-            $value = str_replace(array('php_', '.dll'), '', $value);
-            $list[$value] = extension_loaded($value);
-        }
-
-        return $list;
+        return $this->getExtensionsLoaded(true);
     }
 
-    public static function getEnabledExtensionsFromIni()
+    public function getEnabledPHPExtensions()
     {
-        $enabled_extensions = array();
+        return $this->getExtensionsLoaded();
+    }
+
+    public static function getEnabledPHPExtensionsFromIni()
+    {
+        $enabled_extensions = [];
         $extension = '';
 
         // read php.ini
@@ -286,10 +340,10 @@ class PHPExtensionManager
 
         // check php.ini array for extension entries
         foreach ($lines as $line) {
-            if ($line['type'] != 'entry') {
+            if ($line['type'] !== 'entry') {
                 continue;
             }
-            if ($line['key'] != 'extension') {
+            if ($line['section'] !== 'PHP' && $line['key'] !== 'extension') {
                 continue;
             }
 

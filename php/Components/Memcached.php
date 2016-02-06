@@ -21,10 +21,10 @@ class Memcached extends AbstractComponent
 
     public $installationFolder = '\bin\memcached';
 
-    public $files = array(
+    public $files = [
         '\bin\memcached\memcached.exe',
         '\bin\memcached\pthreadGC2.dll'
-    );
+    ];
 
     /**
      * Returns memcached Version.

@@ -63,11 +63,11 @@ class PHPInfo
         $phpinfo = preg_replace('#>(no|off|disabled)#i', '><span style="color:#f00; font-weight: bold;">$1</span>', $phpinfo);
 
         # grab all php extensions for display in an additional table
-        $match_modules = array();
+        $match_modules = [];
         preg_match_all("^(?:module_)(.*)\"^", $buffered_phpinfo, $match_modules, PREG_SET_ORDER);
 
         // create 4 lists from the whole extensions result set
-        $modlists = array();
+        $modlists = [];
         $i = 0;
         foreach ($match_modules as $mod) {
             $modlists[($i % 4)][] = $mod;

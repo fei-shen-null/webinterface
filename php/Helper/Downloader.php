@@ -23,7 +23,7 @@ class Downloader
 
         set_time_limit(0); // unlimited max execution time
 
-        $options = array(
+        $options = [
             CURLOPT_URL     => $url,
             CURLOPT_FILE    => $file,
             CURLOPT_TIMEOUT => 3600 * 2, // set 2h to not timeout on big files
@@ -34,7 +34,7 @@ class Downloader
             //CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_BUFFERSIZE => 4096
-        );
+        ];
 
         $ch = curl_init();
         curl_setopt_array($ch, $options);

@@ -10,14 +10,14 @@
 
 function index()
 {
-    $tpl_data = array(
+    $tpl_data = [
         'load_jquery_additionals' => true,
         'components'              => \Webinterface\Helper\Serverstack::getInstalledComponents(),
         'windows_version'         => \Webinterface\Helper\Serverstack::getWindowsVersion(),
         'bitsize'                 => \Webinterface\Helper\Serverstack::getBitSizeString(),
         'registry_updated'        => \Webinterface\Helper\Updater::updateRegistry(),
         'registry'                => include WPNXM_DATA_DIR . 'wpnxm-software-registry.php'
-    );
+    ];
 
     render('page-action', $tpl_data);
 }
@@ -40,7 +40,11 @@ function download()
 
 function curl_progress_callback($download_size, $downloaded, $upload_size, $uploaded)
 {
-    $data = array("progress" => array("loaded" => $downloaded, "total" => $download_size));
+    $data = [ "progress" => [
+        "loaded" => $downloaded,
+        "total" => $download_size
+    ]];
+
     $json = json_encode($data);
     echo '<script>updateProgress('.$json.');</script>' . PHP_EOL;
     ob_flush();

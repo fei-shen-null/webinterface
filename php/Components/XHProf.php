@@ -18,10 +18,10 @@ class XHProf extends AbstractComponent
 
     public $installationFolder = '\www\tools\xhprof';
 
-    public $files = array(
+    public $files = [
         '\www\tools\xhprof\package.xml',
         '\www\tools\xhprof\xhprof_html\index.php'
-    );
+    ];
 
     /**
      * Returns Version.

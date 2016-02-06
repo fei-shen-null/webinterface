@@ -26,12 +26,12 @@ class PostgreSQL extends AbstractComponent
 
     public $installationFolder = '\bin\postgresql';
 
-    public $files = array(
+    public $files = [
         // Note: the folder was renamed from "pgsql" (name in the original zip) to "postgresql"
         '\bin\postgresql\bin\initdb.exe',
         '\bin\postgresql\bin\postgresql.conf',
         '\bin\postgresql\bin\pg_ctl.exe' // http://www.postgresql.org/docs/9.3/static/app-pg-ctl.html
-    );
+    ];
 
     public $configFile = '\bin\postgresql\bin\postgresql.conf';
 

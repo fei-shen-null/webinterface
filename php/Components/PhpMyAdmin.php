@@ -18,10 +18,10 @@ class PhpMyAdmin extends AbstractComponent
 
     public $registryName = 'phpmyadmin';
 
-    public $files = array(
+    public $files = [
         '\www\tools\phpmyadmin\libraries\Config.class.php',
         '\www\tools\phpmyadmin\index.php'
-    );
+    ];
 
     public function getVersion()
     {

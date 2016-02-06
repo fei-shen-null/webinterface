@@ -12,7 +12,7 @@ namespace Webinterface\Helper;
 
 class Projects
 {
-    private $projectFolders = array();
+    private $projectFolders = [];
 
     /**
      * The "toolDirectories" array contains paths of the "/www/tools" folder.
@@ -23,20 +23,20 @@ class Projects
      *
      * @var array
      */
-    private $toolDirectories = array(
-        'adminer' => 'adminer/adminer.php',
-        'memadmin' => '',
+    private $toolDirectories = [
+        'adminer'           => 'adminer/adminer.php',
+        'memadmin'          => '',
         'phpmemcachedadmin' => '',
-        'phpmyadmin' => '',
-        'rockmongo' => '',
-        'updater' => '', // wpn-xm registry updater
-        'uprofiler' => 'uprofiler/uprofiler_html',
-        'webgrind' => '',
-        //'webinterface' => '', // wpn-xm webinterface
-        'wincache' => '',
-        'xcache' => '',
-        'xhprof' => 'xhprof/xhprof_html'
-    );
+        'phpmyadmin'        => '',
+        'rockmongo'         => '',
+        'updater'           => '', // wpn-xm registry updater
+        'uprofiler'         => 'uprofiler/uprofiler_html',
+        'webgrind'          => '',
+        //'webinterface'    => '', // wpn-xm webinterface
+        'wincache'          => '',
+        'xcache'            => '',
+        'xhprof'            => 'xhprof/xhprof_html'
+    ];
 
     public function __construct()
     {
@@ -50,7 +50,7 @@ class Projects
      */
     public function getProjects()
     {
-        $dirs   = array();
+        $dirs   = [];
         $handle = opendir(WPNXM_WWW_DIR);
 
         while ($dir = readdir($handle)) {
@@ -236,11 +236,11 @@ class Projects
     {
         $url = sprintf('https://packagist.org/packages/%s.json', $package);
 
-        $context = stream_context_create(array(
-            'http' => array(
+        $context = stream_context_create([
+            'http' => [
                 'ignore_errors' => true
-             )
-        ));
+            ]
+        ]);
 
         // silenced: because this throws a warning, if offline
         $json = @file_get_contents($url, false, $context);
@@ -273,7 +273,7 @@ class Projects
         // display "settings" cog wheel for this project. Modal shows a configuration screen "per project".
         $html .= '<a class="btn-new-domain floatright" data-toggle="modal" data-target="#myModal" ';
         $html .= ' href="' . WPNXM_WEBINTERFACE_ROOT . 'index.php?page=projects&action=edit&project=' . $dir . '">';
-        $html .= '<span class="glyphicon glyphicon-cog"></span></a>';
+        $html .= '<i class="glyphicon glyphicon-cog"></i></a>';
 
         /*if (false === $this->isDomain($dir)) {
             // display link to add a new domain for this directory

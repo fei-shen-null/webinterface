@@ -21,10 +21,10 @@ class Webgrind extends AbstractComponent
 
     public $installationFolder =  '\www\tools\webgrind';
 
-    public $files = array(
+    public $files = [
         '\www\tools\webgrind\config.php',
         '\www\tools\webgrind\index.php'
-    );
+    ];
 
     public function getVersion()
     {

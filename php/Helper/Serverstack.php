@@ -41,7 +41,7 @@ class Serverstack
 
     public static function getInstalledComponents()
     {
-        $classes = array();
+        $classes = [];
 
         $files = glob(WPNXM_COMPONENTS_DIR . '*.php');
 
@@ -58,7 +58,7 @@ class Serverstack
 
     public static function instantiateInstalledComponents()
     {
-        $components = array();
+        $components = [];
 
         $classes = self::getInstalledComponents();
 
@@ -102,7 +102,7 @@ class Serverstack
      */
     public static function assertExtensionFileFound($extension)
     {
-        $files = array(
+        $files = [
             'apc' => 'bin\php\ext\php_apc.dll',
             'xdebug' => 'bin\php\ext\php_xdebug.dll',
             'xhprof' => 'bin\php\ext\php_xhprof.dll',
@@ -112,7 +112,7 @@ class Serverstack
             'nginx' => 'bin\nginx\nginx.conf',
             'mariadb' => 'bin\mariadb\my.ini',
             'php' => 'bin\php\php.ini',
-        );
+        ];
 
         $file = WPNXM_DIR . $files[$extension];
 
@@ -314,23 +314,33 @@ class Serverstack
         throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
     }
 
+    /**
+     * getWindowsVersion()
+     *
+     * https://en.wikipedia.org/wiki/Windows_NT#Releases
+     * https://de.wikipedia.org/wiki/Microsoft_Windows_NT#Versionsgeschichte
+     *
+     * @return [type] [description]
+     */
     public static function getWindowsVersion()
     {
         $useragent = $_SERVER['HTTP_USER_AGENT'];
 
-        $regexps = array(
-            'Win 311'         => 'Win16',
+        $regexps = [
+            /*'Win 311'       => 'Win16',
             'Win 95'          => '(Windows 95)|(Win95)|(Windows_95)',
             'Win ME'          => '(Windows 98)|(Win 9x 4.90)|(Windows ME)',
             'Win 98'          => '(Windows 98)|(Win98)',
-            'Win 2000'        => '(Windows NT 5.0)|(Windows 2000)',
+            'WinNT'           => '(Windows NT 4.0)|(WinNT4.0)|(WinNT)|(Windows NT)',
+            'Win 2000'        => '(Windows NT 5.0)|(Windows 2000)',*/
             'Win XP'          => '(Windows NT 5.1)|(Windows XP)',
             'Win Server 2003' => '(Windows NT 5.2)',
             'Win Vista'       => '(Windows NT 6.0)',
             'Windows 7'       => '(Windows NT 6.1)',
             'Windows 8'       => '(Windows NT 6.2)',
-            'WinNT'           => '(Windows NT 4.0)|(WinNT4.0)|(WinNT)|(Windows NT)'
-        );
+            'Windows 8.1'     => '(Windows NT 6.3)',
+            'Windows 10'      => '(Windows NT 6.4)|(Windows NT 10.0)'
+        ];
 
         foreach ($regexps as $name => $pattern) {
             if (preg_match('/' . $pattern . '/i', $useragent)) {

@@ -21,10 +21,10 @@ class Nginx extends AbstractComponent
 
     public $installationFolder = '\bin\nginx';
 
-    public $files = array(
+    public $files = [
         '\bin\nginx\conf\nginx.conf',
         '\bin\nginx\bin\nginx.exe'
-    );
+    ];
 
     public $configFile = '\bin\nginx\conf\nginx.conf';
 

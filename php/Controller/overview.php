@@ -13,7 +13,7 @@ use Webinterface\Helper\Serverstack;
 
 function index()
 {
-    $tpl_data = array(
+    $tpl_data = [
       // load jq, because the database password reset uses jq modal window
       'load_jquery_additionals' => true,
       // version
@@ -49,7 +49,7 @@ function index()
       'xdebug_extension_type'       => XDebug::getXDebugExtensionType(),
       'xdebug_profiler_active'      => XDebug::isProfilerActive(),
       'server_is_nginx'             => (strpos($_SERVER["SERVER_SOFTWARE"], 'nginx') !== false) ? true : false
-    );
+    ];
 
     render('page-action', $tpl_data);
 }

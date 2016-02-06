@@ -10,10 +10,10 @@
 
 function index()
 {
-    $tpl_data = array(
+    $tpl_data = [
         'no_layout' => true, // it's a modal dialog
         'domains' => \Webinterface\Helper\Domains::listDomains()
-    );
+    ];
 
     render('page-action', $tpl_data);
 }

@@ -21,10 +21,10 @@ class MariaDb extends AbstractComponent
 
     public $installationFolder = '\bin\mariadb';
 
-    public $files = array(
+    public $files = [
         '\bin\mariadb\my.ini',
         '\bin\mariadb\bin\mysqld.exe'
-    );
+    ];
 
     public $configFile = '\bin\mariadb\my.cnf';
 

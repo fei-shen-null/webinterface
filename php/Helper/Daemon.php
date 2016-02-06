@@ -76,25 +76,31 @@ class Daemon
         switch ($daemon) {
             case 'nginx':
                 $nginx_folder = WPNXM_DIR . 'bin\nginx';
-                chdir($nginx_folder); //requierd for nginx
-                exec("start $hide_console nginx.exe $options");
+                chdir($nginx_folder); // required for nginx
+                self::runCommand("start $hide_console nginx.exe $options");
                 break;
 
             case 'php':
                 $folder = WPNXM_DIR . 'bin\php';
-                chdir($folder); //required for nginx
-                exec("start $hide_console php-cgi.exe -b localhost:9100 $options"); // @todo use php-cgi-spawner
+                chdir($folder); // required for nginx
+                self::runCommand("start $hide_console php-cgi.exe -b localhost:9100 $options"); // @todo use php-cgi-spawner
+                break;
+
+            case 'spawn-php':
+                $folder = WPNXM_DIR . 'bin\php';
+                chdir($folder); // required for nginx
+                self::runCommand("start $hide_console php-cgi.exe -b localhost:9100 $options"); // @todo use php-cgi-spawner
                 break;
 
             case 'mariadb':
                 $mysqld_folder = WPNXM_DIR . 'bin\mariadb\bin';
-                chdir($mysqld_folder); //change to folder
-                exec("start $hide_console mysqld.exe $options");
+                chdir($mysqld_folder); // change to folder
+                self::runCommand("start $hide_console mysqld.exe $options");
                 break;
 
             case 'memcached':
                 $memcached_daemon = WPNXM_DIR . 'bin\memcached\memcached.exe ';
-                exec($hide_console . $memcached_daemon . $options);
+                self::runCommand($hide_console . $memcached_daemon . $options);
                 break;
 
             default:
@@ -107,20 +113,20 @@ class Daemon
     public static function stopDaemon($daemon)
     {
         $hide_console = WPNXM_DIR . 'bin\tools\RunHiddenConsole.exe ';
-        $process_kill = WPNXM_DIR . 'bin\tools\Process.exe -k  ';
+        $process_kill = 'taskkill /IM ';
 
         switch ($daemon) {
             case 'nginx':
-                exec($hide_console . $process_kill . 'nginx.exe');
+                self::runCommand($hide_console . $process_kill . 'nginx.exe');
                 break;
             case 'mariadb':
-                exec($hide_console . $process_kill . 'mysqld.exe');
+                self::runCommand($hide_console . $process_kill . 'mysqld.exe');
                 break;
             case 'memcached':
-                exec($hide_console . $process_kill . 'memcached.exe');
+                self::runCommand($hide_console . $process_kill . 'memcached.exe');
                 break;
             case 'php':
-                exec($hide_console . $process_kill . 'php-cgi.exe');
+                self::runCommand($hide_console . $process_kill . 'php-cgi.exe');
                 break;
             default:
                 throw new \InvalidArgumentException(
@@ -140,29 +146,34 @@ class Daemon
     {
         chdir(WPNXM_DIR);
 
-        $restart = 'start /B restart.bat ';
+        $restart = 'cmd.exe /c restart.bat ';
 
         switch ($daemon) {
             case 'nginx':
-                exec($restart . 'nginx');
+                self::runCommand($restart . 'nginx');
                 break;
             case 'mariadb':
-                exec($restart . 'mariadb');
+                self::runCommand($restart . 'mariadb');
                 break;
             case 'memcached':
-                exec($restart . 'memcached');
+                self::runCommand($restart . 'memcached');
                 break;
             case 'php':
-                exec($restart . 'php');
+                self::runCommand($restart . 'php');
                 break;
             case 'graceful-php':
-                Webinterface\Helper\PHPGracefulRestart::restart();
+                PHPGracefulRestart::restart();
                 break;
             default:
                 throw new \InvalidArgumentException(
                     sprintf(__METHOD__. '() has no command for the daemon: "%s"', $daemon)
                 );
         }
+    }
+
+    public static function runCommand($cmd)
+    {
+        pclose(popen($cmd . ' 2>nul >nul', 'r'));
     }
 
 }
