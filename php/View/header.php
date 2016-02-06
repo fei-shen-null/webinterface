@@ -22,7 +22,8 @@
     <link rel="shortcut icon" href="favicon.ico" />
 
     <!-- Pace.js -->
-    <script src="<?=WPNXM_ASSETS?>js/pace/pace.min.js"></script>
+    <script data-pace-options='{ "ajax": true, "document": false, "eventLag": false }'
+            src="<?=WPNXM_ASSETS?>js/pace/pace.min.js"></script>
     <link type="text/css" href="<?=WPNXM_ASSETS?>css/pace.css" rel="stylesheet" />
     <!-- jQuery -->
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.min.js"></script>
@@ -35,14 +36,13 @@
     <?php if (isset($load_jquery_additionals) && $load_jquery_additionals === true) { ?>
     <!-- jQuery Plugins -->
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.form.js"></script>
-    <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.organicTabs.js"></script>
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.treeTable.js"></script>
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.jeditable.js"></script>
     <link type="text/css" href="<?=WPNXM_ASSETS?>css/jquery.treeTable.css" rel="stylesheet" />
     <?php } ?>
 
     <!-- WPN-XM stuff last in line, because using jQuery and overwriting CSS -->
-    <link rel="stylesheet" type="text/css" href="<?=WPNXM_ASSETS?>css/style.css"  media="screen, projection" />
+    <link type="text/css" href="<?=WPNXM_ASSETS?>css/style.css" rel="stylesheet" />
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/wpnxm.js"></script>
 </head>
 <body>

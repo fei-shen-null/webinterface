@@ -1,5 +1,5 @@
 <!-- start "footer.php" -->
-    </div><!-- close: div content-centered -->
+    </div><!-- ./col-md-12.content-centered -->
 
     <div class="footer wpnxm-footer">
         <hr class="footer-line"/>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="clear">
-             WPИ-XM Serverstack for Windows - Version <?php echo WPNXM_VERSION; ?>
+             WPИ-XM Server Stack for Windows - Version <?php echo WPNXM_VERSION; ?>
             <p>&#169; 2010-<?php echo date("Y"); ?> by <a href="http://jakoch.de/">Jens-Andr&#x00E9; Koch</a> Softwaresystemtechnik.
                 <br />
                 Page generated in <?=round((microtime(true) - TIME_STARTED), 3);?>s.
@@ -31,7 +31,7 @@
                 <h4 class="modal-title">Modal title</h4>
             </div>
             <div class="modal-body">
-            ...
+            Modal body
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
