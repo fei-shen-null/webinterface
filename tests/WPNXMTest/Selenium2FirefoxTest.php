@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * WPИ-XM Server Stack
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
+ * http://wpn-xm.org/
+ *
+ * This source file is subject to the terms of the MIT license.
+ * For full copyright and license information, view the bundled LICENSE file.
+ */
+
 namespace WPNXMTest;
 
 class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
@@ -31,7 +40,7 @@ class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
         }
 
         if ($selenium_running === false) {
-             $this->markTestAsSkipped(
+            $this->markTestAsSkipped(
                 'Selenium is not running on localhost:4444. Please start Selenium.'
              );
         }
@@ -42,5 +51,4 @@ class Selenium2FirefoxTest extends \PHPUnit_Extensions_Selenium2TestCase
         $this->url('/');
         $this->assertEquals('WPИ-XM Server Stack for Windows - @APPVERSION@', $this->title());
     }
-
 }
