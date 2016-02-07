@@ -29,13 +29,13 @@ function project()
     echo $project;
 }
 
+/**
+ * showTab is the Tab Controller - handling GET requests for tab pages.
+ * Ajax calls to tab pages use URLs like: "index.php?page=config&action=showtab&tab=xy".
+ * Each tab function renders content for inline display in the tab-content container.
+ */
 function showtab()
 {
-    /**
-     * Tab Controller - handles GET requests for tab pages.
-     * Ajax calls to tab pages look like this: "index.php?page=config&action=showtab&tab=xy".
-     * Each tab function renders content for inline display in the tabs content container.
-     */
     $tab       = filter_input(INPUT_GET, 'tab');
     $tab       = strtr($tab, '-', '_'); // minus to underscore conversion
     $tabAction = 'tab_'.$tab;
@@ -110,6 +110,20 @@ function tab_php_ext()
     ];
 
     render('Config\tab-phpext', $tpl_data);
+}
+
+function getNumberOfExtensionsLoaded()
+{
+    $extensionManager = new Webinterface\Helper\PHPExtensionManager();
+
+    $tpl_data = [
+        'number_available_zend_extensions' => count($extensionManager->getZendExtensions()),
+        'number_enabled_zend_extensions'   => count($extensionManager->getEnabledZendExtensions()),
+        'number_available_php_extensions'  => count($extensionManager->getPHPExtensions()),
+        'number_enabled_php_extensions'    => count($extensionManager->getEnabledPHPExtensions()),
+    ];
+
+    echo json_encode($tpl_data);
 }
 
 function tab_xdebug()
