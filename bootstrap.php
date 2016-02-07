@@ -32,39 +32,39 @@ if (!defined('WPNXM_DIR')) {
     if (defined('PHPUNIT_TESTSUITE_TRAVIS') or (DS === '/')) {
         // Linux Paths
         define('WPNXM_DIR', dirname(__DIR__)); # only the webinterface folder exists on travis
-        define('WPNXM_WWW_DIR', WPNXM_DIR . DS); # no www folder
-        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'webinterface/php/Controller/');
-        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'webinterface/php/Components/');
-        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'webinterface/php/Helper/');
-        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'webinterface/php/View/');
-        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'webinterface/php/data/');
+        define('WPNXM_WWW_DIR', WPNXM_DIR.DS); # no www folder
+        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR.'webinterface/php/Controller/');
+        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR.'webinterface/php/Components/');
+        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR.'webinterface/php/Helper/');
+        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR.'webinterface/php/View/');
+        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'webinterface/php/data/');
     } else {
         // Windows Paths
-        define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))) . DS);
-        define('WPNXM_WWW_DIR', WPNXM_DIR . 'www' . DS);
-        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR . 'tools\webinterface\php\Controller' . DS);
-        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR . 'tools\webinterface\php\Components' . DS);
-        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR . 'tools\webinterface\php\Helper' . DS);
-        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR . 'tools\webinterface\php\View' . DS);
-        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR . 'tools\webinterface\php\data' . DS);
+        define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))).DS);
+        define('WPNXM_WWW_DIR', WPNXM_DIR.'www'.DS);
+        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\Controller'.DS);
+        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\Components'.DS);
+        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\Helper'.DS);
+        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\View'.DS);
+        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\data'.DS);
     }
 
     // Web Path Constants -> "http://.."
-    $port = ($_SERVER['SERVER_PORT'] !== '80') ? (':' . $_SERVER['SERVER_PORT']) : ''; // add embedded webserver port, in case its running
-    define('SERVER_URL', 'http://' . $_SERVER['SERVER_NAME'] . $port);
-    define('WPNXM_ROOT', SERVER_URL . ltrim(dirname(dirname(dirname($_SERVER['PHP_SELF']))), '\\') . '/');
-    define('WPNXM_WWW_ROOT', WPNXM_ROOT . 'www/');
+    $port = ($_SERVER['SERVER_PORT'] !== '80') ? (':'.$_SERVER['SERVER_PORT']) : ''; // add embedded webserver port, in case its running
+    define('SERVER_URL', 'http://'.$_SERVER['SERVER_NAME'].$port);
+    define('WPNXM_ROOT', SERVER_URL.ltrim(dirname(dirname(dirname($_SERVER['PHP_SELF']))), '\\').'/');
+    define('WPNXM_WWW_ROOT', WPNXM_ROOT.'www/');
     define('WPNXM_WEBINTERFACE_ROOT', '/tools/webinterface/');
     define('WPNXM_ASSETS', '/tools/webinterface/assets/');
     define('WPNXM_IMAGES_DIR', '/tools/webinterface/assets/img/');
 
     // WPNXM Configuration File
-    define('WPNXM_INI', WPNXM_DIR . 'wpn-xm.ini');
-    define('WPNXM_BIN', WPNXM_DIR . 'bin' . DS);
-    define('WPNXM_TEMP', WPNXM_DIR . 'temp' . DS);
+    define('WPNXM_INI', WPNXM_DIR.'wpn-xm.ini');
+    define('WPNXM_BIN', WPNXM_DIR.'bin'.DS);
+    define('WPNXM_TEMP', WPNXM_DIR.'temp'.DS);
 
     // Composer managed Vendor folder
-    define('VENDOR_DIR', __DIR__ . DS . 'vendor' . DS);
+    define('VENDOR_DIR', __DIR__.DS.'vendor'.DS);
 
     /**
      * Feature Flags
@@ -81,14 +81,13 @@ if (!defined('WPNXM_DIR')) {
 }
 
 // Register Composer Autoloader
-if (!is_file(VENDOR_DIR . 'autoload.php')) {
+if (!is_file(VENDOR_DIR.'autoload.php')) {
     throw new \RuntimeException(
-        'Could not find "vendor/autoload.php".' . PHP_EOL .
-        'Did you forget to run "composer install --dev"?' . PHP_EOL
+        'Could not find "vendor/autoload.php".'.PHP_EOL.
+        'Did you forget to run "composer install --dev"?'.PHP_EOL
     );
 }
-require VENDOR_DIR . 'autoload.php';
-
+require VENDOR_DIR.'autoload.php';
 
 if (!function_exists('showConstants')) {
 
@@ -101,7 +100,7 @@ if (!function_exists('showConstants')) {
      */
     function showConstants($return = 'dump')
     {
-        $array = get_defined_constants(true);
+        $array          = get_defined_constants(true);
         $user_constants = $array['user'];
 
         switch ($return) {
@@ -111,16 +110,15 @@ if (!function_exists('showConstants')) {
                 return var_export($user_constants, true);
             case 'dump':
             default:
-                exit('<pre>' . var_dump($user_constants) . '</pre>');
+                exit('<pre>'.var_dump($user_constants).'</pre>');
         }
     }
-
 }
 
 /**
  * Check if the current request is an Ajax request.
  *
- * @return boolean True, if Ajax Request. Otherwise, false.
+ * @return bool True, if Ajax Request. Otherwise, false.
  */
 function isAjaxRequest()
 {
@@ -142,7 +140,7 @@ function isAjaxRequest()
  */
 function redirect($url)
 {
-    header('Location: ' . $url);
+    header('Location: '.$url);
     exit;
 }
 
@@ -151,7 +149,7 @@ function redirect($url)
  *
  * @param string The classname to include.
  */
-spl_autoload_register(function($class) {
+spl_autoload_register(function ($class) {
 
     // return early, if class already loaded
     if (class_exists($class) === true) {
@@ -162,7 +160,7 @@ spl_autoload_register(function($class) {
     $prefix = 'Webinterface\\';
 
     // base directory for the namespace prefix (normally "/src/")
-    $base_dir = __DIR__ . DS . 'php' . DS;
+    $base_dir = __DIR__.DS.'php'.DS;
 
     // does the class use the namespace prefix?
     $len = strlen($prefix);
@@ -177,7 +175,7 @@ spl_autoload_register(function($class) {
     // replace the namespace prefix with the base directory,
     // replace namespace separators with directory separators in the relative class name,
     // append with .php
-    $file = $base_dir . str_replace('\\', DS, $relative_class) . '.php';
+    $file = $base_dir.str_replace('\\', DS, $relative_class).'.php';
 
     // if the file exists, require it
     if (file_exists($file) === true) {
@@ -197,8 +195,8 @@ function exception_handler($e) /** Throwable **/
     $html .= '    <h3 class="panel-title">Error</h3>';
     $html .= '  </div>';
     $html .= '  <div class="panel-body">';
-    $html .= '    <b>' . $e->getMessage() . '</b>';
-    $html .= '    <p><pre>' . $e->getTraceAsString() . '</pre></p>';
+    $html .= '    <b>'.$e->getMessage().'</b>';
+    $html .= '    <p><pre>'.$e->getTraceAsString().'</pre></p>';
     $html .= '  </div>';
     $html .= '</div>';
     $html .= '</div>';
@@ -209,7 +207,8 @@ function exception_handler($e) /** Throwable **/
 /**
  * Convert Errors to ErrorException.
  */
-function error_handler($errno, $errstr, $errfile, $errline, array $errcontext) {
+function error_handler($errno, $errstr, $errfile, $errline, array $errcontext)
+{
     // error was suppressed with the @-operator
     if (0 === error_reporting()) {
         return false;
@@ -222,7 +221,7 @@ set_error_handler('error_handler');
 set_exception_handler('exception_handler');
 
 // create tools menu (cached html menu)
-if(!file_exists(WPNXM_DATA_DIR . 'tools-topmenu.html')) {
+if (!file_exists(WPNXM_DATA_DIR.'tools-topmenu.html')) {
     $projects = new Webinterface\Helper\Projects;
     $projects->listTools();
     unset($projects);

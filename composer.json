@@ -22,13 +22,18 @@
         "jakoch/nginx-conf": "0.1.0"
     },
     "require-dev": {
-        "phpunit/phpunit":          "*",
-        "phpunit/phpunit-selenium": "*"
+        "phpunit/phpunit":            "*",
+        "phpunit/phpunit-selenium":   "*",
+        "fabpot/php-cs-fixer":        "dev-master"
     },
     "autoload": {
         "psr-4": { "Webinterface\\": "php/" }
     },
     "autoload-dev": {
         "psr-4": { "WPNXMTest\\": "tests/" }
+    },
+    "config": {
+        "bin-dir": "bin/",
+        "preferred-install": "dist"
     }
 }
