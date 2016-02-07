@@ -1,6 +1,9 @@
 <h2>
     PHP Extensions
-    <small>(<?php echo $number_enabled_php_extensions; ?> of <?php echo $number_available_php_extensions; ?> loaded)</small>
+    <small id="php-extensions-loaded">
+      (<span id="number_enabled_php_extensions"><?php echo $number_enabled_php_extensions; ?></span>
+      of <span id="number_available_php_extensions"><?php echo $number_available_php_extensions; ?></span> loaded)
+    </small>
     <div id="phpext-ajax-status" class="btn btn-small btn-success floatright hide">Updating PHP Extensions.</div>
 </h2>
 
@@ -20,7 +23,10 @@ To enable an extension, check it's checkbox. To disable an extension, uncheck it
 
 <h2>
     Zend Extensions
-    <small>(<?php echo $number_enabled_zend_extensions; ?> of <?php echo $number_available_zend_extensions; ?> loaded)</small>
+    <small id="zend-extensions-loaded">
+      (<span id="number_enabled_zend_extensions"><?php echo $number_enabled_zend_extensions; ?></span>
+      of <span id="number_available_zend_extensions"><?php echo $number_available_zend_extensions; ?></span> loaded)
+    </small>
     <div id="zendext-ajax-status" class="btn btn-small btn-success floatright hide">Updating Zend Extensions.</div>
 </h2>
 <form id="zendExtensionsForm" class="phpextensions form-horizontal" method="post"
@@ -72,7 +78,6 @@ $(function() {
   });
 
   $('#phpExtensionsForm').submit(function(e) {
-    console.log('test');
     event.preventDefault(); // Prevent the form from submitting via the browser
     var form = $(this);
     $.ajax({
@@ -106,11 +111,17 @@ function signalRestartAndUpdateExtensions(responseText, extensionType)
     // restart PHP
     $.get("index.php?page=daemon&action=restart&daemon=graceful-php");
 
-    // update the extension display
     var updateExtensionsForm = function() {
+        // update the extensions form display
         $.ajax({url: url}).done(function(html) {
           $(targetId).html(html);
           $(ajaxStatusId).hide().addClass('hide');
+        });
+        // update the number of loaded extensions
+        $.getJSON('index.php?page=config&action=getNumberOfExtensionsLoaded', function(data) {
+          $.each(data, function(key, val) {
+            $('#'+key).html(val);
+          });
         });
     }
 
