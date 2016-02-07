@@ -228,6 +228,7 @@ class PHPExtensionManager
 
     /**
      * Fetches the line from php.ini where the php extension is found.
+     * @return string
      */
     private function getExtensionLineFromPHPINI($name)
     {
