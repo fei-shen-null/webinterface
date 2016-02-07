@@ -8,10 +8,13 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
+/**
+ * Debug Index
+ */
 function index()
 {
     $tpl_data = [
-        'constants' => showConstants('raw') // showConstants() is defined in bootstrap.php
+        'constants' => showConstants('raw'), // showConstants() is defined in bootstrap.php
     ];
 
     render('page-action', $tpl_data);

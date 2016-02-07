@@ -23,14 +23,14 @@ class MongoDB extends AbstractComponent
 
     public $files = [
         '\bin\mongodb\mongodb.conf',
-        '\bin\mongodb\bin\mongod.exe'
+        '\bin\mongodb\bin\mongod.exe',
     ];
 
     public $configFile = '\bin\mongodb\mongodb.conf';
 
     public function getVersion()
     {
-        if($this->isInstalled() === false) {
+        if ($this->isInstalled() === false) {
             return 'not installed';
         }
 
@@ -51,10 +51,9 @@ class MongoDB extends AbstractComponent
 
             // this returns an array with the keys "retval","ok"
             $mongodb_version = $db->execute('return db.version()');
-
         } catch (\MongoConnectionException $e) {
             return \Webinterface\Helper\Serverstack::printExclamationMark(
-                    $e->getMessage() . '. Please wake the daemon.'
+                    $e->getMessage().'. Please wake the daemon.'
             );
         }
 

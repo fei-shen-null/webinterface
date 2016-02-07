@@ -8,17 +8,26 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
+/**
+ * daemon restart
+ */
 function restart()
 {
-     Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
+    Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
 }
 
+/**
+ * daemon start
+ */
 function start()
 {
-     Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
+    Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
 }
 
+/**
+ * daemon stop
+ */
 function stop()
 {
-     Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
+    Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
 }

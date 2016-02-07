@@ -14,7 +14,7 @@ function index()
 
     $tpl_data = [
         'no_layout' => true,
-        'component' => ucfirst($component)
+        'component' => ucfirst($component),
     ];
 
     render('page-action', $tpl_data);
@@ -26,13 +26,15 @@ function update()
 
     if (empty($password) === true) {
         echo '<div class="alert alert-danger">No Password given!</div>';
+
         return;
     }
 
     $component = filter_input(INPUT_POST, 'component', FILTER_SANITIZE_STRING);
 
-    if(empty($component) === true) {
+    if (empty($component) === true) {
         echo '<div class="alert alert-danger">No Component given!</div>';
+
         return;
     }
 

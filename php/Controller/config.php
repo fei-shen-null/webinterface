@@ -8,12 +8,15 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
+/**
+ * config index
+ */
 function index()
 {
     $tpl_data = [
         'load_jquery_additionals' => true,
         'mongodb_installed'       => Webinterface\Helper\Serverstack::isInstalled('mongodb'),
-        'xdebug_installed'        => Webinterface\Helper\Serverstack::isInstalled('xdebug')
+        'xdebug_installed'        => Webinterface\Helper\Serverstack::isInstalled('xdebug'),
     ];
 
     render('page-action', $tpl_data);
@@ -21,9 +24,9 @@ function index()
 
 function project()
 {
-   $project = filter_input(INPUT_GET, 'project');
+    $project = filter_input(INPUT_GET, 'project');
 
-   echo $project;
+    echo $project;
 }
 
 function showtab()
@@ -33,9 +36,9 @@ function showtab()
      * Ajax calls to tab pages look like this: "index.php?page=config&action=showtab&tab=xy".
      * Each tab function renders content for inline display in the tabs content container.
      */
-    $tab = filter_input(INPUT_GET, 'tab');
-    $tab = strtr($tab, '-', '_'); // minus to underscore conversion
-    $tabAction = 'tab_' . $tab;
+    $tab       = filter_input(INPUT_GET, 'tab');
+    $tab       = strtr($tab, '-', '_'); // minus to underscore conversion
+    $tabAction = 'tab_'.$tab;
     if (false === is_callable($tabAction)) {
         throw new \Exception(sprintf('The controller method "%s" for the Tab "%s" was not found!', $tabAction, $tab));
     }
@@ -60,8 +63,8 @@ function tab_mongodb()
 function tab_nginx()
 {
     $tpl_data = [
-        'no_layout' => true,
-        'nginx_access_toggle_form' => renderNginxAccessToggleFrom()
+        'no_layout'                => true,
+        'nginx_access_toggle_form' => renderNginxAccessToggleFrom(),
     ];
 
     render('Config\tab-nginx', $tpl_data);
@@ -73,9 +76,9 @@ function tab_nginx_domains()
     $domains  = new Webinterface\Helper\Domains;
 
     $tpl_data = [
-        'no_layout' => true,
+        'no_layout'       => true,
         'project_folders' => $projects->getProjects(true),
-        'domains' => $domains->listDomains()
+        'domains'         => $domains->listDomains(),
     ];
 
     render('Config\tab-nginx-domains', $tpl_data);
@@ -84,9 +87,9 @@ function tab_nginx_domains()
 function tab_php()
 {
     $tpl_data = [
-        'no_layout' => true,
+        'no_layout'                 => true,
         'php_version_switcher_form' => renderPhpVersionSwitcherForm(),
-        'ini' => Webinterface\Helper\PHPINI::read(),
+        'ini'                       => Webinterface\Helper\PHPINI::read(),
     ];
 
     render('Config\tab-php', $tpl_data);
@@ -97,13 +100,13 @@ function tab_php_ext()
     $extensionManager = new Webinterface\Helper\PHPExtensionManager();
 
     $tpl_data = [
-        'no_layout' => true,
+        'no_layout'                        => true,
         'number_available_zend_extensions' => count($extensionManager->getZendExtensions()),
-        'number_enabled_zend_extensions' => count($extensionManager->getEnabledZendExtensions()),
-        'number_available_php_extensions' => count($extensionManager->getPHPExtensions()),
-        'number_enabled_php_extensions' => count($extensionManager->getEnabledPHPExtensions()),
-        'php_extensions_form' => renderPHPExtensionsFormContent(),
-        'zend_extensions_form' => renderZendExtensionsFormContent()
+        'number_enabled_zend_extensions'   => count($extensionManager->getEnabledZendExtensions()),
+        'number_available_php_extensions'  => count($extensionManager->getPHPExtensions()),
+        'number_enabled_php_extensions'    => count($extensionManager->getEnabledPHPExtensions()),
+        'php_extensions_form'              => renderPHPExtensionsFormContent(),
+        'zend_extensions_form'             => renderZendExtensionsFormContent(),
     ];
 
     render('Config\tab-phpext', $tpl_data);
@@ -114,9 +117,9 @@ function tab_xdebug()
     $xdebug_installed = Webinterface\Helper\Serverstack::isInstalled('xdebug');
 
     $tpl_data = [
-        'no_layout' => true,
+        'no_layout'        => true,
         'xdebug_installed' => $xdebug_installed,
-        'ini_settings' => ($xdebug_installed) ? ini_get_all('xdebug') : [],
+        'ini_settings'     => ($xdebug_installed) ? ini_get_all('xdebug') : [],
     ];
 
     render('Config\tab-xdebug', $tpl_data);
@@ -129,10 +132,8 @@ function update_php_extensions()
 
     $extensionManager       = new Webinterface\Helper\PHPExtensionManager();
     $enabledExtensions      = array_flip($extensionManager->getEnabledPHPExtensionsFromIni());
-    $disableTheseExtensions = array_diff($enabledExtensions, $extensions);
-    $disableTheseExtensions = array_values($disableTheseExtensions); // re-index
-
-    //var_dump($disableTheseExtensions); /* show extensions to disable */
+    var_dump($enabledExtensions);
+    $disableTheseExtensions = array_values(array_diff($enabledExtensions, $extensions)); // diff + re-index
 
     foreach ($extensions as $extension) {
         $extensionManager->enable($extension);
@@ -143,16 +144,16 @@ function update_php_extensions()
     }
 
     // prepare response data
-    $tpl_data = [
-        'enabled_extensions' => $extensions,
+    $responseData = [
+        'enabled_extensions'  => $extensions,
         'disabled_extensions' => $disableTheseExtensions,
-        'responseText' => 'Extensions updated. Restarting PHP ...'
+        'responseText'        => 'Extensions updated. Restarting PHP ...',
     ];
 
     // send as JSON
-    echo json_encode($array);
+    echo json_encode($responseData);
 
-    // restarting of PHP is run via AJAX
+    // Note: restart of PHP is done via AJAX
 }
 
 function update_zend_extensions()
@@ -183,9 +184,9 @@ function update_zend_extensions()
 
     // prepare response data
     $tpl_data = [
-        'enabled_extensions' => $extensions,
+        'enabled_extensions'  => $extensions,
         'disabled_extensions' => $disableTheseExtensions,
-        'responseText' => 'Extensions updated. Restarting PHP ...'
+        'responseText'        => 'Extensions updated. Restarting PHP ...',
     ];
 
     // send as JSON
@@ -198,7 +199,7 @@ function renderNginxAccessToggleFrom()
 {
     // $("input[name=nginx_access_toggle]:checked").val()
 
-    $nginxConfig = new \Webinterface\Components\Nginx\Config;
+    $nginxConfig             = new \Webinterface\Components\Nginx\Config;
     $allow_only_local_access = $nginxConfig->isAllowedOnlyLocalAccess();
 
     // form
@@ -242,9 +243,9 @@ function update_nginx_access_state()
 
     $nginxConfig = new \Webinterface\Components\Nginx\Config;
 
-    if($toggle_state === 'allow_access_from_any_computer') {
+    if ($toggle_state === 'allow_access_from_any_computer') {
         $nginxConfig->allowAccessFromAnyComputer();
-    } elseif($toggle_state === 'allow_only_local_access') {
+    } elseif ($toggle_state === 'allow_only_local_access') {
         $nginxConfig->allowOnlyLocalAccess();
     } else {
         throw new \Exception('The "nginx_access_toggle" value is missing!');
@@ -267,7 +268,7 @@ function renderExtensionsFormContent($zendExtensions = false)
 {
     $extensionManager = new Webinterface\Helper\PHPExtensionManager();
 
-    if($zendExtensions === true) {
+    if ($zendExtensions === true) {
         $available_extensions = $extensionManager->getZendExtensions();
         $enabled_extensions   = $extensionManager->getEnabledZendExtensions();
     } else {
@@ -276,9 +277,9 @@ function renderExtensionsFormContent($zendExtensions = false)
     }
 
     $html_checkboxes = '';
-    $i = 1; // start at first element
-    $itemsTotal = count($available_extensions); // elements total
-    $itemsPerColumn = ceil($itemsTotal/4);
+    $i               = 1; // start at first element
+    $itemsTotal      = count($available_extensions); // elements total
+    $itemsPerColumn  = ceil($itemsTotal / 4);
 
     // use list of available_extensions to draw checkboxes
     foreach ($available_extensions as $name => $file) {
@@ -309,17 +310,17 @@ function renderExtensionsFormContent($zendExtensions = false)
         $itemsTotal--;
     }
 
-   if (isAjaxRequest() and !isset($_GET['tab'])) {
-       echo $html_checkboxes;
-   } else {
-       return $html_checkboxes;
-   }
+    if (isAjaxRequest() && !isset($_GET['tab'])) {
+        echo $html_checkboxes;
+    } else {
+        return $html_checkboxes;
+    }
 }
 
 function update_phpini_setting()
 {
     $directive = filter_input(INPUT_POST, 'directive');
-    $value = filter_input(INPUT_POST, 'value');
+    $value     = filter_input(INPUT_POST, 'value');
 
     // @todo figure out, if we need to set a ini [section], in order to save the directive correctly?
     // @see IniReaderWriter::set() $section is not used there
@@ -349,14 +350,14 @@ function renderPhpVersionSwitcherForm()
 
     $options = '';
     foreach ($versionFolders as $folder) {
-        $options .= '<option value="' . $folder['php-version'] . '"';
+        $options .= '<option value="'.$folder['php-version'].'"';
         $options .= ($folder['php-version'] === $currentVersion) ? ' selected' : '';
-        $options .= '>' . $folder['php-version'] . '</option>';
+        $options .= '>'.$folder['php-version'].'</option>';
     }
 
     $html = '<form id="php-version-switcher-form" action="index.php?page=config&action=update_phpversionswitch" method="POST">';
 
-    $html .= '<p><select name="new-php-version" size="' . $number_php_versions . '">';
+    $html .= '<p><select name="new-php-version" size="'.$number_php_versions.'">';
     $html .= $options;
     $html .= '</select></p>';
 

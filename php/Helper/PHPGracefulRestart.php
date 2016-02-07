@@ -10,9 +10,6 @@
 
 namespace Webinterface\Helper;
 
-use Webinterface\Helper\PHPExtensionManager;
-use Webinterface\Helper\Daemon;
-
 class PHPGracefulRestart
 {
     /**
@@ -51,23 +48,21 @@ class PHPGracefulRestart
     public static function deactivateExtensionsWithStartupErrors()
     {
         // (4) start PHP on CLI and get stdout
-        exec(WPNXM_BIN . "php\php.exe -v", $stdout);
+        exec(WPNXM_BIN."php\php.exe -v", $stdout);
 
-        if(isset($stdout) && is_array($stdout))
-        {
+        if (isset($stdout) && is_array($stdout)) {
             // (5) parse output lines and get the extension name
-            foreach($stdout as $idx => $line)
-            {
-                if($line === '') {
+            foreach ($stdout as $idx => $line) {
+                if ($line === '') {
                     continue;
                 }
 
-                if(strpos($line, 'Unable to load dynamic library') !== false) {
+                if (strpos($line, 'Unable to load dynamic library') !== false) {
                     /**
                      * $line = "PHP Warning:  PHP Startup: Unable to load dynamic library 'ext\php_odbc.dll'"
                      * $matches[1] = "php_odbc"
                      */
-                    if(preg_match("#\'\\w+(.*).dll\'#i", $line, $matches)) {
+                    if (preg_match("#\'\\w+(.*).dll\'#i", $line, $matches)) {
                         $extension = str_replace('\\', '', $matches[1]);
 
                         // (6) write extension name to JSON file for informing the user
@@ -87,7 +82,7 @@ class PHPGracefulRestart
      */
     public static function logExtensionError($data)
     {
-        $logfile = WPNXM_DIR . '\logs\php_startup_errors.json';
+        $logfile = WPNXM_DIR.'\logs\php_startup_errors.json';
 
         self::appendJsonFile($logfile, $data);
     }
@@ -99,8 +94,8 @@ class PHPGracefulRestart
     {
         $handle = fopen($filename, 'a+');
 
-        if(!$handle) {
-            throw new \Exception('Error getting file handle: ' . $file);
+        if (!$handle) {
+            throw new \Exception('Error getting file handle: '.$file);
         }
 
         fseek($handle, 0, SEEK_END); // seek to the end

@@ -14,9 +14,9 @@ class PHPVersionSwitch
 {
     public static function switchVersion($newVersion)
     {
-        $targetFolder     = WPNXM_BIN . 'php';
-        $newVersionFolder = WPNXM_BIN . 'php-' . $newVersion;
-        $oldVersionFolder = WPNXM_BIN . 'php-' . PHP_VERSION;
+        $targetFolder     = WPNXM_BIN.'php';
+        $newVersionFolder = WPNXM_BIN.'php-'.$newVersion;
+        $oldVersionFolder = WPNXM_BIN.'php-'.PHP_VERSION;
 
         if (is_dir($targetFolder) === false) {
             throw new \Exception(sprintf(
@@ -59,10 +59,10 @@ class PHPVersionSwitch
      */
     public static function checkForPhpIni($folder)
     {
-        $ini    = $folder . DS .'php.ini';
-        $iniDev = $folder . DS .'php.ini-development';
+        $ini    = $folder.DS.'php.ini';
+        $iniDev = $folder.DS.'php.ini-development';
 
-        if(false === is_file($ini) && true === is_file($iniDev)) {
+        if (false === is_file($ini) && true === is_file($iniDev)) {
             if (!copy($iniDev, $ini)) {
                 throw new \Exception(sprintf('Renaming (%s) to (%s) failed.', $iniDev, $ini));
             }
@@ -81,26 +81,26 @@ class PHPVersionSwitch
         $paths = array_unique($paths);
 
         // remove "non existing" paths
-        foreach($paths as $key => $path) {
-            if(!is_dir($path)) {
+        foreach ($paths as $key => $path) {
+            if (!is_dir($path)) {
                 unset($paths[$key]);
             }
         }
 
         $paths[] = $folder;
 
-        putenv('PATH=' . implode(';', $paths));
+        putenv('PATH='.implode(';', $paths));
     }
 
     public static function getPhpVersionFromFolder($dir)
     {
-        if(!is_file($dir . '\php.exe')) {
+        if (!is_file($dir.'\php.exe')) {
             return '0.0.0'; // php.exe was not found
         }
 
-        $enableErrorLogging = ' -d log_errors=on -d error_log=' . WPNXM_DIR . 'logs\php_error.log';
+        $enableErrorLogging = ' -d log_errors=on -d error_log='.WPNXM_DIR.'logs\php_error.log';
 
-        $out = shell_exec($dir . '\php.exe -v' . $enableErrorLogging);
+        $out = shell_exec($dir.'\php.exe -v'.$enableErrorLogging);
 
         preg_match('#PHP\s((\d+\.\d+\.\d+)((?:(alpha|beta|rc)\d+))?)\s\(cli\)#i', $out, $matches);
 
@@ -111,7 +111,7 @@ class PHPVersionSwitch
 
     public static function getCurrentVersion()
     {
-        return self::getPhpVersionFromFolder(WPNXM_BIN . 'php');
+        return self::getPhpVersionFromFolder(WPNXM_BIN.'php');
     }
 
     /**
@@ -128,7 +128,7 @@ class PHPVersionSwitch
 
     public static function getPhpFolders()
     {
-        return glob(WPNXM_BIN . 'php*', GLOB_ONLYDIR);
+        return glob(WPNXM_BIN.'php*', GLOB_ONLYDIR);
     }
 
     public static function determinePhpVersions()
@@ -136,13 +136,12 @@ class PHPVersionSwitch
         $folders = self::getPhpFolders();
 
         // fetch php version from all php folders
-        foreach($folders as $key => $folder) {
-
+        foreach ($folders as $key => $folder) {
             $phpVersion = self::getPhpVersionFromFolder($folder);
 
             $folders[$key] = [
-                'dir' => $folder,
-                'php-version' => $phpVersion
+                'dir'         => $folder,
+                'php-version' => $phpVersion,
             ];
         }
 
@@ -151,11 +150,12 @@ class PHPVersionSwitch
 
     public static function removeInvalidFolders(array $folders)
     {
-        foreach ($folders as $key => $folder){
-            if($folder['php-version'] === '0.0.0') {
+        foreach ($folders as $key => $folder) {
+            if ($folder['php-version'] === '0.0.0') {
                 unset($folders[$key]);
             }
         }
+
         return $folders;
     }
 
@@ -170,10 +170,9 @@ class PHPVersionSwitch
         array_shift($folders);
 
         // rename all other crude "php" folder names into "php-{version}" folder
-        foreach($folders as $key => $folder) {
-
-            if(false === strpos($folder['dir'], $folder['php-version'])) {
-                $newFolderName = WPNXM_BIN . 'php-' . $folder['php-version'];
+        foreach ($folders as $key => $folder) {
+            if (false === strpos($folder['dir'], $folder['php-version'])) {
+                $newFolderName = WPNXM_BIN.'php-'.$folder['php-version'];
 
                 // chmod, because the folder might be hidden or write protected
                 self::chmodDeep($folder['dir'], 0755);

@@ -47,7 +47,7 @@ class IniReaderWriter
                 $this->lines[] = ['type' => 'comment', 'data' => $line];
             // section
             } elseif (preg_match('/\[(.*)\]/', $line, $match)) {
-                $section = $match[1];
+                $section       = $match[1];
                 $this->lines[] = ['type' => 'section', 'data' => $line, 'section' => $section];
             // entry
             } elseif (preg_match('/^\s*(.*?)\s*=\s*(.*?)\s*$/', $line, $match)) {
@@ -64,17 +64,16 @@ class IniReaderWriter
      */
     public function get($section, $key)
     {
-        foreach ($this->lines as $line)
-        {
-            if($line['type'] !== 'entry') {
+        foreach ($this->lines as $line) {
+            if ($line['type'] !== 'entry') {
                 continue;
             }
 
-            if($line['section'] != strtolower($section)) {
+            if ($line['section'] != strtolower($section)) {
                 continue;
             }
 
-            if($line['key'] != $key) {
+            if ($line['key'] != $key) {
                 continue;
             } else {
                 return $line['value'];
@@ -90,15 +89,15 @@ class IniReaderWriter
     public function set($section, $key, $value)
     {
         foreach ($this->lines as &$line) {
-            if($line['type'] != 'entry') {
+            if ($line['type'] != 'entry') {
                 continue;
             }
             //if($line['section'] != $section) continue;
-            if($line['key'] != $key) {
+            if ($line['key'] != $key) {
                 continue;
             }
             $line['value'] = $value;
-            $line['data'] = $key . " = " . $value . "\r\n";
+            $line['data']  = $key.' = '.$value."\r\n";
 
             return;
         }

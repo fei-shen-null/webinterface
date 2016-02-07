@@ -14,17 +14,17 @@ use Webinterface\Components\AbstractConfig;
 
 class Config extends AbstractConfig
 {
-    public $nginxConfigFile = WPNXM_BIN . '\nginx\conf\nginx.conf';
+    public $nginxConfigFile = WPNXM_BIN.'\nginx\conf\nginx.conf';
 
     public function isAllowedOnlyLocalAccess()
     {
         $config = $this->readNginxConfig();
 
-        if(preg_match('/(^\s+)(listen)\s+(\d+\.\d+\.\d+\.\d+\:80\;)/m', $config)) {
+        if (preg_match('/(^\s+)(listen)\s+(\d+\.\d+\.\d+\.\d+\:80\;)/m', $config)) {
             return true; //
         }
 
-        if(preg_match('/(^\s+)(listen\s+80\;)/m', $config)) {
+        if (preg_match('/(^\s+)(listen\s+80\;)/m', $config)) {
             return false; // allowAccessFromAnyComputer
         }
 

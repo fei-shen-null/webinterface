@@ -36,28 +36,31 @@ To enable an extension, check it's checkbox. To disable an extension, uncheck it
     </div>
 </form>
 
-<script>
+<script type="text/javascript">
+$(function() {
 
-handlePHPExtensionsForm();
-handleZendExtensionsForm();
+    handlePHPExtensionsForm();
+    handleZendExtensionsForm();
 
-jQuery.fn.extend({
-    // extend jQuery with a "pulsate" function
-    // Usage: http://jsfiddle.net/nick_craver/HHWBv/
-    pulsate: function() {
-        var obj = $(this);
-        // pulsate 3 times
-        for(var i=0; i<2; i++) {
-          obj.animate({opacity: 0.2}, 1000, 'linear')
-             .animate({opacity: 1}, 1000, 'linear');
+    jQuery.fn.extend({
+        // extend jQuery with a "pulsate" function
+        // Usage: http://jsfiddle.net/nick_craver/HHWBv/
+        pulsate: function() {
+            var obj = $(this);
+            // pulsate 3 times
+            for(var i=0; i<2; i++) {
+              obj.animate({opacity: 0.2}, 1000, 'linear')
+                 .animate({opacity: 1}, 1000, 'linear');
+            }
+            // pulsate 1 more, then hide
+            obj.animate({opacity: 0.2}, 1000, 'linear')
+               .animate({opacity: 1}, 1000, 'linear', function() {
+                obj.hide();
+            });
+        return obj;
         }
-        // pulsate 1 more, then hide
-        obj.animate({opacity: 0.2}, 1000, 'linear')
-           .animate({opacity: 1}, 1000, 'linear', function() {
-            obj.hide();
-        });
-    return obj;
-    }
+    });
+
 });
 
 // wait for the DOM to be loaded
@@ -126,6 +129,8 @@ function handleZendExtensionsForm() {
         var jsonData = responseText;
         var ajaxStatus = '#zendext-ajax-status';
 
+        console.log(jsonData);
+
         // after a change to php ini, we are indicating the change and the PHP daemon restart
         // by showing the ajax status
         $(ajaxStatus).html(jsonData.responseText).removeClass('hide').show().pulsate();
@@ -136,17 +141,18 @@ function handleZendExtensionsForm() {
         // there might be a change in the on/off state of extensions.
         // fetch their state as HTML checkbox display
         var updateZendExtensionsForm = function() {
-            $.ajax({ url: "index.php?page=config&action=renderZendExtensionsFormContent",
-                success: function(data, textStatus, XMLHttpRequest) {
-                    $("#zendExtensionsFormContent").html(data);
-                    $(ajaxStatus).hide().addClass('hide');
-            }});
+            $.ajax({
+              url: "index.php?page=config&action=renderZendExtensionsFormContent"
+            }).done(function(html) {
+              $("#zendExtensionsFormContent").html(html);
+              $(ajaxStatus).hide().addClass('hide');
+            });
         }
 
         // delayed call, because PHP needs to startup again
         setTimeout(updateZendExtensionsForm, 2200);
     }
-}; // END of handlePHPExtensionsForm()
+}; // ./ handlePHPExtensionsForm()
 
 // wait for the DOM to be loaded
 function handlePHPExtensionsForm() {
@@ -214,6 +220,8 @@ function handlePHPExtensionsForm() {
         var jsonData = responseText;
         var ajaxStatus = '#phpext-ajax-status';
 
+        console.log(jsonData);
+
         // after a change to php ini, we are indicating the change and the PHP daemon restart
         // by showing the ajax status
         $(ajaxStatus).html(jsonData.responseText).removeClass('hide').show().pulsate();
@@ -224,16 +232,16 @@ function handlePHPExtensionsForm() {
         // there might be a change in the on/off state of extensions.
         // fetch their state as HTML checkbox display
         var updatePHPExtensionsForm = function() {
-            $.ajax({ url: "index.php?page=config&action=renderPHPExtensionsFormContent",
-                success: function(data, textStatus, XMLHttpRequest) {
-                    $("#phpExtensionsFormContent").html(data);
-                    $(ajaxStatus).hide().addClass('hide');
-            }});
+            $.ajax({
+                url: "index.php?page=config&action=renderPHPExtensionsFormContent"
+            }).done(function(html) {
+              $("#phpExtensionsFormContent").html(html);
+              $(ajaxStatus).hide().addClass('hide')
+            });
         }
 
         // delayed call, because PHP needs to startup again
         setTimeout(updatePHPExtensionsForm, 2200);
     }
-}; // END of handlePHPExtensionsForm()
-
+}; // ./ handlePHPExtensionsForm()
 </script>

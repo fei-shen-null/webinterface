@@ -23,7 +23,7 @@ class Memcached extends AbstractComponent
 
     public $files = [
         '\bin\memcached\memcached.exe',
-        '\bin\memcached\pthreadGC2.dll'
+        '\bin\memcached\pthreadGC2.dll',
     ];
 
     /**
@@ -33,7 +33,7 @@ class Memcached extends AbstractComponent
      */
     public function getVersion()
     {
-        if($this->isInstalled() === false) {
+        if ($this->isInstalled() === false) {
             return 'not installed';
         }
 
@@ -45,12 +45,12 @@ class Memcached extends AbstractComponent
 
         // hardcoded for now
         $server = 'localhost';
-        $port = 11211;
+        $port   = 11211;
 
         $memcache = new \Memcache;
         $memcache->addServer($server, $port);
 
-        $version = @$memcache->getVersion();
+        $version   = @$memcache->getVersion();
         $available = (bool) $version;
 
         if ($available && @$memcache->connect($server, $port)) {

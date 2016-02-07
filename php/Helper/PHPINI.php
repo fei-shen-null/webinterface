@@ -10,8 +10,6 @@
 
 namespace Webinterface\Helper;
 
-use Webinterface\Helper\INIReaderWriter;
-
 /**
  * Wrapper for handling php.ini with ini class.
  */
@@ -49,7 +47,7 @@ class PHPINI
     public static function doBackup($file)
     {
         $newFilename = str_replace('.ini', '', $file);
-        $newFilename .= '-backup-' . date("dmy-His") . '.ini';
+        $newFilename .= '-backup-'.date('dmy-His').'.ini';
         copy($file, $newFilename); // backup current registry
         self::removeOldBackupFiles();
 
@@ -61,8 +59,8 @@ class PHPINI
      */
     public static function removeOldBackupFiles()
     {
-        $files = glob(WPNXM_BIN . 'php\php-backup-*.ini');
-        $c = count($files);
+        $files = glob(WPNXM_BIN.'php\php-backup-*.ini');
+        $c     = count($files);
         if ($c > 3) {
             rsort($files);
             for ($i = 3; $i <= $c; $i++) {
@@ -70,5 +68,4 @@ class PHPINI
             }
         }
     }
-
 }

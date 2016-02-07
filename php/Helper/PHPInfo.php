@@ -1,4 +1,14 @@
 <?php
+
+/*
+ * WPИ-XM Server Stack
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
+ * http://wpn-xm.org/
+ *
+ * This source file is subject to the terms of the MIT license.
+ * For full copyright and license information, view the bundled LICENSE file.
+ */
+
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
@@ -33,24 +43,24 @@ class PHPInfo
      * When settings $strip_tags true, the phpinfo body content is
      * further reduced for better and faster processing with preg_match().
      *
-     * @param boolean Strips tags from content when true.
+     * @param bool Strips tags from content when true.
      * @return string phpinfo
      */
     public static function getPHPInfo($strip_tags = false)
     {
-        $matches = '';
+        $matches          = '';
         $buffered_phpinfo = self::getPHPInfoContent();
 
         # only the body content
-        preg_match("#<body[^>]*>(.*)</body>#simU", $buffered_phpinfo, $matches);
+        preg_match('#<body[^>]*>(.*)</body>#simU', $buffered_phpinfo, $matches);
         $phpinfo = $matches[1];
 
         # enhance the readability of items
-        $phpinfo = str_replace(";", "; ", $phpinfo);      // semicolon separated items
+        $phpinfo = str_replace(';', '; ', $phpinfo);      // semicolon separated items
         $phpinfo = str_replace('&quot;', '"', $phpinfo);
 
         // compile options, remove quotes and add line-break before
-        $phpinfo = preg_replace("#\"\s(--.*)\"#simU", "<br>$1", $phpinfo);
+        $phpinfo = preg_replace("#\"\s(--.*)\"#simU", '<br>$1', $phpinfo);
 
         if ($strip_tags === true) {
             $phpinfo = strip_tags($phpinfo);
@@ -64,11 +74,11 @@ class PHPInfo
 
         # grab all php extensions for display in an additional table
         $match_modules = [];
-        preg_match_all("^(?:module_)(.*)\"^", $buffered_phpinfo, $match_modules, PREG_SET_ORDER);
+        preg_match_all('^(?:module_)(.*)"^', $buffered_phpinfo, $match_modules, PREG_SET_ORDER);
 
         // create 4 lists from the whole extensions result set
         $modlists = [];
-        $i = 0;
+        $i        = 0;
         foreach ($match_modules as $mod) {
             $modlists[($i % 4)][] = $mod;
             $i++;
@@ -81,12 +91,12 @@ class PHPInfo
             $html .= '<div class="col-md-3"><ul class="list-group">';
             foreach ($modlist as $mod) {
                 $html .= '<li class="list-group-item margin-2">';
-                $html .= '<a href="#module_' . $mod[1] . '">' . $mod[1] . '</a></li>';
+                $html .= '<a href="#module_'.$mod[1].'">'.$mod[1].'</a></li>';
             }
             $html .= '</ul></div>';
         }
         $html .= '</div></div>'; // why is this needed?
 
-        return $html . $phpinfo;
+        return $html.$phpinfo;
     }
 }

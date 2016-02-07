@@ -33,29 +33,29 @@ class Domains
             exit(sprintf('<div class="error bold" style="font-size: 13px; width: 500px;">
                 %snginx.conf does not include the config files of the domains-enabled folder.<br><br>
                     Please add "include domains-enabled/*;" to "nginx.conf".</div>',
-                WPNXM_DIR . '\bin\nginx\conf\\'));
+                WPNXM_DIR.'\bin\nginx\conf\\'));
         }
 
-        $enabledDomains  = glob(WPNXM_DIR . '\bin\nginx\conf\domains-enabled\*.conf');
-        $disabledDomains = glob(WPNXM_DIR . '\bin\nginx\conf\domains-disabled\*.conf');
+        $enabledDomains  = glob(WPNXM_DIR.'\bin\nginx\conf\domains-enabled\*.conf');
+        $disabledDomains = glob(WPNXM_DIR.'\bin\nginx\conf\domains-disabled\*.conf');
 
         $domains = [];
 
         foreach ($enabledDomains as $idx => $file) {
-            $domain = basename($file, '.conf');
+            $domain           = basename($file, '.conf');
             $domains[$domain] = [
                 'fullpath' => $file,
                 'filename' => basename($file),
-                'enabled'  => true
+                'enabled'  => true,
             ];
         }
 
         foreach ($disabledDomains as $idx => $file) {
-            $domain = basename($file, '.conf');
+            $domain           = basename($file, '.conf');
             $domains[$domain] = [
                 'fullpath' => $file,
                 'filename' => basename($file),
-                'enabled'  => false
+                'enabled'  => false,
             ];
         }
 
@@ -65,11 +65,11 @@ class Domains
     /**
      * Check, if nginx.conf contains the line to load all enabled domains.
      *
-     * @return boolean True, if line exists, so domains get loaded. Otherwise, false.
+     * @return bool True, if line exists, so domains get loaded. Otherwise, false.
      */
     public static function areEnabledDomainsLoadedByNginxConf()
     {
-        $lines = file(WPNXM_DIR . '\bin\nginx\conf\nginx.conf');
+        $lines = file(WPNXM_DIR.'\bin\nginx\conf\nginx.conf');
 
         foreach ($lines as $line) {
             // return true, if the line exists and is not commented
@@ -82,5 +82,4 @@ class Domains
 
         return false;
     }
-
 }

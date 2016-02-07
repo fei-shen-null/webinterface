@@ -7,7 +7,6 @@
  * This source file is subject to the terms of the MIT license.
  * For full copyright and license information, view the bundled LICENSE file.
  */
-
 function index()
 {
     $projects = new Webinterface\Helper\Projects();
@@ -17,7 +16,7 @@ function index()
         'numberOfProjects'        => $projects->getNumberOfProjects(),
         'listProjects'            => $projects->listProjects(),
         'numberOfTools'           => $projects->getNumberOfTools(),
-        'listTools'               => $projects->listTools()
+        'listTools'               => $projects->listTools(),
     ];
 
     render('page-action', $tpl_data);
@@ -26,7 +25,7 @@ function index()
 function create()
 {
     $tpl_data = [
-        'no_layout' => true
+        'no_layout' => true,
     ];
 
     render('page-action', $tpl_data);
@@ -38,7 +37,7 @@ function edit()
 
     $tpl_data = [
         'no_layout' => true,
-        'project' => $project
+        'project'   => $project,
     ];
 
     render('page-action', $tpl_data);
@@ -62,10 +61,10 @@ function createproject()
             break;
     }
 
-    if(mkdir(WPNXM_WWW_DIR . DS . $project, 0777)) {
-       header('Project created', true, '200');
+    if (mkdir(WPNXM_WWW_DIR.DS.$project, 0777)) {
+        header('Project created', true, '200');
     } else {
-       header('Project not created.', true, '500');
+        header('Project not created.', true, '500');
     }
 
     exit;
@@ -73,7 +72,7 @@ function createproject()
 
 function settings()
 {
-   $project = filter_input(INPUT_GET, 'project');
+    $project = filter_input(INPUT_GET, 'project');
 
-   echo $project;
+    echo $project;
 }

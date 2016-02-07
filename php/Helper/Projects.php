@@ -35,7 +35,7 @@ class Projects
         //'webinterface'    => '', // wpn-xm webinterface
         'wincache'          => '',
         'xcache'            => '',
-        'xhprof'            => 'xhprof/xhprof_html'
+        'xhprof'            => 'xhprof/xhprof_html',
     ];
 
     public function __construct()
@@ -59,7 +59,7 @@ class Projects
                 continue;
             }
 
-            if (is_dir(WPNXM_WWW_DIR . $dir) === true) {
+            if (is_dir(WPNXM_WWW_DIR.$dir) === true) {
                 $dirs[] = $dir;
             }
         }
@@ -73,7 +73,7 @@ class Projects
     public function listProjects()
     {
         if ($this->getNumberOfProjects() === 0) {
-            return "No project dirs found.";
+            return 'No project dirs found.';
         }
 
         $html = '<ul class="list-group text-left">';
@@ -81,7 +81,7 @@ class Projects
         foreach ($this->projectFolders as $dir) {
             // always display the folder
             $html .= '<li class="list-group-item">';
-            $html .= '<a class="folder" href="' . WPNXM_ROOT . $dir . '">' . $dir . '</a>';
+            $html .= '<a class="folder" href="'.WPNXM_ROOT.$dir.'">'.$dir.'</a>';
 
             if (FEATURE_4 === true) {
                 $html .= $this->renderSettingsLink($dir);
@@ -91,7 +91,7 @@ class Projects
             $html .= '</li>';
         }
 
-        return $html . '</ul>';
+        return $html.'</ul>';
     }
 
     public function listTools()
@@ -101,20 +101,19 @@ class Projects
         $html = '';
 
         foreach ($this->toolDirectories as $dir => $href) {
-
-            $link = ($href === '') ? (WPNXM_ROOT . 'tools/' . $dir) : (WPNXM_ROOT . 'tools/' . $href);
+            $link = ($href === '') ? (WPNXM_ROOT.'tools/'.$dir) : (WPNXM_ROOT.'tools/'.$href);
 
             $html .= '<li class="list-group-item">';
-            $html .= '<a class="folder" href="'.$link.'">' . $dir . '</a>';
+            $html .= '<a class="folder" href="'.$link.'">'.$dir.'</a>';
             $html .= '</li>';
         }
 
         // write the html list to file. this acts as a cache for the tools topmenu.
         // the file is rewritten each time "Tools & Projects" is opened,
         // because the user might have deleted or installed a new tool.
-        file_put_contents(WPNXM_DATA_DIR . 'tools-topmenu.html', $html);
+        file_put_contents(WPNXM_DATA_DIR.'tools-topmenu.html', $html);
 
-        return '<ul class="list-group text-left">' . $html . '</ul>';
+        return '<ul class="list-group text-left">'.$html.'</ul>';
     }
 
     /**
@@ -131,10 +130,10 @@ class Projects
          * display a home link using the homepage attribute
          */
         if (true === $this->hasComposerConfig($dir)) {
-            $composer = json_decode(file_get_contents(WPNXM_WWW_DIR . $dir . '/composer.json'), true);
+            $composer = json_decode(file_get_contents(WPNXM_WWW_DIR.$dir.'/composer.json'), true);
 
-            if(isset($composer['homepage']) === true) {
-                $html .= '<a class="btn btn-default btn-xs" href="' . $composer['homepage'] . '">';
+            if (isset($composer['homepage']) === true) {
+                $html .= '<a class="btn btn-default btn-xs" href="'.$composer['homepage'].'">';
                 $html .= '<i class="large home icon"></i>';
                 $html .= '</a>';
             }
@@ -146,15 +145,15 @@ class Projects
          * If the project folder contains a ".git/config" file
          * with a github repo link, display a "github.com" link.
          */
-        if(true === $this->isGitRepoAndHostedOnGithub($dir)) {
-            if(isset($composer['name']) === true) {
-                $githubLink = 'https://github.com/' . $composer['name'];
+        if (true === $this->isGitRepoAndHostedOnGithub($dir)) {
+            if (isset($composer['name']) === true) {
+                $githubLink = 'https://github.com/'.$composer['name'];
             } else {
-                $githubLink = 'https://github.com/' . $this->getProjectNameFromGitConfig($dir);
+                $githubLink = 'https://github.com/'.$this->getProjectNameFromGitConfig($dir);
             }
 
             $html .= '<a class="btn btn-default btn-xs" href="'.$githubLink.'">';
-            $html .= '<img src="' . WPNXM_IMAGES_DIR . 'github-mark.png" style="height: 18px; width: 17px;" />';
+            $html .= '<img src="'.WPNXM_IMAGES_DIR.'github-mark.png" style="height: 18px; width: 17px;" />';
             $html .= '</a>';
         }
 
@@ -205,24 +204,25 @@ class Projects
             $html .= '</a></li></ul>';
         }*/
 
-        return $html . '</div>';
+        return $html.'</div>';
     }
 
     public function readProjectGitConfig($dir)
     {
-        return file_get_contents(WPNXM_WWW_DIR . $dir . '/.git/config');
+        return file_get_contents(WPNXM_WWW_DIR.$dir.'/.git/config');
     }
 
     public function getProjectNameFromGitConfig($dir)
     {
         $gitConfig = $this->readProjectGitConfig($dir);
         preg_match('#github.com(?:\:|/)(.*).git#i', $gitConfig, $matches);
+
         return $matches[1];
     }
 
     public function isGitRepoAndHostedOnGithub($dir)
     {
-        if($this->hasGitConfig($dir) === true) {
+        if ($this->hasGitConfig($dir) === true) {
             $gitConfig = $this->readProjectGitConfig($dir);
             if (false !== strpos($gitConfig, 'github')) {
                 return true;
@@ -238,8 +238,8 @@ class Projects
 
         $context = stream_context_create([
             'http' => [
-                'ignore_errors' => true
-            ]
+                'ignore_errors' => true,
+            ],
         ]);
 
         // silenced: because this throws a warning, if offline
@@ -247,9 +247,9 @@ class Projects
 
         $array = json_decode($json, true);
 
-        if(isset($array['status']) && $array['status'] === 'error') {
+        if (isset($array['status']) && $array['status'] === 'error') {
             \Webinterface\Helper\Serverstack::printExclamationMark(
-                'The request to packagist.org failed. This might be a service problem.' .
+                'The request to packagist.org failed. This might be a service problem.'.
                 ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
             );
         }
@@ -261,7 +261,7 @@ class Projects
      * Returns the correct "package name" for building a Travis-CI or Github URL
      * This returns [package][repository] instead of [name], which is lowercased.
      */
-    public function getPackageName(array $packageDescription = array())
+    public function getPackageName(array $packageDescription = [])
     {
         return str_replace('https://github.com/', '', $packageDescription['package']['repository']);
     }
@@ -272,7 +272,7 @@ class Projects
 
         // display "settings" cog wheel for this project. Modal shows a configuration screen "per project".
         $html .= '<a class="btn-new-domain floatright" data-toggle="modal" data-target="#myModal" ';
-        $html .= ' href="' . WPNXM_WEBINTERFACE_ROOT . 'index.php?page=projects&action=edit&project=' . $dir . '">';
+        $html .= ' href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=projects&action=edit&project='.$dir.'">';
         $html .= '<i class="glyphicon glyphicon-cog"></i></a>';
 
         /*if (false === $this->isDomain($dir)) {
@@ -293,22 +293,22 @@ class Projects
      */
     public function isDomain($dir)
     {
-        return is_file(WPNXM_DIR . '/bin/nginx/conf/domains/' . $dir . '.conf');
+        return is_file(WPNXM_DIR.'/bin/nginx/conf/domains/'.$dir.'.conf');
     }
 
     public function hasTravisConfig($dir)
     {
-        return is_file(WPNXM_WWW_DIR . $dir . '/.travis.yml');
+        return is_file(WPNXM_WWW_DIR.$dir.'/.travis.yml');
     }
 
     public function hasComposerConfig($dir)
     {
-        return is_file(WPNXM_WWW_DIR . $dir . '/composer.json');
+        return is_file(WPNXM_WWW_DIR.$dir.'/composer.json');
     }
 
     public function hasGitConfig($dir)
     {
-        return is_file(WPNXM_WWW_DIR . $dir . '/.git/config');
+        return is_file(WPNXM_WWW_DIR.$dir.'/.git/config');
     }
 
     /**
@@ -319,7 +319,7 @@ class Projects
     public function checkWhichToolsAreInstalled()
     {
         foreach ($this->toolDirectories as $dir => $href) {
-            if (is_dir(WPNXM_WWW_DIR . 'tools\\' . $dir) === false) {
+            if (is_dir(WPNXM_WWW_DIR.'tools\\'.$dir) === false) {
                 unset($this->toolDirectories[$dir]);
             }
         }

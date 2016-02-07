@@ -20,7 +20,7 @@
 
                     $checked = (isset($domain['enabled']) && $domain['enabled'] === true) ? 'checked="checked"' : '';
 
-                    echo '<tr><td><input type="checkbox" ' . $checked . '></td><td>' . $domain['filename'] . '</td>
+                    echo '<tr><td><input type="checkbox" '.$checked.'></td><td>'.$domain['filename'].'</td>
                           <td><a href="/webinterface/index.php?page=openfile&file='.$domain['filename'].'"Open in Editor</a></td></tr>';
                 }
             } else {

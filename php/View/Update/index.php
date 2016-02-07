@@ -2,7 +2,7 @@
 
 <?php
 // display info box, if registry was updated
-if($registry_updated === true) {
+if ($registry_updated === true) {
     echo '<div class="info">The WPN-XM Software Registry was updated.</div>';
 }
 ?>
@@ -18,28 +18,27 @@ echo '<table class="table table-condensed table-hover">
     </tr>
     <tr>
         <td>Windows</td>
-        <td><span style="font-size:14px">' . $windows_version . '(' . $bitsize . ')</span></td>
+        <td><span style="font-size:14px">'.$windows_version.'('.$bitsize.')</span></td>
         <td><span style="font-size:14px">Windows 8.1</span></td>
     </tr>
 </thead>
 ';
 
 foreach ($components as $index => $componentName) {
-
-    if($componentName === 'PEAR') {
+    if ($componentName === 'PEAR') {
         continue;
     }
 
-    $class = '\Webinterface\Components\\'.$componentName;
+    $class     = '\Webinterface\Components\\'.$componentName;
     $component = new $class;
 
     $versionString = $component->getVersion();
-    $version = strlen($versionString) > 10 ? '0.0.0' : $versionString;
+    $version       = strlen($versionString) > 10 ? '0.0.0' : $versionString;
 
     $html = '<tr>
-        <td>' . $component->name . '</td>
-        <td><span style="font-size:14px">' . $versionString . '</span></td>
-        <td>' . printUpdatedSign($component->getRegistryName(), $version, $registry[$component->registryName]['latest']['version']) . '</td>
+        <td>'.$component->name.'</td>
+        <td><span style="font-size:14px">'.$versionString.'</span></td>
+        <td>'.printUpdatedSign($component->getRegistryName(), $version, $registry[$component->registryName]['latest']['version']).'</td>
     </tr>';
 
     $html = str_replace('float:right', 'float:left', $html);
@@ -58,21 +57,21 @@ echo '</table></div></div></div>';
 function printUpdatedSign($component, $old_version, $new_version)
 {
     $url = sprintf(
-        WPNXM_WEBINTERFACE_ROOT . 'index.php?page=update&action=download&component=%s&version=%s',
+        WPNXM_WEBINTERFACE_ROOT.'index.php?page=update&action=download&component=%s&version=%s',
         $component,
         $new_version
     );
 
     if (version_compare($old_version, $new_version) === -1) {
-        $html = '<a href="' . $url . '"';
+        $html = '<a href="'.$url.'"';
         $html .= ' class="download btn btn-success btn-xs" style="font-size: 14px">';
         $html .= '<i class="icon-arrow-up"></i>';
-        $html .= '&nbsp; ' . $new_version . '</a>';
+        $html .= '&nbsp; '.$new_version.'</a>';
 
         return $html;
     }
 
-    return '<span style="font-size:14px">' . $old_version . '</span>';
+    return '<span style="font-size:14px">'.$old_version.'</span>';
 }
 ?>
 

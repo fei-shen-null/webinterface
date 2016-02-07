@@ -11,7 +11,7 @@
 </thead>
 <?php
 foreach ($ini_settings as $setting => $values) {
-    echo '<tr><td>' . $setting . '</td><td>' . $values['global_value'] . '</td></tr>';
+    echo '<tr><td>'.$setting.'</td><td>'.$values['global_value'].'</td></tr>';
 }
 ?>
 </table>

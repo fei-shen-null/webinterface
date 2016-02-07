@@ -19,21 +19,21 @@ class Downloader
      */
     public static function download($url)
     {
-        $file = fopen(WPNXM_TEMP . basename($url), 'w+');
+        $file = fopen(WPNXM_TEMP.basename($url), 'w+');
 
         set_time_limit(0); // unlimited max execution time
 
         $options = [
-            CURLOPT_URL     => $url,
-            CURLOPT_FILE    => $file,
-            CURLOPT_TIMEOUT => 3600 * 2, // set 2h to not timeout on big files
-            CURLOPT_HEADER  => 0,
-            CURLOPT_NOPROGRESS => false,
-            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_URL              => $url,
+            CURLOPT_FILE             => $file,
+            CURLOPT_TIMEOUT          => 3600 * 2, // set 2h to not timeout on big files
+            CURLOPT_HEADER           => 0,
+            CURLOPT_NOPROGRESS       => false,
+            CURLOPT_SSL_VERIFYPEER   => false,
             CURLOPT_PROGRESSFUNCTION => 'curl_progress_callback',
             //CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_BUFFERSIZE => 4096
+            CURLOPT_BUFFERSIZE     => 4096,
         ];
 
         $ch = curl_init();

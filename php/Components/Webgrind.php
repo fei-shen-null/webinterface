@@ -23,20 +23,20 @@ class Webgrind extends AbstractComponent
 
     public $files = [
         '\www\tools\webgrind\config.php',
-        '\www\tools\webgrind\index.php'
+        '\www\tools\webgrind\index.php',
     ];
 
     public function getVersion()
     {
-        if($this->isInstalled() === false) {
+        if ($this->isInstalled() === false) {
             return 'not installed';
         }
 
-        $file = WPNXM_DIR . $this->files[1];
+        $file = WPNXM_DIR.$this->files[1];
 
         $maxLines = 10; // read only the first few lines of the file
 
-        $file_handle = fopen($file, "r");
+        $file_handle = fopen($file, 'r');
 
         for ($i = 0; $i < $maxLines && !feof($file_handle); $i++) {
             $line = fgets($file_handle, 1024);
@@ -44,7 +44,7 @@ class Webgrind extends AbstractComponent
             // static $webgrindVersion = '1.0';
             preg_match("#webgrindVersion = '(.*)'#", $line, $matches);
 
-            if(isset($matches[0])) {
+            if (isset($matches[0])) {
                 break;
             }
         }
@@ -59,14 +59,14 @@ class Webgrind extends AbstractComponent
      */
     public static function setProfilerDataDir($dir = '')
     {
-        if($dir === '') {
+        if ($dir === '') {
             $dir = ini_get('xdebug.profiler_output_dir');
         }
 
-        $file = WPNXM_WWW_DIR . 'webgrind/config.php';
-        $out = '';
+        $file = WPNXM_WWW_DIR.'webgrind/config.php';
+        $out  = '';
 
-        $handle = @fopen($file, "r");
+        $handle = @fopen($file, 'r');
         if ($handle) {
             $line = 0;
             while (!feof($handle)) {
@@ -74,12 +74,12 @@ class Webgrind extends AbstractComponent
                 $linebuffer = fgets($handle);
                 // set storage dir by replacing line 19
                 if ($line === 19) {
-                    $linebuffer = '    static $storageDir = \'' . $dir . "'\n";
+                    $linebuffer = '    static $storageDir = \''.$dir."'\n";
                     continue;
                 }
                 // set profiler dir by replacing line 20
                 if ($line === 20) {
-                    $linebuffer = '    static $profilerDir = \'' . $dir . "'\n";
+                    $linebuffer = '    static $profilerDir = \''.$dir."'\n";
                     continue;
                 }
                 $out .= $linebuffer;
@@ -89,5 +89,4 @@ class Webgrind extends AbstractComponent
 
         return (bool) file_put_contents($file, $out);
     }
-
 }

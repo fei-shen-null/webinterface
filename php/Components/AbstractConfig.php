@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
@@ -17,5 +18,4 @@ namespace Webinterface\Components;
  */
 abstract class AbstractConfig
 {
-
 }

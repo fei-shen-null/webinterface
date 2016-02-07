@@ -14,7 +14,7 @@
                 </tr>
                 <?php
                 foreach ($constants as $name => $value) {
-                    echo '<tr><td>' . $name . '</td>';
+                    echo '<tr><td>'.$name.'</td>';
                     echo '<td>';
                     if ($value === false or $value === 0) {
                         echo 'false';

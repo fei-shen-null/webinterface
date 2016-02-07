@@ -43,7 +43,7 @@ class Serverstack
     {
         $classes = [];
 
-        $files = glob(WPNXM_COMPONENTS_DIR . '*.php');
+        $files = glob(WPNXM_COMPONENTS_DIR.'*.php');
 
         foreach ($files as $file) {
             $pi = pathinfo($file);
@@ -72,9 +72,9 @@ class Serverstack
     /**
      * Get Version - Facade.
      *
-     * @param  string $componentName
-     * @return string
+     * @param  string                    $componentName
      * @throws \InvalidArgumentException
+     * @return string
      */
     public static function getVersion($componentName)
     {
@@ -84,12 +84,12 @@ class Serverstack
     /**
      * Instantiate Component by name
      *
-     * @param string $componentName
+     * @param  string $componentName
      * @return object
      */
     public static function Component($componentName)
     {
-        $componentClass = '\Webinterface\Components\\' . $componentName;
+        $componentClass = '\Webinterface\Components\\'.$componentName;
 
         return new $componentClass;
     }
@@ -103,18 +103,18 @@ class Serverstack
     public static function assertExtensionFileFound($extension)
     {
         $files = [
-            'apc' => 'bin\php\ext\php_apc.dll',
-            'xdebug' => 'bin\php\ext\php_xdebug.dll',
-            'xhprof' => 'bin\php\ext\php_xhprof.dll',
+            'apc'       => 'bin\php\ext\php_apc.dll',
+            'xdebug'    => 'bin\php\ext\php_xdebug.dll',
+            'xhprof'    => 'bin\php\ext\php_xhprof.dll',
             'memcached' => 'bin\php\ext\php_memcache.dll', # file without D
-            'zeromq' => 'bin\php\ext\php_zmq.dll',
-            'mongodb' => 'bin\php\ext\php_mongo.dll',
-            'nginx' => 'bin\nginx\nginx.conf',
-            'mariadb' => 'bin\mariadb\my.ini',
-            'php' => 'bin\php\php.ini',
+            'zeromq'    => 'bin\php\ext\php_zmq.dll',
+            'mongodb'   => 'bin\php\ext\php_mongo.dll',
+            'nginx'     => 'bin\nginx\nginx.conf',
+            'mariadb'   => 'bin\mariadb\my.ini',
+            'php'       => 'bin\php\php.ini',
         ];
 
-        $file = WPNXM_DIR . $files[$extension];
+        $file = WPNXM_DIR.$files[$extension];
 
         return is_file($file);
     }
@@ -138,9 +138,9 @@ class Serverstack
     /**
      * Attempts to establish a connection to the specified port (on localhost)
      *
-     * @param  string  $daemon Daemon/Service name.
-     * @return boolean
+     * @param  string                    $daemon Daemon/Service name.
      * @throws \InvalidArgumentException
+     * @return bool
      */
     public static function portCheck($daemon)
     {
@@ -151,10 +151,10 @@ class Serverstack
             'php'           => '9000',
             'xdebug'        => '9100',
             'mongodb'       => '27017',
-            'mongodb-admin' => '27018'
+            'mongodb-admin' => '27018',
         ];
 
-        if(isset($defaultPorts[$daemon])) {
+        if (isset($defaultPorts[$daemon])) {
             return self::checkPort('127.0.0.1', $defaultPorts[$daemon]);
         }
 
@@ -174,11 +174,11 @@ class Serverstack
         $stateText = (strpos($daemon, 'phpext') !== false) ? 'loaded' : 'running';
 
         if (Daemon::isRunning($daemon) === false) {
-            $img = WPNXM_IMAGES_DIR . 'status_stop.png';
-            $title = self::getDaemonName($daemon) . ' is not ' . $stateText . '!';
+            $img   = WPNXM_IMAGES_DIR.'status_stop.png';
+            $title = self::getDaemonName($daemon).' is not '.$stateText.'!';
         } else {
-            $img = WPNXM_IMAGES_DIR . 'status_run.png';
-            $title = self::getDaemonName($daemon) . ' is ' . $stateText . '.';
+            $img   = WPNXM_IMAGES_DIR.'status_run.png';
+            $title = self::getDaemonName($daemon).' is '.$stateText.'.';
         }
 
         return sprintf(
@@ -204,26 +204,26 @@ class Serverstack
             'xdebug'          => 'PHP Extension XDebug',
         ];
 
-        if(isset($daemons[$daemon])) {
+        if (isset($daemons[$daemon])) {
             return $daemons[$daemon];
         }
 
-        throw new \InvalidArgumentException(sprintf(__METHOD__ . '() no name for the daemon: "%s"', $daemon));
+        throw new \InvalidArgumentException(sprintf(__METHOD__.'() no name for the daemon: "%s"', $daemon));
     }
 
     /**
      * Checks, if a component is installed.
      * A component is installed, when all its files exists.
      *
-     * @param string $component
-     * @return boolean
+     * @param  string                    $component
      * @throws \InvalidArgumentException
+     * @return bool
      */
     public static function isInstalled($component)
     {
         // these components are always installed. base of the server stack.
-        if($component === 'php' or $component === 'nginx' or $component === 'mariadb') {
-                return true;
+        if ($component === 'php' or $component === 'nginx' or $component === 'mariadb') {
+            return true;
         }
 
         return self::Component($component)->isInstalled();
@@ -237,10 +237,10 @@ class Serverstack
      * established, there is a service listening on the port.
      * If the connection fails, there is no service.
      *
-     * @param  string  $host    Hostname
-     * @param  integer $port    Portnumber
-     * @param  integer $timeout Timeout for socket connection in seconds (default is 30).
-     * @return boolean
+     * @param  string $host    Hostname
+     * @param  int    $port    Portnumber
+     * @param  int    $timeout Timeout for socket connection in seconds (default is 30).
+     * @return bool
      */
     public static function checkPort($host, $port, $timeout = 30)
     {
@@ -260,11 +260,11 @@ class Serverstack
      *
      * self::getServiceNameByPort('80')
      *
-     * @param  integer $port     Portnumber
-     * @param  string  $protocol Protocol (Is either tcp or udp. Default is tcp.)
-     * @return string  Name of the Internet service associated with $service
+     * @param  int    $port     Portnumber
+     * @param  string $protocol Protocol (Is either tcp or udp. Default is tcp.)
+     * @return string Name of the Internet service associated with $service
      */
-    public static function getServiceNameByPort($port, $protocol = "tcp")
+    public static function getServiceNameByPort($port, $protocol = 'tcp')
     {
         return @getservbyport($port, $protocol);
     }
@@ -272,11 +272,11 @@ class Serverstack
     /**
      * Get port that a certain service uses.
      *
-     * @param  string  $service  Name of the service
-     * @param  string  $protocol Protocol (Is either tcp or udp. Default is tcp.)
-     * @return integer Internet port which corresponds to $service
+     * @param  string $service  Name of the service
+     * @param  string $protocol Protocol (Is either tcp or udp. Default is tcp.)
+     * @return int    Internet port which corresponds to $service
      */
-    public static function getPortByServiceName($service, $protocol = "tcp")
+    public static function getPortByServiceName($service, $protocol = 'tcp')
     {
         return @getservbyname($service, $protocol);
     }
@@ -292,6 +292,7 @@ class Serverstack
         if (preg_match('/^\d+\.\d+\.\d+\.\d+$/', $ip) === 1) {
             return $ip;
         }
+
         return '0.0.0.0';
     }
 
@@ -299,8 +300,8 @@ class Serverstack
      * Get Password - Facade.
      *
      * @param  string                    $component
-     * @return string                    The Password.
      * @throws \InvalidArgumentException
+     * @return string                    The Password.
      */
     public static function getPassword($component)
     {
@@ -339,22 +340,22 @@ class Serverstack
             'Windows 7'       => '(Windows NT 6.1)',
             'Windows 8'       => '(Windows NT 6.2)',
             'Windows 8.1'     => '(Windows NT 6.3)',
-            'Windows 10'      => '(Windows NT 6.4)|(Windows NT 10.0)'
+            'Windows 10'      => '(Windows NT 6.4)|(Windows NT 10.0)',
         ];
 
         foreach ($regexps as $name => $pattern) {
-            if (preg_match('/' . $pattern . '/i', $useragent)) {
+            if (preg_match('/'.$pattern.'/i', $useragent)) {
                 return $name;
             }
         }
 
-        return 'Unknown (' . $useragent . ')';
+        return 'Unknown ('.$useragent.')';
     }
 
     /**
      * Returns the Bit-Size as integer.
      *
-     * @return integer
+     * @return int
      */
     public static function getBitSize()
     {
@@ -376,7 +377,6 @@ class Serverstack
      */
     public static function getBitSizeString()
     {
-        return self::getBitSize() . 'bit';
+        return self::getBitSize().'bit';
     }
-
 }

@@ -7,7 +7,6 @@
  * This source file is subject to the terms of the MIT license.
  * For full copyright and license information, view the bundled LICENSE file.
  */
-
 use Webinterface\Components\XDebug;
 use Webinterface\Helper\Serverstack;
 
@@ -48,7 +47,7 @@ function index()
       'phpext_xdebug_installed'     => Serverstack::isExtensionInstalled('xdebug'),
       'xdebug_extension_type'       => XDebug::getXDebugExtensionType(),
       'xdebug_profiler_active'      => XDebug::isProfilerActive(),
-      'server_is_nginx'             => (strpos($_SERVER["SERVER_SOFTWARE"], 'nginx') !== false) ? true : false
+      'server_is_nginx'             => (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false) ? true : false,
     ];
 
     render('page-action', $tpl_data);
@@ -57,26 +56,26 @@ function index()
 function stop()
 {
     Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
-    redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
+    redirect(WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
 }
 
 function start()
 {
     Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
-    redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
+    redirect(WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
 }
 
 function restart()
 {
     Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
 
-    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-      // restart - ajax request
+    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        // restart - ajax request
     } else {
-      // restart - non-ajax restart
+        // restart - non-ajax restart
 
       // let windows wait some seconds
       sleep(3);
-      redirect(WPNXM_WEBINTERFACE_ROOT . 'index.php?page=overview');
+        redirect(WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
     }
 }

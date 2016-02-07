@@ -29,7 +29,7 @@ abstract class AbstractComponent
 
     /**
      * @var array Array with all essential files of the component.
-     * For making sure, that the component is installed.
+     *            For making sure, that the component is installed.
      */
     public $files = [];
 
@@ -59,7 +59,7 @@ abstract class AbstractComponent
     {
         $bool = false;
         foreach ($this->files as $file) {
-            $bool = file_exists(WPNXM_DIR . $file);
+            $bool = file_exists(WPNXM_DIR.$file);
             // stop at the first file found
             if ($bool === true && $fast === true) {
                 break;
@@ -96,8 +96,8 @@ abstract class AbstractComponent
 
     public function download($url = '', $targetFolder = '')
     {
-        $url = ($url === '') ? $this->downloadURL : $url;
-        $targetFolder = ($targetFolder === '') ? $this->installationFolder: $targetFolder;
+        $url          = ($url === '') ? $this->downloadURL : $url;
+        $targetFolder = ($targetFolder === '') ? $this->installationFolder : $targetFolder;
     }
 
     /**
@@ -123,9 +123,9 @@ abstract class AbstractComponent
     /**
      * Find out, whether an extension is loaded
      *
-     * @param string $name
-     * @return bool <b>TRUE</b> if the extension identified by <i>name</i>
-     * is loaded, <b>FALSE</b> otherwise.
+     * @param  string $name
+     * @return bool   <b>TRUE</b> if the extension identified by <i>name</i>
+     *                     is loaded, <b>FALSE</b> otherwise.
      */
     public function isExtensionLoaded($name = null)
     {

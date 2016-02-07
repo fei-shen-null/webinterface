@@ -15,26 +15,26 @@ class Viewhelper
     public static function showMenu()
     {
         // fetch HTML fragment for the tools topmenu
-        $tools_list_html = file_get_contents(WPNXM_DATA_DIR . 'tools-topmenu.html');
+        $tools_list_html = file_get_contents(WPNXM_DATA_DIR.'tools-topmenu.html');
 
         $updateLink = (FEATURE_2 === true) ? '<li class="divider"></li><li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>' : '';
 
         $menu = '<div class="main_menu navbar">
                  <ul class="nav">
-                    <li class="first"><a href="' . WPNXM_WEBINTERFACE_ROOT .'index.php?page=overview">Overview</a></li>
+                    <li class="first"><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview">Overview</a></li>
                     <li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=config">Configuration</a></li>
                     <li><a class="active" href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=projects">Projects & Tools</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <b class="caret"></b></a>
                         <ul class="dropdown-menu">'.
-                             $tools_list_html .
+                             $tools_list_html.
                              $updateLink
                              /*. '<li><a href="#">Filter2</a></li>
                              <li class="divider"></li>
                              <li class="nav-header">Nav header</li>
                              <li><a href="#">Filter1</a></li>
                              <li><a href="#">Filter2</a></li>'*/
-                        . '</ul>
+                        .'</ul>
                     </li>
                     <li class="last"><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=phpinfo">PHP Info</a></li>
                 </ul>
@@ -45,7 +45,7 @@ class Viewhelper
 
     public static function showWelcome()
     {
-        if (self::fileCounter(WPNXM_DATA_DIR . '/welcomeMsgCounter.txt', 3) === true) {
+        if (self::fileCounter(WPNXM_DATA_DIR.'/welcomeMsgCounter.txt', 3) === true) {
             return;
         }
 
@@ -69,9 +69,9 @@ class Viewhelper
     /**
      * Uses a file for counting the display times of the welcome message.
      *
-     * @param  string  $file       The file containing the counter.
-     * @param  int     $max_counts The number of times to return false.
-     * @return boolean When the number of max_displays is reached, method will return true; else false;
+     * @param  string $file       The file containing the counter.
+     * @param  int    $max_counts The number of times to return false.
+     * @return bool   When the number of max_displays is reached, method will return true; else false;
      */
     public static function fileCounter($file, $max_counts)
     {
@@ -84,7 +84,7 @@ class Viewhelper
             // read, comparison, incr
             $current = file_get_contents($file);
 
-            if ((int)$current === (int)$max_counts) {
+            if ((int) $current === (int) $max_counts) {
                 return true;
             }
 

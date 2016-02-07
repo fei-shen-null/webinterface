@@ -12,13 +12,13 @@ namespace Webinterface\Helper;
 
 class OpenFile
 {
-   /**
+    /**
     * Opens the file (in a background process)
     * @param string $file The file to open.
     */
    public static function openFile($file)
    {
-       pclose(popen("start /B notepad ". $file, "r"));
+       pclose(popen('start /B notepad '.$file, 'r'));
        /*
 
       // extension check

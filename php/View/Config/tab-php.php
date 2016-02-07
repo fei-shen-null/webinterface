@@ -26,12 +26,12 @@ Do not forget to restart the PHP daemon in order to let the new settings become 
 <?php
 // render the php.ini array into the TreeTable
 // use class="editable" on values (jquery.jEditable)
-$i = 0;
+$i        = 0;
 $nodeName = '';
 foreach ($ini['ini_array'] as $key => $value) {
-    $i = $i + 1;
-    $nodeName = 'node-' . $i;
-    $html = '';
+    $i        = $i + 1;
+    $nodeName = 'node-'.$i;
+    $html     = '';
 
     if ($value['type'] === 'section') {
         echo '<tr id="'.$nodeName.'"><td>'.$value['section'].'</td></tr>';
@@ -46,7 +46,7 @@ foreach ($ini['ini_array'] as $key => $value) {
         echo '<tr id="'.$nodeName.'" class="child-of-'.$sectionNodeName.'">';
         echo '<td>'.$value['key'].'</td>';
         // class editable for jquery.jEditable
-        echo '<td><div class="editable">' . $value['value'] . '</div></td>';
+        echo '<td><div class="editable">'.$value['value'].'</div></td>';
         echo '</tr>';
     }
 }

@@ -13,7 +13,7 @@ namespace Webinterface\Components;
 /**
  * WPN-XM Webinterface - Class for MariaDB
  */
-class MariaDb extends AbstractComponent
+class MariaDB extends AbstractComponent
 {
     public $name = 'MariaDb';
 
@@ -23,7 +23,7 @@ class MariaDb extends AbstractComponent
 
     public $files = [
         '\bin\mariadb\my.ini',
-        '\bin\mariadb\bin\mysqld.exe'
+        '\bin\mariadb\bin\mysqld.exe',
     ];
 
     public $configFile = '\bin\mariadb\my.cnf';
@@ -43,7 +43,7 @@ class MariaDb extends AbstractComponent
         $connection = @mysqli_connect('localhost', 'root', $this->getPassword());
 
         if (false === $connection) {
-           return \Webinterface\Helper\Serverstack::printExclamationMark(
+            return \Webinterface\Helper\Serverstack::printExclamationMark(
                sprintf(
                    'MariaDB Connection not possible. Access denied. Check credentials. Error: "%s"',
                    mysqli_connect_error()
@@ -73,14 +73,14 @@ class MariaDb extends AbstractComponent
     public function setPassword($password)
     {
         // commands
-        $stop_mariadb = "taskkill /f /IM mysqld.exe 1>nul 2>nul";
-        $mysqld_exe = WPNXM_BIN . 'mariadb\bin\mysqld.exe';
-        $start_mariadb_change_pw = $mysqld_exe . ' --defaults-file=' . WPNXM_BIN . '\bin\\\mariadb\\\my.ini --init-file=' . WPNXM_BIN . '\bin\\\mariadb\\\init_passwd_change.txt';
-        $start_mariadb_normal = $mysqld_exe . ' --defaults-file=' . WPNXM_BIN . '\bin\\\mariadb\\\my.ini';
+        $stop_mariadb            = 'taskkill /f /IM mysqld.exe 1>nul 2>nul';
+        $mysqld_exe              = WPNXM_BIN.'mariadb\bin\mysqld.exe';
+        $start_mariadb_change_pw = $mysqld_exe.' --defaults-file='.WPNXM_BIN.'\bin\\\mariadb\\\my.ini --init-file='.WPNXM_BIN.'\bin\\\mariadb\\\init_passwd_change.txt';
+        $start_mariadb_normal    = $mysqld_exe.' --defaults-file='.WPNXM_BIN.'\bin\\\mariadb\\\my.ini';
 
         // create the init-file with the password update query
         file_put_contents(
-            WPNXM_DIR . '\bin\mariadb\init_passwd_change.txt',
+            WPNXM_DIR.'\bin\mariadb\init_passwd_change.txt',
             "UPDATE mysql.user SET PASSWORD=PASSWORD('$password') WHERE User='root';\nFLUSH PRIVILEGES;"
         );
 
@@ -91,17 +91,19 @@ class MariaDb extends AbstractComponent
 
         // stop mysqld and execute the init-file, then restart
         exec($stop_mariadb);
-        exec($start_mariadb_change_pw); sleep(2); exec($stop_mariadb);
+        exec($start_mariadb_change_pw);
+        sleep(2);
+        exec($stop_mariadb);
         exec($start_mariadb_normal);
 
-        unlink(WPNXM_DIR . '\bin\mariadb\init_passwd_change.txt');
+        unlink(WPNXM_DIR.'\bin\mariadb\init_passwd_change.txt');
 
         // test connection with new password
-        $connection = new \mysqli("localhost", "root", $password, "mysql");
+        $connection = new \mysqli('localhost', 'root', $password, 'mysql');
 
         if (mysqli_connect_errno()) {
             $response = '<div class="alert alert-danger">Database Connection with new password FAILED.';
-            $response .= '(MySQL ["' . mysqli_connect_errno() . '"]"' . mysqli_connect_error() . '")</div>';
+            $response .= '(MySQL ["'.mysqli_connect_errno().'"]"'.mysqli_connect_error().'")</div>';
         } else {
             $response = '<div class="alert alert-success">Password changed SUCCESSFULLY.</div>';
         }
@@ -114,12 +116,12 @@ class MariaDb extends AbstractComponent
 
     public function getDataDir()
     {
-        $myini_array = file(WPNXM_DIR . $this->configFile);
+        $myini_array = file(WPNXM_DIR.$this->configFile);
 
-        $array = preg_grep("/^datadir/", $myini_array);
-        $key_datadir = key($array);
-        $mysql_datadir_array = explode("\"", $myini_array[$key_datadir]);
-        $mysql_datadir = str_replace("/", "\\", $mysql_datadir_array[1]);
+        $array               = preg_grep('/^datadir/', $myini_array);
+        $key_datadir         = key($array);
+        $mysql_datadir_array = explode('"', $myini_array[$key_datadir]);
+        $mysql_datadir       = str_replace('/', '\\', $mysql_datadir_array[1]);
 
         return $mysql_datadir;
     }

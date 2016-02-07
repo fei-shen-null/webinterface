@@ -20,7 +20,7 @@ class XHProf extends AbstractComponent
 
     public $files = [
         '\www\tools\xhprof\package.xml',
-        '\www\tools\xhprof\xhprof_html\index.php'
+        '\www\tools\xhprof\xhprof_html\index.php',
     ];
 
     /**
@@ -30,11 +30,11 @@ class XHProf extends AbstractComponent
      */
     public function getVersion()
     {
-        if(!is_file(WPNXM_DIR . $this->files[0])) {
+        if (!is_file(WPNXM_DIR.$this->files[0])) {
             return 'not installed';
         }
 
-        $xml = simplexml_load_file(WPNXM_DIR . $this->files[0]);
+        $xml = simplexml_load_file(WPNXM_DIR.$this->files[0]);
 
         return $xml->version->release;
     }

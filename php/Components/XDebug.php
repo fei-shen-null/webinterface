@@ -24,12 +24,12 @@ class XDebug extends AbstractComponent
     public $installationFolder = '\bin\php\ext';
 
     public $files = [
-        '\bin\php\ext\php_xdebug.dll'
+        '\bin\php\ext\php_xdebug.dll',
     ];
 
     public $configFile = '\bin\php\php.ini';
 
-     /**
+    /**
      * Returns Xdebug Version.
      *
      * @return string Xdebug Version
@@ -37,7 +37,7 @@ class XDebug extends AbstractComponent
     public function getVersion()
     {
         $xdebug_version = 'false';
-        $phpinfo = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
+        $phpinfo        = \Webinterface\Helper\PHPInfo::getPHPInfo(true);
 
         // Check phpinfo content for Xdebug as Zend Extension
         if (preg_match('/with\sXdebug\sv([0-9.rcdevalphabeta-]+),/', $phpinfo, $matches)) {
