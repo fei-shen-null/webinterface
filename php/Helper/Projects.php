@@ -157,53 +157,6 @@ class Projects
             $html .= '</a>';
         }
 
-        /**
-         * Travis-CI
-         *
-         * If the project folder contains a ".travis.yml" file, display a "travis-ci.org" link.
-         */
-        /*if (true === $this->hasTravisConfig($dir)) {
-
-            /**
-             * Unresolved Issues
-             *
-             * Some people set their composer name to "something/somwhere", while their github name is "x/y".
-             * That breaks the 1:1 relation between github repository name and packagist name,
-             * An example is: "github.com/bzick/fenom" - "packagist.org/fenom/fenom"
-             *
-             * given that there is a 1:1 relation of travis-ci repo name and github repo name,
-             * the only way to get the travis repo url is by fetching the git origin url from the config.
-             * 1. read file: '.get/config'
-             * 2. fetch "[remote "origin"] url
-             * 3. extract repo name from URL = $package
-             *
-             * Do a "like *" search and set the one found or ask user to select one of multiple.
-             */
-            /*
-            if (extension_loaded('openssl') === true) {
-                $possible_repos = file_get_contents('https://api.travis-ci.org/repositories.json?search=' . $dir);
-                var_dump($possible_repos);
-            }
-            */
-          /*
-            // if the package is "composer-ified", it may also be on "packagist.org"
-            $package = $this->getPackagistPackageDescription($composer['name']);
-
-            //var_dump($package['package']);
-
-            $packageName = strtolower($package['package']['name']);
-
-            // add the travis link by showing build status badge
-            $html .= '<a style="margin-left: 5px;" href="http://travis-ci.org/' . $packageName . '">';
-            $html .= '<img src="https://travis-ci.org/' . $packageName . '.png">';
-            $html .= '</a>';
-
-            // add packagist link and download badge
-            $html .= '<ul><li><a style="margin-left: 5px;" href="https://packagist.org/packages/' . $composer['name'] . '">';
-            $html .= '<img src="https://poser.pugx.org/' .  $composer['name']  . '/downloads.png">';
-            $html .= '</a></li></ul>';
-        }*/
-
         return $html.'</div>';
     }
 
