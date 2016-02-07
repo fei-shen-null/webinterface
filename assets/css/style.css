@@ -64,6 +64,10 @@ div.content-centered {
     float: none;
 }
 
+.phpextensions {
+    margin-bottom: 15px;
+}
+
 .phpextensions .form-group {
     float: left;
     margin: 10px;
