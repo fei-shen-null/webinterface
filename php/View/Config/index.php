@@ -41,16 +41,15 @@
 <script>
 function setupTreeTable()
 {
-  // Apply some configuration settings
   $("table#treeTable").treeTable({
     clickableNodeNames: true
   });
-  // Make visible that a row is clicked
+  // show that a row is clicked
   $("table#treeTable tbody tr").mousedown(function () {
-    $("tr.selected").removeClass("selected"); // Deselect currently selected rows
+    $("tr.selected").removeClass("selected"); // deselect currently selected rows
     $(this).addClass("selected");
   });
-  // Make row selected, when span is clicked
+  // select row, when span is clicked
   $("table#treeTable tbody tr span").mousedown(function () {
     $($(this).parents("tr")[0]).trigger("mousedown");
   });
@@ -77,13 +76,8 @@ function submitEdit(value, settings)
   var origvalue = this.revert;
   var result = value;
 
-  // ok, we have the value, but not the "name of the directive".
-  // therefore let's fetch the html value of the first td tag from the row,
-  // which we are currently editing the value of (in the second td).
+  // "name of the directive" is the html value of the first td tag from the current row
   var directive = $('td:first', $(this).parents('tr')).html();
-
-  //console.log(edits);
-  //alert("You changed the setting "+ directive +" to the value "+ value +".");
 
   // build array for sending data as json
   edits['directive'] = directive;
