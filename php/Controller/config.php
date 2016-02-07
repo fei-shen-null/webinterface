@@ -333,7 +333,7 @@ function update_phpini_setting()
 
 function update_phpversionswitch()
 {
-    $new_version = filter_input(INPUT_POST, 'new-php-version');
+    $new_version = filter_input(INPUT_POST, 'new_php_version');
 
     Webinterface\Helper\PHPVersionSwitch::switchVersion($new_version);
     Webinterface\Helper\Daemon::restartDaemon('php');
@@ -354,7 +354,7 @@ function renderPhpVersionSwitcherForm()
         $options .= '>' . $folder['php-version'] . '</option>';
     }
 
-    $html = '<form action="index.php?page=config&action=update_phpversionswitch" method="POST">';
+    $html = '<form id="php-version-switcher-form" action="index.php?page=config&action=update_phpversionswitch" method="POST">';
 
     $html .= '<p><select name="new-php-version" size="' . $number_php_versions . '">';
     $html .= $options;

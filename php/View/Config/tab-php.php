@@ -53,3 +53,22 @@ foreach ($ini['ini_array'] as $key => $value) {
 ?>
 
 </table>
+
+<script>
+var currentPHPversion = $("#php-version-switcher-form select[name='new-php-version'] option:selected").text();
+console.log('The currently active PHP version is:' + currentPHPversion);
+
+$("#php-version-switcher-form").submit(function(event) {
+  event.preventDefault();
+  var $form = $(this),
+    url = $form.attr("action"),
+    php_version = $form.find("select[name='new-php-version']").val();
+
+  if(currentPHPversion === php_version) {
+    console.log('Skipping version change, because old PHP version equals new PHP version.')
+    return;
+  }
+
+  var posting = $.post(url, { new_php_version: php_version } );
+});
+</script>
