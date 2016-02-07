@@ -36,7 +36,7 @@ class PHPExtensionManager
     {
         if ($name === 'xdebug') {
             if (!$this->uncommentXdebug(false)) {
-                $this->addXdebugExtension();
+               $this->addXdebugExtension();
             }
         }
 
@@ -67,7 +67,7 @@ class PHPExtensionManager
 
         # prepare line to insert
         $new_line = ($enabled === true) ? '' : ';';
-        $new_line .= 'extension='.$name."\n";
+        $new_line .= 'extension=' . $name . "\n";
 
         # read php.ini and determine position of last extension entry
         $lines = $this->readIni();
@@ -93,18 +93,17 @@ class PHPExtensionManager
         $lines = $this->readIni();
 
         foreach ($lines as $index => $line) {
-            if (strpos($line, '[XDebug]') !== false) {
+            if(strpos($line, '[XDebug]') !== false) {
                 return true; # if found, end.
             }
         }
-
         return false;
     }
 
     public function addXdebugExtension()
     {
         // exit early, if section exists already
-        if ($this->checkXdebugSectionExists() === true) {
+        if($this->checkXdebugSectionExists() === true) {
             return;
         }
 
@@ -112,21 +111,21 @@ class PHPExtensionManager
         $phpiniEOF = '; Local Variables:';
 
         # load and prepare xdebug php.ini template
-        $tpl_content = file_get_contents(WPNXM_DATA_DIR.'/config-templates/xdebug-section-phpini.tpl');
+        $tpl_content = file_get_contents(WPNXM_DATA_DIR . '/config-templates/xdebug-section-phpini.tpl');
 
         $search = [
             '%PHP_EXT_DIR%',
-            '%TEMP_DIR%',
+            '%TEMP_DIR%'
         ];
 
         $replace = [
-            WPNXM_DIR.'\bin\php\ext\\',
-            WPNXM_DIR.'\temp',
+            WPNXM_DIR . '\bin\php\ext\\',
+            WPNXM_DIR . '\temp'
         ];
 
         $content = str_replace($search, $replace, $tpl_content);
 
-        $new_line =  $content."\n\n".$phpiniEOF;
+        $new_line =  $content . "\n\n" . $phpiniEOF;
 
         return $this->replaceLineInPHPINI($phpiniEOF, $new_line);
     }
@@ -142,7 +141,7 @@ class PHPExtensionManager
 
         # prepare line to insert
         $new_line = ($enabled === true) ? '' : ';';
-        $new_line .= 'zend_extension="'.WPNXM_DIR.'\php\ext\php_xdebug.dll"'."\n";
+        $new_line .= 'zend_extension="'.WPNXM_DIR.'\php\ext\php_xdebug.dll"' . "\n";
 
         # prepare line to look for in php.ini
         if ($enabled === true) {
@@ -172,9 +171,9 @@ class PHPExtensionManager
 
         foreach ($lines as $index => $line) {
             // look for extensions=; but not zend_extension
-            if ((strpos($line, 'extension=') !== false) and (strpos($line, 'zend_extension=') === false)) {
+            if ( (strpos($line, 'extension=') !== false) and (strpos($line, 'zend_extension=') === false)) {
                 // lookahead parsing (1 line); look for extensions=; but not zend_extension
-                if ((strpos($lines[$index + 1], 'extension=') !== false) and (strpos($line, 'zend_extension=') === false)) {
+                if ( (strpos($lines[$index + 1], 'extension=') !== false) and (strpos($line, 'zend_extension=') === false)) {
                     # not the last element
                     continue;
                 } else {
@@ -201,7 +200,7 @@ class PHPExtensionManager
 
         # extension found, do comment, if line uncommented
         if (strpos($old_line, 'extension=') !== false) {
-            $new_line = ';'.$old_line;
+            $new_line = ';' . $old_line;
             $this->replaceLineInPHPINI($old_line, $new_line);
         }
 
@@ -228,7 +227,6 @@ class PHPExtensionManager
 
     /**
      * Fetches the line from php.ini where the php extension is found.
-     * @return string
      */
     private function getExtensionLineFromPHPINI($name)
     {
@@ -262,27 +260,28 @@ class PHPExtensionManager
     {
         static $extensions = [];
 
-        if (!empty($extensions)) {
+        if(!empty($extensions)) {
             return $extensions;
         }
 
-        $files = glob(WPNXM_DIR.'/bin/php/ext/php_*.dll');
+        $files = glob(WPNXM_DIR . '/bin/php/ext/php_*.dll');
 
         foreach ($files as $key => $file) {
-            $value              = basename($file);
-            $key                = str_replace(['php_', '.dll'], '', $value);
+            $value = basename($file);
+            $key = str_replace(['php_', '.dll'], '', $value);
             $extensions[ $key ] = $value;
         }
 
         return $extensions;
     }
 
+
     public static function getZendExtensionsWhitelist()
     {
         return array_flip([
             'opcache', // Zend Engine OpCache
             'xdebug',  // XDebug
-            'ioncube',  // IonCube Loader
+            'ioncube'  // IonCube Loader
         ]);
     }
 
@@ -305,7 +304,7 @@ class PHPExtensionManager
         $list = [];
 
         foreach ($extensions as $key => $value) {
-            if (extension_loaded($key) === true) {
+            if(extension_loaded($key) === true) {
                 $list[$key] = true;
             }
         }
@@ -326,7 +325,7 @@ class PHPExtensionManager
     public static function getEnabledPHPExtensionsFromIni()
     {
         $enabled_extensions = [];
-        $extension          = '';
+        $extension = '';
 
         // read php.ini
         $ini_file = php_ini_loaded_file();
@@ -344,14 +343,14 @@ class PHPExtensionManager
             if ($line['section'] !== 'PHP' && $line['key'] !== 'extension') {
                 continue;
             }
-            if (strpos($line['value'], '.dll') !== false) {
+            if(strpos($line['value'], '.dll') !== false) {
                 $extension = $line['value'];
 
                 // cut everything of after ".dll"
                 // as there might be comments on the line (; #)
                 $extension = substr($extension, 0, strpos($extension, '.dll'));
 
-                $enabled_extensions[] = $extension.'.dll';
+                $enabled_extensions[] = $extension . '.dll';
             }
         }
 

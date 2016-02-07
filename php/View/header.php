@@ -35,7 +35,6 @@
 
     <?php if (isset($load_jquery_additionals) && $load_jquery_additionals === true) { ?>
     <!-- jQuery Plugins -->
-    <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.form.js"></script>
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.treeTable.js"></script>
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.jeditable.js"></script>
     <link type="text/css" href="<?=WPNXM_ASSETS?>css/jquery.treeTable.css" rel="stylesheet" />
