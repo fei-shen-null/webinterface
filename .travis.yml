@@ -35,9 +35,9 @@ before_script:
     - sudo apt-fast -y install nginx
     - sudo cp /home/travis/build/WPN-XM/webinterface/tests/nginx.conf.travis /etc/nginx/nginx.conf
   # PHP-FPM
-    - sudo apt-fast -m -y install php5-fpm
-    - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-    - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+    #- sudo apt-fast -m -y install php5-fpm
+    #- sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+    #- ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
   # fix folder permissions
     - chmod 777 /home/travis/build/WPN-XM/webinterface/php/data/
   # Return to project root, create error.log and start Nginx
