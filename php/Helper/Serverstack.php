@@ -239,10 +239,10 @@ class Serverstack
      *
      * @param  string $host    Hostname
      * @param  int    $port    Portnumber
-     * @param  int    $timeout Timeout for socket connection in seconds (default is 30).
+     * @param  int    $timeout Timeout for socket connection in seconds (default is 5).
      * @return bool
      */
-    public static function checkPort($host, $port, $timeout = 30)
+    public static function checkPort($host, $port, $timeout = 5)
     {
         $socket = fsockopen($host, $port, $errorNumber, $errorString, $timeout);
 
