@@ -7,6 +7,7 @@
  * This source file is subject to the terms of the MIT license.
  * For full copyright and license information, view the bundled LICENSE file.
  */
+
 use Webinterface\Components\XDebug;
 use Webinterface\Helper\Serverstack;
 
