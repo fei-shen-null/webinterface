@@ -50,4 +50,4 @@ phpunit.xml
 /wpnxm-scp/*.pro.user
 
 # data file for the counter
-/php/data/welcomeMsgCounter.txt
+/data/welcomeMsgCounter.txt

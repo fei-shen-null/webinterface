@@ -37,7 +37,7 @@ if (!defined('WPNXM_DIR')) {
         define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR.'webinterface/php/Components/');
         define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR.'webinterface/php/Helper/');
         define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR.'webinterface/php/View/');
-        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'webinterface/php/data/');
+        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'webinterface/data/');
     } else {
         // Windows Paths
         define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))).DS);
@@ -46,7 +46,7 @@ if (!defined('WPNXM_DIR')) {
         define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\Components'.DS);
         define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\Helper'.DS);
         define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\View'.DS);
-        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'tools\webinterface\php\data'.DS);
+        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'tools\webinterface\data'.DS);
     }
 
     // Web Path Constants -> "http://.."

@@ -39,7 +39,7 @@ before_script:
     #- sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
     #- ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
   # fix folder permissions
-    - chmod 777 /home/travis/build/WPN-XM/webinterface/php/data/
+    - chmod 777 /home/travis/build/WPN-XM/webinterface/data/
   # Return to project root, create error.log and start Nginx
     - cd /home/travis/build/WPN-XM/webinterface
     - sudo /etc/init.d/nginx restart
