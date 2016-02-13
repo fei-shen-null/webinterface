@@ -369,21 +369,28 @@ function renderPhpVersionSwitcherForm()
         $options .= '>'.$folder['php-version'].'</option>';
     }
 
-    $html = '<form id="php-version-switcher-form" action="index.php?page=config&action=update_phpversionswitch" method="POST">';
+    $html = '<div class="col-md-6">';
+    $html .= '<form id="php-version-switcher-form" action="index.php?page=config&action=update_phpversionswitch" method="POST">';
 
-    $html .= '<p><select name="new-php-version" size="'.$number_php_versions.'">';
+    $html .= '<div class="form-group col-md-6">';
+    $html .= '<select class="form-control" name="new-php-version" size="'.$number_php_versions.'">';
     $html .= $options;
-    $html .= '</select></p>';
+    $html .= '</select>';
+    $html .= '</div>';
 
-    // show switch button only, if multiple PHP version present
+    // show switch button, if multiple PHP version present
     if ($number_php_versions > 1) {
-        $html .= '<div class="right">';
-        $html .= '<button class="btn btn-danger" type="reset"><i class="icon-remove"></i> Reset</button>&nbsp;';
+        $html .= '<div class="pull-right"></br>';
         $html .= '<button class="btn btn-success" type="submit"><i class="icon-ok"></i> Switch</button>';
+        $html .= '&nbsp;';
+        $html .= '<button class="btn btn-danger" type="reset"><i class="icon-remove"></i> Reset</button>&nbsp;';
         $html .= '</div>';
     }
 
     $html .= '</form>';
+
+    $html .= '</div>';
+    $html .= '<div class="clearfix"></div>';
 
     return $html;
 }
