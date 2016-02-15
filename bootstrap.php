@@ -160,7 +160,7 @@ spl_autoload_register(function ($class) {
     $prefix = 'Webinterface\\';
 
     // base directory for the namespace prefix (normally "/src/")
-    $base_dir = __DIR__.DS.'php'.DS;
+    $base_dir = __DIR__.DS.'src'.DS;
 
     // does the class use the namespace prefix?
     $len = strlen($prefix);
