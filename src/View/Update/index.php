@@ -1,12 +1,5 @@
 <h2 class="heading">Updater</h2>
 
-<?php
-// display info box, if registry was updated
-if ($registry_updated === true) {
-    echo '<div class="info">The WPN-XM Software Registry was updated.</div>';
-}
-?>
-
 <div class="left-box">
     <div class="cs-message">
         <div class="cs-message-content cs-message-content-config">
@@ -24,11 +17,12 @@ echo '<table class="table table-condensed table-hover">
 </thead>
 ';
 
-foreach ($components as $index => $componentName) {
+foreach ($components as $idx => $componentName)
+{
     if ($componentName === 'PEAR') {
         continue;
     }
-
+   
     $class     = '\Webinterface\Components\\'.$componentName;
     $component = new $class;
 
@@ -65,7 +59,7 @@ function printUpdatedSign($component, $old_version, $new_version)
     if (version_compare($old_version, $new_version) === -1) {
         $html = '<a href="'.$url.'"';
         $html .= ' class="download btn btn-success btn-xs" style="font-size: 14px">';
-        $html .= '<i class="icon-arrow-up"></i>';
+        $html .= '<i class="download icon"></i>';
         $html .= '&nbsp; '.$new_version.'</a>';
 
         return $html;
@@ -105,13 +99,10 @@ function download(link)
 // intercept clicks on the "Download Component" links
 $("a.download" ).on('click', function (e) {
     e.preventDefault();
-
-    // insert the download progress bar
+    // add download progress bar
     $(this).after('<progress id="progress" value="0" max="0">0%</progress>');
-
     // trigger AJAX download with curl callback to update the progessbar
     download(this.href);
-
     return false;
 });
 </script>

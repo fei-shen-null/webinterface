@@ -10,13 +10,14 @@
 
 function index()
 {
+    \Webinterface\Helper\Updater::updateRegistries();
+        
     $tpl_data = [
         'load_jquery_additionals' => true,
+        'registry'                => include WPNXM_DATA_DIR.'wpnxm-software-registry.php',
         'components'              => \Webinterface\Helper\Serverstack::getInstalledComponents(),
         'windows_version'         => \Webinterface\Helper\Serverstack::getWindowsVersion(),
-        'bitsize'                 => \Webinterface\Helper\Serverstack::getBitSizeString(),
-        'registry_updated'        => \Webinterface\Helper\Updater::updateRegistry(),
-        'registry'                => include WPNXM_DATA_DIR.'wpnxm-software-registry.php',
+        'bitsize'                 => \Webinterface\Helper\Serverstack::getBitSizeString()
     ];
 
     render('page-action', $tpl_data);
