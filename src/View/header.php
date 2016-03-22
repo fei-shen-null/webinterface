@@ -30,19 +30,19 @@
     <!-- Twitter's Bootstrap -->
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/bootstrap.min.js"></script>
     <link type="text/css" href="<?=WPNXM_ASSETS?>css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Semantic UI Icon -->
-    <link type="text/css" href="<?=WPNXM_ASSETS?>css/icon.min.css" rel="stylesheet" />
-
+    <!-- Twitter Typeahead & Bloodhound -->
+    <script  type="text/javascript" src="<?=WPNXM_ASSETS?>js/typeahead.bundle.min.js"></script>
     <?php if (isset($load_jquery_additionals) && $load_jquery_additionals === true) { ?>
     <!-- jQuery Plugins -->
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.treeTable.js"></script>
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/jquery.jeditable.js"></script>
     <link type="text/css" href="<?=WPNXM_ASSETS?>css/jquery.treeTable.css" rel="stylesheet" />
     <?php } ?>
-
     <!-- WPN-XM stuff last in line, because using jQuery and overwriting CSS -->
     <link type="text/css" href="<?=WPNXM_ASSETS?>css/style.css" rel="stylesheet" />
     <script type="text/javascript" src="<?=WPNXM_ASSETS?>js/wpnxm.js"></script>
+    <!-- Semantic UI Icon -->
+    <link type="text/css" href="<?=WPNXM_ASSETS?>css/icon.min.css" rel="stylesheet" />
 </head>
 <body>
 
