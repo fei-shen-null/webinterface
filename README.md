@@ -1,10 +1,11 @@
 ### Webinterface of the WPN-XM Server Stack
 
-[![Build Status](https://travis-ci.org/WPN-XM/webinterface.svg)](https://travis-ci.org/WPN-XM/webinterface) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WPN-XM/webinterface/badges/quality-score.png?s=5ecbc5c3fae1771e3b5c33a8984f6ff9c477ec0e)](https://scrutinizer-ci.com/g/WPN-XM/webinterface/)
-
+| Branch  	| Build Status  	| Quality Score | Code Coverage 
+|---	|---	|---	|---	|---	|
+| master	|  [![Build Status](https://travis-ci.org/WPN-XM/webinterface.svg)](https://travis-ci.org/WPN-XM/webinterface) 	|   [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WPN-XM/webinterface/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/WPN-XM/webinterface/?branch=master) | [![Code Coverage](https://scrutinizer-ci.com/g/WPN-XM/webinterface/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WPN-XM/webinterface/?branch=master)
+| develop  	| [![Build Status](https://travis-ci.org/WPN-XM/webinterface.svg?branch=develop)](https://travis-ci.org/WPN-XM/webinterface)  	| [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WPN-XM/webinterface/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/WPN-XM/webinterface/?branch=develop)	| [![Code Coverage](https://scrutinizer-ci.com/g/WPN-XM/webinterface/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/WPN-XM/webinterface/?branch=develop)
 
 #### Usage
-
 
 During the installation process of WPN-XM the webinterface is installed to `/server/www/tools/webinterface`.
 
