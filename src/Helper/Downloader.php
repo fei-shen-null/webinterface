@@ -43,4 +43,59 @@ class Downloader
 
         fclose($file);
     }
+
+    /**
+     * Download $url to $file.
+     * If the file doesn't exist, fetch it
+     * If the file exist, download it only, when it is "old".
+     *
+     * @param  string $url  Source URL.
+     * @param  string $file Target file.
+     *
+     * @return bool         True, when download successful.
+     */
+    public static function downloadIfNotExistsOrOld($url, $file)
+    {
+        if(!file_exists($file)) {
+            $needsUpdate = true;
+        } else {
+            // fetch date header (doing a simple HEAD request)
+            stream_context_set_default([
+                'http' => [
+                    'method' => 'HEAD',
+                ],
+            ]);
+
+            // silenced: throws warning, if offline
+            $headers = @get_headers($url, 1);
+
+            // we are offline
+            if (empty($headers) === true) {
+                return false;
+            }
+
+            // parse header date
+            $date          = \DateTime::createFromFormat('D, d M Y H:i:s O', $headers['Date']);
+            $last_modified = filemtime($file);
+
+            // update condition, older than 1 week
+            $needsUpdate = $date->getTimestamp() >= $last_modified + (7 * 24 * 60 * 60);
+        }
+
+        // do update
+        $updated = false;
+        if ($needsUpdate === true) {
+
+            // set request method back to GET, to fetch the file
+            stream_context_set_default([
+                'http' => [
+                    'method' => 'GET',
+                ],
+            ]);
+
+            $updated = file_put_contents($file, file_get_contents($url));
+        }
+
+        return $updated;
+    }
 }
