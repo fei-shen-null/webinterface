@@ -51,8 +51,7 @@ http {
         listen 80 default_server;
         server_name localhost;
 
-        charset utf-8; 
-
+        charset utf-8;
         root /home/travis/build/WPN-XM/webinterface;
 
         # handle files in the root path /www
@@ -67,6 +66,6 @@ http {
             fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
             fastcgi_param PATH_INFO $fastcgi_script_name;
             include fastcgi_params;
-        }        
+        }
     }
 }
