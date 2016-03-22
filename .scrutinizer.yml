@@ -3,6 +3,7 @@
 #
 # https://scrutinizer-ci.com/docs/
 #
+
 filter:
     excluded_paths:
         - 'vendor/*'
@@ -13,6 +14,8 @@ tools:
     # because huge number of false-positives and no real value
     php_cpd: false
     php_sim: false
+    # enable external code coverage (we send from travis)
+    external_code_coverage: true
     php_changetracking:
         enabled: true
         bug_patterns:
