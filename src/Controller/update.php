@@ -31,11 +31,8 @@ function download()
         throw new \InvalidArgumentException('Please specify "component" and "version".');
     }
 
-    \Webinterface\Helper\Registry::getUrl($component, $version);
-
-    $downloadUrl = \Webinterface\Helper\Registry::getUrl($component, $version);
-
-    \Webinterface\Helper\Downloader::download($downloadUrl);
+    $url = \Webinterface\Helper\Registry::getUrl($component, $version);
+    \Webinterface\Helper\Downloader::download($url);
 }
 
 function curl_progress_callback($download_size, $downloaded, $upload_size, $uploaded)
