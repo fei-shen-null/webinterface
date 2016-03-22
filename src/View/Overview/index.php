@@ -1,7 +1,7 @@
 <div class="centered">
+
     <div class="left-box">
         <h2>Server Software</h2>
-
         <div class="cs-message">
 
             <table class="cs-message-content">
@@ -189,8 +189,8 @@
             </table>
             <?php } ?>
 
-        </div>
-    </div>
+        </div><!-- end: cs-message -->
+    </div><!-- end: right-box -->
 
     <div class="right-box">
         <h2>Configuration</h2>
@@ -633,10 +633,9 @@
             </table>
             <?php } ?>
 
-        </div>
-    </div>
-
-</div>
+        </div><!-- end: cs-message -->
+    </div><!-- end: right-box -->
+</div><!-- end: centered -->
 
 <script>
 $(function(){
