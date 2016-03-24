@@ -1,3 +1,45 @@
+<h2>Install PHP Extension</h2>
+<?php if($pickle_installed) { ?>
+<div id="bloodhound">
+  <input type="text" class="typeahead" placeholder="PHP Extension"/>
+  <!--<button class="btn btn-default ui item"><i class="large zoom icon"></i></span>Search</button>-->
+  <button id="install-extension-button" type="submit" class="btn btn-success">Install</button>
+</div>
+
+<script type="text/javascript">
+  var extensions = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    // url points to a json file that contains an array of PHP extension names
+    prefetch: 'data/php-extensions-on-pecl.json'
+  });
+  // when passing in `null` for the `options` arguments, it will use default options
+  $('#bloodhound .typeahead').typeahead(null, {
+    name: 'extensions',
+    limit: 5,
+    source: extensions
+  });
+  $("#install-extension-button").click(function() {
+    alert( "Handler for .click() called." );
+  });
+</script>
+
+<?php } else { ?>
+<div class="alert alert-info" role="alert">
+  <p>PHP Extensions are installed by using the PHP Extension Installer called <a href="https://github.com/FriendsOfPHP/pickle">Pickle</a>.</p>
+  <p>But, it isn't installed, yet!</p>
+</div>
+<button id="install-pickle-button" type="submit" class="btn btn-success">Install Pickle</button>
+
+<script type="text/javascript">
+  $("#install-pickle-button").click(function() {
+    alert( "Handler for .click() called." );
+  });
+</script>
+<?php } ?>
+
+<br><br>
+
 <h2>
     PHP Extensions
     <small id="php-extensions-loaded">
@@ -128,29 +170,4 @@ function signalRestartAndUpdateExtensions(responseText, extensionType)
     // use a delayed call, because PHP needs to startup again
     setTimeout(updateExtensionsForm, 2200);
 }
-</script>
-
-
-<h2>Install PHP Extension</h2>
-<div class="container" id="scrollable-bloodhound">
-  <input type="text" class="typeahead form-control" placeholder="PHP Extension"/>
-  <!--<button class="btn btn-default ui item"><i class="large zoom icon"></i></span>Search</button>-->
-  <button id="install-extension-button" type="submit" class="btn btn-success">Install</button>
-</div>
-<script type="text/javascript">
-  var extensions = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.whitespace,
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    // url points to a json file that contains an array of PHP extension names
-    prefetch: 'data/php-extensions-on-pecl.json'
-  });
-  // when passing in `null` for the `options` arguments, it will use default options
-  $('#scrollable-bloodhound .typeahead').typeahead(null, {
-    name: 'extensions',
-    limit: 5,
-    source: extensions
-  });
-  $("#install-extension-button").click(function() {
-    alert( "Handler for .click() called." );
-  });
 </script>
