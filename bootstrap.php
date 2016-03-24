@@ -59,9 +59,14 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_IMAGES_DIR', '/tools/webinterface/assets/img/');
 
     // WPNXM Configuration File
-    define('WPNXM_INI', WPNXM_DIR.'wpn-xm.ini');
-    define('WPNXM_BIN', WPNXM_DIR.'bin'.DS);
-    define('WPNXM_TEMP', WPNXM_DIR.'temp'.DS);
+    define('WPNXM_INI',     WPNXM_DIR.'wpn-xm.ini');
+    define('WPNXM_BIN',     WPNXM_DIR.'bin'.DS);
+    define('WPNXM_TEMP',    WPNXM_DIR.'temp'.DS);
+    
+    // Nginx Configurations
+    define('WPNXM_NGINX_CONF',                  WPNXM_BIN. 'nginx/conf/nginx.conf');
+    define('WPNXM_NGINX_DOMAINS_ENABLED_DIR',   WPNXM_BIN. 'nginx/conf/domains-enabled/');
+    define('WPNXM_NGINX_DOMAINS_DISABLED_DIR',  WPNXM_BIN. 'nginx/conf/domains-disabled/');
 
     // Composer managed Vendor folder
     define('VENDOR_DIR', __DIR__.DS.'vendor'.DS);
@@ -73,7 +78,7 @@ if (!defined('WPNXM_DIR')) {
      * If you want to contribute to the project, set the toggle true and search for "FEATURE_x"
      * to start hacking. If a feature is implemented, you can remove the feature flag.
      */
-    $toggle = false;
+    $toggle = true;
     define('FEATURE_1', $toggle); // "create new project dialog" in php/view/projects-index.php
     define('FEATURE_2', $toggle); // tools -> updater [components are fetched, but not extracted and installed into their folders]
     define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Domains, MariaDB, Xdebug
