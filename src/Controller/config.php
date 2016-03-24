@@ -13,10 +13,12 @@
  */
 function index()
 {
+    $serverstack = new Webinterface\Helper\Serverstack;
+    
     $tpl_data = [
         'load_jquery_additionals' => true,
-        'mongodb_installed'       => Webinterface\Helper\Serverstack::isInstalled('mongodb'),
-        'xdebug_installed'        => Webinterface\Helper\Serverstack::isInstalled('xdebug'),
+        'mongodb_installed'       =>  $serverstack->isInstalled('mongodb'),
+        'xdebug_installed'        =>  $serverstack->isInstalled('xdebug'),
     ];
 
     render('page-action', $tpl_data);
@@ -101,6 +103,7 @@ function tab_php_ext()
 
     $tpl_data = [
         'no_layout'                        => true,
+        'pickle_installed'                 => (new \Webinterface\Components\Pickle)->isInstalled(),
         'number_available_zend_extensions' => count($extensionManager->getZendExtensions()),
         'number_enabled_zend_extensions'   => count($extensionManager->getEnabledZendExtensions()),
         'number_available_php_extensions'  => count($extensionManager->getPHPExtensions()),

@@ -63,7 +63,7 @@ class Serverstack
         $classes = self::getInstalledComponents();
 
         foreach ($classes as $class) {
-            $components[] = self::Component($class);
+            $components[] = self::getComponent($class);
         }
 
         return $components;
@@ -78,7 +78,7 @@ class Serverstack
      */
     public static function getVersion($componentName)
     {
-        return self::Component($componentName)->getVersion();
+        return self::getComponent($componentName)->getVersion();
     }
 
     /**
@@ -87,11 +87,11 @@ class Serverstack
      * @param  string $componentName
      * @return object
      */
-    public static function Component($componentName)
+    public static function getComponent($componentName)
     {
-        $componentClass = '\Webinterface\Components\\'.$componentName;
+        $class = '\Webinterface\Components\\'.$componentName;
 
-        return new $componentClass;
+        return new $class;
     }
 
     /**
@@ -214,8 +214,9 @@ class Serverstack
     /**
      * Checks, if a component is installed.
      * A component is installed, when all its files exists.
-     *
-     * @param  string                    $component
+     * See $files array of the component.
+     * 
+     * @param  string $component
      * @throws \InvalidArgumentException
      * @return bool
      */
@@ -225,8 +226,8 @@ class Serverstack
         if ($component === 'php' or $component === 'nginx' or $component === 'mariadb') {
             return true;
         }
-
-        return self::Component($component)->isInstalled();
+                      
+        return self::getComponent($component)->isInstalled();
     }
 
     /**
@@ -307,9 +308,9 @@ class Serverstack
     {
         switch ($component) {
             case 'mariadb':
-               return self::Component('Mariadb')->getPassword();
+               return self::getComponent('Mariadb')->getPassword();
             case 'mongodb':
-               return self::Component('Mongodb')->getPassword();
+               return self::getComponent('Mongodb')->getPassword();
         }
 
         throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
