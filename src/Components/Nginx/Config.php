@@ -10,9 +10,7 @@
 
 namespace Webinterface\Components\Nginx;
 
-use Webinterface\Components\AbstractConfig;
-
-class Config extends AbstractConfig
+class Config
 {
     public $nginxConfigFile = WPNXM_BIN.'\nginx\conf\nginx.conf';
 
