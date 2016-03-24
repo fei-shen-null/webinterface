@@ -58,7 +58,8 @@ abstract class AbstractComponent
     public function isInstalled($fast = true)
     {
         $bool = false;
-        foreach ($this->files as $file) {
+        
+        foreach ((array)$this->files as $file) {
             $bool = file_exists(WPNXM_DIR.$file);
             // stop at the first file found
             if ($bool === true && $fast === true) {
