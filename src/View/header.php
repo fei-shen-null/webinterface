@@ -46,12 +46,12 @@
 </head>
 <body>
 
-<!--
-    The CSS will come alive only, when Javascript is disabled.
-    It's displaying a message for all the security nerds with disabled javascript.
-    We need this reminder, because the WPN-XM configuration pages depend on jQuery and AJAX.
--->
-<noscript><style type="text/css">
+
+<noscript><!--
+The CSS will come alive only, when Javascript is disabled.
+It's displaying a message for all the security nerds with disabled javascript.
+We need this reminder, because the WPN-XM configuration pages depend on jQuery and AJAX.
+--><style type="text/css">
 #page{ display:none; }
 #javascript-off-errorbox { display:block; font-size:20px; color:red; }
 </style></noscript>
