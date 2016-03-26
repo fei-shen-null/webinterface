@@ -1,6 +1,6 @@
-<div class="centered">
-
-    <div class="left-box">
+<div class="col-md-10 content-centered">
+  
+    <div class="col-md-6"><!-- Start: left-box -->
         <h2>Server Software</h2>
         <div class="cs-message">
 
@@ -190,9 +190,9 @@
             <?php } ?>
 
         </div><!-- end: cs-message -->
-    </div><!-- end: right-box -->
+    </div><!-- end: left-box -->
 
-    <div class="right-box">
+    <div class="col-md-6"><!-- start: right-box -->
         <h2>Configuration</h2>
         <div class="cs-message">
 
@@ -270,11 +270,8 @@
                         }
                         ?>
                         >Error Log</a>
-
-                        <?php if (FEATURE_3 === true) { ?>
                         <a class="btn btn-default btn-sm"
-                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>
-                        <?php } ?>
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#nginx'; ?>">Configure</a>                        
                     </td>
                 </tr>
             </table>
@@ -405,11 +402,9 @@
                             echo "onclick=\"ajaxGET('$url')\"";
                         }
                         ?>
-                        >Show Log</a>
-
-                        <?php if (FEATURE_3 === true) { ?>
-                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>
-                        <?php } ?>
+                        >Show Log</a>                       
+                        <a class="btn btn-default btn-sm"
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mariadb'; ?>">Configure</a>                        
                     </td>
                 </tr>
             </table>
@@ -484,11 +479,9 @@
                             echo "onclick=\"ajaxGET('$url')\"";
                         }
                         ?>
-                        >Show Log</a>
-
-                        <?php if (FEATURE_3 === true) { ?>
-                        <a class="btn btn-default btn-sm" href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
-                        <?php } ?>
+                        >Show Log</a>                        
+                        <a class="btn btn-default btn-sm"
+                           href="<?php echo WPNXM_WEBINTERFACE_ROOT . 'index.php?page=config#mongodb'; ?>">Configure</a>
                     </td>
                 </tr>
             </table>
@@ -635,6 +628,7 @@
 
         </div><!-- end: cs-message -->
     </div><!-- end: right-box -->
+    <div class="clearfix"></div>
 </div><!-- end: centered -->
 
 <script>
