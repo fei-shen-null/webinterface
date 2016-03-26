@@ -15,9 +15,13 @@ namespace Webinterface\Components;
  */
 class Pickle extends AbstractComponent
 {
-    public $name                = 'Webgrind';
-    public $registryName        = 'webgrind';
-
+    public $name                = 'Pickle';
+    public $registryName        = 'pickle';
     public $installationFolder  = '\bin\pickle';
     public $files               = '\bin\pickle\pickle.phar';
+    
+    public function getVersion()
+    {
+        return 'Not implemented, yet.';
+    }
 }
