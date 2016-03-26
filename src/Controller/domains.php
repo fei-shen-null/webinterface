@@ -18,51 +18,28 @@ function index()
     render('page-action', $tpl_data);
 }
 
+function newDomainFromTemplate($domainName)
+{
+    $template = file_get_contents(WPNXM_DATA_DIR.'/config-templates/nginx-domain-conf.tpl');
+    
+    $content = str_replace('%%domain%%', $domainName, $template);
+    
+    $domainFile = WPNXM_NGINX_DOMAINS_ENABLED_DIR . $domainName.'.conf';
+    
+    file_put_contents($domainFile, $content);
+}
+
 function insert()
 {
-    $newDomainName = isset($_GET['newdomain']) ? $_GET['newdomain'] : null;
-
-    $domainFileToCreate = NGINX_DOMAINS_DIR.$newDomainName.'.conf';
-
-    clearstatcache();
-
-    /**
-     * Create folder "domains" in "/bin/nginx/conf", if not existant yet.
-     *
-     * Note: the folder is normally created during installation.
-     * This is just a fallback, in case the user might have removed it.
-     */
-    if (!is_dir(NGINX_DOMAINS_DIR)) {
-        mkdir(NGINX_DOMAINS_DIR, 0777);
-    }
-
-    // read domain template file
-    $tplContent = file_get_contents(WPNXM_DATA_DIR.'/config-templates/nginx-domain-conf.tpl');
-
-    // replace the host name in the domain template
-    $content = str_replace('%%domain%%', $newDomainName, $tplContent);
-
-    // write new domain file using the domain template as content
-    file_put_contents($domainFileToCreate, $content);
-
-    // Add include-line for new domain file in "\bin\nginx\conf\domains.conf"
-
-    clearstatcache();
-
-    $domainsMainConfigFile = WPNXM_DIR.'\bin\nginx\conf\domains.conf';
-
-    if (!is_writable($domainsMainConfigFile) && !chmod($domainsMainConfigFile, 0777)) {
-        exit('The "domains.conf" file is not writeable. Please modify permissions.');
-    } else {
-        file_put_contents($domainsMainConfigFile, "\n # automatically added domain configuration file \n include domains/$newDomainName.conf;", FILE_APPEND);
-    }
-
+    $newDomainName = isset($_GET['newdomain']) ? $_GET['newdomain'] : null;    
+      
+    newDomainFromTemplate($newDomainName);
+    
     // check for "COM" (php_com_dotnet.dll)
     if (!class_exists('COM') and !extension_loaded('com_dotnet')) {
         $msg = 'COM class not found. Enable the extension by adding "extension=php_com_dotnet.dll" to your php.ini.';
         throw new Exception($msg);
     }
-
     $WshShell = new COM('WScript.Shell');
 
     // reload nginx configuration

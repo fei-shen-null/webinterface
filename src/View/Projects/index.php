@@ -2,7 +2,7 @@
 
 <div class="col-md-10 content-centered">
 
-    <div class="col-md-6" id="left-box">
+    <div class="col-md-7" id="left-box">
 
         <!-- Projects Panel -->
         <div class="panel panel-default">
@@ -10,21 +10,12 @@
             <div class="pull-left">
                 <h4>Projects <small>(<?php echo $numberOfProjects; ?>)</small></h4>
             </div>
-            <div class="pull-right">
-                <?php if (FEATURE_1 == true) { // @todo feature-flag create new project dialog ?>
-                    <a class="btn btn-default btn-sm new-project-btn-position floatright"
-                       data-toggle="modal" data-target="#myModal"
-                       href="index.php?page=projects&action=create" >
-                       New Project
-                    </a>
-                <?php } ?>
-                <?php if (FEATURE_4 == true) { // @todo feature-flag list-domains dialog ?>
-                    <a class="btn btn-default btn-sm new-project-btn-position floatright"
-                       data-toggle="modal" data-target="#myModal"
-                       href="index.php?page=domains">
-                       List Domains
-                    </a>
-                <?php } ?>
+            <div class="pull-right">                
+                <a class="btn btn-default btn-sm new-project-btn-position floatright"
+                   data-toggle="modal" data-target="#myModal"
+                   href="index.php?page=projects&action=create" >
+                   New Project
+                </a>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -35,7 +26,7 @@
         </div>
     </div>
 
-    <div class="col-md-6" id="right-box">
+    <div class="col-md-5" id="right-box">
 
         <!-- Tools Panel -->
         <div class="panel panel-default">

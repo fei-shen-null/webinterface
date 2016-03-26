@@ -43,23 +43,55 @@ class Domains
 
         foreach ($enabledDomains as $idx => $file) {
             $domain           = basename($file, '.conf');
+            $domainData       = self::getRootAndServername($file);
             $domains[$domain] = [
-                'fullpath' => $file,
-                'filename' => basename($file),
-                'enabled'  => true,
+                'root'        => $domainData['root'],
+                'servernames' => $domainData['servernames'],
+                'fullpath'    => $file,
+                'filename'    => basename($file),
+                'enabled'     => true,
             ];
         }
 
         foreach ($disabledDomains as $idx => $file) {
             $domain           = basename($file, '.conf');
+            $domainData       = self::getRootAndServername($file);
             $domains[$domain] = [
-                'fullpath' => $file,
-                'filename' => basename($file),
-                'enabled'  => false,
+                'root'        => $domainData['root'],
+                'servernames' => $domainData['servernames'],
+                'fullpath'    => $file,
+                'filename'    => basename($file),
+                'enabled'     => false,
             ];
         }
 
         return $domains;
+    }
+    
+    public static function getRootAndServername($file)
+    {
+        $content     = file_get_contents($file); 
+        $root        = self::getRootForDomain($content);
+        $servernames = self::getServerNamesForDomain($content);
+        return ['root' => $root, 'servernames' => $servernames];
+    }
+    
+    public static function getRootForDomain($content)
+    {      
+        if(1 === preg_match('#root\s+(www\/.*);#', $content, $matches)) {
+            return $matches[1];
+        } else {
+            return 'root folder not found';
+        }
+    }
+    
+    public static function getServerNamesForDomain($content)
+    {
+        if(preg_match_all('#server_name\s+(.*);#', $content, $matches)) {
+            return $matches[1];
+        } else {
+            return 'servername not found';
+        }
     }
 
     /**

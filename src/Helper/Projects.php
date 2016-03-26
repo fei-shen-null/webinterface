@@ -13,6 +13,7 @@ namespace Webinterface\Helper;
 class Projects
 {
     private $projectFolders = [];
+    private $domains        = [];
 
     /**
      * The "toolDirectories" array contains paths of the "/www/tools" folder.
@@ -41,6 +42,7 @@ class Projects
     public function __construct()
     {
         $this->projectFolders = $this->getProjects();
+        $this->domains        = \Webinterface\Helper\Domains::listDomains();   
     }
 
     /**
@@ -59,7 +61,7 @@ class Projects
                 continue;
             }
 
-            if (is_dir(WPNXM_WWW_DIR.$dir) === true) {
+            if (is_dir(WPNXM_WWW_DIR.$dir)) {
                 $dirs[] = $dir;
             }
         }
@@ -72,26 +74,47 @@ class Projects
 
     public function listProjects()
     {
-        if ($this->getNumberOfProjects() === 0) {
+        if ($this->getNumberOfProjects() == 0) {
             return 'No project dirs found.';
         }
 
-        $html = '<ul class="list-group text-left">';
-
+        $html = '<table width="100%">';
         foreach ($this->projectFolders as $dir) {
-            // always display the folder
-            $html .= '<li class="list-group-item">';
-            $html .= '<a class="folder" href="'.WPNXM_ROOT.$dir.'">'.$dir.'</a>';
-
-            if (FEATURE_4 === true) {
-                $html .= $this->renderSettingsLink($dir);
-            }
-
+            $html .= '<tr height="35px">';                       
+            // 1. display the folder name of a project and link to its realpath            
+            $html .= '<td class="pull left"><a class="folder" href="'.WPNXM_ROOT.$dir.'">'.self::shortenString($dir).'</a></td>';            
+            // 2. display the domains
+            $html .= '<td><font style="font-size: 12px">'.$this->renderDomains($dir).'</font></td>';            
+            // 3. display the repository links (home, github) and settings link
+            $html .= ' <td class="right" width="120px">';           
+            $html .= $this->renderSettingsLink($dir);
             $html .= $this->renderRepositoryLinks($dir);
-            $html .= '</li>';
+            $html .= '</td></tr>';
         }
 
-        return $html.'</ul>';
+        return $html.'</table>';
+    }
+    
+    private static function shortenString($string, $maxLength = 22)
+    {
+        return (strlen($string) > $maxLength) ? substr($string,0,$maxLength).'...' : $string;
+    }
+       
+    public function renderDomains($dir)
+    {         
+        if(isset($this->domains[$dir]))
+        {
+            $domain = $this->domains[$dir];            
+        
+            $html = '';
+            foreach($domain['servernames'] as $server_name) {
+                $html .= '<div class="left"><i class="angle right icon"></i>'
+                    . '<a href="http:\\\\' . $server_name . '">' . $server_name . '</a>'
+                    . '<br></div>';
+            }
+            
+            return $html;
+        }
     }
 
     public function listTools()
@@ -121,7 +144,7 @@ class Projects
      */
     public function renderRepositoryLinks($dir)
     {
-        $html = '<div class="btn-group pull-right" style="margin-right: 10px; margin-top: -4px;">';
+        $html = '<div class="btn-group pull-right" style="margin-right: 10px; margin-top: -3px;">';
 
         /**
          * Home - Link to project website
@@ -129,10 +152,10 @@ class Projects
          * If the project folder contains a "composer.json" file
          * display a home link using the homepage attribute
          */
-        if (true === $this->hasComposerConfig($dir)) {
+        if ($this->hasComposerConfig($dir)) {
             $composer = json_decode(file_get_contents(WPNXM_WWW_DIR.$dir.'/composer.json'), true);
 
-            if (isset($composer['homepage']) === true) {
+            if (isset($composer['homepage'])) {
                 $html .= '<a class="btn btn-default btn-xs" href="'.$composer['homepage'].'">';
                 $html .= '<i class="large home icon"></i>';
                 $html .= '</a>';
@@ -145,8 +168,8 @@ class Projects
          * If the project folder contains a ".git/config" file
          * with a github repo link, display a "github.com" link.
          */
-        if (true === $this->isGitRepoAndHostedOnGithub($dir)) {
-            if (isset($composer['name']) === true) {
+        if ($this->isGitRepoAndHostedOnGithub($dir)) {
+            if (is_array($composer) && isset($composer['name'])) {
                 $githubLink = 'https://github.com/'.$composer['name'];
             } else {
                 $githubLink = 'https://github.com/'.$this->getProjectNameFromGitConfig($dir);
