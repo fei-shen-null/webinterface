@@ -1,0 +1,1 @@
+C:\server-086-full-56-64\bin\node\bower %1 %2 %3 %4

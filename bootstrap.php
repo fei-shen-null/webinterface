@@ -70,19 +70,6 @@ if (!defined('WPNXM_DIR')) {
 
     // Composer managed Vendor folder
     define('VENDOR_DIR', __DIR__.DS.'vendor'.DS);
-
-    /**
-     * Feature Flags
-     *
-     * Some features are "work in progress". Therefore they are disabled in release versions.
-     * If you want to contribute to the project, set the toggle true and search for "FEATURE_x"
-     * to start hacking. If a feature is implemented, you can remove the feature flag.
-     */
-    $toggle = true;
-    define('FEATURE_1', $toggle); // "create new project dialog" in php/view/projects-index.php
-    define('FEATURE_2', $toggle); // tools -> updater [components are fetched, but not extracted and installed into their folders]
-    define('FEATURE_3', $toggle); // Configuration Tabs Nginx, Nginx Domains, MariaDB, Xdebug
-    define('FEATURE_4', $toggle); // create nginx domains directly from project list [depends on nginx-conf parser]
 }
 
 // Register Composer Autoloader

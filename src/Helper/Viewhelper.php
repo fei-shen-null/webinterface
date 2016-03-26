@@ -17,7 +17,7 @@ class Viewhelper
         // fetch HTML fragment for the tools topmenu
         $tools_list_html = file_get_contents(WPNXM_DATA_DIR.'tools-topmenu.html');
 
-        $updateLink = (FEATURE_2 === true) ? '<li class="divider"></li><li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>' : '';
+        $updateLink = '<li class="divider"></li><li><a href="'.WPNXM_WEBINTERFACE_ROOT.'index.php?page=update">Update</a></li>';
 
         $menu = '<div class="main_menu navbar">
                  <ul class="nav">

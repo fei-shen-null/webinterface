@@ -46,7 +46,6 @@
 </head>
 <body>
 
-
 <noscript><!--
 The CSS will come alive only, when Javascript is disabled.
 It's displaying a message for all the security nerds with disabled javascript.

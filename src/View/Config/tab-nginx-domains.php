@@ -1,16 +1,14 @@
 <h2>Nginx Domains</h2>
 
 <div class="floatleft">
-
     <fieldset style="width: 350px;">
+    <legend><h3>Enable or disable Domains</h3></legend>
 
-    <legend><h3>Domains</h3></legend>
-
-    <div class="info">
-       You might select the domains to load.
-       Enable or disable domains in "domain.conf", simply by toggling the checkbox.
-       Remember to restart Nginx for changes to take effect
-    </div>
+    <p class="info">
+       You might select the domains to load by Nginx during startup.
+       Enable or disable a domain by toggling its checkbox.
+       Remember to restart Nginx for changes to take effect.
+    </p>
 
     <form action="/webinterface/index.php?page=config&action=update_nginx_domains" method="post" class="well form-inline">
         <table>
@@ -38,9 +36,7 @@
 </div>
 
 <div class="floatright">
-
     <fieldset style="width: 350px;">
-
     <legend><h3>Add or Edit Domain</h3></legend>
 
     <p class="info">

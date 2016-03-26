@@ -15,12 +15,10 @@
                   <li class="active"><a name="help" href="/webinterface/index.php?page=config#help">Help</a></li>
                   <li><a name="php" href="/webinterface/index.php?page=config#php">PHP</a></li>
                   <li><a name="php-ext" href="/webinterface/index.php?page=config#php-ext">PHP Extensions</a></li>
-                  <?php if (FEATURE_3 == true) { ?>
                   <li><a name="nginx" href="/webinterface/index.php?page=config#nginx">Nginx</a></li>
                   <li><a name="nginx-domains" href="/webinterface/index.php?page=config#nginx-domains">Nginx Domains</a></li>
                   <li><a name="mariadb" href="/webinterface/index.php?page=config#mariadb">MariaDB</a></li>
-                  <?php } ?>
-                  <?php if(FEATURE_3 == true && $mongodb_installed === true) { ?>
+                  <?php if($mongodb_installed === true) { ?>
                   <li><a name="mongodb" href="/webinterface/index.php?page=config#mongodb">MongoDB</a></li>
                   <?php } ?>
                   <?php if($xdebug_installed === true) { ?>
