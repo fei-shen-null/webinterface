@@ -62,11 +62,11 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_INI',     WPNXM_DIR.'wpn-xm.ini');
     define('WPNXM_BIN',     WPNXM_DIR.'bin'.DS);
     define('WPNXM_TEMP',    WPNXM_DIR.'temp'.DS);
-    
+
     // Nginx Configurations
-    define('WPNXM_NGINX_CONF',                  WPNXM_BIN. 'nginx/conf/nginx.conf');
-    define('WPNXM_NGINX_DOMAINS_ENABLED_DIR',   WPNXM_BIN. 'nginx/conf/domains-enabled/');
-    define('WPNXM_NGINX_DOMAINS_DISABLED_DIR',  WPNXM_BIN. 'nginx/conf/domains-disabled/');
+    define('WPNXM_NGINX_CONF',                  WPNXM_BIN. 'nginx\conf\nginx.conf');
+    define('WPNXM_NGINX_DOMAINS_ENABLED_DIR',   WPNXM_BIN. 'nginx\conf\domains-enabled'.DS);
+    define('WPNXM_NGINX_DOMAINS_DISABLED_DIR',  WPNXM_BIN. 'nginx\conf\domains-disabled'.DS);
 
     // Composer managed Vendor folder
     define('VENDOR_DIR', __DIR__.DS.'vendor'.DS);
