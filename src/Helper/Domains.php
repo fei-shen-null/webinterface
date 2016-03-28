@@ -101,8 +101,13 @@ class Domains
      */
     public static function areEnabledDomainsLoadedByNginxConf()
     {
-        $lines = file(WPNXM_DIR.'\bin\nginx\conf\nginx.conf');
-
+        if(!file_exists(WPNXM_NGINX_CONF)) {
+            return false;
+        }
+            
+        $lines = file(WPNXM_NGINX_CONF);
+        $matches = [];
+        
         foreach ($lines as $line) {
             // return true, if the line exists and is not commented
             if (preg_match('/(.*)include domains-enabled\/\*/', $line, $matches)) {
