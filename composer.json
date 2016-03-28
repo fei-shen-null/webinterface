@@ -19,6 +19,7 @@
     },
     "require": {
         "php":               ">=5.5.0",
+        "wpn-xm/software":   "dev-master",
         "jakoch/nginx-conf": "0.1.0"
     },
     "require-dev": {
