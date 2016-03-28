@@ -20,7 +20,7 @@ before_script:
     - composer self-update
     - composer install --prefer-dist --no-interaction --optimize-autoloader
   # copy "default configs" from "vendor/wpnxm-software" repo to "default location"
-    - cp -r $TRAVIS_BUILD_DIR/vendor/wpn-xm/software/nginx/config $TRAVIS_BUILD_DIR/bin/nginx
+    - cp -r vendor/wpn-xm/software/nginx/config bin/nginx/
     - cat $TRAVIS_BUILD_DIR/bin/nginx/conf/nginx.conf
   # X Virtual Frame Buffer (for Selenium)
     - export DISPLAY=:99.0
