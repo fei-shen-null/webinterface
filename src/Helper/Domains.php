@@ -28,16 +28,20 @@ class Domains
      */
     public static function listDomains()
     {
-        if (false === self::areEnabledDomainsLoadedByNginxConf()) {
-            // tell the world that "nginx.conf" misses "include domains.conf;"
-            exit(sprintf('<div class="error bold" style="font-size: 13px; width: 500px;">
-                %snginx.conf does not include the config files of the domains-enabled folder.<br><br>
-                    Please add "include domains-enabled/*;" to "nginx.conf".</div>',
-                WPNXM_DIR.'\bin\nginx\conf\\'));
+        if(!file_exists(WPNXM_NGINX_CONF)) {
+            return 'nginx.conf not found';
         }
 
-        $enabledDomains  = glob(WPNXM_DIR.'\bin\nginx\conf\domains-enabled\*.conf');
-        $disabledDomains = glob(WPNXM_DIR.'\bin\nginx\conf\domains-disabled\*.conf');
+        if (!self::areEnabledDomainsLoadedByNginxConf()) {
+            // tell the world that "nginx.conf" misses "include domains.conf;"
+            exit(sprintf('<div class="error bold" style="font-size: 13px; width: 500px;">
+                %s does not include the config files of the domains-enabled folder.<br><br>
+                    Please add "include domains-enabled/*;" to "nginx.conf".</div>',
+                WPNXM_NGINX_CONF));
+        }
+
+        $enabledDomains  = glob(WPNXM_NGINX_DOMAINS_ENABLED_DIR.'\*.conf');
+        $disabledDomains = glob(WPNXM_NGINX_DOMAINS_ENABLED_DIR.'\*.conf');
 
         $domains = [];
 
@@ -67,24 +71,24 @@ class Domains
 
         return $domains;
     }
-    
+
     public static function getRootAndServername($file)
     {
-        $content     = file_get_contents($file); 
+        $content     = file_get_contents($file);
         $root        = self::getRootForDomain($content);
         $servernames = self::getServerNamesForDomain($content);
         return ['root' => $root, 'servernames' => $servernames];
     }
-    
+
     public static function getRootForDomain($content)
-    {      
+    {
         if(1 === preg_match('#root\s+(www\/.*);#', $content, $matches)) {
             return $matches[1];
         } else {
             return 'root folder not found';
         }
     }
-    
+
     public static function getServerNamesForDomain($content)
     {
         if(preg_match_all('#server_name\s+(.*);#', $content, $matches)) {
@@ -101,13 +105,9 @@ class Domains
      */
     public static function areEnabledDomainsLoadedByNginxConf()
     {
-        if(!file_exists(WPNXM_NGINX_CONF)) {
-            return false;
-        }
-            
         $lines = file(WPNXM_NGINX_CONF);
         $matches = [];
-        
+
         foreach ($lines as $line) {
             // return true, if the line exists and is not commented
             if (preg_match('/(.*)include domains-enabled\/\*/', $line, $matches)) {
