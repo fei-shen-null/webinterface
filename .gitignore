@@ -36,6 +36,7 @@ cache/**/*
 
 # PHPUnit
 phpunit.xml
+.php_cs.cache
 
 # Folder for Inno Setup compiled executables and preprocessed scripts
 /_build
