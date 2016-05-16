@@ -31,7 +31,7 @@ function newDomainFromTemplate($domainName)
 
 function insert()
 {
-    $newDomainName = isset($_GET['newdomain']) ? $_GET['newdomain'] : null;    
+    $newDomainName = $request->get('newdomain', null);    
       
     newDomainFromTemplate($newDomainName);
     

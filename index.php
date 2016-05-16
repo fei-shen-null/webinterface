@@ -9,20 +9,12 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-/**
- * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
- * http://wpn-xm.org/
- *
- * This source file is subject to the terms of the MIT license.
- * For full copyright and license information, view the bundled LICENSE file.
- */
 define('TIME_STARTED', microtime(true));
 
 include 'bootstrap.php';
 
 // page controller
-$page           = isset($_GET['page']) ? $_GET['page'] : 'projects';
+$page           = $request->get('page', 'projects');
 $pagecontroller = WPNXM_CONTROLLER_DIR.$page.'.php';
 if (is_file($pagecontroller)) {
     include $pagecontroller;
@@ -31,7 +23,7 @@ if (is_file($pagecontroller)) {
 }
 
 // action controller
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+$action =  $request->get('action', 'index');
 $action = strtr($action, '-', '_'); // minus to underscore conversion
 if (!is_callable($action)) {
     throw new \Exception('Error: Action "'.$action.'" not found in PageController "'.$page.'".');
