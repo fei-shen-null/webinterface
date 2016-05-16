@@ -47,6 +47,8 @@ script:
    - phpunit -c ./tests/phpunit.xml.travis
 
 after_script:
+  # coding style
+  - php vendor/bin/php-cs-fixer --diff --dry-run -v fix
   # show nginx logs
   - cat /var/log/nginx/access.log
   - cat /var/log/nginx/error.log
