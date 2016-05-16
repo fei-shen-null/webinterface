@@ -218,3 +218,5 @@ if (!file_exists(WPNXM_DATA_DIR.'tools-topmenu.html')) {
     $projects->listTools();
     unset($projects);
 }
+
+$request = new Webinterface\Core\Request();
