@@ -29,7 +29,7 @@
 
             <!-- The tab content is fetched via Ajax and inserted into the tab-pane. -->
             <div class="tab-content">
-              <div class="tab-pane active" id="the-tab-pane">bla</div>
+              <div class="tab-pane active" id="the-tab-pane"></div>
             </div>
         </div>
     </div>
