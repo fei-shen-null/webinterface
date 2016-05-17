@@ -64,6 +64,14 @@ class IniReaderWriter
      */
     public function get($section, $key)
     {
+        if(!isset($section)) {
+            throw new \Exception('Missing parameter $section.');
+        }
+
+        if(!isset($key)) {
+            throw new \Exception('Missing parameter $key.');
+        }
+
         foreach ($this->lines as $line) {
             if ($line['type'] !== 'entry') {
                 continue;
@@ -88,6 +96,18 @@ class IniReaderWriter
      */
     public function set($section, $key, $value)
     {
+        if(!isset($section)) {
+            throw new \Exception('Missing parameter $section.');
+        }
+
+        if(!isset($key)) {
+            throw new \Exception('Missing parameter $key.');
+        }
+
+        if(!isset($value)) {
+            throw new \Exception('Missing parameter $value.');
+        }
+
         foreach ($this->lines as &$line) {
             if ($line['type'] != 'entry') {
                 continue;
@@ -102,7 +122,7 @@ class IniReaderWriter
             return;
         }
 
-        throw new Exception('Missing Section or Key');
+        throw new \Exception('Missing Section or Key');
     }
 
     public function write($file = '')
