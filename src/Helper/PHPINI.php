@@ -60,10 +60,10 @@ class PHPINI
     public static function removeOldBackupFiles()
     {
         $files = glob(WPNXM_BIN.'php\php-backup-*.ini');
-        $c     = count($files);
+        $c     = count($files);    
         if ($c > 3) {
             rsort($files);
-            for ($i = 3; $i <= $c; $i++) {
+            for ($i = 2; $i <= $c; $i++) {
                 unlink(trim($files[$i]));
             }
         }
