@@ -16,6 +16,7 @@ class Request
     private $post = [];
 
     private $filter_definition = [
+        'token'     => FILTER_SANITIZE_STRING,
         'page'      => FILTER_SANITIZE_STRING,
         'action'    => FILTER_SANITIZE_STRING,
         'tab'       => FILTER_SANITIZE_STRING,
@@ -25,7 +26,7 @@ class Request
         'newdomain' => FILTER_SANITIZE_STRING,
     ];  
 
-    function __construct(array $filter_definition = []) 
+    public function __construct(array $filter_definition = []) 
     {
         $args = array_merge($this->filter_definition, $filter_definition);
 
@@ -41,12 +42,12 @@ class Request
         }        
     }
 
-    function get($key, $default = null)
+    public function get($key, $default = null)
     {
         return array_key_exists($key, $this->get) ? $this->get[$key] : $default;
     }
 
-    function post($key, $default = null)
+    public function post($key, $default = null)
     {
         return array_key_exists($key, $this->post) ? $this->post[$key] : $default;
     }    
