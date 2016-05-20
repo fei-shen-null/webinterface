@@ -44,7 +44,13 @@ before_script:
     - curl http://localhost:80/ -v
 
 script:
-   - phpunit -c ./tests/phpunit.xml.travis
+  # PHP lint
+  - >
+    echo;
+    echo "Running PHP lint";
+    find . -name \*.php ! -path "./vendor/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;
+  # PHPUnit
+  - phpunit -c ./tests/phpunit.xml.travis
 
 after_script:
   # coding style
