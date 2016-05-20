@@ -23,8 +23,8 @@
         "wpn-xm/php-software":      "dev-master",
         "jakoch/nginx-conf":        "0.1.0"
     },
-    "require-dev": {
-        "phpunit/phpunit":          "*",
+    "require-dev": {        
+        "phpunit/phpunit":          "^4|^5",
         "phpunit/phpunit-selenium": "*",
         "fabpot/php-cs-fixer":      "dev-master"
     },
