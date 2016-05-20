@@ -26,7 +26,6 @@
     "require-dev": {        
         "phpunit/phpunit":          "*",
         "phpunit/phpunit-selenium": "*",
-        "phpunit/php-code-coverage":">=2.2.4",
         "fabpot/php-cs-fixer":      "dev-master"
     },
     "autoload": {
