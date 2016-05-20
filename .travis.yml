@@ -6,14 +6,23 @@ cache:
   directory:
     - $HOME/.composer/cache/files
 
+addons:
+  apt:
+    packages:
+      - parallel
+      - firefox
+      - nginx
+      - php5-fpm
+      - php5-cli
+
 before_script:
-   # install apt-fast to speedup dependency installation
-    - sudo add-apt-repository -y ppa:apt-fast/stable
-    - sudo apt-get update
-    - sudo apt-get install apt-fast
-    - sudo apt-fast -y update
+  # install apt-fast to speedup dependency installation
+  #  - sudo add-apt-repository -y ppa:apt-fast/stable
+  #  - sudo apt-get update
+  #  - sudo apt-get install apt-fast
+  #  - sudo apt-fast -y update
   # install dependencies
-    - sudo apt-fast -m -y install firefox nginx php5-fpm php5-cli
+  #  - sudo apt-fast -m -y install firefox nginx php5-fpm php5-cli
   # fix folder permissions
     - chmod 777 /home/travis/build/WPN-XM/webinterface/data/
   # Composer (PHP dependency solver)
