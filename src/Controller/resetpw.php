@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -40,11 +40,11 @@ function update()
 
     switch ($component) {
         case 'mariadb':
-            $c = new Webinterface\Components\MariaDb();
+            $c = new \WPNXM\Webinterface\Software\\MariaDb();
             echo $c->setPassword($password);
             break;
         case 'mongodb':
-            $c = new Webinterface\Components\MongoDb();
+            $c = new \WPNXM\Webinterface\Software\\MongoDb();
             echo $c->setPassword($password);
             break;
         default:

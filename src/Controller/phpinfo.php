@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -11,7 +11,7 @@
 function index()
 {
     $tpl_data = [
-        'php_info' => Webinterface\Helper\PHPInfo::getPHPInfo(),
+        'php_info' => \WPNXM\Webinterface\Helper\PHPInfo::getPHPInfo(),
     ];
 
     render('page-action', $tpl_data);

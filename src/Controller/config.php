@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -13,7 +13,7 @@
  */
 function index()
 {
-    $serverstack = new Webinterface\Helper\Serverstack;
+    $serverstack = new \WPNXM\Webinterface\Helper\Serverstack;
     
     $tpl_data = [
         'load_jquery_additionals' => true,
@@ -74,8 +74,8 @@ function tab_nginx()
 
 function tab_nginx_domains()
 {
-    $projects = new Webinterface\Helper\Projects;
-    $domains  = new Webinterface\Helper\Domains;
+    $projects = new \WPNXM\Webinterface\Helper\Projects;
+    $domains  = new \WPNXM\Webinterface\Helper\Domains;
 
     $tpl_data = [
         'no_layout'       => true,
@@ -91,7 +91,7 @@ function tab_php()
     $tpl_data = [
         'no_layout'                 => true,
         'php_version_switcher_form' => renderPhpVersionSwitcherForm(),
-        'ini'                       => Webinterface\Helper\PHPINI::read(),
+        'ini'                       => \WPNXM\Webinterface\Helper\PHPINI::read(),
     ];
 
     render('Config\tab-php', $tpl_data);
@@ -99,11 +99,11 @@ function tab_php()
 
 function tab_php_ext()
 {
-    $extensionManager = new Webinterface\Helper\PHPExtensionManager();
+    $extensionManager = new \WPNXM\Webinterface\Helper\PHPExtensionManager();
 
     $tpl_data = [
         'no_layout'                        => true,
-        'pickle_installed'                 => (new \Webinterface\Components\Pickle)->isInstalled(),
+        'pickle_installed'                 => (new \WPNXM\Webinterface\Software\Pickle)->isInstalled(),
         'number_available_zend_extensions' => count($extensionManager->getZendExtensions()),
         'number_enabled_zend_extensions'   => count($extensionManager->getEnabledZendExtensions()),
         'number_available_php_extensions'  => count($extensionManager->getPHPExtensions()),
@@ -117,7 +117,7 @@ function tab_php_ext()
 
 function getNumberOfExtensionsLoaded()
 {
-    $extensionManager = new Webinterface\Helper\PHPExtensionManager();
+    $extensionManager = new \WPNXM\Webinterface\Helper\PHPExtensionManager();
 
     $tpl_data = [
         'number_available_zend_extensions' => count($extensionManager->getZendExtensions()),
@@ -131,7 +131,7 @@ function getNumberOfExtensionsLoaded()
 
 function tab_xdebug()
 {
-    $xdebug_installed = Webinterface\Helper\Serverstack::isInstalled('xdebug');
+    $xdebug_installed = \WPNXM\Webinterface\Helper\Serverstack::isInstalled('xdebug');
 
     $tpl_data = [
         'no_layout'        => true,
@@ -147,7 +147,7 @@ function update_php_extensions()
     /* extensions to enable */
     $extensions = filter_input(INPUT_POST, 'extensions', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
-    $extensionManager       = new Webinterface\Helper\PHPExtensionManager();
+    $extensionManager       = new \WPNXM\Webinterface\Helper\PHPExtensionManager();
     $enabledExtensions      = array_flip($extensionManager->getEnabledPHPExtensionsFromIni());
     var_dump($enabledExtensions);
     $disableTheseExtensions = array_values(array_diff($enabledExtensions, $extensions)); // diff + re-index
@@ -178,7 +178,7 @@ function update_zend_extensions()
     /* zend extensions to enable */
     $extensions = filter_input(INPUT_POST, 'extensions', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
-    $extensionManager       = new Webinterface\Helper\PHPExtensionManager();
+    $extensionManager       = new \WPNXM\Webinterface\Helper\PHPExtensionManager();
     $availableExtensions    = $extensionManager->getZendExtensions();
     $enabledExtensions_lo   = $extensionManager->getEnabledZendExtensions();
     $enabledExtensions      = array_flip($extensionManager->getEnabledPHPExtensionsFromIni());
@@ -216,7 +216,7 @@ function renderNginxAccessToggleFrom()
 {
     // $("input[name=nginx_access_toggle]:checked").val()
 
-    $nginxConfig             = new \Webinterface\Components\Nginx\Config;
+    $nginxConfig             = new \WPNXM\Webinterface\Software\NginxConfig;
     $allow_only_local_access = $nginxConfig->isAllowedOnlyLocalAccess();
 
     // form
@@ -258,7 +258,7 @@ function update_nginx_access_state()
 {
     $toggle_state = filter_input(INPUT_POST, 'nginx_access_toggle');
 
-    $nginxConfig = new \Webinterface\Components\Nginx\Config;
+    $nginxConfig = new \WPNXM\Webinterface\Software\Nginx\Config;
 
     if ($toggle_state === 'allow_access_from_any_computer') {
         $nginxConfig->allowAccessFromAnyComputer();
@@ -283,7 +283,7 @@ function renderZendExtensionsFormContent()
 
 function renderExtensionsFormContent($zendExtensions = false)
 {
-    $extensionManager = new Webinterface\Helper\PHPExtensionManager();
+    $extensionManager = new \WPNXM\Webinterface\Helper\PHPExtensionManager();
 
     if ($zendExtensions === true) {
         $available_extensions = $extensionManager->getZendExtensions();
@@ -361,8 +361,8 @@ function update_phpversionswitch()
 
 function renderPhpVersionSwitcherForm()
 {
-    $versionFolders      = Webinterface\Helper\PHPVersionSwitch::getVersions();
-    $currentVersion      = Webinterface\Helper\PHPVersionSwitch::getCurrentVersion();
+    $versionFolders      = WPNXM\Webinterface\Helper\PHPVersionSwitch::getVersions();
+    $currentVersion      = WPNXM\Webinterface\Helper\PHPVersionSwitch::getCurrentVersion();
     $number_php_versions = count($versionFolders);
 
     $options = '';

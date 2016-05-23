@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -15,9 +15,9 @@ function index()
     $tpl_data = [
         'load_jquery_additionals' => true,
         'registry'                => include WPNXM_DATA_DIR.'wpnxm-software-registry.php',
-        'components'              => \Webinterface\Helper\Serverstack::getInstalledComponents(),
-        'windows_version'         => \Webinterface\Helper\Serverstack::getWindowsVersion(),
-        'bitsize'                 => \Webinterface\Helper\Serverstack::getBitSizeString()
+        'components'              => \WPNXM\Webinterface\Helper\Serverstack::getInstalledComponents(),
+        'windows_version'         => \WPNXM\Webinterface\Helper\Serverstack::getWindowsVersion(),
+        'bitsize'                 => \WPNXM\Webinterface\Helper\Serverstack::getBitSizeString()
     ];
 
     render('page-action', $tpl_data);
@@ -32,8 +32,9 @@ function download()
         throw new \InvalidArgumentException('Please specify "component" and "version".');
     }
 
-    $url = \Webinterface\Helper\Registry::getUrl($component, $version);
-    \Webinterface\Helper\Downloader::download($url);
+    $url = \WPNXM\Webinterface\Helper\Registry::getUrl($component, $version);
+    
+    \WPNXM\Webinterface\Helper\Downloader::download($url);
 }
 
 function curl_progress_callback($download_size, $downloaded, $upload_size, $uploaded)

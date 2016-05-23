@@ -1,14 +1,14 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-namespace Webinterface\Helper;
+namespace WPNXM\Webinterface\Helper;
 
 class Projects
 {
@@ -42,7 +42,7 @@ class Projects
     public function __construct()
     {
         $this->projectFolders = $this->getProjects();
-        $this->domains        = \Webinterface\Helper\Domains::listDomains();   
+        $this->domains        = \WPNXM\Webinterface\Helper\Domains::listDomains();   
     }
 
     /**
@@ -224,7 +224,7 @@ class Projects
         $array = json_decode($json, true);
 
         if (isset($array['status']) && $array['status'] === 'error') {
-            \Webinterface\Helper\Serverstack::printExclamationMark(
+            \WPNXM\Webinterface\Helper\Serverstack::printExclamationMark(
                 'The request to packagist.org failed. This might be a service problem.'.
                 ' Please ensure that HTTPS streamwrapper support is enabled in php.ini (extension=php_openssl.dll).'
             );

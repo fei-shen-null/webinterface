@@ -9,7 +9,7 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-namespace Webinterface\Helper;
+namespace WPNXM\Webinterface\Helper;
 
 class Registry
 {

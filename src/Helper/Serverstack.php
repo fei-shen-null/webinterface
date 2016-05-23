@@ -1,14 +1,14 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-namespace Webinterface\Helper;
+namespace WPNXM\Webinterface\Helper;
 
 class Serverstack
 {
@@ -41,9 +41,11 @@ class Serverstack
 
     public static function getInstalledComponents()
     {
+        // TODO scanner for installed components
+
         $classes = [];
 
-        $files = glob(WPNXM_COMPONENTS_DIR.'*.php');
+        $files = glob('*.php');
 
         foreach ($files as $file) {
             $pi = pathinfo($file);
@@ -89,8 +91,23 @@ class Serverstack
      */
     public static function getComponent($componentName)
     {
-        $class = '\Webinterface\Components\\'.$componentName;
+        $dir       = strtolower($componentName);
+        $className = ucfirst($componentName);
 
+        // Software\PHPExtension
+        if($componentName === 'xdebug' || strpos($componentName, 'phpext_') !== false) {
+            $class = '\WPNXM\Webinterface\Software\PHPExtension\\'.$className;
+            if(!class_exists($class, false)) {
+                include VENDOR_DIR . 'wpn-xm\software\PHPExtension\\'.$dir.'\scripts\webinterface\\'.$className.'.php';                
+            }
+            return new $class;         
+        } 
+        
+        // Software
+        $class = '\WPNXM\Webinterface\Software\\'.$className;
+        if(!class_exists($class, false)) {
+            include VENDOR_DIR . 'wpn-xm\software\\'.$dir.'\scripts\webinterface\\'.$className.'.php';            
+        }
         return new $class;
     }
 

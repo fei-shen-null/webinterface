@@ -57,12 +57,11 @@ abstract class SoftwareBase
      */
     public function isInstalled($fast = true)
     {
-        $bool  = false;
-        $files = (array) $this->files;
+        $bool = false;
         
-        foreach ($files as $file) {
+        foreach ((array)$this->files as $file) {
             $bool = file_exists(WPNXM_DIR.$file);
-            // stop at first file found
+            // stop at the first file found
             if ($bool === true && $fast === true) {
                 break;
             }

@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -62,8 +62,8 @@ We need this reminder, because the WPN-XM configuration pages depend on jQuery a
     </h1>
 
     <?php
-        Webinterface\Helper\Viewhelper::showMenu();
-        Webinterface\Helper\Viewhelper::showWelcome();
+        WPNXM\Webinterface\Helper\Viewhelper::showMenu();
+        WPNXM\Webinterface\Helper\Viewhelper::showWelcome();
     ?>
 
     <div class="alert alert-danger fade in" id="javascript-off-errorbox">

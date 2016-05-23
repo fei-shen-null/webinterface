@@ -29,10 +29,10 @@
         "fabpot/php-cs-fixer":      "dev-master"
     },
     "autoload": {
-        "psr-4": { "Webinterface\\": "php/" }
+        "psr-4": { "WPNXM\\Webinterface\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "WPNXMTest\\": "tests/" }
+        "psr-4": { "WPNXM\\Webinterface\\Test\\": "tests/" }
     },
     "config": {
         "bin-dir": "bin/",

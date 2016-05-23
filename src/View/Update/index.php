@@ -23,7 +23,7 @@ foreach ($components as $idx => $componentName)
         continue;
     }
    
-    $class     = '\Webinterface\Components\\'.$componentName;
+    $class     = '\WPNXM\Webinterface\Software\\'.$componentName;
     $component = new $class;
 
     $versionString = $component->getVersion();

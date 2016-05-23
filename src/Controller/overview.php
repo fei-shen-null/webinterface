@@ -1,15 +1,15 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-use Webinterface\Components\XDebug;
-use Webinterface\Helper\Serverstack;
+use WPNXM\Webinterface\Software\PHPExtension\XDebug;
+use WPNXM\Webinterface\Helper\Serverstack;
 
 function index()
 {
@@ -56,19 +56,19 @@ function index()
 
 function stop()
 {
-    Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
+    WPNXM\Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
     redirect(WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
 }
 
 function start()
 {
-    Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
+    WPNXM\Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
     redirect(WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
 }
 
 function restart()
 {
-    Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
+    WPNXM\Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
 
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         // restart - ajax request

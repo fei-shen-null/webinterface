@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - onwards, Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016, Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -10,7 +10,7 @@
 
 function index()
 {
-    $projects = new Webinterface\Helper\Projects();
+    $projects = new \WPNXM\Webinterface\Helper\Projects();
 
     $tpl_data = [
         'load_jquery_additionals' => true,
@@ -50,14 +50,13 @@ function createproject()
     $template = filter_input(INPUT_POST, 'projecttemplate');
 
     switch ($template) {
-        case '"Hello World" Project':
-            $template = new Webinterface\Helper\ProjectTemplate();
+        case 0: // Hello world
+            $template = new \WPNXM\Webinterface\Helper\ProjectTemplate();
             $template->generate();
             break;
-        case  '"Composer" Project':
-
+        case 1: // PHP project with Composer
             break;
-        case 'Project Folder only':
+        case 2:
         default:
             break;
     }

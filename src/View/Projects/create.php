@@ -35,12 +35,13 @@
       <label class="col-md-4 control-label" for="projecttemplate">Select Project Template</label>
       <div class="col-md-4 controls">
         <select id="projecttemplate" name="projecttemplate" class="input-xlarge">
-          <option>Project folder only</option>
-          <option>"Hello World" Project</option>
-          <option>"Composer" Project</option>
-          <!--
-          <option>HTML5 Boilerplate</option>
-          <option>Twitter Bootstrap3</option>
+          <option>not implemented yet</option>
+         <!--
+          <option value="0">None</option>
+          <option value="1">"Hello World" Project</option>
+          <option value="2">"Composer" Project</option>          
+          <option value="3">HTML5 Boilerplate</option>
+          <option value="4">Twitter Bootstrap3</option>
           -->
         </select>
       </div>

@@ -9,7 +9,7 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-namespace WPNXMTest;
+namespace WPNXM\Webinterface\Test;
 
 class BootstrapTest extends \PHPUnit_Framework_TestCase
 {

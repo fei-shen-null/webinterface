@@ -41,8 +41,7 @@ if (!defined('WPNXM_DIR')) {
         // Linux Paths
         define('WPNXM_DIR', dirname(__DIR__)); # only the webinterface folder exists on travis
         define('WPNXM_WWW_DIR', WPNXM_DIR.DS); # no www folder
-        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR.'webinterface/src/Controller/');
-        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR.'webinterface/src/Components/');
+        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR.'webinterface/src/Controller/');        
         define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR.'webinterface/src/Helper/');
         define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR.'webinterface/src/View/');
         define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'webinterface/data/');
@@ -51,7 +50,6 @@ if (!defined('WPNXM_DIR')) {
         define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))).DS);
         define('WPNXM_WWW_DIR', WPNXM_DIR.'www'.DS);
         define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR.'tools\webinterface\src\Controller'.DS);
-        define('WPNXM_COMPONENTS_DIR', WPNXM_WWW_DIR.'tools\webinterface\src\Components'.DS);
         define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR.'tools\webinterface\src\Helper'.DS);
         define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR.'tools\webinterface\src\View'.DS);
         define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'tools\webinterface\data'.DS);
@@ -149,7 +147,7 @@ function redirect($url)
  *
  * @param string The classname to include.
  */
-spl_autoload_register(function ($class) {
+/*spl_autoload_register(function ($class) {
 
     // return early, if class already loaded
     if (class_exists($class) === true) {
@@ -157,7 +155,7 @@ spl_autoload_register(function ($class) {
     }
 
     // the project-specific namespace prefix
-    $prefix = 'Webinterface\\';
+    $prefix = 'WPNXM\Webinterface\\';
 
     // base directory for the namespace prefix (normally "/src/")
     $base_dir = __DIR__.DS.'src'.DS;
@@ -185,7 +183,7 @@ spl_autoload_register(function ($class) {
             sprintf('Autoloading Failure! Class "%s" requested, but file "%s" not found.', $class, $file)
         );
     }*/
-});
+/*});*/
 
 function exception_handler($e) /** Throwable **/
 {
@@ -222,9 +220,9 @@ set_exception_handler('exception_handler');
 
 // create tools menu (cached html menu)
 if (!file_exists(WPNXM_DATA_DIR.'tools-topmenu.html')) {
-    $projects = new Webinterface\Helper\Projects;
+    $projects = new WPNXM\Webinterface\Helper\Projects;
     $projects->listTools();
     unset($projects);
 }
 
-$request = new Webinterface\Core\Request();
+$request = new WPNXM\Webinterface\Core\Request();
