@@ -55,7 +55,7 @@ before_script:
     - >
       echo;
       echo "Stamping Version Number";
-    - export WEBINTERFACE_VERSION=master
+    - export WEBINTERFACE_VERSION=Master
     - if [ $TRAVIS_TAG ]; then
         export WEBINTERFACE_VERSION=$TRAVIS_TAG;
       fi
