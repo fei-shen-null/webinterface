@@ -8,7 +8,7 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-namespace Webinterface\Components;
+namespace Webinterface\Software;
 
 /**
  * WPN-XM Webinterface - Abstract Base Class for Components.
@@ -16,7 +16,7 @@ namespace Webinterface\Components;
  * The class provides basic methods to gather pieces of information
  * about a component.
  */
-abstract class AbstractComponent
+abstract class SoftwareBase
 {
     /* @var string Printable name of the component. */
     public $name;
