@@ -1,1 +1,2 @@
-C:\server-086-full-56-64\bin\node\bower %1 %2 %3 %4
+@echo off 
+bower %1 %2 %3 %4

@@ -1,1 +1,2 @@
-C:\server-086-full-56-64\bin\node\grunt %1 %2 %3 %4
+@echo off
+grunt %1 %2 %3 %4
