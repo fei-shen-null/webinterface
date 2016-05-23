@@ -53,13 +53,24 @@ before_script:
     - curl http://localhost:80/ -v
 
 script:
+  # Versionize
+  - >
+    echo;
+    echo "Stamping Version Number";
+    export WEBINTERFACE_VERSION=master;
+    if [ $TRAVIS_TAG ]; then
+      echo "Using the tag as version number: $TRAVIS_TAG";
+      export WEBINTERFACE_VERSION=$TRAVIS_TAG 
+    fi
+    sed -e s%@WEBINTERFACE_VERSION@%${WEBINTERFACE_VERSION}% bootstrap.php > bootstrap.php
+    cat bootstrap.php
   # PHP lint
   - >
     echo;
     echo "Running PHP lint";
     find . -name \*.php ! -path "./vendor/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;
   # PHPUnit
-  - phpunit -c ./tests/phpunit.xml.travis
+  - phpunit -c ./tests/phpunit.xml.travis  
 
 after_script:
   # coding style

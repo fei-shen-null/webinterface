@@ -23,10 +23,15 @@ unset($GLOBALS);
  * Check constants via "index.php?page=debug".
  */
 if (!defined('WPNXM_DIR')) {
-    // WPNXM Version String (major.minor.buildnumber) replaced automatically during build
+
+    // WPNXM Version String
+    // The placeholder is replaced during the build of the Installers by the TRAVIS_TAG.
+    // The versioning scheme is "major.minor.buildnumber".
     define('WPNXM_VERSION', '@APPVERSION@');
 
-    // Webinterface Version String (major.minor.buildnumber) replaced automatically during build
+    // Webinterface Version String
+    // The placeholder is replaced during the build of the webinterface by the TRAVIS_TAG.
+    // The versioning scheme is either "master" or for a tagged release: "major.minor.buildnumber".
     define('WEBINTERFACE_VERSION', '@WEBINTERFACE_VERSION@');
 
     define('DS', DIRECTORY_SEPARATOR);
