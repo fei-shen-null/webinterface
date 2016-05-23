@@ -39,8 +39,8 @@ before_script:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
   # Selenium
-    - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
-    - java -jar selenium-server-standalone-2.48.2.jar > /dev/null 2> /tmp/selenium_output.log &
+    - wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.0.jar
+    - java -jar selenium-server-standalone-2.53.0.jar > /dev/null 2> /tmp/selenium_output.log &
     - sleep 4
   # PHP-FPM
     - sudo cp $TRAVIS_BUILD_DIR/tests/travis/php-fpm.conf ~/.phpenv/versions/$(phpenv version-name)/etc/
