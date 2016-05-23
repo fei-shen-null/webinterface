@@ -26,6 +26,9 @@ if (!defined('WPNXM_DIR')) {
     // WPNXM Version String (major.minor.buildnumber) replaced automatically during build
     define('WPNXM_VERSION', '@APPVERSION@');
 
+    // Webinterface Version String (major.minor.buildnumber) replaced automatically during build
+    define('WEBINTERFACE_VERSION', '@WEBINTERFACE_VERSION@');
+
     define('DS', DIRECTORY_SEPARATOR);
 
     // Path Constants -> "c:/.."
