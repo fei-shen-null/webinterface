@@ -40,11 +40,11 @@ function update()
 
     switch ($component) {
         case 'mariadb':
-            $c = new \WPNXM\Webinterface\Software\\MariaDb();
+            $c = new \WPNXM\Webinterface\Software\MariaDb();
             echo $c->setPassword($password);
             break;
         case 'mongodb':
-            $c = new \WPNXM\Webinterface\Software\\MongoDb();
+            $c = new \WPNXM\Webinterface\Software\MongoDb();
             echo $c->setPassword($password);
             break;
         default:
