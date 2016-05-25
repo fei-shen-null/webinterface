@@ -51,4 +51,22 @@ class Request
     {
         return array_key_exists($key, $this->post) ? $this->post[$key] : $default;
     }    
+
+    /**
+     * Check, if the current request is an Ajax request.
+     *
+     * @return bool True, if Ajax Request. Otherwise, false.
+     */
+    public static function isAjax()
+    {
+        if (!empty($_SERVER['X-Requested-With']) and $_SERVER['X-Requested-With'] === 'XMLHttpRequest') {
+            return true;
+        }
+
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+            return true;
+        }
+
+        return false;
+    }
 }

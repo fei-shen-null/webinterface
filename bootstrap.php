@@ -42,18 +42,18 @@ if (!defined('WPNXM_DIR')) {
         // Linux Paths
         define('WPNXM_DIR', dirname(__DIR__)); # only the webinterface folder exists on travis
         define('WPNXM_WWW_DIR', WPNXM_DIR.DS); # no www folder
-        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR.'webinterface/src/Controller/');        
-        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR.'webinterface/src/Helper/');
-        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR.'webinterface/src/View/');
-        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'webinterface/data/');
+        define('WPNXM_CONTROLLER_DIR', __DIR__.'/src/Controller/');        
+        define('WPNXM_HELPER_DIR', __DIR__.'/src/Helper/');
+        define('WPNXM_VIEW_DIR', __DIR__.'/src/View/');
+        define('WPNXM_DATA_DIR', __DIR__.'/data/');
     } else {
         // Windows Paths
-        define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))).DS);
+        define('WPNXM_DIR', dirname(dirname(dirname(__DIR__))).DS); // 3 folders up, \www\tools\webinterface
         define('WPNXM_WWW_DIR', WPNXM_DIR.'www'.DS);
-        define('WPNXM_CONTROLLER_DIR', WPNXM_WWW_DIR.'tools\webinterface\src\Controller'.DS);
-        define('WPNXM_HELPER_DIR', WPNXM_WWW_DIR.'tools\webinterface\src\Helper'.DS);
-        define('WPNXM_VIEW_DIR', WPNXM_WWW_DIR.'tools\webinterface\src\View'.DS);
-        define('WPNXM_DATA_DIR', WPNXM_WWW_DIR.'tools\webinterface\data'.DS);
+        define('WPNXM_CONTROLLER_DIR', __DIR__.'\src\Controller'.DS);
+        define('WPNXM_HELPER_DIR', __DIR__.'\src\Helper'.DS);
+        define('WPNXM_VIEW_DIR', __DIR__.'\src\View'.DS);
+        define('WPNXM_DATA_DIR', __DIR__.'\data'.DS);
     }
 
     // Web Path Constants -> "http://.."
@@ -71,9 +71,9 @@ if (!defined('WPNXM_DIR')) {
     define('WPNXM_TEMP',    WPNXM_DIR.'temp'.DS);
 
     // Nginx Configurations
-    define('WPNXM_NGINX_CONF',                  WPNXM_BIN. 'nginx/conf/nginx.conf');
-    define('WPNXM_NGINX_DOMAINS_ENABLED_DIR',   WPNXM_BIN. 'nginx/conf/domains-enabled'.DS);
-    define('WPNXM_NGINX_DOMAINS_DISABLED_DIR',  WPNXM_BIN. 'nginx/conf/domains-disabled'.DS);
+    define('WPNXM_NGINX_CONF',                  WPNXM_BIN.'nginx\conf\nginx.conf');
+    define('WPNXM_NGINX_DOMAINS_ENABLED_DIR',   WPNXM_BIN.'nginx\conf\domains-enabled'.DS);
+    define('WPNXM_NGINX_DOMAINS_DISABLED_DIR',  WPNXM_BIN.'nginx\conf\domains-disabled'.DS);
 
     // Composer managed Vendor folder
     define('VENDOR_DIR', __DIR__.DS.'vendor'.DS);
@@ -115,24 +115,6 @@ if (!function_exists('showConstants')) {
 }
 
 /**
- * Check if the current request is an Ajax request.
- *
- * @return bool True, if Ajax Request. Otherwise, false.
- */
-function isAjaxRequest()
-{
-    if (!empty($_SERVER['X-Requested-With']) and $_SERVER['X-Requested-With'] === 'XMLHttpRequest') {
-        return true;
-    }
-
-    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
-        return true;
-    }
-
-    return false;
-}
-
-/**
  * Redirect to Url.
  *
  * @param string $url
@@ -143,172 +125,13 @@ function redirect($url)
     exit;
 }
 
-spl_autoload_register('Autoloader::autoloadSoftware');
-spl_autoload_register('Autoloader::autoloadSoftwarePHPExtension');
-spl_autoload_register('Autoloader::autoload');
-//spl_autoload_register('Autoloader::autoloadPHPSoftware');
+include __DIR__ . '\src\Core\Autoloader.php';
+Autoloader::init();
 
-/**
- * Custom & PSR-4 Autoloader
- *
- * @param string The classname to include.
- */
-class Autoloader
-{
-	public static function autoload($class)
-	{
-		var_dump('autoload webinterface:', $class).NL;
+include __DIR__ . '\src\Core\Errorhandler.php';
+Errorhandler::init();
 
-	    // return early, if class already loaded
-	    if (class_exists($class, false)) {
-	        return true;
-	    }
-
-	    // the project-specific namespace prefix
-	    $prefix = 'WPNXM\Webinterface\\';
-
-	    // is this a request for one of our classes, else exit early from this autoloader
-		if(strpos($class, $prefix) === false) {
-			return false;
-		}	   
-
-	    // base directory for the namespace prefix (normally "/src/")
-	    $base_dir = __DIR__.DS.'src'.DS;
-
-	    // does the class use the namespace prefix?
-	    $len = strlen($prefix);
-	    if (strncmp($prefix, $class, $len) !== 0) {
-	        // no, move to the next registered autoloader
-	        return;
-	    }
-
-	    // get the relative class name
-	    $relative_class = substr($class, $len);
-
-	    // replace the namespace prefix with the base directory,
-	    // replace namespace separators with directory separators in the relative class name,
-	    // append with .php
-	    $file = $base_dir.str_replace('\\', DS, $relative_class).'.php';
-
-	    // if the file exists, require it
-	    if (file_exists($file) === true) {
-	        require $file;
-	    } else {
-	        /*throw new \Exception(
-	            sprintf('Autoloading Failure! Class "%s" requested, but file "%s" not found.', $class, $file)
-	        );*/
-	        return false;
-	    }
-	}
-
-	/**
-	 * Instantiate class for a software by name
-	 * 
-	 * Software, e.g. '\WPNXM\Webinterface\Software\Nginx'  
-	 *
-	 * @param  string $software
-	 * @return object
-	 */
-	public static function autoloadSoftware($software)
-	{		
-		// return early, if class already loaded
-	    if (class_exists($software, false)) {
-	    	echo 'class exists' . $software.NL;
-	        return true;
-	    }
-
-		$software = strtolower($software);		
-	    $nsArray  = explode('\\', $software);
-	    $nsCount  = count($nsArray);
-
-		// Nginx
-	    if($nsCount === 1) {
-	    	// software = software = $nsArray[0]
-	    	$class = $software;
-	    }
-	    // \WPNXM\Webinterface\Software\Nginx
-	    elseif($nsCount === 4) {
-			$software  = $nsArray[3];   
-		    $class     = $nsArray[3];
-		}
-		// \WPNXM\Webinterface\Software\Nginx\NginxConfig
-		elseif(count($nsArray) === 5) { 
-			$software  = $nsArray[3]; 
-		    $class     = $nsArray[4]; 
-		}
-
-		$class = ucfirst($class);
-	    $file = VENDOR_DIR . 'wpn-xm\software\\'.$software.'\scripts\webinterface\\'.$class.'.php';
-
-	    if(is_file($file)) {
-	    	include $file;
-	    	return true;
-		}    
-	}
-
-	/**
-	 * Instantiate a PHP Extensions class from the Software repository
-	 *
-	 * PHP Extension, e.g. '\WPNXM\Webinterface\Software\PHPExtension\Xdebug'
-	 *
-	 * @param  string $software
-	 * @return object
-	 */
-	public static function autoloadSoftwarePHPExtension($software)
-	{		
-		// return early, if class already loaded
-	    if (class_exists($software, false)) {
-	        return true;
-	    }
-
-		$software  = str_replace('WPNXM\Webinterface\Software\PHPExtension\\', '', $software);
-	    $dir       = strtolower($software);
-	    $class     = ucfirst($software);
-
-	    $file = VENDOR_DIR . 'wpn-xm\software\PHPExtension\\'.$dir.'\scripts\webinterface\\'.$class.'.php'; 
-
-	    if(is_file($file)) {
-	    	include $file;
-	    	return true;
-		}
-	}
-}
-
-
-
-function exception_handler($e) /** Throwable **/
-{
-    $html = '<div class="centered" style="font-size: 16px;">';
-    $html .= '<div class="panel panel-red">';
-    $html .= '  <div class="panel-heading">';
-    $html .= '    <h3 class="panel-title">Error</h3>';
-    $html .= '  </div>';
-    $html .= '  <div class="panel-body">';
-    $html .= '    <b>'.$e->getMessage().'</b>';
-    $html .= '    <p><pre>'.$e->getTraceAsString().'</pre></p>';
-    $html .= '  </div>';
-    $html .= '</div>';
-    $html .= '</div>';
-
-    echo $html;
-}
-
-/**
- * Convert Errors to ErrorException.
- */
-function error_handler($errno, $errstr, $errfile, $errline, array $errcontext)
-{
-    // error was suppressed with the @-operator
-    if (0 === error_reporting()) {
-        return false;
-    }
-
-    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-}
-
-set_error_handler('error_handler');
-set_exception_handler('exception_handler');
-
+// cache warmup
 // create tools menu (cached html menu)
 if (!file_exists(WPNXM_DATA_DIR.'tools-topmenu.html')) {
     $projects = new WPNXM\Webinterface\Helper\Projects;
