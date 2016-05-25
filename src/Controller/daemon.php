@@ -13,7 +13,10 @@
  */
 function restart()
 {
-    Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
+	global $request;
+    $daemon = $request->get('daemon', null);
+    
+    Webinterface\Helper\Daemon::restartDaemon($daemon);
 }
 
 /**
@@ -21,7 +24,10 @@ function restart()
  */
 function start()
 {
-    Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
+	global $request;
+    $daemon = $request->get('daemon', null);
+
+    Webinterface\Helper\Daemon::startDaemon($daemon);
 }
 
 /**
@@ -29,5 +35,8 @@ function start()
  */
 function stop()
 {
-    Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
+	global $request;
+    $daemon = $request->get('daemon', null);
+
+    Webinterface\Helper\Daemon::stopDaemon($daemon);
 }

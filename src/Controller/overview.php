@@ -56,19 +56,28 @@ function index()
 
 function stop()
 {
-    WPNXM\Webinterface\Helper\Daemon::stopDaemon($_GET['daemon']);
+    global $request;
+    $daemon = $request->get('daemon', null);
+
+    WPNXM\Webinterface\Helper\Daemon::stopDaemon($daemon);
     redirect(WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
 }
 
 function start()
 {
-    WPNXM\Webinterface\Helper\Daemon::startDaemon($_GET['daemon']);
+    global $request;
+    $daemon = $request->get('daemon', null);
+
+    WPNXM\Webinterface\Helper\Daemon::startDaemon($daemon);
     redirect(WPNXM_WEBINTERFACE_ROOT.'index.php?page=overview');
 }
 
 function restart()
 {
-    WPNXM\Webinterface\Helper\Daemon::restartDaemon($_GET['daemon']);
+    global $request;
+    $daemon = $request->get('daemon', null);
+
+    WPNXM\Webinterface\Helper\Daemon::restartDaemon($daemon);
 
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         // restart - ajax request

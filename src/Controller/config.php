@@ -17,8 +17,8 @@ function index()
     
     $tpl_data = [
         'load_jquery_additionals' => true,
-        'mongodb_installed'       =>  $serverstack->isInstalled('mongodb'),
-        'xdebug_installed'        =>  $serverstack->isInstalled('xdebug'),
+        'mongodb_installed'       => $serverstack->isInstalled('mongodb'),
+        'xdebug_installed'        => $serverstack->isInstalled('xdebug'),
     ];
 
     render('page-action', $tpl_data);
@@ -216,7 +216,7 @@ function renderNginxAccessToggleFrom()
 {
     // $("input[name=nginx_access_toggle]:checked").val()
 
-    $nginxConfig             = new \WPNXM\Webinterface\Software\NginxConfig;
+    $nginxConfig             = new \WPNXM\Webinterface\Software\Nginx\NginxConfig;
     $allow_only_local_access = $nginxConfig->isAllowedOnlyLocalAccess();
 
     // form
@@ -258,7 +258,7 @@ function update_nginx_access_state()
 {
     $toggle_state = filter_input(INPUT_POST, 'nginx_access_toggle');
 
-    $nginxConfig = new \WPNXM\Webinterface\Software\Nginx\Config;
+    $nginxConfig = new \WPNXM\Webinterface\Software\Nginx\NginxConfig;
 
     if ($toggle_state === 'allow_access_from_any_computer') {
         $nginxConfig->allowAccessFromAnyComputer();
@@ -283,6 +283,8 @@ function renderZendExtensionsFormContent()
 
 function renderExtensionsFormContent($zendExtensions = false)
 {
+    global $request;
+
     $extensionManager = new \WPNXM\Webinterface\Helper\PHPExtensionManager();
 
     if ($zendExtensions === true) {
@@ -326,8 +328,10 @@ function renderExtensionsFormContent($zendExtensions = false)
         $i++;
         $itemsTotal--;
     }
-
-    if (isAjaxRequest() && !isset($_GET['tab'])) {
+    
+    $tab = $request->get('tab');
+    
+    if ($request->isAjax() && !isset($tab)) {
         echo $html_checkboxes;
     } else {
         return $html_checkboxes;
