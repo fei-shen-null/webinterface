@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>WPИ-XM Server Stack for Windows - <?php echo WPNXM_VERSION; ?></title>
+    <title>WPИ-XM Server Stack for Windows - <?php echo WPNXM_STACK_VERSION; ?></title>
     <meta name="description" content="WPИ-XM Server Stack for Windows - Webinterface.">
     <meta name="author" content="Jens-André Koch" />
     <link rel="shortcut icon" href="favicon.ico" />
@@ -58,7 +58,7 @@ We need this reminder, because the WPN-XM configuration pages depend on jQuery a
 <div class="container center">
 
     <h1 class="logo">
-        <small style="position:relative; top:90px; left:150px;">Version <?php echo WPNXM_VERSION; ?></small>
+        <small style="position:relative; top:90px; left:150px;">Version <?php echo WPNXM_STACK_VERSION; ?></small>
     </h1>
 
     <?php
