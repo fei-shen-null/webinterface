@@ -30,10 +30,8 @@ class Projects
         'phpmemcachedadmin' => '',
         'phpmyadmin'        => '',
         'rockmongo'         => '',
-        'updater'           => '', // wpn-xm registry updater
         'uprofiler'         => 'uprofiler/uprofiler_html',
         'webgrind'          => '',
-        //'webinterface'    => '', // wpn-xm webinterface
         'wincache'          => '',
         'xcache'            => '',
         'xhprof'            => 'xhprof/xhprof_html',
@@ -87,7 +85,7 @@ class Projects
             $html .= '<td><font style="font-size: 12px">'.$this->renderDomains($dir).'</font></td>';            
             // 3. display the repository links (home, github) and settings link
             $html .= ' <td class="right" width="120px">';           
-            $html .= $this->renderSettingsLink($dir);
+            // TODO $html .= $this->renderSettingsLink($dir);
             $html .= $this->renderRepositoryLinks($dir);
             $html .= '</td></tr>';
         }

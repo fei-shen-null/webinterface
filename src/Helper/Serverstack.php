@@ -65,7 +65,7 @@ class Serverstack
         $classes = self::getInstalledComponents();
 
         foreach ($classes as $class) {
-            $components[] = self::getComponent($class);
+            $components[] = (new $class);
         }
 
         return $components;
@@ -80,35 +80,20 @@ class Serverstack
      */
     public static function getVersion($componentName)
     {
-        return self::getComponent($componentName)->getVersion();
+        $fqcn = self::getClassnameForComponent($componentName);
+
+        return (new $fqcn)->getVersion();
     }
 
-    /**
-     * Instantiate Component by name
-     *
-     * @param  string $componentName
-     * @return object
-     */
-    public static function getComponent($componentName)
+    public static function getClassnameForComponent($component)
     {
-        $dir       = strtolower($componentName);
-        $className = ucfirst($componentName);
-
         // Software\PHPExtension
-        if($componentName === 'xdebug' || strpos($componentName, 'phpext_') !== false) {
-            $class = '\WPNXM\Webinterface\Software\PHPExtension\\'.$className;
-            if(!class_exists($class, false)) {
-                include VENDOR_DIR . 'wpn-xm\software\PHPExtension\\'.$dir.'\scripts\webinterface\\'.$className.'.php';                
-            }
-            return new $class;         
-        } 
-        
-        // Software
-        $class = '\WPNXM\Webinterface\Software\\'.$className;
-        if(!class_exists($class, false)) {
-            include VENDOR_DIR . 'wpn-xm\software\\'.$dir.'\scripts\webinterface\\'.$className.'.php';            
+        if(strpos($component, 'phpext_') !== false || $component === 'xdebug') {
+            return '\WPNXM\Webinterface\Software\PHPExtension\\'.$component;
         }
-        return new $class;
+
+        // Software
+        return '\WPNXM\Webinterface\Software\\'.$component;
     }
 
     /**
@@ -126,9 +111,6 @@ class Serverstack
             'memcached' => 'bin\php\ext\php_memcache.dll', # file without D
             'zeromq'    => 'bin\php\ext\php_zmq.dll',
             'mongodb'   => 'bin\php\ext\php_mongo.dll',
-            'nginx'     => 'bin\nginx\nginx.conf',
-            'mariadb'   => 'bin\mariadb\my.ini',
-            'php'       => 'bin\php\php.ini',
         ];
 
         $file = WPNXM_DIR.$files[$extension];
@@ -186,22 +168,22 @@ class Serverstack
      * @return string Embeddable image tag with tooltip.
      */
     public static function getStatusIcon($daemon)
-    {
-        // extension are loaded and daemons are running
-        $stateText = (strpos($daemon, 'phpext') !== false) ? 'loaded' : 'running';
+    {            
+        // change return text: "extension is loaded" and "daemons is running"
+        $runningLabel = (strpos($daemon, 'phpext') !== false) ? 'loaded' : 'running';
 
+        $server = self::getDaemonName($daemon);
+        
         if (Daemon::isRunning($daemon) === false) {
             $img   = WPNXM_IMAGES_DIR.'status_stop.png';
-            $title = self::getDaemonName($daemon).' is not '.$stateText.'!';
+            $title = $server .' is not '.$runningLabel.'!';
         } else {
             $img   = WPNXM_IMAGES_DIR.'status_run.png';
-            $title = self::getDaemonName($daemon).' is '.$stateText.'.';
+            $title = $server .' is '.$runningLabel.'.';
         }
 
         return sprintf(
-            '<img style="float:right;" src="%s" alt="%s" title="%s" rel="tooltip">',
-            $img, $title, $title
-        );
+            '<img style="float:right;" src="%s" alt="%s" title="%s" rel="tooltip">', $img, $title, $title);
     }
 
     /**
@@ -243,8 +225,10 @@ class Serverstack
         if ($component === 'php' or $component === 'nginx' or $component === 'mariadb') {
             return true;
         }
-                      
-        return self::getComponent($component)->isInstalled();
+
+        $fqcn = self::getClassnameForComponent($component);
+
+        return (new $fqcn)->isInstalled();
     }
 
     /**
@@ -325,9 +309,9 @@ class Serverstack
     {
         switch ($component) {
             case 'mariadb':
-               return self::getComponent('Mariadb')->getPassword();
+               return (new \WPNXM\Webinterface\Software\MariaDB)->getPassword();
             case 'mongodb':
-               return self::getComponent('Mongodb')->getPassword();
+               return (new \WPNXM\Webinterface\Software\MongoDB)->getPassword();
         }
 
         throw new \InvalidArgumentException(sprintf('There is no password method for the daemon: %s', $component));
