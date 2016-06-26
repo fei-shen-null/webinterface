@@ -461,7 +461,7 @@
                         </a>
                         <?php } ?>
 
-                        <?php if (\Webinterface\Helper\Daemon::isRunning('mongodb')) { ?>
+                        <?php if (\WPNXM\Webinterface\Helper\Daemon::isRunning('mongodb')) { ?>
                             <a class="btn btn-default btn-sm" href="http://localhost:28017/">Show WebAdmin</a>
                         <?php } ?>
 
