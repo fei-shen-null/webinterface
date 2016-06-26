@@ -27,7 +27,7 @@ if (!defined('WPNXM_DIR')) {
     // WPNXM Version String
     // The placeholder is replaced during the build of the Installers by the TRAVIS_TAG.
     // The versioning scheme is "major.minor.buildnumber".
-    define('WPNXM_VERSION', '@APPVERSION@');
+    define('WPNXM_STACK_VERSION', '@STACK_VERSION@');
 
     // Webinterface Version String
     // The placeholder is replaced during the build of the webinterface by the TRAVIS_TAG.
