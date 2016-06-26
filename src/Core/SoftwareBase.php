@@ -52,20 +52,15 @@ abstract class SoftwareBase
      * A component is installed, if all its files exist.
      * The files are defined in the $files array.
      *
-     * @param bool If true, checks only the first file (default). Otherwise, checks all files.
      * @return bool True, if installed, false otherwise.
      */
-    public function isInstalled($fast = true)
+    public function isInstalled()
     {
         $bool  = false;
-        $files = (array) $this->files;
+        $files = (array) $this->files; 
         
         foreach ($files as $file) {
-            $bool = file_exists(WPNXM_DIR.$file);
-            // stop at first file found
-            if ($bool === true && $fast === true) {
-                break;
-            }
+            $bool = file_exists(WPNXM_DIR.$file);            
         }
 
         return $bool;
@@ -120,20 +115,6 @@ abstract class SoftwareBase
     public function getRegistryName()
     {
         return $this->registryName;
-    }
-
-    /**
-     * Find out, whether an extension is loaded
-     *
-     * @param  string $name
-     * @return bool   <b>TRUE</b> if the extension identified by <i>name</i>
-     *                     is loaded, <b>FALSE</b> otherwise.
-     */
-    public function isExtensionLoaded($name = null)
-    {
-        $name = ($name === null) ? $name : $this->name;
-
-        return extension_loaded($name);
     }
 
     /**
