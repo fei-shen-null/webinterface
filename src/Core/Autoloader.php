@@ -79,7 +79,6 @@ class Autoloader
 	{		
 		// return early, if class already loaded
 	    if (class_exists($software, false)) {
-	    	echo 'class exists' . $software.NL;
 	        return true;
 	    }
 
@@ -101,8 +100,10 @@ class Autoloader
 		elseif(count($nsArray) === 5) { 
 			$software  = $nsArray[3]; 
 		    $class     = $nsArray[4]; 
-		}
-
+		} else {
+            return false;
+        }
+        
 		$class = ucfirst($class);
 	    $file = VENDOR_DIR . 'wpn-xm\software\\'.$software.'\scripts\webinterface\\'.$class.'.php';
 
