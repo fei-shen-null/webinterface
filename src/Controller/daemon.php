@@ -16,7 +16,7 @@ function restart()
 	global $request;
     $daemon = $request->get('daemon', null);
     
-    Webinterface\Helper\Daemon::restartDaemon($daemon);
+    WPNXM\Webinterface\Helper\Daemon::restartDaemon($daemon);
 }
 
 /**
@@ -27,7 +27,7 @@ function start()
 	global $request;
     $daemon = $request->get('daemon', null);
 
-    Webinterface\Helper\Daemon::startDaemon($daemon);
+    WPNXM\Webinterface\Helper\Daemon::startDaemon($daemon);
 }
 
 /**
@@ -38,5 +38,5 @@ function stop()
 	global $request;
     $daemon = $request->get('daemon', null);
 
-    Webinterface\Helper\Daemon::stopDaemon($daemon);
+    WPNXM\Webinterface\Helper\Daemon::stopDaemon($daemon);
 }

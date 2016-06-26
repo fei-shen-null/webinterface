@@ -39,7 +39,7 @@ function project()
 function showtab()
 {
     $tab       = filter_input(INPUT_GET, 'tab');
-    $tab       = strtr($tab, '-', '_'); // minus to underscore conversion
+    $tab       = strtr($tab, '-', '_');
     $tabAction = 'tab_'.$tab;
     if (false === is_callable($tabAction)) {
         throw new \Exception(sprintf('The controller method "%s" for the Tab "%s" was not found!', $tabAction, $tab));
@@ -100,10 +100,14 @@ function tab_php()
 function tab_php_ext()
 {
     $extensionManager = new \WPNXM\Webinterface\Helper\PHPExtensionManager();
-
+    
+    $pickle = new \WPNXM\Webinterface\Software\Pickle;
+    $pickle_installed = $pickle->isInstalled();
+        
     $tpl_data = [
         'no_layout'                        => true,
-        'pickle_installed'                 => (new \WPNXM\Webinterface\Software\Pickle)->isInstalled(),
+        'pickle_installed'                 => $pickle_installed,
+        'pickle_version'                   => ($pickle_installed === true ? $pickle->getVersion() : '---'), 
         'number_available_zend_extensions' => count($extensionManager->getZendExtensions()),
         'number_enabled_zend_extensions'   => count($extensionManager->getEnabledZendExtensions()),
         'number_available_php_extensions'  => count($extensionManager->getPHPExtensions()),
@@ -258,17 +262,20 @@ function update_nginx_access_state()
 {
     $toggle_state = filter_input(INPUT_POST, 'nginx_access_toggle');
 
-    $nginxConfig = new \WPNXM\Webinterface\Software\Nginx\NginxConfig;
-
-    if ($toggle_state === 'allow_access_from_any_computer') {
-        $nginxConfig->allowAccessFromAnyComputer();
-    } elseif ($toggle_state === 'allow_only_local_access') {
-        $nginxConfig->allowOnlyLocalAccess();
-    } else {
+    if(!isset($toggle_state)) {
         throw new \Exception('The "nginx_access_toggle" value is missing!');
     }
 
-    echo '<div class="modal"><p class="info">Saved. Nginx Access...</div>';
+    $nginxConfig = new \WPNXM\Webinterface\Software\Nginx\NginxConfig;
+
+    if ($toggle_state === 'allow_access_from_any_computer') {
+        $nginxConfig->allowAccessFromAnyComputer();        
+    } 
+    elseif ($toggle_state === 'allow_only_local_access') {
+        $nginxConfig->allowOnlyLocalAccess();        
+    } 
+
+    echo '<div class="modal"><p class="info">Saved. Nginx Access...</div>';    
 }
 
 function renderPHPExtensionsFormContent()
@@ -347,8 +354,8 @@ function update_phpini_setting()
     // @see IniReaderWriter::set() $section is not used there
     $section = '';
 
-    Webinterface\Helper\PHPINI::setDirective($section, $directive, $value);
-    Webinterface\Helper\Daemon::restartDaemon('php');
+    WPNXM\Webinterface\Helper\PHPINI::setDirective($section, $directive, $value);
+    WPNXM\Webinterface\Helper\Daemon::restartDaemon('php');
 
     echo '<div class="modal"><p class="info">Saved. PHP restarted.</div>';
 }
@@ -357,8 +364,8 @@ function update_phpversionswitch()
 {
     $new_version = filter_input(INPUT_POST, 'new_php_version');
 
-    Webinterface\Helper\PHPVersionSwitch::switchVersion($new_version);
-    Webinterface\Helper\Daemon::restartDaemon('php');
+    WPNXM\Webinterface\Helper\PHPVersionSwitch::switchVersion($new_version);
+    WPNXM\Webinterface\Helper\Daemon::restartDaemon('php');
 
     echo '<div class="modal"><p class="info">PHP version switched. PHP restarted.</div>';
 }
@@ -395,7 +402,6 @@ function renderPhpVersionSwitcherForm()
     }
 
     $html .= '</form>';
-
     $html .= '</div>';
     $html .= '<div class="clearfix"></div>';
 
