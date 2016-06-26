@@ -1,4 +1,6 @@
-<h2>Install PHP Extension</h2>
+<h2>Install PHP Extension<small style="font-size: 10px;">&nbsp; using Pickle v<?=$pickle_version?></small>
+  <div id="php-extension-installation-ajax-status" class="btn btn-small btn-success floatright hide">Installing PHP Extension...</div>
+</h2>
 <?php if($pickle_installed) { ?>
 <div id="bloodhound">
   <input type="text" class="typeahead" placeholder="PHP Extension"/>
@@ -10,7 +12,7 @@
   var extensions = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.whitespace,
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    // url points to a json file that contains an array of PHP extension names
+    // URL points to a json file, that contains an array of PHP extension names
     prefetch: 'data/php-extensions-on-pecl.json'
   });
   // when passing in `null` for the `options` arguments, it will use default options
@@ -20,21 +22,67 @@
     source: extensions
   });
   $("#install-extension-button").click(function() {
-    alert( "Handler for .click() called." );
+    //alert( "Handler for .click() called." );
   });
 </script>
 
 <?php } else { ?>
-<div class="alert alert-info" role="alert">
-  <p>PHP Extensions are installed by using the PHP Extension Installer called <a href="https://github.com/FriendsOfPHP/pickle">Pickle</a>.</p>
-  <p>But, it isn't installed, yet!</p>
+
+<div class="alert alert-warning" role="alert">
+  <strong>PHP Extension Installer not found!</strong>
+  <hr>
+  <p>The PHP Extension Installer (<a href="https://github.com/FriendsOfPHP/pickle">Pickle</a>) is used to install new PHP extensions.</p>
+  <p>But Pickle wasn't found on your system.</p>
+  <p><div class="btn btn-info btn-lg">Please install Pickle!</div></p>
+  <!--<p><br/>Do you want to install Pickle now?</p>
+  <br/>
+  <button id="install-pickle-button" type="submit" class="btn btn-success">Install Pickle</button>
+  -->
 </div>
-<button id="install-pickle-button" type="submit" class="btn btn-success">Install Pickle</button>
 
 <script type="text/javascript">
-  $("#install-pickle-button").click(function() {
-    alert( "Handler for .click() called." );
-  });
+// intercept clicks on the "Download Component" links
+$("#install-pickle-button" ).on('click', function (e) {
+    e.preventDefault();    
+    alert( "Handler for .click() called. Launching Ajax Request to install Pickle." );    
+    // add download progress bar
+    $(this).after('<progress id="progress" value="0" max="0" style="margin-left: 15px">0%</progress>');
+    // trigger AJAX download with curl callback to update the progessbar
+    download('index.php?page=updater&action=install&software=pickle');
+    return false;
+});
+function updateProgress(json)
+{
+    var progressBar = $('progress');
+    progressBar.attr('value', json.progress.loaded);
+    progressBar.attr('max', json.progress.total);
+}
+
+function download(link)
+{
+    var ajaxStatus = $('#php-extension-installation-ajax-status');
+    ajaxStatus.html('<b>Downloading Pickle ...</b>').removeClass("hide");
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', link);
+    xhr.send(null);
+
+    // 1 second interval for continous xhr response handling
+    var timer = window.setInterval(function () {
+        // finished?
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            window.clearTimeout(timer);
+            $('progress').replaceWith('<b>Done!</b>');
+            ajaxStatus.html('<b>Done!</b>');
+        }
+        // append callback data to the body for evaluation (updates the progress bar)
+        $('body').append(' ' + xhr.responseText + ' ');
+        if((xhr.responseText).indexOf("Error")) {
+            timer = null;
+            return;
+        }
+    }, 2000);
+};
 </script>
 <?php } ?>
 
@@ -45,8 +93,8 @@
     <small id="php-extensions-loaded">
       (<span id="number_enabled_php_extensions"><?php echo $number_enabled_php_extensions; ?></span>
       of <span id="number_available_php_extensions"><?php echo $number_available_php_extensions; ?></span> loaded)
-    </small>
-    <div id="phpext-ajax-status" class="btn btn-small btn-success floatright hide">Updating PHP Extensions.</div>
+    </small>    
+    <div id="php-extension-activation-ajax-status" class="btn btn-small btn-success floatright hide">Updating PHP Extensions.</div>
 </h2>
 
 To enable an extension, check it's checkbox. To disable an extension, uncheck it's checkbox. <small>Surprise, surprise!</small>
@@ -69,7 +117,7 @@ To enable an extension, check it's checkbox. To disable an extension, uncheck it
       (<span id="number_enabled_zend_extensions"><?php echo $number_enabled_zend_extensions; ?></span>
       of <span id="number_available_zend_extensions"><?php echo $number_available_zend_extensions; ?></span> loaded)
     </small>
-    <div id="zendext-ajax-status" class="btn btn-small btn-success floatright hide">Updating Zend Extensions.</div>
+    <div id="zend-extension-activation-ajax-status" class="btn btn-small btn-success floatright hide">Updating Zend Extensions.</div>
 </h2>
 <form id="zendExtensionsForm" class="phpextensions form-horizontal" method="post"
       action="<?php echo WPNXM_WEBINTERFACE_ROOT; ?>index.php?page=config&amp;action=update_zend_extensions">
@@ -136,19 +184,19 @@ $(function() {
 function signalRestartAndUpdateExtensions(responseText, extensionType)
 {
     if(extensionType === 'zend') {
-      var ajaxStatusId = '#zendext-ajax-status';
-      var targetId = '#zendExtensionsFormContent';
+      var ajaxStatusId = $('#zend-extension-activation-ajax-status');
+      var targetId = $('#zendExtensionsFormContent');
       var url = 'index.php?page=config&action=renderZendExtensionsFormContent';
     }
 
     if(extensionType === 'php') {
-      var ajaxStatusId = '#phpext-ajax-status';
-      var targetId = '#phpExtensionsFormContent';
+      var ajaxStatusId = $('#php-extension-activation-ajax-status');
+      var targetId = $('#phpExtensionsFormContent');
       var url = 'index.php?page=config&action=renderPHPExtensionsFormContent';
     }
 
     // indicating the change to php.ini and the PHP restart
-    $(ajaxStatusId).html(responseText.responseText).removeClass('hide').show().pulsate();
+    ajaxStatusId.html(responseText.responseText).removeClass('hide').show().pulsate();
 
     // restart PHP
     $.get("index.php?page=daemon&action=restart&daemon=graceful-php");
@@ -156,8 +204,8 @@ function signalRestartAndUpdateExtensions(responseText, extensionType)
     var updateExtensionsForm = function() {
         // update the extensions form display
         $.ajax({url: url}).done(function(html) {
-          $(targetId).html(html);
-          $(ajaxStatusId).hide().addClass('hide');
+          targetId.html(html);
+          ajaxStatusId.hide().addClass('hide');
         });
         // update the number of loaded extensions
         $.getJSON('index.php?page=config&action=getNumberOfExtensionsLoaded', function(data) {
