@@ -140,7 +140,13 @@ class Daemon
     {
         chdir(WPNXM_DIR);
 
-        $restart = 'restart-wpnxm.bat ';
+        if (file_exists('restart-wpnxm.bat')) {
+            $restart = 'restart-wpnxm.bat ';
+        } elseif (file_exists('restart.bat')) {
+            $restart = 'restart.bat ';
+        } else {
+            die('restart.bat not found, please manually restart ' . $daemon);
+        }
 
         switch ($daemon) {
             case 'nginx':
